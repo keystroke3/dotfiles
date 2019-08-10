@@ -1,0 +1,1 @@
+/home/ted/.bashrc
