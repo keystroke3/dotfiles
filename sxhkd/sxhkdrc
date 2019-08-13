@@ -81,7 +81,7 @@ super + p
 
 #Rofi theme selector
 super + r
-    rofi-theme-selector
+    kitty -e ranger
 
 #Pavucontrol
 super + v
@@ -104,8 +104,9 @@ super + Escape
     xkill
 
 #Terminal emulator
+#kitty -o background_opacity=0.8
 super + Return
-	xfce4-terminal
+	kitty
 
 #Keyboard dependent
 #Terminal emulator
@@ -139,8 +140,8 @@ super + shift + s
 	pkill -USR1 -x sxhkd
 
 #kill
-super + shift + q
-	bspc node -c
+#super + shift + q
+#	bspc node -c
 
 #kill
 super + q
@@ -281,7 +282,8 @@ alt + F2
 alt + F3
     xfce4-appfinder
 
-
+ctrl + space
+	ulauncher
 #########################
 #VARIETY KEYS WITH PYWAL#
 #########################
@@ -324,16 +326,16 @@ ctrl + shift + Escape
 
 #Scrot
 Print
-    scrot 'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f $$(xdg-user-dir PICTURES)'
-
+   scrot /home/ted/Pictures/'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e /home/ted/scripts/flush
 #screeenshooter
 ctrl + Print
-     xfce4-screenshooter
+     gnome-screenshot -a && /home/ted/scripts/flush
 
 #Gnome-Screenshot
 ctrl + shift + Print
      gnome-screenshot -i
-
+shift + Print
+	gnome-screenshot -w
 
 #########################
 #     MULTIMEDIA KEYS   #
@@ -374,11 +376,11 @@ XF86AudioStop
 
 #Brightness up
 XF86MonBrightnessUp
-    xbacklight -inc 5
+    xbacklight -inc 2
 
 #Brightness down
 XF86MonBrightnessDown
-    xbacklight -dec 5
+    xbacklight -dec 2
 
 
 #########################
@@ -456,7 +458,7 @@ super + {_,shift + }a
 #alt + shift + {h,j,k,l}
 #	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
-alt + {Left,Down,Up,Right}
+super + alt + {Left,Down,Up,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # Contract tiled space
