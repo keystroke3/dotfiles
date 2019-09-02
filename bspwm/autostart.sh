@@ -26,7 +26,8 @@ kdeconnect-indicator &
 
 xsetroot -cursor_name left_ptr &
 sxhkd &
-
+eval "$(ssh-agent -s)"
+ssh-add $HOME/.ssh/github
 # conky -c $HOME/.config/bspwm/system-overview &
 #run variety &
 run nm-applet &
@@ -37,16 +38,12 @@ blueberry-tray &
 compton --config $HOME/.config/bspwm/compton.conf &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 /usr/lib/xfce4/notifyd/xfce4-notifyd &
-ulauncher &
+#nitrogen --set-auto Pictures/blackpink.png
+# ulauncher &
 $HOME/.redpaper/wallpaper.sh &
-wal -i "/home/ted/Pictures/Redpaper/Drift to the Future by @maldo_95 [3840x2160].png" -n &
-#nitrogen --restore &
-#run caffeine &
-#run vivaldi-stable &
-#run firefox &
-#run thunar &
-#run dropbox &
-#run insync start &
-#run discord &
-#run spotify &
-#run atom &
+wal -i "/home/ted/Pictures/Redpaper.old/Drift to the Future by @maldo_95 [3840x2160].png" -n &
+#auto-xflux -k 1800
+
+#Git init
+eval "$(ssh-agent -s)"
+
