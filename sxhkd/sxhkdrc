@@ -61,7 +61,7 @@ super + F12
 
 #Atom
 super + e
-    pcmanfm
+    thunar
 
 #Toggle fullscreen of window
 super + f
@@ -106,6 +106,8 @@ super + Escape
 #Terminal emulator
 #kitty -o background_opacity=0.8
 super + Return
+	kitty
+ctrl + Return
 	kitty
 
 #Keyboard dependent
@@ -419,7 +421,7 @@ alt + Tab
 
 #Focus selected desktop
 super + Tab
-	bspc desktop -f '^{1-9,10}'
+	autorandr --single/hdmidown
 
 
 # Focus next/previous window
@@ -465,7 +467,7 @@ super + alt + {Left,Down,Up,Right}
 #super + ctrl + {h,j,k,l}
 #	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
-alt + shift + {Left,Down,Up,Right}
+super + alt + shift + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
 super + button{1-3}
@@ -508,3 +510,13 @@ super + ctrl + {_,shift +}{1-9}
 # Cancel preselection
 super + ctrl + space
 	bspc node --presel-dir cancel
+
+#super + button{1-3}
+#     bspc pointer -g {move,resize_side,resize_corner}
+#super + @button{1-3}
+#     bspc pointer -u
+#super + !button{1-3}
+#    bspc pointer -t %i %i
+
+alt + {1,2}
+	autorandr {single, hdmidown}

@@ -110,7 +110,7 @@ alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resource
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
 alias sc="gedit ~/.config/sxhkd/sxhkdrc &"
-alias pb="gedit ~/.config/polybar/config &"
+alias pb="gedit ~/.config/polybar/config.ini &"
 alias sb="gedit ~/.config/bspwm/bspwmrc &"
 alias as="gedit ~/.config/bspwm/autostart.sh &"
 # Print each PATH entry on a separate line
@@ -118,4 +118,8 @@ alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
 alias al="gedit .aliases &"
 alias smb="sudo gedit /etc/samba/smb.conf &"
+alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
+alias mpv10='mpv --ytdl-format="(best[height=1080])"'
+alias webkit="sudo gedit /etc/lightdm/lightdm-webkit2-greeter.conf"
+alias xfluxx="xflux -l 1 -g 38 -k 2000"
 
