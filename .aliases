@@ -104,8 +104,6 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 	# # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
 	# alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
 
-# Lock the screen (when going AFK)
-alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
@@ -121,5 +119,6 @@ alias smb="sudo gedit /etc/samba/smb.conf &"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
 alias webkit="sudo gedit /etc/lightdm/lightdm-webkit2-greeter.conf"
-alias xfluxx="xflux -l 1 -g 38 -k 2000"
+alias xfluxx="xflux -l 1 -g 38 -k 4000"
+alias lampp="sudo /opt/lampp/lampp"
 

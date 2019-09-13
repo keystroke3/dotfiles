@@ -15,3 +15,4 @@ if [systemd-detect-virt = "oracle"];
 	/usr/bin/VBoxClient-all
 fi
 
+xflux -l -1 -g 36 -k 3900
