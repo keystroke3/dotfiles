@@ -76,8 +76,8 @@ super + m
     pragha
 
 # Toggle pseudo tiling of window
-super + p
-	bspc node --state \~pseudo_tiled
+%super + p
+%	bspc node --state \~pseudo_tiled
 
 #Rofi theme selector
 super + r
@@ -94,6 +94,12 @@ super + w
 #Hide polybar
 super + y
     polybar-msg cmd toggle
+super_l + u
+	redpaper -c
+
+# lock the screen
+super + l
+	systemctl suspend
 
 #Oblogout
 super + x
@@ -142,12 +148,12 @@ super + shift + s
 	pkill -USR1 -x sxhkd
 
 #kill
-#super + shift + q
-#	bspc node -c
+super + shift + q
+	bspc node -c
 
-#kill
-super + q
-	bspc node -c	
+%#kill
+%super + q
+%	bspc node -c	
 
 #Logout
 super + shift + x
@@ -318,26 +324,20 @@ alt + shift + u
 #Xcfe4-TaskManager
 ctrl + shift + Escape
     xfce4-taskmanager
-
+ctrl + alt + Delete
+	poweroff
 
 #########################
 #     SCREENSHOTS       #
 #########################
 
-
-
-#Scrot
 Print
-   scrot /home/ted/Pictures/'ArcoLinux-%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e /home/ted/scripts/flush
-#screeenshooter
-ctrl + Print
-     gnome-screenshot -a && /home/ted/scripts/flush
-
-#Gnome-Screenshot
-ctrl + shift + Print
-     gnome-screenshot -i
+	xfce4-screenshooter -f -s /home/ted/Pictures
 shift + Print
-	gnome-screenshot -w
+	xfce4-screenshooter -r -s /home/ted/Pictures
+ctrl  + Print
+	xfce4-screenshooter -w -s /home/ted/Pictures
+	
 
 #########################
 #     MULTIMEDIA KEYS   #
@@ -500,7 +500,7 @@ super + ctrl + {e,r,t,y}
 	bspc node --focus @{parent,brother,first,second}
 
 # Preselect the splitting area for next window on leaf/parent
-super + ctrl + {u,i,o,p}
+super + {u,i,o,p}
 	bspc node --presel-dir \~{west,south,north,east}
 
 # Define splitting ratio for next window on leaf/parent

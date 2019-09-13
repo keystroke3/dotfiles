@@ -55,7 +55,7 @@ bspc config presel_feedback_color "$color1"
 
 #Dual monitor
 #find out names with arandr or xrandr
-bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10Q
+bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
 
 #bspc monitor LVDS1 -d 1 2 3 4
 #bspc monitor DP3 -d  5 6 7 8 9
@@ -65,11 +65,11 @@ bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10Q
 #bspc monitor HDMI2 -d 6 7 8 9 10
 
 #Fullscreen applications
-bspc rule -a inkscape state=fullscreen
-bspc rule -a Spotify state=fullscreen
-bspc rule -a Vlc state=fullscreen
-bspc rule -a VirtualBox Manager state=fullscreen
-bspc rule -a VirtualBox Machine state=fullscreen
+#bspc rule -a inkscape state=fullscreen
+#bspc rule -a Spotify state=fullscreen
+#bspc rule -a Vlc state=fullscreen
+#bspc rule -a VirtualBox Manager state=fullscreen
+#bspc rule -a VirtualBox Machine state=fullscreen
 #bspc rule -a Gimp state=fullscreen
 
 #Floating applications
@@ -93,7 +93,8 @@ bspc rule -a Gnome-disks state=tiled
 bspc rule -a Xfce4-settings-manager state=tiled
 
 #open applications on specific workspaces
-bspc rule -a Firefox desktop='^1' follow=on
+bspc rule -a Firefox desktop='^1'
+bspc rule -a Bluetooth state=floating
 #bspc rule -a Google-chrome desktop='^1' follow=on
 #bspc rule -a Chromium desktop='^1'  follow=on
 #bspc rule -a Subl3 desktop='^2' follow=on
