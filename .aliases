@@ -108,7 +108,7 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
 alias sc="gedit ~/.config/sxhkd/sxhkdrc &"
-alias pb="gedit ~/.config/polybar/config.ini &"
+alias pb="gedit ~/.config/polybar/config &"
 alias sb="gedit ~/.config/bspwm/bspwmrc &"
 alias as="gedit ~/.config/bspwm/autostart.sh &"
 # Print each PATH entry on a separate line
@@ -122,3 +122,5 @@ alias webkit="sudo gedit /etc/lightdm/lightdm-webkit2-greeter.conf"
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
 alias lampp="sudo /opt/lampp/lampp"
 
+alias l="less"
+alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'

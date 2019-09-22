@@ -41,7 +41,7 @@ compton --config $HOME/.config/bspwm/compton.conf &
 #nitrogen --set-auto Pictures/blackpink.png
 # ulauncher &
 $HOME/.redpaper/wallpaper.sh &
-wal -i "/home/ted/Pictures/Redpaper.old/Drift to the Future by @maldo_95 [3840x2160].png" -n &
+wal -i "/home/ted/Pictures/DVDE.png" -n &
 #auto-xflux -k 1800
 
 #Git init

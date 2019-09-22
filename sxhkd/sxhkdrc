@@ -1,6 +1,24 @@
 #########################
 # SUPER + FUNCTION KEYS #
 #########################
+
+# Kill window
+super + shift + x
+	bspc  node -k
+
+alt + f
+	rofi-finder.sh
+
+super + space
+	rofi -show
+
+#rofi run
+ctrl + space
+ 	rofi -show run
+#Rofi theme selector
+ctrl + alt + r
+   rofi-theme-selector
+
 super + d
 	redpaper -d
 super + c
@@ -79,7 +97,6 @@ super + m
 %super + p
 %	bspc node --state \~pseudo_tiled
 
-#Rofi theme selector
 super + r
     kitty -e ranger
 
@@ -211,13 +228,6 @@ ctrl + alt + s
 #Urxvt
 ctrl + alt + t
      urxvt
-
-#rofi run
-alt + r
- 	rofi -show run
-#Rofi theme selector
-ctrl + alt + r
-   rofi-theme-selector
 
 #Pulse Audio Control
 ctrl + alt + u
@@ -378,11 +388,11 @@ XF86AudioStop
 
 #Brightness up
 XF86MonBrightnessUp
-    xbacklight -inc 2
+    light -A 2
 
 #Brightness down
 XF86MonBrightnessDown
-    xbacklight -dec 2
+    light -U 2
 
 
 #########################
@@ -488,8 +498,9 @@ super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 
 # set the window state
-super + space
-	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+#super + space
+#	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
 super + s
 	bspc node -t {floating,tiled}
 super + t
@@ -500,8 +511,9 @@ super + ctrl + {e,r,t,y}
 	bspc node --focus @{parent,brother,first,second}
 
 # Preselect the splitting area for next window on leaf/parent
-super + {u,i,o,p}
-	bspc node --presel-dir \~{west,south,north,east}
+%super + {u,i,o,p}
+%	bspc node --presel-dir \~{west,south,north,east}
+
 
 # Define splitting ratio for next window on leaf/parent
 super + ctrl + {_,shift +}{1-9}
@@ -511,12 +523,55 @@ super + ctrl + {_,shift +}{1-9}
 super + ctrl + space
 	bspc node --presel-dir cancel
 
-#super + button{1-3}
-#     bspc pointer -g {move,resize_side,resize_corner}
-#super + @button{1-3}
-#     bspc pointer -u
-#super + !button{1-3}
-#    bspc pointer -t %i %i
-
 alt + {1,2}
 	autorandr {single, hdmidown}
+
+# mouse bindings
+# __________________
+
+%~button1
+%	DidIClickDesktop.sh && gapgrab	
+
+%~button2
+%	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
+%#DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
+%		
+%~button3
+%	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
+
+%# Switch workspace by scrolling on the desktop. Causes scrolling issues on some systems.
+%#~button4
+%#	DidIClickDesktop.sh && bspc desktop -f next
+%#~button5
+%#	DidIClickDesktop.sh && bspc desktop -f prev
+
+
+# Move or resize window
+super + button{1-3}
+	bspc pointer {move,resize_side,resize_corner}
+
+%# Needed for ^^^^
+alt + button{1-3}
+	; bspc pointer -g {move,resize_side,resize_corner}
+
+
+### Add or remove desktops by scrolling
+super + ctrl + button5
+    bspcp dsktp rm
+
+super + ctrl + button4
+    bspcp dsktp add
+
+# Spawn applications popup menu and manually tile selected 
+# app where your mouse was when you opened the menu. Smartsplit only chooses
+# biggest dimension of the window, MouseLaunch only cares which edge is closer.
+# mod5 is alt_gr (first key right from space) on most keyboards. 
+mod5 + @button1
+    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
+#	smartsplit ; dboxmenu
+
+# Spawn window manipulation menu
+# Mod1 is alt
+#    BspwmWindowMenu
+mod1 + @button1
+    mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
