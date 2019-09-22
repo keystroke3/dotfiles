@@ -66,3 +66,5 @@ source ~/.cache/wal/colors-tty.sh
 #export PATH="/home/ted/.pyenv/bin:$PATH"
 #eval "$(pyenv init -)"
 #eval "$(pyenv virtualenv-init -)"
+EDITOR=/usr/bin/nano
+TERMINAL=/usr/bin/kitty

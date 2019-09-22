@@ -1,1 +1,1 @@
-[ -n "$PS1" ] && source ~/.bash_profile;
+.bash_profile
