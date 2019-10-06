@@ -1,0 +1,21 @@
+set $wallpaper /home/ted/Pictures/Redpaper/Astronaut and the black hole fantasy space [1920x1080].jpeg
+
+set $background #120819
+set $foreground #afc2d5
+
+set $color0 #120819
+set $color1 #34358C
+set $color2 #4F368F
+set $color3 #334E9D
+set $color4 #5E55A3
+set $color5 #9766AA
+set $color6 #C165A6
+set $color7 #afc2d5
+set $color8 #7a8795
+set $color9 #34358C
+set $color10 #4F368F
+set $color11 #334E9D
+set $color12 #5E55A3
+set $color13 #9766AA
+set $color14 #C165A6
+set $color15 #afc2d5

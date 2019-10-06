@@ -1,0 +1,81 @@
+configuration {
+  display-drun: "> ";
+  drun-display-format: "{name}";
+  modi: "drun";
+/*  font: "Iosevka Medium 13";*/
+/*  font: "ShureTechMono Nerd Font Mono 13";*/
+  font: "UbuntuCondensed Nerd Font Mono 13";
+  fullscreen: false;
+  show-icons: true;
+/*  window-format: "{t}";*/
+}
+ 
+* {
+  background-color: rgba(0, 0, 0, 0%);
+  text-color: #d6f;
+}
+ 
+window {
+  background-color: rgba(32, 23, 50, 90%);
+  location: center;
+  width: 60%;
+  height: 40%;
+  
+}
+ 
+mainbox {
+  children: [ listview, inputbar ];
+  padding: 60;
+}
+ 
+listview {
+  columns: 4;
+  layout: vertical; 
+  /* position: center; */
+/*   lines: 3; */
+  /* padding: 70; */
+  spacing: 30;
+}
+ 
+element {
+  /* background-color: #201732; */
+  border-radius: 4;
+  orientation: vertical;
+  padding: 10 0;
+}
+ 
+element selected {
+  background-color: rgba(62, 54, 77, 90%);
+  text-color: #3bf;
+/*  text-color: #f92672;*/
+  /* text-color: #ae81ff; */
+}
+ 
+element-icon {
+  size: 128;
+}
+ 
+element-text {
+  horizontal-align: 0.5;
+  padding: 10 0 0 0;
+  text-color: inherit;
+}
+ 
+inputbar {
+  background-color: rgba(62, 54, 77, 90%);
+  border-radius: 4;
+  margin: 0 11;
+  padding: 10 12;
+  position: south;
+  width: 100%;
+}
+ 
+prompt {
+  enabled: false;
+}
+ 
+entry {
+  /* border: 5; */
+  /* border-color: #fff; */
+}
+

@@ -21,8 +21,8 @@ bspc config gapless_monocle      true
 bspc config focus_by_distance    true
 bspc config focus_follows_pointer true
 bspc config history_aware_focus  true
-bspc config pointer_motion_interval 5
-bspc config pointer_modifier mod4
+#bspc config pointer_motion_interval 5
+bspc config pointer_modifier mod1
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action2 resize_corner
@@ -50,10 +50,6 @@ bspc config presel_feedback_color "$color1"
 # Use the line below if you are on bspwm < 0.9.4
 #bspc config presel_border_color "$color1"
 
-
-#Single monitor
-#bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-
 #Dual monitor
 #find out names with arandr or xrandr
 bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
@@ -75,40 +71,19 @@ bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 10
 
 #Floating applications
 bspc rule -a Arandr state=floating
-bspc rule -a feh
-#bspc rule -a mpv state=floating sticky=on
+bspc rule -a mpv state=tiling sticky=off
 #bspc rule -a Font-manager state=floating
 bspc rule -a Galculator state=floating
-#bspc rule -a Gpick state=floating sticky=on
-#bspc rule -a Nitrogen state=floating
 bspc rule -a Oblogout state=floating
-#bspc rule -a Pavucontrol state=floating sticky=on
-#bspc rule -a Peek state=floating
-#bspc rule -a rofi state=floating sticky=on
-#bspc rule -a Skype state=floating
-#bspc rule -a Stacer state=floating
-#bspc rule -a Xfce4-appfinder state=floating sticky=on
-
 #Tiled applications
 bspc rule -a Gnome-disks state=tiled
 bspc rule -a Xfce4-settings-manager state=tiled
 
 #open applications on specific workspaces
-bspc rule -a Firefox desktop='^1'
-bspc rule -a Bluetooth state=floating
-#bspc rule -a Google-chrome desktop='^1' follow=on
-#bspc rule -a Chromium desktop='^1'  follow=on
-#bspc rule -a Subl3 desktop='^2' follow=on
-#bspc rule -a Atom desktop='^2' follow=on
-#bspc rule -a Steam desktop='^5'
-#bspc rule -a vlc desktop='^6'  follow=on
-#bspc rule -a mpv desktop='^6'  follow=on
-#bspc rule -a Vivaldi-stable desktop='^6' follow=on
-#bspc rule -a Vivaldi-snapshot desktop='^6' follow=on
-#bspc rule -a Transmission-gtk desktop='^7' follow=on
-#bspc rule -a Thunar desktop='^8' follow=on
-#bspc rule -a discord desktop='^9' follow=on
-#bspc rule -a Spotify desktop='^10' follow=on
+bspc rule -a firefox desktop='^1'
+bspc rule -a persepolis state=floating
+bspc rule -a bluetooth state=floating
+
 
 #Spotify fix  --move desktop 10
 #sleep 1

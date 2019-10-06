@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Gas Station by Bogdan mB0sco.jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#16060f",
+        "foreground": "#aec4dc",
+        "cursor": "#aec4dc"
+    },
+    "colors": {
+        "color0": "#16060f",
+        "color1": "#50516D",
+        "color2": "#9B7F69",
+        "color3": "#36558C",
+        "color4": "#354894",
+        "color5": "#52679A",
+        "color6": "#6589B3",
+        "color7": "#aec4dc",
+        "color8": "#79899a",
+        "color9": "#50516D",
+        "color10": "#9B7F69",
+        "color11": "#36558C",
+        "color12": "#354894",
+        "color13": "#52679A",
+        "color14": "#6589B3",
+        "color15": "#aec4dc"
+    }
+}

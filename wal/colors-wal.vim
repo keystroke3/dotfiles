@@ -1,0 +1,23 @@
+" Special
+let wallpaper  = "/home/ted/Pictures/Redpaper/Astronaut and the black hole fantasy space [1920x1080].jpeg"
+let background = "#120819"
+let foreground = "#afc2d5"
+let cursor     = "#afc2d5"
+
+" Colors
+let color0  = "#120819"
+let color1  = "#34358C"
+let color2  = "#4F368F"
+let color3  = "#334E9D"
+let color4  = "#5E55A3"
+let color5  = "#9766AA"
+let color6  = "#C165A6"
+let color7  = "#afc2d5"
+let color8  = "#7a8795"
+let color9  = "#34358C"
+let color10 = "#4F368F"
+let color11 = "#334E9D"
+let color12 = "#5E55A3"
+let color13 = "#9766AA"
+let color14 = "#C165A6"
+let color15 = "#afc2d5"

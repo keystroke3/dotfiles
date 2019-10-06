@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/DVDE.png",
+    "alpha": "100",
+    "special": {
+        "background": "#0e1015",
+        "foreground": "#9ed2f3",
+        "cursor": "#9ed2f3"
+    },
+    "colors": {
+        "color0": "#0e1015",
+        "color1": "#2548AC",
+        "color2": "#4F4BBA",
+        "color3": "#2565DA",
+        "color4": "#D038D8",
+        "color5": "#BC7CC4",
+        "color6": "#239BF4",
+        "color7": "#9ed2f3",
+        "color8": "#6e93aa",
+        "color9": "#2548AC",
+        "color10": "#4F4BBA",
+        "color11": "#2565DA",
+        "color12": "#D038D8",
+        "color13": "#BC7CC4",
+        "color14": "#239BF4",
+        "color15": "#9ed2f3"
+    }
+}
