@@ -6,7 +6,7 @@ alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
 shopt -s expand_aliases
-alias update="sudo pacman -Syyuu"
+alias update="yay -Syyuu"
 # alias yayupdate="yay -Syyu"
 alias pacinstall="sudo pacman -S"
 alias pacsearch="sudo pacman -Fs"
@@ -44,11 +44,6 @@ alias -- -="cd -"
 
 # Shortcuts
 alias prompt="cd && code .bash_prompt"
-alias aliases="cd && code .aliases"
-alias dl="cd ~/Downloads"
-alias dt="cd ~/Desktop"
-alias pp="cd pyProjects"
-alias ps="cd pyScripts"
 alias ll="lsd -alF"
 alias la="lsd -a"
 # Always enable colored `grep` output
@@ -124,3 +119,5 @@ alias lampp="sudo /opt/lampp/lampp"
 
 alias l="less"
 alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
+alias wgeta="wget --recursive --no-parent"
+alias wgeti='wget -r -np -R "index.html*"'

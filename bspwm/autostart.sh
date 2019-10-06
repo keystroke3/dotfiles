@@ -31,6 +31,7 @@ ssh-add $HOME/.ssh/github
 # conky -c $HOME/.config/bspwm/system-overview &
 #run variety &
 run nm-applet &
+devilspie &
 # run pamac-tray &
 run xfce4-power-manager &
 numlockx on &
@@ -41,7 +42,7 @@ compton --config $HOME/.config/bspwm/compton.conf &
 #nitrogen --set-auto Pictures/blackpink.png
 # ulauncher &
 $HOME/.redpaper/wallpaper.sh &
-wal -i "/home/ted/Pictures/DVDE.png" -n &
+wal -i /home/ted/Pictures/Redpaper/Astronaut\ and\ the\ black\ hole\ fantasy\ space\ \[1920x1080\].jpeg -n &
 #auto-xflux -k 1800
 
 #Git init

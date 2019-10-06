@@ -1,0 +1,1 @@
+yay -S autorandar caja code deezloader-remix-git glu kitty tauon-music-box pcmanfm polybar powerline ranger python-pip persepolis findutils telegram-desktop xfce4-screenshooter xfce4-power-manager xflux
