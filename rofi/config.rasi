@@ -1,13 +1,12 @@
 configuration {
-  display-drun: "> ";
+  display-drun: " Search:";
   drun-display-format: "{name}";
   modi: "drun";
 /*  font: "Iosevka Medium 13";*/
 /*  font: "ShureTechMono Nerd Font Mono 13";*/
-  font: "UbuntuCondensed Nerd Font Mono 13";
+  font: "UbuntuCondensed Nerd Font Mono 12";
   fullscreen: false;
   show-icons: true;
-/*  window-format: "{t}";*/
 }
  
 * {
@@ -16,66 +15,69 @@ configuration {
 }
  
 window {
-  background-color: rgba(32, 23, 50, 90%);
+  background-color: rgb(34, 15, 71);
   location: center;
   width: 60%;
-  height: 40%;
+  height: 45%;
   
 }
  
 mainbox {
   children: [ listview, inputbar ];
-  padding: 60;
+  padding: 40;
 }
  
 listview {
   columns: 4;
-  layout: vertical; 
-  /* position: center; */
-/*   lines: 3; */
-  /* padding: 70; */
+  layout: vertical;
   spacing: 30;
 }
  
 element {
-  /* background-color: #201732; */
-  border-radius: 4;
+  background-color: rgba(117, 11, 255, 0.029);
+  border-radius: 0;
   orientation: vertical;
-  padding: 10 0;
+  padding: 10;
 }
  
 element selected {
-  background-color: rgba(62, 54, 77, 90%);
+  /* background-color: rgba(62, 54, 77, 90%); */
+  background-color: rgba(77, 12, 163, 0.267);
   text-color: #3bf;
+  transition: 20;
+  /* transition-duration: 100ms; */
 /*  text-color: #f92672;*/
   /* text-color: #ae81ff; */
 }
  
 element-icon {
-  size: 128;
+  size: 40;
 }
  
 element-text {
   horizontal-align: 0.5;
-  padding: 10 0 0 0;
+  padding: 5 0 0 0;
   text-color: inherit;
 }
  
 inputbar {
-  background-color: rgba(62, 54, 77, 90%);
-  border-radius: 4;
-  margin: 0 11;
-  padding: 10 12;
-  position: south;
-  width: 100%;
+  background-color: rgba(62, 54, 77, 0);
+  border-radius: 50%;
+/*  margin: 0 30;*/
+  padding: 10 0;
 }
  
 prompt {
-  enabled: false;
+  background-color: rgba(126, 79, 236, 0.9);
+  padding: 5px;
+  border-radius: 50% 0 0 50%;
+  text-color: rgb(33, 0, 75);
+  enabled: true;
 }
  
 entry {
-  /* border: 5; */
-  /* border-color: #fff; */
+  font: "ShureTechMono Nerd Font Mono 20";
+  border-radius: 0 50% 50% 0;
+  background-color: rgba(117, 11, 255, 0.199);
 }
 
