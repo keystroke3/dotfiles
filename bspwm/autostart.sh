@@ -27,7 +27,7 @@ kdeconnect-indicator &
 xsetroot -cursor_name left_ptr &
 sxhkd &
 eval "$(ssh-agent -s)"
-ssh-add $HOME/.ssh/github
+ssh-add $HOME/.ssh/github $HOME/.ssh/bitbucket
 # conky -c $HOME/.config/bspwm/system-overview &
 #run variety &
 run nm-applet &
