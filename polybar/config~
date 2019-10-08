@@ -1,3 +1,22 @@
+#  ____ _____ 
+# |  _ \_   _|  Derek Taylor (DistroTube)
+# | | | || |    http://www.youtube.com/c/DistroTube
+# | |_| || |    http://www.gitlab.com/dwt1/ 
+# |____/ |_|  	
+
+;=====================================================
+;
+; To learn more about how to configure Polybar
+; go to https://github.com/jaagr/polybar
+;
+; The README contains alot of information
+; Themes : https://github.com/jaagr/dots/tree/master/.local/etc/themer/themes
+; https://github.com/jaagr/polybar/wiki/
+; https://github.com/jaagr/polybar/wiki/Configuration
+; https://github.com/jaagr/polybar/wiki/Formatting
+;
+;=====================================================
+
 [global/wm]
 ;https://github.com/jaagr/polybar/wiki/Configuration#global-wm-settings
 margin-top = 0
@@ -106,7 +125,7 @@ font-1 = "UbuntuMono Nerd Font:size=16;3"
 font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
 font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
 font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
-font-5 = "Noto Sans Symbols2:pixelsize=10;1"
+
 modules-left = bspwm xwindow
 ;modules-center = 
 modules-right = player-mpris-tail arrow1 memory2 arrow3 network arrow4 pavolume arrow5 battery arrow6 date
@@ -767,7 +786,7 @@ format-online-background = ${colors.background}
 
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/.config/polybar/scripts/player-mpris-tail.py --icon-playing  奈 -f '♫ {icon} {artist} - {title} ♪'
+exec = ~/.config/polybar/scripts/player-mpris-tail.py --icon-playing  奈 --icon-paused ⏸ -f '♫ {icon} {artist} - {title} ♪'
 tail = true
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}
