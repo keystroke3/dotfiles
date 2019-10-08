@@ -10,12 +10,12 @@ configuration {
 }
  
 * {
-  background-color: rgba(0, 0, 0, 0%);
-  text-color: #d6f;
+  background-color: rgba(141, 44, 44, 0);
+  text-color: rgb(246, 66, 252);
 }
  
 window {
-  background-color: rgb(34, 15, 71);
+  background-color: rgb(23, 6, 26);
   location: center;
   width: 60%;
   height: 45%;
@@ -34,7 +34,7 @@ listview {
 }
  
 element {
-  background-color: rgba(117, 11, 255, 0.029);
+  /* background-color: rgba(166, 11, 255, 0.025); */
   border-radius: 0;
   orientation: vertical;
   padding: 10;
@@ -42,12 +42,9 @@ element {
  
 element selected {
   /* background-color: rgba(62, 54, 77, 90%); */
-  background-color: rgba(77, 12, 163, 0.267);
+  background-color: rgba(158, 12, 163, 0.349);
   text-color: #3bf;
   transition: 20;
-  /* transition-duration: 100ms; */
-/*  text-color: #f92672;*/
-  /* text-color: #ae81ff; */
 }
  
 element-icon {
@@ -68,7 +65,7 @@ inputbar {
 }
  
 prompt {
-  background-color: rgba(126, 79, 236, 0.9);
+  background-color: rgba(210, 79, 236, 0.9);
   padding: 5px;
   border-radius: 50% 0 0 50%;
   text-color: rgb(33, 0, 75);
@@ -78,6 +75,6 @@ prompt {
 entry {
   font: "ShureTechMono Nerd Font Mono 20";
   border-radius: 0 50% 50% 0;
-  background-color: rgba(117, 11, 255, 0.199);
+  background-color: rgba(227, 11, 255, 0.199);
 }
 
