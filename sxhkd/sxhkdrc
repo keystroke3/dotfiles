@@ -28,6 +28,11 @@ super + shift + c
 super + m
 	thunar
 
+super + g
+	kitty -e gotop
+super + n
+	notify-send "Hello world"
+
 #########################
 # SUPER + ... KEYS      #
 #########################
@@ -64,7 +69,7 @@ super + y
 
 # lock the screen
 super + l
-	systemctl suspend
+	i3lock -i "/home/ted/Pictures/Redpaper/Pacman, Planets [1920x1080].png" && systemctl suspend
 
 #Oblogout
 super + x
@@ -79,6 +84,11 @@ super + Return
 	kitty
 ctrl + Return
 	kitty
+
+super + t
+	kitty -e tomb open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen -f
+super + shift + t
+	tomb close
 
 #########################
 # SUPER + SHIFT KEYS    #

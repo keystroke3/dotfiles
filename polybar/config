@@ -767,7 +767,8 @@ format-online-background = ${colors.background}
 
 [module/player-mpris-tail]
 type = custom/script
-exec = ~/.config/polybar/scripts/player-mpris-tail.py --icon-playing  奈 -f '♫ {icon} {artist} - {title} ♪'
+exec = ~/.config/polybar/scripts/player-mpris-tail.py -f '{icon} {:artist:t20:{artist}:}{:artist: - :}{:t20:{title}:}'
+;♫♪
 tail = true
 format-foreground = ${colors.foreground}
 format-background = ${colors.background}

@@ -80,9 +80,11 @@ bspc rule -a Xfce4-settings-manager state=tiled
 
 #open applications on specific workspaces
 bspc rule -a firefox desktop='^1'
+bspc rule -a tauonmb='^9'
 bspc rule -a persepolis state=floating
 bspc rule -a bluetooth state=floating
-
+bspc rule -a emacs state=tiled
+bspc rule -a VLC media player='^5'
 
 #Spotify fix  --move desktop 10
 #sleep 1

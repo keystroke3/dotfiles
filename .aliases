@@ -8,12 +8,11 @@ alias more=less
 shopt -s expand_aliases
 alias update="yay -Syyuu"
 # alias yayupdate="yay -Syyu"
-alias pacinstall="sudo pacman -S"
-alias pacsearch="sudo pacman -Fs"
-alias paminstall="sudo pamac install"
+alias get="yay -S"
+alias search="yay -Fs"
 alias wr="wget -r -np -nH --cut-dirs=3 -p -e robots=off -U mozilla -c -R.html"
 alias y480="cd && cd /home/ted/Videos/youtube-dl && youtube-dl -f '[height<480]'"
-alias pacremove="sudo pacman -Rns"
+alias kick="yay -Rns"
 alias clone="cd && cd ~/gitclones && git clone"
 alias verad="sudo veracrypt -d"
 alias veram="sudo veracrypt --mount /mnt/RELATIVITY/blackhole"
@@ -33,7 +32,7 @@ alias nc="ncmpcpp"
 alias clone="cd gitclones && git clone"
 alias py="python"
 # alias y="cd && cd /home/ted/Videos/youtube-dl && youtube-dl -f '[height=1080]'"
-alias y="cd && cd /home/ted/Videos/youtube-dl && youtube-dl"
+alias y="cd && cd /home/ted/Videos/youtube && youtube-dl"
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -109,7 +108,7 @@ alias as="gedit ~/.config/bspwm/autostart.sh &"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="gedit .aliases &"
+alias al="gedit ~/.aliases &"
 alias smb="sudo gedit /etc/samba/smb.conf &"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
@@ -121,3 +120,4 @@ alias l="less"
 alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
 alias wgeta="wget --recursive --no-parent"
 alias wgeti='wget -r -np -R "index.html*"'
+alias wipe='wipe -rvVp 3'
