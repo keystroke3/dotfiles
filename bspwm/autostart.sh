@@ -14,7 +14,7 @@ function run {
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
 $HOME/.config/polybar/launch.sh &
-kdeconnect-indicator &
+indicator-kdeconnect &
 
 #change your keyboard if you need it
 #setxkbmap -layout be
@@ -26,12 +26,10 @@ kdeconnect-indicator &
 
 xsetroot -cursor_name left_ptr &
 sxhkd &
-eval "$(ssh-agent -s)"
-ssh-add $HOME/.ssh/github $HOME/.ssh/bitbucket
+
 # conky -c $HOME/.config/bspwm/system-overview &
 #run variety &
 run nm-applet &
-devilspie &
 # run pamac-tray &
 run xfce4-power-manager &
 numlockx on &
