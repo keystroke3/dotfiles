@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/NFS Heat [1920x1080].png",
+    "alpha": "100",
+    "special": {
+        "background": "#06012B",
+        "foreground": "#8bcbed",
+        "cursor": "#8bcbed"
+    },
+    "colors": {
+        "color0": "#06012B",
+        "color1": "#670FD3",
+        "color2": "#2A48D3",
+        "color3": "#9F12DF",
+        "color4": "#9A32D1",
+        "color5": "#DA25EE",
+        "color6": "#E55BF7",
+        "color7": "#8bcbed",
+        "color8": "#618ea5",
+        "color9": "#670FD3",
+        "color10": "#2A48D3",
+        "color11": "#9F12DF",
+        "color12": "#9A32D1",
+        "color13": "#DA25EE",
+        "color14": "#E55BF7",
+        "color15": "#8bcbed"
+    }
+}

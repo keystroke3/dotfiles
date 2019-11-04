@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/[3840x2160] Ocean Sunset.jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#633e3f",
+        "foreground": "#eccebe",
+        "cursor": "#eccebe"
+    },
+    "colors": {
+        "color0": "#633e3f",
+        "color1": "#4E958F",
+        "color2": "#6C8B8F",
+        "color3": "#748AA5",
+        "color4": "#8F9393",
+        "color5": "#AC9A94",
+        "color6": "#8B93A5",
+        "color7": "#eccebe",
+        "color8": "#a59085",
+        "color9": "#4E958F",
+        "color10": "#6C8B8F",
+        "color11": "#748AA5",
+        "color12": "#8F9393",
+        "color13": "#AC9A94",
+        "color14": "#8B93A5",
+        "color15": "#eccebe"
+    }
+}

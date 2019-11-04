@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Neon Vader - 4k.jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#010203",
+        "foreground": "#a4c1d2",
+        "cursor": "#a4c1d2"
+    },
+    "colors": {
+        "color0": "#010203",
+        "color1": "#523460",
+        "color2": "#2B4C6B",
+        "color3": "#5D5070",
+        "color4": "#31698D",
+        "color5": "#5B658C",
+        "color6": "#906A8A",
+        "color7": "#a4c1d2",
+        "color8": "#728793",
+        "color9": "#523460",
+        "color10": "#2B4C6B",
+        "color11": "#5D5070",
+        "color12": "#31698D",
+        "color13": "#5B658C",
+        "color14": "#906A8A",
+        "color15": "#a4c1d2"
+    }
+}
