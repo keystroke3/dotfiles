@@ -50,7 +50,7 @@ super + w
 	bspc node -g {sticky=on, sticky=off}
 
 super + e
-    nemo
+    spacefm
 
 #Toggle fullscreen of window
 super + f

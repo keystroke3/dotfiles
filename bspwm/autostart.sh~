@@ -45,7 +45,7 @@ compton --config $HOME/.config/bspwm/compton.conf &
 #nitrogen --set-auto Pictures/blackpink.png
 # ulauncher &
 $HOME/.redpaper/wallpaper.sh &
-wal -i Pictures/Redpaper/Firewatch\ but\ without\ man-made\ objects\ or\ birds..png  -n &
+wal -i /home/ted/Pictures/Redpaper/Middle\ of\ the\ Ocean\ by\ Angel\ Ganev\ \[3840x2160\].png -n &
 #auto-xflux -k 1800
 
 #Git init

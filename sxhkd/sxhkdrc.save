@@ -26,7 +26,7 @@ super + shift + c
 	redpaper -bc
 
 super + m
-	caja
+	thunar
 
 super + g
 	kitty -e gotop
@@ -50,7 +50,7 @@ super + w
 	bspc node -g {sticky=on, sticky=off}
 
 super + e
-    nemo
+    caja
 
 #Toggle fullscreen of window
 super + f

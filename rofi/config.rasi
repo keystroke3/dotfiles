@@ -58,7 +58,8 @@ element-text {
 }
  
 inputbar {
-  background-color: rgba(62, 54, 77, 0);
+  /* background-color: rgba(62, 54, 77, 0); */
+  background-color: ${xrdb:color8};
   border-radius: 50%;
 /*  margin: 0 30;*/
   padding: 10 0;
