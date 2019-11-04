@@ -1,21 +1,21 @@
-set $wallpaper /home/ted/Pictures/Redpaper/Astronaut and the black hole fantasy space [1920x1080].jpeg
+set $wallpaper /home/ted/Pictures/Redpaper/Firewatch but without man-made objects or birds..png
 
-set $background #120819
-set $foreground #afc2d5
+set $background #1c0a1b
+set $foreground #f6e4d9
 
-set $color0 #120819
-set $color1 #34358C
-set $color2 #4F368F
-set $color3 #334E9D
-set $color4 #5E55A3
-set $color5 #9766AA
-set $color6 #C165A6
-set $color7 #afc2d5
-set $color8 #7a8795
-set $color9 #34358C
-set $color10 #4F368F
-set $color11 #334E9D
-set $color12 #5E55A3
-set $color13 #9766AA
-set $color14 #C165A6
-set $color15 #afc2d5
+set $color0 #1c0a1b
+set $color1 #CA2B41
+set $color2 #EC5744
+set $color3 #FE7445
+set $color4 #FE8351
+set $color5 #BE7386
+set $color6 #FCBCA3
+set $color7 #f6e4d9
+set $color8 #ac9f97
+set $color9 #CA2B41
+set $color10 #EC5744
+set $color11 #FE7445
+set $color12 #FE8351
+set $color13 #BE7386
+set $color14 #FCBCA3
+set $color15 #f6e4d9

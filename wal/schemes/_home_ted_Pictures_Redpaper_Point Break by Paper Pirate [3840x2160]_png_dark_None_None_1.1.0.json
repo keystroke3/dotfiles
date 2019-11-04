@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Point Break by Paper Pirate [3840x2160].png",
+    "alpha": "100",
+    "special": {
+        "background": "#081550",
+        "foreground": "#e8dbcd",
+        "cursor": "#e8dbcd"
+    },
+    "colors": {
+        "color0": "#081550",
+        "color1": "#25608F",
+        "color2": "#566B8C",
+        "color3": "#8E7A86",
+        "color4": "#56ABB1",
+        "color5": "#A4A4A0",
+        "color6": "#E3AC97",
+        "color7": "#e8dbcd",
+        "color8": "#a2998f",
+        "color9": "#25608F",
+        "color10": "#566B8C",
+        "color11": "#8E7A86",
+        "color12": "#56ABB1",
+        "color13": "#A4A4A0",
+        "color14": "#E3AC97",
+        "color15": "#e8dbcd"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Rainbow Intersections [10240x5760].jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#0a0f0d",
+        "foreground": "#abd5d6",
+        "cursor": "#abd5d6"
+    },
+    "colors": {
+        "color0": "#0a0f0d",
+        "color1": "#48221F",
+        "color2": "#4B574D",
+        "color3": "#BB6140",
+        "color4": "#D2625E",
+        "color5": "#E5A541",
+        "color6": "#8D7C80",
+        "color7": "#abd5d6",
+        "color8": "#779595",
+        "color9": "#48221F",
+        "color10": "#4B574D",
+        "color11": "#BB6140",
+        "color12": "#D2625E",
+        "color13": "#E5A541",
+        "color14": "#8D7C80",
+        "color15": "#abd5d6"
+    }
+}

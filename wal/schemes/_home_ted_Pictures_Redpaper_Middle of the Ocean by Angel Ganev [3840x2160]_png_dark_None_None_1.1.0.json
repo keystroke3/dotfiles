@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Middle of the Ocean by Angel Ganev [3840x2160].png",
+    "alpha": "100",
+    "special": {
+        "background": "#17041e",
+        "foreground": "#f3bfa7",
+        "cursor": "#f3bfa7"
+    },
+    "colors": {
+        "color0": "#17041e",
+        "color1": "#A94663",
+        "color2": "#D24953",
+        "color3": "#ED5152",
+        "color4": "#F37155",
+        "color5": "#DC4D67",
+        "color6": "#EA8227",
+        "color7": "#f3bfa7",
+        "color8": "#aa8574",
+        "color9": "#A94663",
+        "color10": "#D24953",
+        "color11": "#ED5152",
+        "color12": "#F37155",
+        "color13": "#DC4D67",
+        "color14": "#EA8227",
+        "color15": "#f3bfa7"
+    }
+}

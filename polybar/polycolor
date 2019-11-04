@@ -25,45 +25,14 @@ format-padding =
 format-margin =
 format-offset =
 
-
 [colors]
-
-xcolor0 = ${xrdb:color0}
-xcolor1 = ${xrdb:color1}
-xcolor2 = ${xrdb:color2}
-xcolor3 = ${xrdb:color3}
-xcolor4 = ${xrdb:color4}
-xcolor5 = ${xrdb:color5}
-xcolor6 = ${xrdb:color6}
-xcolor7 = ${xrdb:color7}
-xcolor8 = ${xrdb:color8}
-xcolor9 = ${xrdb:color9}
-xcolor10 = ${xrdb:color10}
-xcolor11 = ${xrdb:color11}
-xcolor12 = ${xrdb:color12}
-xcolor13 = ${xrdb:color13}
-xcolor14 = ${xrdb:color14}
-xcolor15 = ${xrdb:color15}
-;background = ${xrdb:background}
-;foreground = ${xrdb:foreground}
-
-background = xcolor0
-foreground = xcolor15
-
-shade1 = ${xrdb:color3}
-shade2 = ${xrdb:color6}
-
-alert = xcolor1
+; Nord theme ============
+background = #292d3e
+foreground = #c0c5ce
+alert = #bd2c40
 volume-min = #a3be8c
 volume-med = #ebcb8b
 volume-max = #bf616a
-; Nord theme ============
-; background = #292d3e
-; foreground = #c0c5ce
-; alert = #bd2c40
-; volume-min = #a3be8c
-; volume-med = #ebcb8b
-; volume-max = #bf616a
 ; =======================
 
 ; Gotham theme ==========
@@ -96,16 +65,16 @@ volume-max = #bf616a
 [bar/mainbar-bspwm]
 monitor = ${env:MONITOR}
 ;monitor-fallback = HDMI1
-width = 98.45%
+width = 100%
 height = 23
-offset-x = 1%
-offset-y = 0.5%
+;offset-x = 1%
+;offset-y = 1%
 radius = 0.0
 fixed-center = true
 bottom = false
 separator = 
 
-background = ${colors.xcolor0}
+background = ${colors.background}
 foreground = ${colors.foreground}
 
 line-size = 2
@@ -119,23 +88,20 @@ override-redirect = false
 enable-ipc = true
 
 ;border-size = 0
-border-left-size = 1
-border-right-size = 1
-border-top-size = 1
-border-bottom-size = 1
+border-left-size = 20
+border-right-size = 20
+border-top-size = 5
 ;border-bottom-size = 0
-border-color = ${colors.shade1}
+border-color = #00000000
 
-padding-left = 0
-padding-right = 0
-padding-top = 0
-padding-bottom = 0
+padding-left = 1
+padding-right = 1
 
 module-margin-left = 0
 module-margin-right = 0
 
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "UbuntuMono Nerd Font:size=11;1"
+font-0 = "UbuntuMono Nerd Font:size=11;2"
 font-1 = "UbuntuMono Nerd Font:size=16;3"
 font-2 = "Font Awesome 5 Free:style=Regular:pixelsize=10;1"
 font-3 = "Font Awesome 5 Free:style=Solid:pixelsize=10;1"
@@ -143,17 +109,16 @@ font-4 = "Font Awesome 5 Brands:pixelsize=8;1"
 font-5 = "Noto Sans Symbols2:pixelsize=10;1"
 modules-left = bspwm xwindow
 ;modules-center = 
-modules-right = player-mpris-tail arrow1 memory2 arrow3 network arrow6 pavolume arrow3 battery arrow6 date
+modules-right = player-mpris-tail arrow1 memory2 arrow3 network arrow4 pavolume arrow5 battery arrow6 date
 
 tray-detached = false
 tray-offset-x = 0
 tray-offset-y = 0
-tray-position = left
-tray-padding = 0
+tray-position = right
+tray-padding = 2
 tray-maxsize = 20
 tray-scale = 1.0
 tray-background = ${colors.background}
-tray-foreground = ${colors.xcolor0}
 
 scroll-up = bspwm-desknext
 scroll-down = bspwm-deskprev
@@ -237,24 +202,19 @@ pin-workspaces = true
 enable-click = true
 enable-scroll = false
 
-; label-focused = ""
-; label-occupied = ""
-; label-urgent = 
-;⭕
-label-focused = 🞕
-label-occupied = ◈
-label-urgent = ◈
-
-label-empty = 🞜
+label-focused = ""
+label-occupied = ""
+label-urgent = 
+label-empty = 
 
 format = <label-state>
 
 label-monitor = %name%
-label-focused-foreground = ${colors.xcolor3}
-label-occupied-foreground = ${colors.xcolor6}
+label-focused-foreground = #8E24AA
+label-occupied-foreground = #fdd835
 ;label-occupied-foreground = ${color.shade7}
-label-urgent-foreground = ${colors.xcolor2}
-label-empty-foreground = ${colors.xcolor6}
+label-urgent-foreground = #e53935
+label-empty-foreground = #fff
 
 label-focused-padding = 1
 label-urgent-padding = 1
@@ -277,9 +237,9 @@ format-background = ${colors.background}
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = ${colors.shade1}
+content-foreground = #82AAFF
 ;#C3E88D
-content-background = ${colors.background}
+content-background = #292d3e
 
 [module/arrow2]
 ; grey to Blue
@@ -295,33 +255,33 @@ content-background = #82AAFF
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = ${colors.shade2}
-content-background = ${colors.shade1}
+content-foreground = #C792EA
+content-background = #82AAFF
 
 [module/arrow4]
 ; grey to Blue
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = ${colros.shade1}
-content-background = ${colors.shade2}
+content-foreground = #FFE585
+content-background = #C792EA
 
 [module/arrow5]
 ; grey to Blue
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = ${colors.shade2}
-content-background = ${colors.shade1}
+content-foreground = #F07178
+content-background = #FFE585
 
 [module/arrow6]
 ; grey to Blue
 type = custom/text
 content = "%{T2} %{T-}"
 content-font = 2
-content-foreground = ${colors.shade1}
+content-foreground = ${colors.background}
 ;content-foreground = #1D2330
-content-background = ${colors.shade2}
+content-background = #F07178
 
 
 
@@ -411,31 +371,33 @@ full-at = 100
 
 format-charging = <animation-charging> <label-charging>
 label-charging = %percentage%%
-label-charging-foreground = ${colors.xcolor0}
-format-charging-background = ${colors.shade2}
+label-charging-foreground = #000000
+format-charging-background = #F07178
 
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = %percentage%%
-label-discharging-foreground = ${colors.xcolor0}
-format-discharging-background = ${colors.shade2}
+label-discharging-foreground = #000000
+format-discharging-background = #F07178
 
 format-full-prefix = " "
-format-full-prefix-foreground = ${colors.xcolor0}
-format-background = ${colors.shade2}
+format-full-prefix-foreground = #000000
+;format-full-underline = #fff
+format-foreground = #12345678
+format-background = #F07178
 
 ramp-capacity-0 = 
 ramp-capacity-1 = 
 ramp-capacity-2 = 
 ramp-capacity-3 = 
 ramp-capacity-4 = 
-ramp-capacity-foreground = ${colors.xcolor0}
+ramp-capacity-foreground = #000000
 
 animation-charging-0 = 
 animation-charging-1 = 
 animation-charging-2 = 
 animation-charging-3 = 
 animation-charging-4 = 
-animation-charging-foreground = ${colors.xcolor0}
+animation-charging-foreground = #000000
 animation-charging-framerate = 750
 
 ################################################################################
@@ -514,7 +476,7 @@ type = internal/cpu
 ; Default: 1
 interval = 1
 format-foreground = ${colors.background}
-format-background = ${colors.shade2}
+format-background = #C792EA
 format-prefix = " "
 format-prefix-foreground = ${colors.background}
 
@@ -546,13 +508,12 @@ interval = 5
 date = "%b %d, %Y | "
 date-alt = " %a %b %d, %Y"
 time = %H:%M%
-time-alt = %b %d, %Y
-;%l:%M%p
+time-alt = %l:%M%p
 ;format-prefix = " "
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground}
-format-foreground = ${colors.xcolor0}
-format-background = ${colors.shade1}
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
 label = "%time% "
 
 #################################################################
@@ -750,9 +711,9 @@ label = %percentage_used%%
 
 format = Mem <label>
 format-prefix = " "
-format-prefix-foreground = ${colors.xcolor0}
-format-foreground = ${colors.xcolor0}
-format-background = ${colors.shade1}
+format-prefix-foreground = #292d3e
+format-foreground = #292d3e
+format-background = #82AAFF
 
 ################################################################################
 
@@ -809,7 +770,7 @@ type = custom/script
 exec = ~/.config/polybar/scripts/player-mpris-tail.py -f '{icon} {:artist:t20:{artist}:}{:artist: - :}{:t20:{title}:}'
 ;♫♪
 tail = true
-format-foreground = ${colors.shade1}
+format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 label = %output%
 
@@ -830,12 +791,12 @@ format-foreground =
 format-background = 
 
 format-connected = <label-connected>
-format-connected-background = ${colors.shade2}
-format-connected-foreground = ${colors.xcolor0}
+format-connected-background = #C792EA
+format-connected-foreground = ${colors.background}
 format-connected-padding = 1
 
 format-disconnected = <label-disconnected>
-format-disconnected-background = ${colors.shade2}
+format-disconnected-background = #C792EA
 format-disconnected-foreground = ${colors.background}
 format-disconnected-padding = 1
 
@@ -880,8 +841,8 @@ click-right = exec pavucontrol
 click-left = ~/.config/polybar/scripts/pavolume.sh --togmute
 scroll-up = ~/.config/polybar/scripts/pavolume.sh --up
 scroll-down = ~/.config/polybar/scripts/pavolume.sh --down
-format-foreground = ${colors.xcolor0}
-format-background = ${colors.shade1}
+format-foreground = ${colors.background}
+format-background = #FFE585
 
 
 
@@ -1183,7 +1144,7 @@ label = %title%
 label-maxlen = 50
 
 format-prefix = "  "
-format-foreground = ${colors.shade1}
+format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 
 ###############################################################################
