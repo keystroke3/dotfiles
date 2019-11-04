@@ -152,7 +152,7 @@ tray-position = left
 tray-padding = 0
 tray-maxsize = 20
 tray-scale = 1.0
-tray-background = ${colors.background}
+tray-background = ${colors.xcolor0}
 tray-foreground = ${colors.xcolor0}
 
 scroll-up = bspwm-desknext

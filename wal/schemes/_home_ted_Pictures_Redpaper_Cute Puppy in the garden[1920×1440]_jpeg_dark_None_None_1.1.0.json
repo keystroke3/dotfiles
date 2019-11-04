@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Cute Puppy in the garden[1920\u00d71440].jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#101212",
+        "foreground": "#cce6c6",
+        "cursor": "#cce6c6"
+    },
+    "colors": {
+        "color0": "#101212",
+        "color1": "#7BC56A",
+        "color2": "#8BC93A",
+        "color3": "#8ECF58",
+        "color4": "#8ED070",
+        "color5": "#74888D",
+        "color6": "#95D38B",
+        "color7": "#cce6c6",
+        "color8": "#8ea18a",
+        "color9": "#7BC56A",
+        "color10": "#8BC93A",
+        "color11": "#8ECF58",
+        "color12": "#8ED070",
+        "color13": "#74888D",
+        "color14": "#95D38B",
+        "color15": "#cce6c6"
+    }
+}

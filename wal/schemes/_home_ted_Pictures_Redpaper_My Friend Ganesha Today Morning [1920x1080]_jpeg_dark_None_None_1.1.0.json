@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/My Friend Ganesha Today Morning [1920x1080].jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#120f0e",
+        "foreground": "#ddd9d4",
+        "cursor": "#ddd9d4"
+    },
+    "colors": {
+        "color0": "#120f0e",
+        "color1": "#91867A",
+        "color2": "#C99774",
+        "color3": "#7F7D83",
+        "color4": "#938E8B",
+        "color5": "#AFA7A1",
+        "color6": "#C6B8AE",
+        "color7": "#ddd9d4",
+        "color8": "#9a9794",
+        "color9": "#91867A",
+        "color10": "#C99774",
+        "color11": "#7F7D83",
+        "color12": "#938E8B",
+        "color13": "#AFA7A1",
+        "color14": "#C6B8AE",
+        "color15": "#ddd9d4"
+    }
+}
