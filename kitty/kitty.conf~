@@ -1037,4 +1037,4 @@ map kitty_mod+shift+v  paste_from_clipboard
 #: }}}
 
 # }}}
-include ~/.cache/wal/colors-kitty.conf
+#include ~/.cache/wal/colors-kitty.conf

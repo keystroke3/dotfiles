@@ -1,21 +1,21 @@
-set $wallpaper /home/ted/Pictures/Redpaper/My favorite of my series, each with a different theme and color. Hi-Res Available. [OC] [1920x1080].png
+set $wallpaper /home/ted/Pictures/Redpaper/Firewatch but without man-made objects or birds..png
 
-set $background #1c030d
-set $foreground #f5e9e0
+set $background #1c0a1b
+set $foreground #f6e4d9
 
-set $color0 #1c030d
-set $color1 #DE6E4A
-set $color2 #D28452
-set $color3 #F1945E
-set $color4 #D77C8B
-set $color5 #DEB59B
-set $color6 #FBDDC8
-set $color7 #f5e9e0
-set $color8 #aba39c
-set $color9 #DE6E4A
-set $color10 #D28452
-set $color11 #F1945E
-set $color12 #D77C8B
-set $color13 #DEB59B
-set $color14 #FBDDC8
-set $color15 #f5e9e0
+set $color0 #1c0a1b
+set $color1 #CA2B41
+set $color2 #EC5744
+set $color3 #FE7445
+set $color4 #FE8351
+set $color5 #BE7386
+set $color6 #FCBCA3
+set $color7 #f6e4d9
+set $color8 #ac9f97
+set $color9 #CA2B41
+set $color10 #EC5744
+set $color11 #FE7445
+set $color12 #FE8351
+set $color13 #BE7386
+set $color14 #FCBCA3
+set $color15 #f6e4d9

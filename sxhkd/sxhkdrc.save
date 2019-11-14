@@ -1,12 +1,8 @@
-#########################
+n#########################
 # SUPER + FUNCTION KEYS #
 #########################
-super + shift + z
-	nedit ~/.zshrc
 alt + f
 	rofi-finder.sh
-super + tab
-	bspc node -f {next, prev}
 
 super + space
 	rofi -show drun
@@ -61,8 +57,9 @@ super + f
 super + r
     kitty -e ranger
 
-super + Tab
-    bspc node -f {next, prev}
+#Pavucontrol
+super + v
+    pavucontrol
 
 #Hide polybar
 super + y
@@ -226,10 +223,9 @@ alt + Tab
 	bspc node -f {north,east,south,west}
 
 #Focus selected desktop
-#super + Tab
-#	autorandr --single/hdmidown
-super + v
-	bspc desktop -l next
+super + Tab
+	autorandr --single/hdmidown
+
 
 # Focus next/previous window
 ctrl + alt + Left
@@ -295,21 +291,14 @@ super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 
 # set the window state
+#super + space
+#	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 super + s
 	bspc node -t {floating,tiled}
 super + t
 	bspc node -t tiled
 
-### Map or unmap windows (functional equivalent of "minimize")
-#super + c
-#    whid dmenu
-
-super + i
-    whid hide
-
-super + o
-	whid last
 
 # Focus parent/brother/first/second for preselection
 super + ctrl + {e,r,t,y}
