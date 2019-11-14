@@ -1,11 +1,11 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 #custom commands
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
-shopt -s expand_aliases
+# shopt -s expand_aliases
 alias update="yay -Syyuu"
 # alias yayupdate="yay -Syyu"
 alias get="yay -S"
@@ -124,3 +124,4 @@ alias wipe='wipe -rvVp 3'
 alias nano='nano -xm'
 alias n='kitty -e nano -x $1 &'
 alias dd='dd status=progress'
+alias ranger='. ranger'alias cm="find ~/Music -empty -type d -delete && echo music cleaned..."

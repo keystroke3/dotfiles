@@ -51,7 +51,7 @@ background = xcolor0
 foreground = xcolor15
 
 shade1 = ${xrdb:color3}
-shade2 = ${xrdb:color15}
+shade2 = ${xrdb:color4}
 
 alert = xcolor1
 volume-min = #a3be8c
