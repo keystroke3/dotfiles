@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Cosmic Wolf [2560x1440].jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#0C0C26",
+        "foreground": "#97a8da",
+        "cursor": "#97a8da"
+    },
+    "colors": {
+        "color0": "#0C0C26",
+        "color1": "#602065",
+        "color2": "#282F93",
+        "color3": "#5C3092",
+        "color4": "#24549F",
+        "color5": "#515494",
+        "color6": "#6D7DBE",
+        "color7": "#97a8da",
+        "color8": "#697598",
+        "color9": "#602065",
+        "color10": "#282F93",
+        "color11": "#5C3092",
+        "color12": "#24549F",
+        "color13": "#515494",
+        "color14": "#6D7DBE",
+        "color15": "#97a8da"
+    }
+}

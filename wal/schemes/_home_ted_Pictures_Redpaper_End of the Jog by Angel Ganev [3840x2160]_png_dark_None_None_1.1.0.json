@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/End of the Jog by Angel Ganev [3840x2160].png",
+    "alpha": "100",
+    "special": {
+        "background": "#190c12",
+        "foreground": "#e6aabf",
+        "cursor": "#e6aabf"
+    },
+    "colors": {
+        "color0": "#190c12",
+        "color1": "#E9645C",
+        "color2": "#D3904A",
+        "color3": "#FA8E65",
+        "color4": "#FCB16E",
+        "color5": "#FDCA78",
+        "color6": "#6633BE",
+        "color7": "#e6aabf",
+        "color8": "#a17685",
+        "color9": "#E9645C",
+        "color10": "#D3904A",
+        "color11": "#FA8E65",
+        "color12": "#FCB16E",
+        "color13": "#FDCA78",
+        "color14": "#6633BE",
+        "color15": "#e6aabf"
+    }
+}
