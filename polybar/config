@@ -14,6 +14,7 @@ compositing-foreground = over
 compositing-overline = over
 compositing-underline = over
 compositing-border = over
+wm-restack = bspwm
 
 ; Define fallback values used by all module formats
 format-foreground = #FF0000
@@ -29,11 +30,15 @@ format-offset =
 [colors]
 
 xcolor0 = ${xrdb:color0}
+;xcolor0 = #1c0a1b
 xcolor1 = ${xrdb:color1}
+;xcolor2 = #EC5744
 xcolor2 = ${xrdb:color2}
 xcolor3 = ${xrdb:color3}
+;xcolor3 = #FE7445
 xcolor4 = ${xrdb:color4}
 xcolor5 = ${xrdb:color5}
+;xcolor6 = #FCBCA3
 xcolor6 = ${xrdb:color6}
 xcolor7 = ${xrdb:color7}
 xcolor8 = ${xrdb:color8}
@@ -44,16 +49,19 @@ xcolor12 = ${xrdb:color12}
 xcolor13 = ${xrdb:color13}
 xcolor14 = ${xrdb:color14}
 xcolor15 = ${xrdb:color15}
+;xcolor15 = #f6e4d9
 ;background = ${xrdb:background}
 ;foreground = ${xrdb:foreground}
 
 background = xcolor0
 foreground = xcolor15
 
-shade1 = ${xrdb:color3}
-shade2 = ${xrdb:color15}
+shade1 = ${colors.xcolor3}
+shade2 = ${colors.xcolor15}
+;shade1 = #FE7445
+;shade2 = #f6e4d9
 
-alert = xcolor1
+;alert = xcolor1
 volume-min = #a3be8c
 volume-med = #ebcb8b
 volume-max = #bf616a

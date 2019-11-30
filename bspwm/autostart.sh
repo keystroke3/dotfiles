@@ -7,7 +7,7 @@ function run {
   fi
 }
 
-polybar-launch &
+
 
 #Find out your monitor name with xrandr or arandr (save and you get this line)
 #xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal
@@ -27,8 +27,10 @@ sxhkd &
 run nm-applet &
 run xfce4-power-manager &
 blueberry-tray &
+blueman-tray &
 compton --config $HOME/.config/bspwm/compton.conf &
 conky  &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 $HOME/.redpaper/wallpaper.sh &
-wal -i Pictures/Redpaper/Firewatch\ but\ without\ man-made\ objects\ or\ birds..png  -n &
+wal -i Pictures/Redpaper/Skyscrapers\ \[2560x1440\].jpeg -n
+sleep 2 && polybar-launch &

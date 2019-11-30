@@ -2,11 +2,13 @@
 # SUPER + FUNCTION KEYS #
 #########################
 super + shift + z
-	nedit .~/.zshrc
+	nedit ~/.zshrc
 alt + f
 	rofi-finder.sh
-super + tab
-	bspc node -f {next, prev}
+super + Tab
+	bspc node -f {next}
+super + shift + Tab
+	bspc node -f {prev}
 
 super + space
 	rofi -show drun

@@ -32,7 +32,7 @@ alias nc="ncmpcpp"
 alias clone="cd gitclones && git clone"
 alias py="python"
 # alias y="cd && cd /home/ted/Videos/youtube-dl && youtube-dl -f '[height=1080]'"
-alias y="cd && cd /home/ted/Videos/youtube && youtube-dl"
+alias y="youtube-dl"
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -124,4 +124,7 @@ alias wipe='wipe -rvVp 3'
 alias nano='nano -xm'
 alias n='kitty -e nano -x $1 &'
 alias dd='dd status=progress'
-alias ranger='. ranger'alias cm="find ~/Music -empty -type d -delete && echo music cleaned..."
+#alias ranger='. ranger'
+alias cm="find ~/Music -empty -type d -delete && echo music cleaned..."
+alias mh="find -type f -exec mv -v {} . \;"
+alias python="/usr/bin/python3"
