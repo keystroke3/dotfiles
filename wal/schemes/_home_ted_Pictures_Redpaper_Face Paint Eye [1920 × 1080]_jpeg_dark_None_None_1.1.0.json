@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Face Paint Eye [1920 \u00d7 1080].jpeg",
+    "alpha": "100",
+    "special": {
+        "background": "#090d0d",
+        "foreground": "#c6c5c4",
+        "cursor": "#c6c5c4"
+    },
+    "colors": {
+        "color0": "#090d0d",
+        "color1": "#AA8C70",
+        "color2": "#DAA063",
+        "color3": "#437688",
+        "color4": "#837D85",
+        "color5": "#36A4B6",
+        "color6": "#6499A6",
+        "color7": "#c6c5c4",
+        "color8": "#8a8989",
+        "color9": "#AA8C70",
+        "color10": "#DAA063",
+        "color11": "#437688",
+        "color12": "#837D85",
+        "color13": "#36A4B6",
+        "color14": "#6499A6",
+        "color15": "#c6c5c4"
+    }
+}

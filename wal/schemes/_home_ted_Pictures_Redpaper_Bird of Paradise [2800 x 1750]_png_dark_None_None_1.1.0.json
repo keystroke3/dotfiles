@@ -1,0 +1,27 @@
+{
+    "wallpaper": "/home/ted/Pictures/Redpaper/Bird of Paradise [2800 x 1750].png",
+    "alpha": "100",
+    "special": {
+        "background": "#944116",
+        "foreground": "#f5bff0",
+        "cursor": "#f5bff0"
+    },
+    "colors": {
+        "color0": "#944116",
+        "color1": "#FB59D9",
+        "color2": "#FF75CD",
+        "color3": "#FF9F99",
+        "color4": "#FFD69E",
+        "color5": "#B7B5FE",
+        "color6": "#EB9DE4",
+        "color7": "#f5bff0",
+        "color8": "#ab85a8",
+        "color9": "#FB59D9",
+        "color10": "#FF75CD",
+        "color11": "#FF9F99",
+        "color12": "#FFD69E",
+        "color13": "#B7B5FE",
+        "color14": "#EB9DE4",
+        "color15": "#f5bff0"
+    }
+}
