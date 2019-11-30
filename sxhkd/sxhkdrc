@@ -5,9 +5,8 @@ super + shift + z
 	nedit ~/.zshrc
 alt + f
 	rofi-finder.sh
-super + tab
+super + Tab
 	bspc node -f {next, prev}
-
 super + space
 	rofi -show drun
 
