@@ -26,7 +26,6 @@ xsetroot -cursor_name left_ptr &
 sxhkd &
 run nm-applet &
 run xfce4-power-manager &
-blueberry-tray &
 blueman-tray &
 compton --config $HOME/.config/bspwm/compton.conf &
 conky  &
