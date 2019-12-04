@@ -32,7 +32,7 @@ alias nc="ncmpcpp"
 alias clone="cd gitclones && git clone"
 alias py="python"
 # alias y="cd && cd /home/ted/Videos/youtube-dl && youtube-dl -f '[height=1080]'"
-alias y="youtube-dl"
+alias y="youtube-dl -f '[height<=1080]'"
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
@@ -128,3 +128,4 @@ alias dd='dd status=progress'
 alias cm="find ~/Music -empty -type d -delete && echo music cleaned..."
 alias mh="find -type f -exec mv -v {} . \;"
 alias python="/usr/bin/python3"
+alias y1080="youtube-dl -f '[height<=1080]'"
