@@ -4,7 +4,7 @@
 super + shift + z
 	nedit ~/.zshrc
 alt + f
-	rofi-finder.sh
+	rofi -modi file-browser -show file-browser
 super + Tab
 	bspc node -f {next, prev}
 super + space
