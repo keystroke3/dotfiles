@@ -1,15 +1,30 @@
 #!/bin/sh
-# sudo pacman -S yay
+sudo pacman -S yay
 
-# yay -S --needed autorandar nemo code deezloader-remix-git \
-# glu kitty tauon-music-box pcmanfm polybar powerline ranger \
-# python-pip persepolis findutils telegram-desktop xfce4-screenshooter \
-# xfce4-power-manager xflux
+HASHES='\n#########################################################################\n\n'
 
-cd ~/dotfiles
+shopt -s dotglob
 dots=$HOME/dotfiles/*
-alldots=`ls -a`
-for i in $dots
-do
-    echo $i
+
+echo "installing programs..."
+yay -S --needed - < installed.txt
+printf "DONE"
+printf "$HASHES"
+printf "Restoring system and program settings..."
+ln -sf $dots/yay $HOME/.config
+for i in $dots; do
+    if [[ $i == !(*/.git*) ]]; then
+        if [[ $i == */.* ]] ; then
+            ln -sf $i $HOME
+        elif [[ -d $i ]] && [[ $i == !(*/.*) ]]; then
+            ln -sf $i $HOME/.config
+        fi
+    fi
 done
+
+echo "dotfiles have been set up"
+printf "$HASHES"
+
+# 
+
+
