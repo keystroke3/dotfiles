@@ -101,18 +101,18 @@ alias pumpitup="osascript -e 'set volume output volume 100'"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
-alias sc="nedit ~/.config/sxhkd/sxhkdrc &"
-alias pb="nedit ~/.config/polybar/config &"
-alias sb="nedit ~/.config/bspwm/bspwmrc &"
-alias as="nedit ~/.config/bspwm/autostart.sh &"
+alias sc="microx ~/.config/sxhkd/sxhkdrc &"
+alias pb="microx ~/.config/polybar/config &"
+alias sb="microx ~/.config/bspwm/bspwmrc &"
+alias as="microx ~/.config/bspwm/autostart.sh &"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="nedit ~/.aliases &"
+alias al="microx ~/.aliases &"
 alias smb="sudo nedit /etc/samba/smb.conf &"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
-alias webkit="sudo nedit /etc/lightdm/lightdm-webkit2-greeter.conf"
+alias webkit="sudo microx /etc/lightdm/lightdm-webkit2-greeter.conf"
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
 alias lampp="sudo /opt/lampp/lampp"
 
@@ -121,7 +121,7 @@ alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
 alias wgeta="wget --recursive --no-parent"
 alias wgeti='wget -r -np -R "index.html*"'
 alias wipe='wipe -rvVp 3'
-alias nano='nano -xm'
+alias nano='nano -x'
 alias n='kitty -e nano -x $1 &'
 alias dd='dd status=progress'
 #alias ranger='. ranger'
