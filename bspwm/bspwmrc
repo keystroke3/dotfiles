@@ -58,11 +58,13 @@ bspc rule -a Gnome-disks state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calender=floating
 
+
 #open applications on specific workspaces
 bspc rule -a firefox desktop='^1'
 bspc rule -a persepolis state=floating
 bspc rule -a bluetooth state=floating
 bspc rule -a steam desktop='4'
+bspc rule -a *Thunderbird* dekstop='^10'
 #polybar hidden when fullscreen for vlc, youtube, mpv ...
 #find out the name of your monitor with xrandr
 #xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_DP-1)
