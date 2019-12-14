@@ -4,7 +4,7 @@
 super + shift + z
 	microx ~/.zshrc
 alt + f
-	rofi -modi file-browser -show file-browser
+	rofi -modi file-browser -show file-browser -show-browser-depth 
 super + Tab
 	bspc node -f {next, prev}
 super + space
@@ -110,7 +110,7 @@ super + shift + s
 super + shift + q
 	bspc node -c
 
-#Logout
+#close Window
 super + shift + x
 	bspc quit
 
