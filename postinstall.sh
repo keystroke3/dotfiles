@@ -1,4 +1,5 @@
 #!/bin/sh
+git clone git@github.com:keystroke3/dotfiles.git
 sudo pacman -S yay
 
 HASHES='\n#########################################################################\n\n'
@@ -6,12 +7,14 @@ HASHES='\n######################################################################
 shopt -s dotglob
 dots=$HOME/dotfiles/*
 
-echo "installing programs..."
-yay -S --needed - < installed.txt
 printf "DONE"
 printf "$HASHES"
 printf "Restoring system and program settings..."
+
 ln -sf $dots/yay $HOME/.config
+echo "installing programs..."
+yay -S --needed - < installed.txt
+
 for i in $dots; do
     if [[ $i == !(*/.git*) ]]; then
         if [[ $i == */.* ]] ; then
@@ -23,6 +26,15 @@ for i in $dots; do
 done
 
 echo "dotfiles have been set up"
+printf "$HASHES"
+echo "installing Redpaper ..."
+
+cd $HOME
+git clone git@github.com:keystroke3/redpaper.git
+cd redpaper
+./install.sh
+redpaper -dl 5
+redpaper -c
 printf "$HASHES"
 
 # 
