@@ -60,6 +60,8 @@ bspc rule -a yad-calender=floating
 bspc rule -a Carousel.py state=floating
 bspc rule -a persepolis state=floating
 bspc rule -a bluetooth state=floating
+bspc rule -a Glade-previewer state=floating
+bspc rule -a emacs state=tiling
 
 #open applications on specific workspaces
 bspc rule -a firefox desktop='^1'

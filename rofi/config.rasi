@@ -10,30 +10,30 @@ configuration {
 
 * {
      text-color: @foreground;
-     active-background: #DB5722;
+     active-background: #666666;
      active-foreground: @foreground;
-     normal-background: @background;
-     normal-foreground: @foreground;
-     urgent-background: #F46E19;
+     normal-background: #666666;
+     normal-foreground: @background;
+     urgent-background: #666666;
      urgent-foreground: @foreground;
     
-     alternate-active-background: @background;
-     alternate-active-foreground: @foreground;
-     alternate-normal-background: @background;
-     alternate-normal-foreground: @foreground;
-     alternate-urgent-background: @background;
-     alternate-urgent-foreground: @foreground;
+     alternate-active-background: #666666;
+     alternate-active-foreground: @background;
+     alternate-normal-background: #666666;
+     alternate-normal-foreground: @background;
+     alternate-urgent-background: @aaaaaa;
+     alternate-urgent-foreground: @background;
     
-     selected-active-background: #F46E19;
+     selected-active-background: #dddddd;
      selected-active-foreground: @foreground;
-     selected-normal-background: #DB5750;
+     selected-normal-background: #dddddd;
      selected-normal-foreground: @foreground;
      selected-urgent-background: #F35031;
      selected-urgent-foreground: @foreground;
     
      background-color: @background;
-     background: #0c0410;
-     foreground: #ef999a;
+     background: #000000;
+     foreground: #dddddd;
      border-color: @background;
      spacing: 2;
     
@@ -47,7 +47,7 @@ window {
 	orientation: vertical;
 	children: [mainbox];
 	border: 2px 2px 2px 0px;
-	border-color: @foreground;
+	border-color: @background;
 	hide-scrollbar: true;
 	padding: 0 20px 0 15px;
 }
@@ -77,7 +77,7 @@ listview {
 }
 
 inputbar {
-	border-radius: 50%;
+	border-radius: 0 100px 0 100px;
 	padding: 5px;
 	border-spacing: 5px 0 0 0;
 	border: 1px;
@@ -104,51 +104,79 @@ prompt{
 
 element {
 	padding: 10px;
-	border-radius: 50%;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element normal.normal {
 	background-color: @normal-background;
 	text-color: @normal-foreground;
+	border-radius: 0 100px 0 100px;
+	border-color: @foreground;
 }
 
 element normal.urgent {
 	background-color: @urgent-background;
 	text-color: @urgent-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element normal.active {
 	background-color: @active-background;
 	text-color: @active-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element selected.normal {
 	background-color: @selected-normal-background;
 	text-color: @background;
 	border-color: @active-background;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element selected.urgent {
 	background-color: @selected-urgent-background;
 	text-color: @selected-urgent-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element selected.active {
 	background-color: @selected-active-background;
 	text-color: @selected-active-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element alternate.normal {
 	background-color: @normal-background;
 	text-color: @normal-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element alternate.urgent {
 	background-color: @urgent-background;
 	text-color: @urgent-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }
 
 element alternate.active {
 	background-color: @active-background;
 	text-color: @active-foreground;
+	border-radius: 0 100px 0 100px;
+	border-size: 1;
+	border-color: @foreground;
 }

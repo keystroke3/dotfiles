@@ -1,7 +1,7 @@
 #!/bin/bash
-if pgrep -x "compton" > /dev/null
+if pgrep -x "picom" > /dev/null
 then
-	killall compton
+	killall picom
 else
-	compton -b --config ~/.config/bspwm/compton.conf
+	picom -b --config ~/.config/picom.conf
 fi

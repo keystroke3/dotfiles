@@ -68,3 +68,5 @@ source ~/.cache/wal/colors-tty.sh
 #eval "$(pyenv virtualenv-init -)"
 EDITOR=/usr/bin/nano
 TERMINAL=/usr/bin/kitty
+# Nodejs
+# export PATH=/usr/local/lib/nodejs/node-v12.14.0-linux-x64/bin:$PATH

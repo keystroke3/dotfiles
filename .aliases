@@ -1,9 +1,8 @@
-#!/usr/bin/env zsh
+#!/bin/sh
 #custom commands
 alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
-alias np='nano -w PKGBUILD'
 alias more=less
 # shopt -s expand_aliases
 alias update="yay -Syyuu"
@@ -13,9 +12,6 @@ alias search="yay -Fs"
 alias wr="wget -r -np -nH --cut-dirs=3 -p -e robots=off -U mozilla -c -R.html"
 alias y480="youtube-dl -f '[height<=480]'"
 alias kick="yay -Rns"
-alias clone="cd && cd ~/gitclones && git clone"
-alias verad="sudo veracrypt -d"
-alias veram="sudo veracrypt --mount /mnt/RELATIVITY/blackhole"
 alias profile="sudo vscodium ~/.bash_profile"
 alias wipe="wipe -rp3"
 alias mv="mv -v"
@@ -57,47 +53,16 @@ alias sudo='sudo '
 # Flush Directory Service cache
 alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 
-# Clean up LaunchServices to remove duplicates in the “Open With” menu
-alias lscleanup="/System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user && killall Finder"
-
-# Canonical hex dump; some systems have this symlinked
-command -v hd > /dev/null || alias hd="hexdump -C"
-
-# macOS has no `md5sum`, so use `md5` as a fallback
-command -v md5sum > /dev/null || alias md5sum="md5"
-
-# macOS has no `sha1sum`, so use `shasum` as a fallback
-command -v sha1sum > /dev/null || alias sha1sum="shasum"
-
-# JavaScriptCore REPL
-jscbin="/System/Library/Frameworks/JavaScriptCore.framework/Versions/A/Resources/jsc";
-[ -e "${jscbin}" ] && alias jsc="${jscbin}";
-unset jscbin;
-
 # Trim new lines and copy to clipboard
 	# alias c="tr -d '\n' | pbcopy"
 
 # Intuitive map function
 # For example, to list all directories that contain a certain file:
 # find . -name .gitattributes | map dirname
-alias map="xargs -n1"
-
-# One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "${method}"="lwp-request -m '${method}'"
-done
+# alias map="xargs -n1"
 
 # Make Grunt print stack traces by default
 command -v grunt > /dev/null && alias grunt="grunt --stack"
-
-# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
-alias stfu="osascript -e 'set volume output muted true'"
-alias pumpitup="osascript -e 'set volume output volume 100'"
-
-	# # Kill all the tabs in Chrome to free up memory
-	# # [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
-	# alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
-
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
@@ -112,7 +77,6 @@ alias al="microx ~/.aliases &"
 alias smb="sudo nedit /etc/samba/smb.conf &"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
-alias webkit="sudo microx /etc/lightdm/lightdm-webkit2-greeter.conf"
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
 alias lampp="sudo /opt/lampp/lampp"
 
@@ -131,3 +95,4 @@ alias python="/usr/bin/python3"
 alias y1080="youtube-dl -f '[height<=1080]'"
 alias carousel="~/.config/polybar/scripts/theme-change-prompt.sh --show"
 alias ytv="cd ~/Videos/youtube"
+alias copy="xclip -sel c < $1"
