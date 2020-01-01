@@ -15,21 +15,18 @@ function run {
 #xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
-indicator-kdeconnect &
+kdeconnect-indicator &
 libinput-gestures-setup start
-if [ -z "$SSH_AUTH_SOCK" ] ; then
-  eval `ssh-agent -s`
-  ssh-add /home/ted/.ssh/github /home/ted/.ssh/bitbucket
-fi
+eval `ssh-agent -s`
 
 xsetroot -cursor_name left_ptr &
 sxhkd &
 run nm-applet &
 run xfce4-power-manager &
 blueman-tray &
-compton --config $HOME/.config/bspwm/compton.conf &
+picom --config ~/.config/picom.conf &
 conky  &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 $HOME/.redpaper/wallpaper.sh &
 wal -i Pictures/Redpaper/Skyscrapers\ \[2560x1440\].jpeg -n
-sleep 2 && polybar-launch &
+$HOME/.config/polybar/launch.sh &
