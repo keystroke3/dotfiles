@@ -1,7 +1,7 @@
 #########################
 # SUPER + FUNCTION KEYS #
 #########################
-super + shift + z
+super + shift + m
 	microx ~/.zshrc
 alt + f
 	rofi -modi file-browser -show file-browser -show-browser-depth 
@@ -27,7 +27,7 @@ super + shift + c
 	redpaper -bc
 
 super + m
-	caja
+	emacs
 
 super + g
 	kitty -e gotop
@@ -190,11 +190,11 @@ XF86AudioStop
 
 #Brightness up
 XF86MonBrightnessUp
-    light -A 2
+    xbacklight -inc 2
 
 #Brightness down
 XF86MonBrightnessDown
-    light -U 2
+    xbacklight -dec 2
 
 
 #########################

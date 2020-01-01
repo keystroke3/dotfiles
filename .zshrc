@@ -2,19 +2,22 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 #DEFAULT_USER=ted
+export PATH=$PATH:~/.bin
 export FZF_BASE="/home/ted/.config/micro/plugins/fzf"
 MICRO_TRUECOLOR=1
 TERM=xterm-256color
 # Path to your oh-my-zsh installation.
-export ZSH="/home/ted/.oh-my-zsh"
+export ZSH="/home/ted/.oh-my-zsh/"
 plugins=(
 git
+virtualenv
 pyenv
 python
 zsh-syntax-highlighting
 zsh-completions
 fzf
 )
+source "/home/ted/.oh-my-zsh/plugins/virtualenv/virtualenv.plugin.zsh"
 autoload -U compinit && compinit
 source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
 source ~/.oh-my-zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -25,11 +28,10 @@ POWERLEVEL9K_RPROMPT_ON_NEWLINE=true
 POWERLEVEL9K_COLOR_SCHEME='light'
 POWERLEVEL9K_VCS_BRANCH_ICON=$'\uF126 '
 POWERLEVEL9K_SHORTEN_DIR_LENGTH=2
-POWERLEVEL9K_SHORTEN_DELIMITER="..."
 POWERLEVEL9K_SHORTEN_STRATEGY="truncate_from_right"
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator virtualenv vcs background_jobs time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=( root_indicator vcs background_jobs time virtualenv)
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -38,7 +40,7 @@ POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator virtualenv vcs backgro
 ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
+# Setting this variable when ZSH_THEME=random wpill cause zsh to load
 # a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
 # If set to an empty array, this variable will have no effect.
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
