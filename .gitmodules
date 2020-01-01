@@ -1,0 +1,3 @@
+[submodule "polybar"]
+	path = polybar
+	url = git@github.com:keystroke3/Carousel.git
