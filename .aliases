@@ -1,6 +1,7 @@
 #!/bin/sh
 #custom commands
 alias cp="cp -i"                          # confirm before overwriting something
+alias vi="vim"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
@@ -25,9 +26,9 @@ alias s="speedtest --no-up"
 alias wl="wget -U Mozilla/5.0 -c --limit-rate=300K"
 alias rm="rm -r"
 alias nc="ncmpcpp"
-alias clone="cd gitclones && git clone"
+alias clone="cd gitclones& git clone"
 alias py="python"
-# alias y="cd && cd /home/ted/Videos/youtube-dl && youtube-dl -f '[height=1080]'"
+# alias y="cd& cd /home/ted/Videos/youtube-dl& youtube-dl -f '[height=1080]'"
 alias y="youtube-dl -f '[height<=1080]'"
 # Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
@@ -38,7 +39,7 @@ alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
 
 # Shortcuts
-alias prompt="cd && code .bash_prompt"
+alias prompt="cd& code .bash_prompt"
 alias ll="lsd -alF"
 alias la="lsd -a"
 # Always enable colored `grep` output
@@ -51,7 +52,7 @@ alias egrep='egrep --color=auto'
 alias sudo='sudo '
 
 # Flush Directory Service cache
-alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
+alias flush="dscacheutil -flushcache& killall -HUP mDNSResponder"
 
 # Trim new lines and copy to clipboard
 	# alias c="tr -d '\n' | pbcopy"
@@ -62,19 +63,19 @@ alias flush="dscacheutil -flushcache && killall -HUP mDNSResponder"
 # alias map="xargs -n1"
 
 # Make Grunt print stack traces by default
-command -v grunt > /dev/null && alias grunt="grunt --stack"
+command -v grunt > /dev/null& alias grunt="grunt --stack"
 
 # Reload the shell (i.e. invoke as a login shell)
 alias reload="exec ${SHELL} -l"
-alias sc="microx ~/.config/sxhkd/sxhkdrc &"
-alias pb="microx ~/.config/polybar/config &"
-alias sb="microx ~/.config/bspwm/bspwmrc &"
-alias as="microx ~/.config/bspwm/autostart.sh &"
+alias sc="vim ~/.config/sxhkd/sxhkdrc"
+alias pb="vim ~/.config/polybar/config"
+alias sb="vim ~/.config/bspwm/bspwmrc"
+alias as="vim ~/.config/bspwm/autostart.sh"
 # Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="microx ~/.aliases &"
-alias smb="sudo nedit /etc/samba/smb.conf &"
+alias al="vim ~/.aliases"
+alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
@@ -86,13 +87,17 @@ alias wgeta="wget --recursive --no-parent"
 alias wgeti='wget -r -np -R "index.html*"'
 alias wipe='wipe -rvVp 3'
 alias nano='nano -x'
-alias n='kitty -e nano -x $1 &'
+alias n='kitty -e nano -x $1'
 alias dd='dd status=progress'
 #alias ranger='. ranger'
-alias cm="find ~/Music -empty -type d -delete && echo music cleaned..."
+alias cm="find ~/Music -empty -type d -delete& echo music cleaned..."
 alias mh="find -type f -exec mv -v {} . \;"
 alias python="/usr/bin/python3"
 alias y1080="youtube-dl -f '[height<=1080]'"
 alias carousel="~/.config/polybar/scripts/theme-change-prompt.sh --show"
 alias ytv="cd ~/Videos/youtube"
 alias copy="xclip -sel c < $1"
+alias rp="cd ~/Pictures/Redpaper"
+alias v="vim ~/.vim/vimrc"
+alias z="vim ~/.zshrc"
+alias yt="youtube-dl"

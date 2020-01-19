@@ -15,10 +15,10 @@ function run {
 #xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
 #xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
 
+$HOME/.config/polybar/launch.sh &
 kdeconnect-indicator &
 libinput-gestures-setup start
 eval `ssh-agent -s`
-
 xsetroot -cursor_name left_ptr &
 sxhkd &
 run nm-applet &
@@ -28,5 +28,6 @@ picom --config ~/.config/picom.conf &
 conky  &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 $HOME/.redpaper/wallpaper.sh &
-wal -i Pictures/Redpaper/Skyscrapers\ \[2560x1440\].jpeg -n
-$HOME/.config/polybar/launch.sh &
+#wal -i Pictures/Redpaper/Skyscrapers\ \[2560x1440\].jpeg -n
+wal -i ~/Pictures/Redpaper/Eternity\ \[1920x1080\].png -n
+sh ~/.config/bspwm/scripts/starttauon.sh
