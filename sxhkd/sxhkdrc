@@ -73,7 +73,7 @@ super + l
 
 #Oblogout
 super + x
-    oblogout
+    clearine
 
 #Xkill
 super + Escape
@@ -86,7 +86,7 @@ ctrl + Return
 	kitty
 
 super + t
-	kitty -e tomb open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen -f
+    kitty -e tomb -q open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen
 super + shift + t
 	tomb close
 
