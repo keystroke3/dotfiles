@@ -47,9 +47,8 @@ and features Powerlevel10k has to offer. You can further customize your prompt b
 `~/.p10k.zsh`.
 
 #### Vim
-There's nothing much going on with Vim. All you need for it to look like it does here is Plugged. This will
-allow you to get the plugins that are in `.vimrc`. I am not using Powerline status here
-instead I use vim-airline.
+There's nothing much going on with Vim. The only extra thing you need [Plugged](https://github.com/junegunn/vim-plug). This will
+allow you to get the plugins that are in `.vimrc`. I am not using Powerline status here but [vim-airline](https://github.com/vim-airline/vim-airline) instead.
 
 #### Icons
 You may notice that file names have been prepended by small icons. This does not come by default to get the icons, you will need to use a tool called `lsd` which is a replacement for the traditional `ls` command. You can find out about how to install and use it in the [here](https://github.com/Peltoche/lsd)
