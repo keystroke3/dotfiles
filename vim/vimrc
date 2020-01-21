@@ -6,7 +6,8 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotesi
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
+" Pywal Colors
+Plug 'dylanaraps/wal.vim'
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 
@@ -40,6 +41,12 @@ set number relativenumber
 set wildmode=longest,list,full
 set splitbelow splitright
 set laststatus=2
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set nofoldenable
+
+
 let g:airline_powerline_fonts = 1
 let g:airline_theme='bubblegum'
 " copy and paste 
