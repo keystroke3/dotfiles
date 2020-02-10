@@ -1,19 +1,81 @@
 #!/bin/sh
+
+#custom functions
+
+# Allows killing of processes using fzf
+fkill() {
+    local pid 
+    if [ "$UID" != "0" ]; then
+        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
+    else
+        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+    fi  
+
+    if [ "x$pid" != "x" ]
+    then
+        echo $pid | xargs kill -${1:-9}
+    fi  
+}
+
+o(){
+    fuzz=`fzf --reverse --height 40%`
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -f $fuzz ]
+    then
+        filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
+        case $filetype in
+            text )
+                vim $fuzz ;;
+            audio )
+                mpv $fuzz & disown ;;
+            application )
+                vim $fuzz ;;
+            * )
+                xdg-open $fuzz & disown 
+        esac
+    fi
+}
+
+# Jump to directory. Much faster than regular cd
+j(){
+    fuzz=`fd -Ht d . $HOME | fzf --reverse --height 40%`
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -d $fuzz ]
+    then
+        cd $fuzz
+    fi
+}
+
 #custom commands
+alias g="| grep"
+alias test1="echo $1; echo $2"
+alias rcopy="rclone copy --progress --no-traverse"
+alias rlist="cat /home/ted/Documents/teams/teamdirs | fzf"
+alias du="dust"
+alias bp="bpython"
+alias pkg="yay -Q | fzf"
+alias gp="cd ~/Pictures"
+alias gv="cd ~/Videos"
+alias gd="cd ~/Downloads"
+alias gm="cd ~/Music"
+alias fzf="fzf --layout=reverse --height=40%"
+alias zz="vim ~/.zprofile"
 alias cp="cp -i"                          # confirm before overwriting something
 alias vi="vim"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
-# shopt -s expand_aliases
 alias update="yay -Syyuu"
-# alias yayupdate="yay -Syyu"
 alias get="yay -S"
 alias search="yay -Fs"
 alias wr="wget -r -np -nH --cut-dirs=3 -p -e robots=off -U mozilla -c -R.html"
-alias y480="youtube-dl -f '[height<=480]'"
+alias yl="youtube-dl -f '[height<=480]'"
 alias kick="yay -Rns"
-alias profile="sudo vscodium ~/.bash_profile"
+alias profile="sudo vim ~/.bash_profile"
 alias wipe="wipe -rp3"
 alias mv="mv -v"
 alias reghelp="gthumb /home/ted/Pictures/file-help.png"
@@ -28,72 +90,42 @@ alias rm="rm -r"
 alias nc="ncmpcpp"
 alias clone="cd gitclones& git clone"
 alias py="python"
-# alias y="cd& cd /home/ted/Videos/youtube-dl& youtube-dl -f '[height=1080]'"
 alias y="youtube-dl -f '[height<=1080]'"
-# Easier navigation: .., ..., ...., ....., ~ and -
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
-
-# Shortcuts
 alias prompt="cd& code .bash_prompt"
 alias ll="lsd -alF"
 alias la="lsd -a"
-# Always enable colored `grep` output
-# Note: `GREP_OPTIONS="--color=auto"` is deprecated, hence the alias usage.
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
-
-# Enable aliases to be sudo’ed
 alias sudo='sudo '
-
-# Flush Directory Service cache
-alias flush="dscacheutil -flushcache& killall -HUP mDNSResponder"
-
-# Trim new lines and copy to clipboard
-	# alias c="tr -d '\n' | pbcopy"
-
-# Intuitive map function
-# For example, to list all directories that contain a certain file:
-# find . -name .gitattributes | map dirname
-# alias map="xargs -n1"
-
-# Make Grunt print stack traces by default
-command -v grunt > /dev/null& alias grunt="grunt --stack"
-
-# Reload the shell (i.e. invoke as a login shell)
-alias reload="exec ${SHELL} -l"
+alias reload="exec ${SHELL} -l && clear"
 alias sc="vim ~/.config/sxhkd/sxhkdrc"
-alias pb="vim ~/.config/polybar/config"
+alias pb="bpython"
 alias sb="vim ~/.config/bspwm/bspwmrc"
 alias as="vim ~/.config/bspwm/autostart.sh"
-# Print each PATH entry on a separate line
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="vim ~/.aliases"
+alias al="vim ~/.aliases && clear && /bin/zsh/ -l"
 alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
 alias lampp="sudo /opt/lampp/lampp"
-
-alias l="less"
 alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
 alias wgeta="wget --recursive --no-parent"
 alias wgeti='wget -r -np -R "index.html*"'
 alias wipe='wipe -rvVp 3'
 alias nano='nano -x'
-alias n='kitty -e nano -x $1'
 alias dd='dd status=progress'
-#alias ranger='. ranger'
 alias cm="find ~/Music -empty -type d -delete& echo music cleaned..."
 alias mh="find -type f -exec mv -v {} . \;"
 alias python="/usr/bin/python3"
-alias y1080="youtube-dl -f '[height<=1080]'"
 alias carousel="~/.config/polybar/scripts/theme-change-prompt.sh --show"
 alias ytv="cd ~/Videos/youtube"
 alias copy="xclip -sel c < $1"

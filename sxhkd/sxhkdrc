@@ -1,54 +1,39 @@
-#########################
-# SUPER + FUNCTION KEYS #
-#########################
-super + shift + m
-	microx ~/.zshrc
-alt + f
-	rofi -modi file-browser -show file-browser -show-browser-depth 
+super + shift + l
+    kitty -e vim ~/.aliases
+
 super + Tab
-	bspc node -f {next, prev}
+	bspc  node -f {next.local, prev.local}
+
+
 super + space
 	rofi -show drun
 
-#rofi run
 ctrl + space
 	rofi -show run
-#Rofi theme selector
-ctrl + alt + r
-   rofi-theme-selector
 
-super + shift + u
-	microx ~/.config/kitty/kitty.conf
 super + d
 	redpaper -d
+
 super + c
 	redpaper -c
+
 super + shift + c
 	redpaper -bc
-
-super + m
-	emacs
-
-super + g
-	kitty -e gotop
-super + n
-	notify-send "Hello world"
-
-#########################
-# SUPER + ... KEYS      #
-#########################
 
 super + shift + x
 	bspc  node -k
 
 super + b
-	microx ~/.config/bspwm/bspwmrc
+	kitty -e vim ~/.config/bspwm/bspwmrc
 
 super+shift+b
-	microx ~/.config/sxhkd/sxhkdrc
+	kitty -e vim ~/.config/sxhkd/sxhkdrc
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
+
+super + p
+    bspc node -g {private=on, private=off}
 
 super + e
     nemo
@@ -60,18 +45,14 @@ super + f
 super + r
     kitty -e ranger
 
-super + Tab
-    bspc node -f {next, prev}
-
 #Hide polybar
 super + y
     polybar-msg cmd toggle
 
 # lock the screen
-super + l
-	i3lock -i "/home/ted/Pictures/Redpaper/Pacman, Planets [1920x1080].png" && systemctl suspend
+ctrl + super + l
+	i3lock -i "/home/ted/Pictures/on the run [5120x2880].png"
 
-#Oblogout
 super + x
     clearine
 
@@ -82,35 +63,29 @@ super + Escape
 #Terminal emulator
 super + Return
 	kitty
+
 ctrl + Return
 	kitty
 
 super + t
     kitty -e tomb -q open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen
+
 super + shift + t
 	tomb close
 
-#########################
-# SUPER + SHIFT KEYS    #
-#########################
 
-#DMENU
 super + shift + d
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
 
-#Reload bspwm
 super + shift + r
 	~/.config/bspwm/bspwmrc
 
-#reload sxhkd:
 super + shift + s
 	pkill -USR1 -x sxhkd
 
-#kill
 super + shift + q
 	bspc node -c
 
-#close Window
 super + shift + x
 	bspc quit
 
@@ -220,51 +195,25 @@ super + shift + {1-9,0}
 
 
 #Focus selected desktop
-alt + Tab
-%	bspc desktop -f '^{1-9,10}'
-	bspc node -f {north,east,south,west}
+#alt + Tab
+#%	bspc desktop -f '^{1-9,10}'
+#	bspc node -f {north,east,south,west}
 
 #Focus selected desktop
-#super + Tab
-#	autorandr --single/hdmidown
 super + v
 	bspc desktop -l next
-
-# Focus next/previous window
-ctrl + alt + Left
-	bspc node --focus west
-
-# Focus next/previous window
-ctrl + alt + Right
-	bspc node --focus east
-
-# Focus Up window
-ctrl +alt + Up
-	bspc node --focus north
-
-# Focus Down window
-ctrl + alt + Down
-	bspc node --focus south
 
 #Rotate desktop
 alt + space
 	bspc node @/ --rotate {90,-90}
 
 # Focus/swap windows by direction
-super + {_,shift + }{h,j,k,l}
-	bspc node --{focus,swap} {west,south,north,east}
-
-# Focus/swap windows by direction
-ctrl + super + {Left,Down,Up,Right}
-	bspc node --{focus} {west,south,north,east}
+super + {h,j,k,l}
+	bspc node --swap {west,south,north,east}
 
 # Flip layout vertically/horizontally
 super + {_,shift + }a
 	bspc node @/ --flip {vertical,horizontal}
-
-# Expand tiled space
-#alt + shift + {h,j,k,l}
-#	bspc node {@west -r -10,@south -r +10,@north -r -10,@east -r +10}
 
 super + alt + {Left,Down,Up,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
@@ -276,15 +225,6 @@ super + alt + {Left,Down,Up,Right}
 super + alt + shift + {Left,Down,Up,Right}
 	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
 
-%super + button{1-3}
-%  bspc pointer -g {move,resize_side,resize_corner}
-
-%super + !button{1-3}
-%  bspc pointer -t %i, %i
-
-%super + @button{1-3}
-%  bspc pointer -u
-
 # Increase/decrease window gap on focused desktop
 super + bracket{left,right}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
@@ -294,11 +234,8 @@ super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 
 # set the window state
-
 super + s
 	bspc node -t {floating,tiled}
-super + t
-	bspc node -t tiled
 
 ### Map or unmap windows (functional equivalent of "minimize")
 #super + c
@@ -310,15 +247,6 @@ super + i
 super + o
 	whid last
 
-# Focus parent/brother/first/second for preselection
-super + ctrl + {e,r,t,y}
-	bspc node --focus @{parent,brother,first,second}
-
-# Preselect the splitting area for next window on leaf/parent
-%super + {u,i,o,p}
-%	bspc node --presel-dir \~{west,south,north,east}
-
-
 # Define splitting ratio for next window on leaf/parent
 super + ctrl + {_,shift +}{1-9}
 	bspc node {_,@/} --presel-ratio 0.{1-9}
@@ -327,55 +255,3 @@ super + ctrl + {_,shift +}{1-9}
 super + ctrl + space
 	bspc node --presel-dir cancel
 
-alt + {1,2}
-	autorandr {single, hdmidown}
-
-# mouse bindings
-# __________________
-
-%~button1
-%	DidIClickDesktop.sh && gapgrab	
-
-%~button2
-%	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmDesktopMenui
-%#DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
-%		
-%~button3
-%	DidIClickDesktop.sh && mygtkmenui -- .config/GTKmenu/LaunchMenu
-
-%# Switch workspace by scrolling on the desktop. Causes scrolling issues on some systems.
-%#~button4
-%#	DidIClickDesktop.sh && bspc desktop -f next
-%#~button5
-%#	DidIClickDesktop.sh && bspc desktop -f prev
-
-
-%# Move or resize window
-%super + button{1-3}
-%	bspc pointer {move,resize_side,resize_corner}
-
-%%# Needed for ^^^^
-%alt + button{1-3}
-%	; bspc pointer -g {move,resize_side,resize_corner}
-
-
-%### Add or remove desktops by scrolling
-%super + ctrl + button5
-%    bspcp dsktp rm
-
-%super + ctrl + button4
-%    bspcp dsktp add
-
-%# Spawn applications popup menu and manually tile selected 
-%# app where your mouse was when you opened the menu. Smartsplit only chooses
-%# biggest dimension of the window, MouseLaunch only cares which edge is closer.
-%# mod5 is alt_gr (first key right from space) on most keyboards. 
-%mod5 + @button1
-%    MouseLaunch ; mygtkmenui -- .config/GTKmenu/LaunchMenu
-%#	smartsplit ; dboxmenu
-
-%# Spawn window manipulation menu
-%# Mod1 is alt
-%#    BspwmWindowMenu
-%mod1 + @button1
-%    mygtkmenui -- .config/GTKmenu/BspwmWindowMenui
