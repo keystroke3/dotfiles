@@ -1,33 +1,25 @@
 #!/bin/bash
 
-function run {
-  if ! pgrep $1 ;
-  then
-    $@&
-  fi
-}
+declare -a programs=(
+"kdeconnect-indicator"
+"ssh-agent" 
+"blueman-tray"
+"sxhkd"
+"nm-applet"
+"xfce4-power-manager"
+)
 
+for program in "${programs[@]}"; do
+   if pgrep $program; then
+       return 0
+   else
+       $program &
+   fi
+done 
 
-
-#Find out your monitor name with xrandr or arandr (save and you get this line)
-#xrandr --output VGA-1 --primary --mode 1360x768 --pos 0x0 --rotate normal
-#xrandr --output DP2 --primary --mode 1920x1080 --rate 60.00 --output LVDS1 --off &
-#xrandr --output LVDS1 --mode 1366x768 --output DP3 --mode 1920x1080 --right-of LVDS1
-#xrandr --output HDMI2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
-
-$HOME/.config/polybar/launch.sh &
-kdeconnect-indicator &
-libinput-gestures-setup start
-eval `ssh-agent -s`
-xsetroot -cursor_name left_ptr &
-sxhkd &
-run nm-applet &
-run xfce4-power-manager &
-blueman-tray &
 picom --config ~/.config/picom.conf &
-conky  &
+~/.config/bspwm/scripts/starttauon.sh
+~/.redpaper/wallpaper.sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-$HOME/.redpaper/wallpaper.sh &
-#wal -i Pictures/Redpaper/Skyscrapers\ \[2560x1440\].jpeg -n
-wal -i ~/Pictures/Redpaper/Eternity\ \[1920x1080\].png -n
-sh ~/.config/bspwm/scripts/starttauon.sh
+$HOME/.config/polybar/launch.sh &
+sleep 300 && thunderbird &

@@ -1,39 +1,67 @@
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+" if exists('+termguicolors')
+"  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"  set termguicolors
+" endif
+autocmd! VimEnter * call s:fcy_nerdcommenter_map()
+function! s:fcy_nerdcommenter_map()
+    nmap cc <plug>NERDCommenterToggle
+    vmap cc <plug>NERDCommenterToggle gv
+endfunction
+set t_Co=256
+if &term =~ '256color'
+    set t_ut=
+endif
 
+call plug#begin('~/.vim/plugged')
 " Make sure you use single quotesi
+" Colorschemes and themes
+"
+"
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'Rigellute/shades-of-purple.vim'
+Plug 'megantiu/true.vim'
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" Pywal Colors
+Plug 'artanikin/vim-synthwave84'
 Plug 'dylanaraps/wal.vim'
+"
+"
+"
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
-
+" Autopep8
+Plug 'tell-k/vim-autopep8'
+" Commentor
+Plug 'preservim/nerdcommenter'
+" CSS colors plugin
+Plug 'ap/vim-css-color'
 " Multiple Plug commands can be written in a single line using | separators
 Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
-
 " On-demand loading
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-fireplace', { 'for': 'clojure' }
-
 " Using a non-master branch
 Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
-
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 Plug 'fatih/vim-go', { 'tag': '*' }
-
 " Plugin options
 Plug 'nsf/gocode', { 'tag': 'v.20150303', 'rtp': 'vim' }
-
 " Plugin outside ~/.vim/plugged with post-update hook
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Auto-indentation plugin for python
+Plug 'vim-scripts/indentpython.vim'
+" Autocomplete for python
+Plug 'Valloric/YouCompleteMe'
+" Pep8 python support
+Plug 'nvie/vim-flake8'
+" syntax highlighting
+Plug 'vim-syntastic/syntastic'
 
-" Unmanaged plugin (manually installed and updated)
-Plug '~/my-prototype-plugin'
-
-" Initialize plugin system
 call plug#end()
 
 
@@ -45,14 +73,76 @@ set tabstop=4
 set shiftwidth=4
 set expandtab
 set nofoldenable
+set t_Co=256
+set background=dark
+set termguicolors
+set encoding=utf-8
 
+let python_highlight_all = 1
+let g:ycm_autoclose_preview_window_after_completion=1
+
+if &term =~ "xterm\\|rxvt"
+  " use an orange cursor in insert mode
+  let &t_SI = "\<Esc>]12;orange\x7"
+  " use a red cursor otherwise
+  let &t_EI = "\<Esc>]12;red\x7"
+  silent !echo -ne "\033]12;red\007"
+  " reset cursor when vim exits
+  autocmd VimLeave * silent !echo -ne "\033]112\007"
+  " use \003]12;gray\007 for gnome-terminal
+endif
 
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+let g:airline_theme='shades_of_purple'
 " copy and paste 
-vnoremap <C-c> "*Y :let @+=@<CR>
-map <C-p> "+P
 
 if has('python3')
 endif
+colorscheme challenger_deep
+autocmd BufNewFile,BufRead *.rasi set syntax=css
+autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
+map ; :
+map <space><space> ZZ
+map <C-p> "+P
+map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <C-n> :NERDTreeToggle<CR>
+map <C-/> <Plug>NERDCommenterToggle('n', 'Toggle')<Cr>
+vnoremap <C-c> "*Y :let @+=@<CR>
+vnoremap <C-q> quit!
+"split navigations
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+"let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+
+" Enable NERDCommenterToggle to check all selected lines is commented or not
+let g:NERDToggleCheckAllLines = 1
+
+
+"Eleifend sollicitudin, lectus ve est curabitur leo 
+"maecenas blandit feugiat dictum. Per ad nibh 
+"aliquam justo per facilisis. 
+"Eu arcu eni a nostra quis et. Diam primis dis. 
+"Tempor aptent ad pede class pharetra dignissim, ve.
