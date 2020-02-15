@@ -2,6 +2,7 @@
 export PATH="$HOME/bin:$PATH";
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 [[ $- != *i* ]] && return
+export VISUAL="gvim"
 
 export FZF_DEFAULT_COMMAND='fd --hidden --type f . $HOME'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

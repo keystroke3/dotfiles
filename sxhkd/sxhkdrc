@@ -1,10 +1,14 @@
+super + {_,shift +} + e
+    bspc node {@/,@parent} {--equalize,--balance}
+
 super + shift + l
     kitty -e vim ~/.aliases
 
 super + Tab
 	bspc  node -f {next.local, prev.local}
 
-
+super + shift + p
+    /home/ted/.config/polybar/launch.sh
 super + space
 	rofi -show drun
 
@@ -36,6 +40,9 @@ super + p
     bspc node -g {private=on, private=off}
 
 super + e
+    nemo
+
+super + n
     nemo
 
 #Toggle fullscreen of window

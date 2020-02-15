@@ -46,15 +46,25 @@ j(){
         return 0
     elif [ -d $fuzz ]
     then
-        cd $fuzz
+        if [ "$1" != "mpv" ]
+        then
+            cd $fuzz
+        else
+            mpv $fuzz & disown
+        fi
     fi
+}
+
+rfile(){
+    file=$@
+    grep $file /home/ted/Documents/teams/teamfiles | fzf
 }
 
 #custom commands
 alias g="| grep"
-alias test1="echo $1; echo $2"
+# alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
-alias rlist="cat /home/ted/Documents/teams/teamdirs | fzf"
+alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
 alias du="dust"
 alias bp="bpython"
 alias pkg="yay -Q | fzf"
