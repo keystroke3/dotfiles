@@ -1,7 +1,6 @@
 #!/bin/bash
 
 declare -a programs=(
-"kdeconnect-indicator"
 "ssh-agent" 
 "blueman-tray"
 "sxhkd"
@@ -9,7 +8,31 @@ declare -a programs=(
 "xfce4-power-manager"
 )
 
+declare -a lazy_load=(
+"thunderbird"
+"kdeconnect-indicator"
+)
+
+$HOME/.config/polybar/launch.sh &
 for program in "${programs[@]}"; do
+   if pgrep $program; then
+       :
+   else
+       $program &
+   fi
+done 
+
+if pgrep "tauonmb";then 
+    :
+else 
+    nohup python3 /opt/tauon-music-box/tauon.py %U &
+fi
+
+picom --config ~/.config/picom.conf &
+~/.redpaper/wallpaper.sh
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+sleep 30
+for program in "${lazy_load[@]}"; do
    if pgrep $program; then
        return 0
    else
@@ -17,9 +40,3 @@ for program in "${programs[@]}"; do
    fi
 done 
 
-picom --config ~/.config/picom.conf &
-~/.config/bspwm/scripts/starttauon.sh
-~/.redpaper/wallpaper.sh
-/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-$HOME/.config/polybar/launch.sh &
-sleep 300 && thunderbird &
