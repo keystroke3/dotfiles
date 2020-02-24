@@ -57,10 +57,11 @@ j(){
 
 rfile(){
     file=$@
-    grep $file /home/ted/Documents/teams/teamfiles | fzf
+    cat $file /home/ted/Documents/teams/teamfiles | fzf
 }
 
 #custom commands
+alias move="find . -mindepth 2 -type f -print -exec mv {} . \;"
 alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
