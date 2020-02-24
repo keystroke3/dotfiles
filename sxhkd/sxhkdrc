@@ -1,14 +1,14 @@
-super + {_,shift +} + e
-    bspc node {@/,@parent} {--equalize,--balance}
+super + =
+   bspc node {@/,@parent} {--equalize,--balance}
 
-super + shift + l
-    kitty -e vim ~/.aliases
-
+super + q 
+    /home/ted/.bin/powermenu
 super + Tab
 	bspc  node -f {next.local, prev.local}
 
 super + shift + p
     /home/ted/.config/polybar/launch.sh
+
 super + space
 	rofi -show drun
 
@@ -42,9 +42,6 @@ super + p
 super + e
     nemo
 
-super + n
-    nemo
-
 #Toggle fullscreen of window
 super + f
 	bspc node --state \~fullscreen
@@ -60,8 +57,8 @@ super + y
 ctrl + super + l
 	i3lock -i "/home/ted/Pictures/on the run [5120x2880].png"
 
-super + x
-    clearine
+/* super + x */
+    /* clearine */
 
 #Xkill
 super + Escape
