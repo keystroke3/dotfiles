@@ -1,0 +1,79 @@
+configuration {
+    modi: "combi,windowcd,run";
+    font: "FontAwesome 20";
+    bw: 0;
+    location: 0;
+    padding: 0;
+    fixed-num-lines: true;
+    show-icons: false;
+    sidebar-mode: false;
+    combi-modi: "window,run";
+    separator-style: "none";
+    hide-scrollbar: true;
+    fullscreen: false;
+    fake-transparency: false;
+    scroll-method: 1;
+    window-format: "[{w}] ·· {c} ··   {t}";
+    click-to-exit: true;
+    show-match: false;
+    color-normal: "@xbg, @xfg, @xbg, @xfg, @xbg";
+    color-urgent: "@xbg, @x1, @xbg, @x1, @xfg";
+    color-active: "@xbg, @xfg, @xbg, @xfg, @xbg";
+    color-window: "@xbg, @x1, @xfg";
+    me-accept-entry: "MousePrimary";
+    me-accept-custom: "MouseMiddle";
+}
+window {
+    background-color: @xbg;
+    border: 2;
+    border-color: @x14;
+    border-radius: 12px;
+    padding: 0;
+    width: 30%;
+    height: 30%;
+    position: center;
+}
+mainbox {
+    border: 0;
+    border-color: @x0;
+    padding: 50 45 0 65;
+}
+listview {
+    fixed-height: 0;
+    border: 0px;
+    border-color: @x6;
+    spacing: 90px;
+    scrollbar: false;
+    layout: horizontal;
+}
+element {
+    border: 0;
+    padding: 60px;
+    font: "FontAwesome 50";
+}
+element normal.normal {
+    background-color: rgba (0,0,0,0%);
+    text-color:       @xfg;
+}
+element selected.normal {
+    background-color: rgba (229,192,123,100%);
+    text-color:       @x0;
+    border-radius:    2% 1% 2% 1%;
+}
+element alternate.normal {
+    background-color: rgba (0,0,0,0%);
+    text-color:       @xfg;
+}
+inputbar {
+    spacing:    0px ;
+    text-color: @xfg;
+    padding:    1px ;
+    children:   [prompt];
+}
+prompt {
+    padding: 0 0 15px 0;
+}
+
+@import "colors.rasi"
+
+
