@@ -18,7 +18,30 @@ fkill() {
 }
 
 o(){
-    fuzz=`fzf --reverse --height 40%`
+    fuzz=$(fzf --reverse --height 40%)
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -f $fuzz ]
+    then
+        filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
+        case $filetype in
+            text )
+                vim $fuzz ;;
+            audio )
+                mpv $fuzz & disown ;;
+            application )
+                vim $fuzz ;;
+            * )
+                xdg-open $fuzz & disown 
+        esac
+    fi
+}
+zle -N open
+bindkey '^o' open
+
+ol(){
+    fuzz=`fd -Ht f . $(pwd) | fzf --reverse --height 40%`
     if [ -z $fuzz ]
     then 
         return 0
@@ -38,9 +61,26 @@ o(){
     fi
 }
 
+
 # Jump to directory. Much faster than regular cd
 j(){
     fuzz=`fd -Ht d . $HOME | fzf --reverse --height 40%`
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -d $fuzz ]
+    then
+        if [ "$1" != "mpv" ]
+        then
+            cd $fuzz
+        else
+            mpv $fuzz & disown
+        fi
+    fi
+}
+
+jl(){
+    fuzz=`fd -Ht d . $(pwd) | fzf --reverse --height 40%`
     if [ -z $fuzz ]
     then 
         return 0
@@ -61,6 +101,7 @@ rfile(){
 }
 
 #custom commands
+alias kc="kdeconnect-cli -d 889bfa8ba2d67e9b "$1""
 alias move="find . -mindepth 2 -type f -print -exec mv {} . \;"
 alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"

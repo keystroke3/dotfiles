@@ -1,11 +1,13 @@
 #!/bin/bash
 
+pkill -f "deadd-notification-center"
 declare -a programs=(
 "ssh-agent" 
 "blueman-tray"
 "sxhkd"
 "nm-applet"
 "xfce4-power-manager"
+"deadd-notification-center"
 )
 
 declare -a lazy_load=(
@@ -22,10 +24,10 @@ for program in "${programs[@]}"; do
    fi
 done 
 
-if pgrep "tauonmb";then 
+if pgrep -f "tauon";then 
     :
 else 
-    nohup python3 /opt/tauon-music-box/tauon.py %U &
+    python3 /opt/tauon-music-box/tauon.py %U &
 fi
 
 picom --config ~/.config/picom.conf &
