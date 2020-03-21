@@ -6,11 +6,13 @@
 "  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 "  set termguicolors
 " endif
-autocmd! VimEnter * call s:fcy_nerdcommenter_map()
-function! s:fcy_nerdcommenter_map()
-    nmap cc <plug>NERDCommenterToggle
-    vmap cc <plug>NERDCommenterToggle gv
-endfunction
+" autocmd! VimEnter * call s:fcy_nerdcommenter_map()
+" function! s:fcy_nerdcommenter_map()
+"     nmap <C-_> <plug>NERDCommenterToggle
+"     imap <C-_> <plug>NERDCommenterToggle gv
+"     vmap <C-_> <plug>NERDCommenterToggle gv
+" endfunction
+map <C-_> <plug>NERDCommenterToggle
 set t_Co=256
 if &term =~ '256color'
     set t_ut=
@@ -57,6 +59,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-scripts/indentpython.vim'
 " Autocomplete for python
 Plug 'Valloric/YouCompleteMe'
+let g:ycm_autoclose_preview_window_after_insertion = 1
 " Pep8 python support
 Plug 'nvie/vim-flake8'
 " syntax highlighting
@@ -100,6 +103,7 @@ if has('python3')
 endif
 colorscheme challenger_deep
 autocmd BufNewFile,BufRead *.rasi set syntax=css
+" autocmd BufNewFile,BufRead *.conf set syntax=ini
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 map ; :
@@ -107,10 +111,22 @@ map <space><space> ZZ
 map <C-p> "+P
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <C-n> :NERDTreeToggle<CR>
-map <C-/> <Plug>NERDCommenterToggle('n', 'Toggle')<Cr>
+" nnoremap <C-m> <Plug>NERDCommentedrToggle('n', 'Toggle')<Cr>
+" inoremap <C-m> <Plug>NERDCommenterToggle('n', 'Toggle')<Cr>
 vnoremap <C-c> "*Y :let @+=@<CR>
-vnoremap <C-q> quit!
+map <C-q> quit!
+nmap <tab> gt
+nmap <shift-tab> gT
+nnoremap <C-b> <C-O>:w<CR>
+inoremap <C-b> <C-O>:w<CR>
+" map <C-b> <C-O>:w<CR>
+
 "split navigations
+nnoremap <space><J> <C-W><C-J>
+nnoremap <space><K> <C-W><C-K>
+nnoremap <space><L> <C-W><C-L>
+nnoremap <space><H> <C-W><C-H>
+
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
