@@ -4,8 +4,11 @@ This repo contains my most frequently used config files. If you use the same pro
 then they may be useful to you. Please make sure you read through the config files to know if
 they will be useful to you and what you may want to change.
 
-![Desktop/Polybar](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/desktop.png)
-Desktop with polybar(stripes theme)
+![Colorful Theme Desktop](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/Colorful%20Theme.jpg)
+**Colorful Theme**
+
+![Stripes Theme Desktop](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/Stripes%20Desktop.png)
+**Stripes Theme**
 
 ![Kitty/Prompt](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/kitty.png)
 Kitty with Powerlevel10k themed prompt.
