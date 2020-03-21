@@ -7,7 +7,7 @@ bspc config border_radius        20
 bspc config border_width         2
 bspc config window_gap           5
 bspc config top_padding          5
-bspc config bottom_padding       2
+bspc config bottom_padding       -15
 bspc config left_padding         2
 bspc config right_padding        2
 bspc config single_monocle       true
@@ -17,7 +17,7 @@ bspc config borderless_monocle   false
 bspc config gapless_monocle      false
 bspc config focus_by_distance    true
 bspc config focus_follows_pointer true
-bspc config history_aware_focus  false
+bspc config history_aware_focus  true
 bspc config pointer_modifier mod4
 bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
@@ -32,6 +32,7 @@ bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 0
 
 
 #Floating applications
+bspc rule -a crow state=floating
 bspc rule -a java-lang-Thread state=floating desktop='^5'
 bspc rule -a Arandr state=floating
 bspc rule -a mpv state=tiling sticky=off
@@ -48,6 +49,8 @@ bspc rule -a emacs state=tiling
 bspc rule -a "Olivia - Video Option" state=floating -z bottom 200 right 200
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
+bspc rule -a "indicator-stickynotes" state=floating
+# bspc rule --a TelegramDesktop state=floating rectangle=947x516+964+555
 
 #open applications on specific workspaces
 bspc rule -a firefox desktop='^1'

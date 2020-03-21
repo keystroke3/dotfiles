@@ -3,7 +3,7 @@ export PATH="$HOME/bin:$PATH";
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 [[ $- != *i* ]] && return
 export VISUAL="gvim"
-
+export PATH="/home/ted/.gem/ruby/2.7.0/bin:$PATH"
 export FZF_DEFAULT_COMMAND='fd --hidden --type f . $HOME'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 # export FZF_ALT_C_COMMAND='fd --hidden -type d'
@@ -28,3 +28,6 @@ fi;
 source ~/.cache/wal/colors-tty.sh
 EDITOR=/usr/bin/vim
 TERMINAL=/usr/bin/kitty
+export NNN_BMS="d:~/Downloads;p:~/Pictures;m:~/Videos/Music Videos;v:~/Videos;s:~/Videos/Series"
+export NNN_PLUG='k:kdeconnect'
+export NNN_TRASH=1
