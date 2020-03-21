@@ -1,10 +1,18 @@
-super + =
-   bspc node {@/,@parent} {--equalize,--balance}
+super + n
+    kill -s USR1 $(pidof deadd-notification-center)
+alt + 1
+    xrandr --output HDMI1 --below eDP1 --mode 1920x1080 --same-as eDP1
+alt + 2 
+    xrandr --output HDMI1 --below eDP1 --mode 1280x720  --same-as eDP1
 
 super + q 
     /home/ted/.bin/powermenu
+
 super + Tab
-	bspc  node -f {next.local, prev.local}
+	bspc  node -f {next.local}
+
+super + shift + Tab
+    bspc node -f {prev.local}
 
 super + shift + p
     /home/ted/.config/polybar/launch.sh
@@ -55,8 +63,7 @@ super + y
 
 # lock the screen
 ctrl + super + l
-	i3lock -i "/home/ted/Pictures/on the run [5120x2880].png"
-
+    mantablockscreen -sc
 /* super + x */
     /* clearine */
 
