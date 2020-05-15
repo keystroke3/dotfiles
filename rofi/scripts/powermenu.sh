@@ -20,10 +20,10 @@ case $chosen in
         sh ~/.bin/blueprompt --yes-command "systemctl reboot" --query "Reboot?"
         ;;
     $lock)
-        i3lock -i "/home/ted/Pictures/on the run [5120x2880].png"
+        mantablockscreen -sc
         ;;
     $suspend)
-        i3lock -i "/home/ted/Pictures/on the run [5120x2880].png"
+        mantablockscreen -sc &
         systemctl suspend
         ;;
     $log_out)

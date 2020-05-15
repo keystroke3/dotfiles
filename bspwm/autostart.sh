@@ -33,7 +33,7 @@ fi
 picom --config ~/.config/picom.conf &
 ~/.redpaper/wallpaper.sh
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-sleep 30
+sleep 20
 for program in "${lazy_load[@]}"; do
    if pgrep $program; then
        return 0

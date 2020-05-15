@@ -1,3 +1,5 @@
+alt + space
+   sh /home/ted/.bin/finder
 super + n
     kill -s USR1 $(pidof deadd-notification-center)
 alt + 1
@@ -45,8 +47,7 @@ super + w
 	bspc node -g {sticky=on, sticky=off}
 
 super + p
-    bspc node -g {private=on, private=off}
-
+    sh ~/.bin/cpicker
 super + e
     nemo
 
@@ -108,17 +109,12 @@ super + shift + x
 
 #Firefox
 ctrl + alt + f
-     firefox
+     chromium
 
 
 #Compton Toggle
 ctrl + alt + o
      ~/.config/bspwm/scripts/compton-toggle.sh
-
-
-#VScode
-ctrl + alt + c
-     code
 
 ctrl + alt + Delete
 	poweroff
@@ -130,11 +126,11 @@ ctrl + alt + Delete
 #########################
 
 Print
-	xfce4-screenshooter -f -s /home/ted/Pictures
+	xfce4-screenshooter -fsc /home/ted/Pictures
 shift + Print
-	xfce4-screenshooter -r -s /home/ted/Pictures
+	xfce4-screenshooter -rsc /home/ted/Pictures
 ctrl  + Print
-	xfce4-screenshooter -w -s /home/ted/Pictures
+	xfce4-screenshooter -wsc /home/ted/Pictures
 	
 
 #########################
@@ -187,16 +183,10 @@ XF86MonBrightnessDown
 # BSPWM LAYOUT KEYS     #
 #########################
 
-#azerty keyboard layout for numbers 1-10
-#{ampersand,eacute,quotedbl,apostrophe,parenleft,section,egrave,exclam,ccedilla,agrave}
-
-#################################################################
 
 #Focus selected desktop FOR QWERTY KEYBOARDS
 super + {1-9,0}
 	bspc desktop -f '^{1-9,10}'
-
-
 
 #Move window to selected desktop FOR QWERTY KEYBOARDS
 super + shift + {1-9,0}
@@ -207,7 +197,7 @@ super + shift + {1-9,0}
 
 #Focus selected desktop
 #alt + Tab
-#%	bspc desktop -f '^{1-9,10}'
+#	bspc desktop -f '^{1-9,10}'
 #	bspc node -f {north,east,south,west}
 
 #Focus selected desktop
@@ -215,8 +205,8 @@ super + v
 	bspc desktop -l next
 
 #Rotate desktop
-alt + space
-	bspc node @/ --rotate {90,-90}
+super + space
+	bspc node @/ --rotate {90}
 
 # Focus/swap windows by direction
 super + {h,j,k,l}
@@ -233,24 +223,13 @@ super + alt + {Left,Down,Up,Right}
 #super + ctrl + {h,j,k,l}
 #	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
 
-super + alt + shift + {Left,Down,Up,Right}
-	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
-
 # Increase/decrease window gap on focused desktop
 super + bracket{left,right}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
 
-# Move floating window
-super + {_,shift + }{Left,Down,Up,Right}
-	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
-
 # set the window state
 super + s
 	bspc node -t {floating,tiled}
-
-### Map or unmap windows (functional equivalent of "minimize")
-#super + c
-#    whid dmenu
 
 super + i
     whid hide
@@ -258,11 +237,5 @@ super + i
 super + o
 	whid last
 
-# Define splitting ratio for next window on leaf/parent
-super + ctrl + {_,shift +}{1-9}
-	bspc node {_,@/} --presel-ratio 0.{1-9}
-
-# Cancel preselection
-super + ctrl + space
-	bspc node --presel-dir cancel
-
+super + alt + {1-9,0}
+    bspc node -f @/ ; bspc node -d '^{1-9,10}'

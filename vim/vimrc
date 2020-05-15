@@ -1,3 +1,4 @@
+" 
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -12,6 +13,10 @@
 "     imap <C-_> <plug>NERDCommenterToggle gv
 "     vmap <C-_> <plug>NERDCommenterToggle gv
 " endfunction
+set updatetime=10
+set ignorecase
+set smartcase
+set termguicolors
 map <C-_> <plug>NERDCommenterToggle
 set t_Co=256
 if &term =~ '256color'
@@ -21,8 +26,6 @@ endif
 call plug#begin('~/.vim/plugged')
 " Make sure you use single quotesi
 " Colorschemes and themes
-"
-"
 Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 Plug 'Rigellute/shades-of-purple.vim'
 Plug 'megantiu/true.vim'
@@ -31,9 +34,6 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'artanikin/vim-synthwave84'
 Plug 'dylanaraps/wal.vim'
-"
-"
-"
 " Any valid git URL is allowed
 Plug 'https://github.com/junegunn/vim-github-dashboard.git'
 " Autopep8
@@ -59,12 +59,13 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'vim-scripts/indentpython.vim'
 " Autocomplete for python
 Plug 'Valloric/YouCompleteMe'
-let g:ycm_autoclose_preview_window_after_insertion = 1
 " Pep8 python support
 Plug 'nvie/vim-flake8'
 " syntax highlighting
 Plug 'vim-syntastic/syntastic'
-
+Plug 'unblevable/quick-scope' 
+highlight QuickScopePrimary guifg='#afff5f'
+highlight QuickScopeSecondary guifg='#5fffff'
 call plug#end()
 
 
@@ -80,6 +81,11 @@ set t_Co=256
 set background=dark
 set termguicolors
 set encoding=utf-8
+set timeoutlen=10
+nnoremap <SPACE> <Nop>
+let mapleader = " "
+nnoremap <Leader>s :w<cr>
+nnoremap <Leader><Leader> :wq<CR>
 
 let python_highlight_all = 1
 let g:ycm_autoclose_preview_window_after_completion=1
@@ -107,9 +113,8 @@ autocmd BufNewFile,BufRead *.rasi set syntax=css
 autocmd FileType python noremap <buffer> <F8> :call Autopep8()<CR>
 
 map ; :
-map <space><space> ZZ
 map <C-p> "+P
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <Leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 map <C-n> :NERDTreeToggle<CR>
 " nnoremap <C-m> <Plug>NERDCommentedrToggle('n', 'Toggle')<Cr>
 " inoremap <C-m> <Plug>NERDCommenterToggle('n', 'Toggle')<Cr>
@@ -155,10 +160,6 @@ let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 let g:NERDToggleCheckAllLines = 1
-
-
-"Eleifend sollicitudin, lectus ve est curabitur leo 
-"maecenas blandit feugiat dictum. Per ad nibh 
-"aliquam justo per facilisis. 
-"Eu arcu eni a nostra quis et. Diam primis dis. 
-"Tempor aptent ad pede class pharetra dignissim, ve.
+let g:ycm_autoclose_preview_window_after_completion = 1 
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_insertion = 0
