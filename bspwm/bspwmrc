@@ -49,11 +49,10 @@ bspc rule -a emacs state=tiling
 bspc rule -a "Olivia - Video Option" state=floating -z bottom 200 right 200
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
-bspc rule -a "indicator-stickynotes" state=floating
+bspc rule -a "sticky notes" state=floating
 # bspc rule --a TelegramDesktop state=floating rectangle=947x516+964+555
 
 #open applications on specific workspaces
-bspc rule -a firefox desktop='^1'
 bspc rule -a steam desktop='4'
 bspc rule -a Thunderbird  desktop='^10'
 bspc rule -a "Tauon Music Box" desktop='^9'
