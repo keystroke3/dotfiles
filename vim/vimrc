@@ -83,9 +83,8 @@ set termguicolors
 set encoding=utf-8
 set timeoutlen=10
 nnoremap <SPACE> <Nop>
-let mapleader = " "
 nnoremap <Leader>s :w<cr>
-nnoremap <Leader><Leader> :wq<CR>
+nnoremap <space><space> :wq<CR>
 
 let python_highlight_all = 1
 let g:ycm_autoclose_preview_window_after_completion=1
