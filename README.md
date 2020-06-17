@@ -4,7 +4,7 @@ This repo contains my most frequently used config files. If you use the same pro
 then they may be useful to you. Please make sure you read through the config files to know if
 they will be useful to you and what you may want to change.
 
-![Colorful Theme Desktop](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/Colorful%20Theme.jpg)
+![Colorful Theme Desktop](https://github.com/keystroke3/dotfiles/blob/master/screenshots/Colorful%20Theme%20shot2.png?raw=true)
 **Colorful Theme**
 
 ![Stripes Theme Desktop](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/Stripes%20Desktop.png)
@@ -60,4 +60,4 @@ You may notice that file names have been prepended by small icons. This does not
 ## Installation
 If you have all things set up correctly, you can start copying the files. First, clone the repo:  
 `git clone https://github.com/keystroke3/dotfiles.git`  
-After cloning, you can copy the files to their respective locations and then logout and log back in apply changes.
+After cloning, you can copy the files to their respective locations and then logout and log back in to apply changes.
