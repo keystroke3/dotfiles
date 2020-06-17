@@ -59,6 +59,5 @@ You may notice that file names have been prepended by small icons. This does not
 
 ## Installation
 If you have all things set up correctly, you can start copying the files. First, clone the repo:  
-`git clone --recursive https://github.com/keystroke3/dotfiles.git`  
-Note that `--recursive` is necessary if you want to get Polybar files.
+`git clone https://github.com/keystroke3/dotfiles.git`  
 After cloning, you can copy the files to their respective locations and then logout and log back in apply changes.

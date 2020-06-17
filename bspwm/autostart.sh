@@ -1,5 +1,5 @@
 #!/bin/bash
-
+setxkbmap -option compose:ralt
 pkill -f "deadd-notification-center"
 declare -a programs=(
 "ssh-agent" 
@@ -16,6 +16,7 @@ declare -a lazy_load=(
 )
 
 $HOME/.config/polybar/launch.sh &
+sleep 2
 for program in "${programs[@]}"; do
    if pgrep $program; then
        :
@@ -28,7 +29,9 @@ if pgrep -f "tauon";then
     :
 else 
     python3 /opt/tauon-music-box/tauon.py %U &
+    bspc desktop -f 9
 fi
+bspc desktop -f 1
 
 picom --config ~/.config/picom.conf &
 ~/.redpaper/wallpaper.sh
@@ -41,4 +44,5 @@ for program in "${lazy_load[@]}"; do
        $program &
    fi
 done 
-
+sleep 10
+py ~/dotfiles/bspwm/scripts/swallow.py &
