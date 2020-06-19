@@ -57,6 +57,7 @@ bspc rule -a steam desktop='4'
 bspc rule -a Thunderbird  desktop='^10'
 bspc rule -a "Tauon Music Box" desktop='^9'
 bspc rule -a "Spotify" destkop='^9'
+pidof bspswallow || bspswallow &
 $HOME/.config/bspwm/autostart.sh
 #polybar hidden when fullscreen for vlc, youtube, mpv ...
 #find out the name of your monitor with xrandr
