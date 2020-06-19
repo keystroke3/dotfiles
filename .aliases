@@ -18,7 +18,7 @@ fkill() {
 }
 
 o(){
-    fuzz=$(fzf --reverse --height 40%)
+    fuzz=$(rg --files ~/ | fzf --reverse --height 40%)
     if [ -z $fuzz ]
     then 
         return 0
@@ -37,11 +37,9 @@ o(){
         esac
     fi
 }
-zle -N open
-bindkey '^o' open
 
 ol(){
-    fuzz=`fd -Ht f . $(pwd) | fzf --reverse --height 40%`
+    fuzz=`rg --files | fzf --reverse --height 40%`
     if [ -z $fuzz ]
     then 
         return 0
@@ -64,7 +62,7 @@ ol(){
 
 # Jump to directory. Much faster than regular cd
 j(){
-    fuzz=`fd -Ht d . $HOME | fzf --reverse --height 40%`
+    fuzz=`fd -t d . $HOME | fzf --reverse --height 40%`
     if [ -z $fuzz ]
     then 
         return 0
@@ -107,7 +105,6 @@ alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
-alias du="dust"
 alias bp="bpython"
 alias pkg="yay -Q | fzf"
 alias gp="cd ~/Pictures"
