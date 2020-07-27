@@ -1,6 +1,6 @@
 configuration {
     modi: "combi,windowcd,run";
-    font: "FontAwesome 35";
+    font: "FontAwesome 60";
     bw: 0;
     location: 0;
     padding: 0;
