@@ -3,8 +3,8 @@
 rofi_command="rofi -theme themes/bluepower.rasi"
 
 ### Options ###
-power_off=""
-reboot=""
+power_off="襤"
+reboot=""
 lock=""
 suspend=""
 log_out=""
