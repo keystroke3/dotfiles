@@ -3,20 +3,6 @@
 #custom functions
 
 # Allows killing of processes using fzf
-fkill() {
-    local pid 
-    if [ "$UID" != "0" ]; then
-        pid=$(ps -f -u $UID | sed 1d | fzf -m | awk '{print $2}')
-    else
-        pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-    fi  
-
-    if [ "x$pid" != "x" ]
-    then
-        echo $pid | xargs kill -${1:-9}
-    fi  
-}
-
 o(){
     fuzz=$(rg --files ~/ | fzf --reverse --height 40%)
     if [ -z $fuzz ]
@@ -26,13 +12,13 @@ o(){
     then
         filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
         case $filetype in
-            text )
-                vim $fuzz ;;
-            audio )
+            text)
+                echo "$fuzz" | xargs -o vim && echo "done" ;;
+            audio)
                 mpv $fuzz & disown ;;
             application )
-                vim $fuzz ;;
-            * )
+                echo "$fuzz" | xargs -o vim && echo "done";;
+            *)
                 xdg-open $fuzz & disown 
         esac
     fi
@@ -48,11 +34,11 @@ ol(){
         filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
         case $filetype in
             text )
-                vim $fuzz ;;
+                echo "$fuzz" | xargs -o vim ;;
             audio )
                 mpv $fuzz & disown ;;
             application )
-                vim $fuzz ;;
+                echo "$fuzz" | xargs -o vim ;;
             * )
                 xdg-open $fuzz & disown 
         esac
@@ -68,12 +54,7 @@ j(){
         return 0
     elif [ -d $fuzz ]
     then
-        if [ "$1" != "mpv" ]
-        then
-            cd $fuzz
-        else
-            mpv $fuzz & disown
-        fi
+        cd "$fuzz" && reset
     fi
 }
 
@@ -157,7 +138,7 @@ alias sb="vim ~/.config/bspwm/bspwmrc"
 alias as="vim ~/.config/bspwm/autostart.sh"
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="vim ~/.aliases && clear && /bin/zsh/ -l"
+alias al="vim ~/.aliases && clear && souce ~/.zshrc"
 alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
@@ -184,7 +165,6 @@ alias rsync="rsync -ah --progress"
 alias halfdark="vim /home/ted/.config/wal/colorschemes/dark/one-half-dark.json"
 alias h="howdoi" 
 alias pq="pacman -Q | fzf"
-alias keys="xev | awk -F'[ )]+' '/^KeyPress/ { a[NR+2] } NR in a { printf "%-3s %s\n", $5, $8 }'"
 alias pr="sudo protonvpn r"
 alias pd="sudo protonvpn d"
 alias feh="feh -d --edit -. -B black ."
