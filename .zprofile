@@ -1,5 +1,6 @@
 # Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
+export PATH="$home/.config/composer/vendor/bin:$PATH"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
 [[ $- != *i* ]] && return
 export VISUAL="gvim"
