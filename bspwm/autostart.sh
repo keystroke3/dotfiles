@@ -3,7 +3,7 @@ setxkbmap -option compose:ralt
 pkill -f "deadd-notification-center"
 declare -a programs=(
 "ssh-agent" 
-"blueman-tray"
+# "blueman-tray"
 "sxhkd"
 "nm-applet"
 "xfce4-power-manager"
