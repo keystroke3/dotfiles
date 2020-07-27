@@ -18,7 +18,8 @@ Kitty with Powerlevel10k themed prompt.
 ## Prerequisites
 Before you attempt to install these dots, you must first make sure your system is ready. Otherwise
 they may not work as intended.
-
+#### Polybar
+If you choose to use my polybar configs, you can find them in my [Carousel Repo](https://github.com/keystroke3/Carousel)
 #### Fonts
 For a basic install, you will need to have [Powerline](https://github.com/powerline/powerline) and [Font Awesome](https://github.com/FortAwesome/Font-Awesome) which will work fine for most of the
 symbols to be visible. There are however, some widgets in polybar that will not load properly
