@@ -8,7 +8,7 @@ super + n
 #    xrandr --output HDMI1 --below eDP1 --mode 1280x720  --same-as eDP1
 
 super + q 
-    /home/ted/.bin/powermenu
+    /home/ted/.config/rofi/scripts/powermenu.sh
 
 super + Tab
 	bspc  node -f {next.local}
@@ -126,12 +126,9 @@ ctrl + alt + Delete
 #########################
 
 Print
-	xfce4-screenshooter -fsc /home/ted/Pictures
+	flameshot full -c -p /home/ted/Pictures/screenshots
 shift + Print
-	xfce4-screenshooter -rsc /home/ted/Pictures
-ctrl  + Print
-	xfce4-screenshooter -wsc /home/ted/Pictures
-	
+	flameshot gui
 
 #########################
 #     MULTIMEDIA KEYS   #
