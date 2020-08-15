@@ -1,18 +1,24 @@
 #!/bin/bash
 setxkbmap -option compose:ralt
-pkill -f "deadd-notification-center"
+xinput --set-button-map 8 1 3 2 4 5 6 7
+xinput set-prop 11 331 0.7
+xinput set-prop 8 319 1
+xsetroot -cursor_name left_ptr
+dirmngr --daemon
 declare -a programs=(
 "ssh-agent" 
 # "blueman-tray"
 "sxhkd"
 "nm-applet"
 "xfce4-power-manager"
-"deadd-notification-center"
+"flameshot"
+"dunst"
 )
 
 declare -a lazy_load=(
 "thunderbird"
-"kdeconnect-indicator"
+exec /usr/lib/kdeconnectd
+indicator-kdeconnect
 )
 
 $HOME/.config/polybar/launch.sh &
@@ -31,7 +37,6 @@ else
     python3 /opt/tauon-music-box/tauon.py %U &
     bspc desktop -f 9
 fi
-bspc desktop -f 1
 
 picom --config ~/.config/picom.conf &
 ~/.redpaper/wallpaper.sh
