@@ -1,7 +1,7 @@
 #!/bin/bash
 if pgrep -x "picom" > /dev/null
 then
-	killall picom
+	killall picom && notify-send "compton is off"
 else
-	picom -b --config ~/.config/picom.conf
+	picom -b --config ~/dotfiles/bspwm/compton.conf && notify-send "compton is on"
 fi

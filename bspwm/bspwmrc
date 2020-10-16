@@ -27,9 +27,6 @@ bspc config ignore_ewmh_struts false
 bspc config honor_size_hints false
 bspc config merge_overlapping_monitors false
 bspc config focused_border_color	#e038c9
-bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
-bspc monitor HDMI1 -d 1 2 3 4 5 6 7 8 9 0
-
 
 #Floating applications
 bspc rule -a crow state=floating
@@ -47,17 +44,18 @@ bspc rule -a persepolis state=floating
 bspc rule -a bluetooth state=floating
 bspc rule -a Glade-previewer state=floating
 bspc rule -a emacs state=tiling
-bspc rule -a "Olivia - Video Option" state=floating -z bottom 200 right 200
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
 bspc rule -a "sticky notes" state=floating
 # bspc rule --a TelegramDesktop state=floating rectangle=947x516+964+555
 
 #open applications on specific workspaces
-bspc rule -a steam desktop='4'
 bspc rule -a Thunderbird  desktop='^10'
 bspc rule -a "Tauon Music Box" desktop='^9'
 bspc rule -a "Spotify" destkop='^9'
+bspc rule -a TelegramDesktop desktop='^7'
+bspc rule -a discord  desktop='^8'
+bspc rule -a code-oss desktop='6'
 pidof bspswallow || bspswallow &
 $HOME/.config/bspwm/autostart.sh
 #polybar hidden when fullscreen for vlc, youtube, mpv ...

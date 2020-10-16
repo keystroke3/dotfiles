@@ -1,0 +1,5 @@
+vim/plugged/
+vim/*.tmp
+vim/pack/
+vim/viminfo
+
