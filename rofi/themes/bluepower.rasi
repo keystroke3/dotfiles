@@ -1,6 +1,6 @@
 configuration {
     modi: "combi,windowcd,run";
-    font: "FontAwesome 60";
+    font: "FontAwesome 40";
     bw: 0;
     location: 0;
     padding: 0;
@@ -29,14 +29,14 @@ window {
     border-color: @x14;
     border-radius: 12px;
     padding: 0;
-    width: 55%;
-    height: 30%;
+    width: 50%;
+    height: 23%;
     position: center;
 }
 mainbox {
     border: 0;
     border-color: @x0;
-    padding: 50 45 0 45;
+    padding: 20 10 0 10;
 }
 listview {
     fixed-height: 0;
@@ -48,7 +48,7 @@ listview {
 }
 element {
     border: 0;
-    padding: 60px;
+    padding: 40px;
 }
 element normal.normal {
     background-color: rgba (0,0,0,0%);

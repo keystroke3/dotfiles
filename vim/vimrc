@@ -1,4 +1,7 @@
-" 
+if has ('mouse')
+   set mouse=a
+endif
+
 " Specify a directory for plugins
 " - For Neovim: stdpath('data') . '/plugged'
 " - Avoid using standard Vim directory names like 'plugin'
@@ -17,7 +20,8 @@ set updatetime=10
 set ignorecase
 set smartcase
 set termguicolors
-map <C-_> <plug>NERDCommenterToggle
+nmap # <plug>NERDCommenterToggle
+vmap # <plug>NERDCommenterToggle
 set t_Co=256
 if &term =~ '256color'
     set t_ut=
@@ -64,6 +68,7 @@ Plug 'nvie/vim-flake8'
 " syntax highlighting
 Plug 'vim-syntastic/syntastic'
 Plug 'unblevable/quick-scope' 
+Plug 'ap/vim-css-color'
 highlight QuickScopePrimary guifg='#afff5f'
 highlight QuickScopeSecondary guifg='#5fffff'
 call plug#end()
@@ -100,10 +105,11 @@ if &term =~ "xterm\\|rxvt"
   " use \003]12;gray\007 for gnome-terminal
 endif
 
-let g:airline_powerline_fonts = 1
-let g:airline_theme='shades_of_purple'
-" copy and paste 
-
+" let g:airline_powerline_fonts = 1
+let g:airline_theme='bubblegum'
+" let g:shades_of_purple_lightline = 1
+" let g:lightline = { 'colorscheme': 'shades_of_purple' }
+" 
 if has('python3')
 endif
 colorscheme challenger_deep
@@ -162,3 +168,4 @@ let g:NERDToggleCheckAllLines = 1
 let g:ycm_autoclose_preview_window_after_completion = 1 
 let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 0
+set viminfo+=n~/.vim/viminfo
