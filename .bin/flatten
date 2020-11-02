@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+from os import walk, getcwd
+from os.path import join, exists
+import shutil
+
+
+def mover():
+    path = getcwd()
+    for working_dir, dirs, files in walk(path, topdown=False):
+        for dir in dirs:
+            end_dir = dir.split("/")[-1]
+            oldpath = join(working_dir,dir)
+            newpath = join(path, end_dir)
+            try:
+                shutil.move(oldpath, newpath)
+            except shutil.Error:
+                newpath = f"{newpath}(copy)"
+            except FileExistsError:
+                continue
+            print(f"{oldpath} ---> {newpath}")
+
+mover()

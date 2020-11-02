@@ -1,0 +1,7 @@
+#!/bin/sh
+# payload="$1"
+IFS='
+'
+[ -f nemo.out ] && rm nemo.out
+echo "$@" > ~/nemo.out
+xdg-open nemo.out

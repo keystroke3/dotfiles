@@ -1,0 +1,3 @@
+#!/bin/bash
+
+exec $HOME/.config/polybar/launch.sh

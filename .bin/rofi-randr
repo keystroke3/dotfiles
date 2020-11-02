@@ -1,0 +1,24 @@
+#!/bin/bash
+
+rofi_command="rofi -theme themes/bluepower.rasi"
+
+### Options ###
+activate=""
+hd="ﬕ"
+deactivate="ﴹ"
+# Variable passed to rofi
+options="$activate\n$hd\n$deactivate"
+
+chosen="$(echo -e "$options" | $rofi_command -dmenu -selected-row 2)"
+case $chosen in
+    $activate)
+        xrandr --auto
+        ;;
+    $hd)
+        sh ~/.screenlayout/hdmihd.sh
+        ;;
+    $deactivate)
+        xrandr --auto
+        ;;
+esac
+

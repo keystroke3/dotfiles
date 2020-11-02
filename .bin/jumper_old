@@ -1,0 +1,19 @@
+#!/usr/bin/sh
+fuzz=$(rg --files ~/ | fzf --reverse --height 40%)
+if [ -z $fuzz ]
+then 
+    return 0
+elif [ -f $fuzz ]
+then
+    filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
+    case $filetype in
+        text )
+            vim $fuzz ;;
+        audio )
+            mpv $fuzz & disown ;;
+        application )
+            vim $fuzz ;;
+        * )
+            xdg-open $fuzz & disown 
+    esac
+fi

@@ -1,0 +1,6 @@
+#!/bin/sh
+pkill kdeconnect-indicator
+pkill kdeconnectd
+
+kdeconnect-indicator &
+kdeconnectd &
