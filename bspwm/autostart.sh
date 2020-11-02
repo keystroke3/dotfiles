@@ -15,9 +15,7 @@ declare -a lazy_load=(
 "thunderbird"
 exec /usr/lib/kdeconnectd
 indicator-kdeconnect
-discord
-telegram-desktop
-code
+#code
 )
 sleep 2
 for program in "${programs[@]}"; do
