@@ -1,0 +1,4 @@
+#!/bin/sh
+# fuzz=$(fd . $HOME -H | rofi -dmenu -theme-str '#window { width: 70%; }' 20 -i -p 'Open Files: ')
+fuzz=$(fd  . /home/ted/Videos/ -pt d | rofi -dmenu -theme-str '#window { width: 70%; }' 20 -i -p 'File Name:')
+mpv --geometry=50%  "$fuzz"

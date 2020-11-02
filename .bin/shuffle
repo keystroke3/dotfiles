@@ -1,0 +1,2 @@
+#!/bin/sh
+mpv --shuffle ~/Videos/Music\ Videos

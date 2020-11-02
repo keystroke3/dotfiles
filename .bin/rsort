@@ -1,0 +1,37 @@
+#!/usr/bin/env python
+import sys
+teamdir = "/home/ted/Documents/teams/"
+files = ["team1.tree", "team2.tree", "team3.tree", "team4.tree", "team5.tree"]
+
+
+def progressbar(it, prefix="", size=60, file=sys.stdout):
+    count = len(it)
+    def show(j):
+        x = int(size*j/count)
+        file.write("%s[%s%s] %i/%i\r" %
+                   (prefix, "#"*x, "."*(size-x), j, count))
+        file.flush()
+    show(0)
+    for i, item in enumerate(it):
+        yield item
+        show(i+1)
+    file.write("\n")
+    file.flush()
+
+
+for f in files:
+    f = teamdir+f
+    drive_id = str(f[::-1][5])
+    with open(f, "r") as s, open("allteams.tree", "a") as d:
+        for i in progressbar(s.readlines(), f"{f[:-5][-5:]}"):
+            d.write(f"({drive_id})    {i}")
+
+with open(teamdir+"allteams.tree", "r") as full_list:
+    with open(teamdir+"teamdirs", "a") as dirs, \
+            open(teamdir+"teamfiles", "a") as files:
+        lines = full_list.readlines()
+        for i in progressbar(lines, "Sorting: "):
+            if "." not in i[-6:] or i[-1:] == "/":
+                dirs.write(i)
+            else:
+                files.write(i)
