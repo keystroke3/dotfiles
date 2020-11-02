@@ -1,21 +1,9 @@
-#!/bin/sh
-#
-# ~/.xinitrc
-#
-# Executed by startx (run your window manager from here)
-
-if [ -d /etc/X11/xinit/xinitrc.d ]; then
-  for f in /etc/X11/xinit/xinitrc.d/*; do
-    [ -x "$f" ] && . "$f"
-	xflux -l -1 -g 36 -k 3900 &
-	
-  done
-  unset f
-fi
-
-if [systemd-detect-virt = "oracle"];
-	/usr/bin/VBoxClient-all
-fi
-
-
-
+sxhkd &
+setxkbmap -option compose:ralt
+xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1
+xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7
+xmodmap -e 'keycode 135 = Super_R'
+xsetroot -cursor_name left_ptr
+dirmngr --daemon
+# exec tdm --xstart
+exec bspwm
