@@ -44,10 +44,10 @@ super + shift + x
 	bspc  node -k
 
 super + b
-	kitty  -e vim ~/.config/bspwm/bspwmrc
+	alacritty  -e vim /home/ted/.config/bspwm/bspwmrc
 
 super+shift+b
-	kitty  -e vim ~/.config/sxhkd/sxhkdrc
+	alacritty  -e vim /home/ted/.config/sxhkd/sxhkdrc
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
@@ -55,7 +55,7 @@ super + w
 super + p
     sh ~/.bin/cpicker
 super + e
-    nemo
+    caja
 
 #Toggle fullscreen of window
 super + f
