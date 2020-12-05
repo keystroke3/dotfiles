@@ -69,6 +69,7 @@ Plug 'nvie/vim-flake8'
 Plug 'vim-syntastic/syntastic'
 Plug 'unblevable/quick-scope' 
 Plug 'ap/vim-css-color'
+Plug 'Vimjas/vim-python-pep8-indent'
 highlight QuickScopePrimary guifg='#afff5f'
 highlight QuickScopeSecondary guifg='#5fffff'
 call plug#end()

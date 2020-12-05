@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import uuid
+from sys import argv
+if len(argv) > 1:
+    try:
+        counter = int(argv[1])
+    except ValueError:
+        print("invalid counter, defaulting to 1")
+        counter = 1
+else:
+    counter = 1
+
+def uidgen():
+    return str(uuid.uuid4()).split('-')[0]
+
+while counter != 0:
+    counter -= 1
+    print(uidgen())
