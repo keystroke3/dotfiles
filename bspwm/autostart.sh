@@ -36,7 +36,7 @@ if [ $mons_num -eq 2 ]; then
 else
     bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 fi
-picom --daemon --config ~/dotfiles/bspwm/compton.conf
+picom --daemon --config ~/.config/picom.conf
 ~/.redpaper/wallpaper.sh $
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 sleep 10
@@ -54,10 +54,10 @@ done
      python3 /opt/tauon-music-box/tauon.py %U &
      bspc desktop -f 9
  fi
-setxkbmap -option compose:ralt &
+#setxkbmap -option compose:ralt &
 xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
 xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7 &
-xmodmap -e 'keycode 135 = Super_R' &
+#xmodmap -e 'keycode 135 = Super_R' &
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &
 wmname LG3D &
