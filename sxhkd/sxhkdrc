@@ -5,7 +5,7 @@ ctrl + q
 alt + space
    sh /home/ted/.bin/finder
 alt + shift + space
-    sh /home/ted/.bin/videofinder >> /home/ted/.bin/videofinder.log
+    sh /home/ted/.bin/videofinder >> ~/.local/videofinder.log
 super + n
     kill -s USR1 $(pidof deadd-notification-center)
 #alt + 1
@@ -93,7 +93,7 @@ super + shift + t
 
 
 super + shift + d
-	# dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
+	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
 super + shift + r
@@ -245,3 +245,5 @@ alt + shift + {1-9,0}
 # Move floating window
 super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
+ctrl + super + p
+	alacritty  -e vim /home/ted/.config/picom.conf
