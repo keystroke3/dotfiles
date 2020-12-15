@@ -247,3 +247,5 @@ super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 ctrl + super + p
 	alacritty  -e vim /home/ted/.config/picom.conf
+super + grave
+    dunstctl history-pop
