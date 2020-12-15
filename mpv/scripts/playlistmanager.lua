@@ -109,16 +109,16 @@ local settings = {
   playlist_display_timeout = 5,
 
   --amount of entries to show before slicing. Optimal value depends on font/video size etc.
-  showamount = 16,
+  showamount = 10,
 
   --font size scales by window, if false requires larger font and padding sizes
-  scale_playlist_by_window=true,
+  scale_playlist_by_window=false,
   --playlist ass style overrides inside curly brackets, \keyvalue is one field, extra \ for escape in lua
   --example {\\fnUbuntu\\fs10\\b0\\bord1} equals: font=Ubuntu, size=10, bold=no, border=1
   --read http://docs.aegisub.org/3.2/ASS_Tags/ for reference of tags
   --undeclared tags will use default osd settings
   --these styles will be used for the whole playlist
-  style_ass_tags = "{}",
+  style_ass_tags = "{\\fs25}",
   --paddings from top left corner
   text_padding_x = 10,
   text_padding_y = 30,
@@ -786,6 +786,14 @@ function reverseplaylist()
   if playlist_visible then showplaylist() end
 end
 
+function startfromtop()
+  refresh_globals()
+  if plen < 2 then return end
+  mp.set_property('playlist-pos', 0)
+  refresh_globals()
+  if playlist_visible then showplaylist() end
+end
+
 function shuffleplaylist()
   refresh_globals()
   if plen < 2 then return end
@@ -958,6 +966,7 @@ function handlemessage(msg, value, value2)
   if msg == "reverse" then reverseplaylist() ; return end
   if msg == "loadfiles" then playlist(value) ; return end
   if msg == "save" then save_playlist() ; return end
+  if msg == "startplaylist" then refresh_globals() ; return end
 end
 
 mp.register_script_message("playlistmanager", handlemessage)
@@ -965,8 +974,9 @@ mp.register_script_message("playlistmanager", handlemessage)
 mp.add_key_binding("CTRL+p", "sortplaylist", sortplaylist)
 mp.add_key_binding("CTRL+P", "shuffleplaylist", shuffleplaylist)
 mp.add_key_binding("CTRL+R", "reverseplaylist", reverseplaylist)
-mp.add_key_binding("P", "loadfiles", playlist)
-mp.add_key_binding("p", "saveplaylist", save_playlist)
+mp.add_key_binding("p", "loadfiles", playlist)
+mp.add_key_binding("g", "startfromtop", startfromtop)
+mp.add_key_binding("P", "saveplaylist", save_playlist)
 mp.add_key_binding("SHIFT+ENTER", "showplaylist", toggle_playlist)
 
 mp.register_event("file-loaded", on_loaded)
