@@ -15,7 +15,7 @@
 # full_circle     full_square     full_rounded     full_alt
 # row_circle      row_square      row_rounded      row_alt
 
-theme="neptune_card_alt"
+theme="neptune_card_alt.rasi"
 dir="$HOME/.config/rofi/powermenu"
 
 # random colors
@@ -78,12 +78,7 @@ case $chosen in
 		fi
         ;;
     $suspend)
-		ans=$(confirm_exit &)
-		if [[ $ans == "" ]]; then
-			systemctl suspend
-		elif [[ $ans == "" ]]; then
-			exit 0
-        fi
+        systemctl suspend
         ;;
     $logout)
 		ans=$(confirm_exit &)
