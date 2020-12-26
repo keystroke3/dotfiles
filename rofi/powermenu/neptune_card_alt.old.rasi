@@ -1,4 +1,5 @@
 /*
+
  *
  * Author  : Aditya Shakya
  * Mail    : adi1090x@gmail.com
@@ -25,6 +26,7 @@ window {
     background-color:               @background;
     text-color:                     @foreground;
     border-radius:                  15px;
+    border:                         2;
     border-color:                   @border;
     height:                         30%;
     width:                          56%;
@@ -42,10 +44,9 @@ prompt {
 
 textbox-prompt-colon {
 	expand: 						false;
-	str: 							"System |";
 	background-color: 				@background-alt;
 	text-color: 					@foreground;
-    padding:                        0.5% 0.5% 0.5% 0%;
+    padding:                        0.5% 18% 0.5% 0%;
 }
 
 inputbar {
@@ -56,7 +57,7 @@ inputbar {
     border:                  		0% 0% 0.2% 0.2%;
     border-radius:                  1%;
     border-color:                  	@border;
-    margin:                         0% 0% 0% 0%;
+    margin:                         0% 1.3% 0% 0%;
     padding:                        0.5%;
     position:                       center;
 }
@@ -64,34 +65,33 @@ inputbar {
 listview {
     background-color:               @background;
     margin:                         0% 0% 0% 0%;
-    columns:                        5;
     spacing:                        2%;
     cycle:                          true;
     dynamic:                        true;
-    layout:                         vertical;
+    columns:                        5;
+    layout:                         horizontal;
 }
 
 mainbox {
     background-color:               @background;
     children:                       [ inputbar, listview ];
-    spacing:                        0.5%;
-    padding:                        4% 2% 0% 2%;
-
+    spacing:                        3.5%;
+    padding:                        2% 0% 0% 3%;
 }
 
 element {
     background-color:               @background-alt;
     text-color:                     @foreground;
-    orientation:                    horizontal;
+    orientation:                    vertical;
     border-radius:                  4%;
 }
 
 element-text {
-	font:							"feather 32";
+	font:							"feather 30";
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    margin:                         2.7% 2.7% 6.8% 2.7%;
+    margin:                         4.7% 2.7% 6.7% 2.7%;
 }
 
 element normal.urgent,
@@ -112,7 +112,7 @@ element selected {
     text-color:                     @foreground;
     border:                  		0% 0% 0.2% 0.2%;
     border-radius:                  4%;
-    border-color:                  	@border;
+    border-color:                  	@border-alt;
 }
 
 element selected.urgent {
