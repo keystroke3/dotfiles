@@ -1,5 +1,7 @@
 super + g
   mpv --shuffle ~/Videos/Music\ Videos 
+super + shift + g
+  /home/ted/Carousel/scripts/wireguard-vpn change
 ctrl + q
     echo "firefox"
 alt + space
@@ -14,7 +16,7 @@ super + n
 #    xrandr --output HDMI1 --below eDP1 --mode 1280x720  --same-as eDP1
 
 super + q 
-    /home/ted/.config/rofi/scripts/powermenu.sh
+    /home/ted/.config/rofi/powermenu/powermenu.sh
 
 super + Tab
 	bspc  node -f {next.local}
@@ -26,10 +28,10 @@ super + shift + y
     /home/ted/.config/polybar/launch.sh
 
 super + space
-	rofi -show drun
+    /home/ted/.config/rofi/launchers/colorful/launcher.sh
 
 ctrl + space
-	rofi -show run
+	rofi -show run -disable-history
 
 super + d
 	redpaper -d
@@ -249,3 +251,5 @@ ctrl + super + p
 	alacritty  -e vim /home/ted/.config/picom.conf
 super + grave
     dunstctl history-pop
+super + shift + grave
+    dunstctl close

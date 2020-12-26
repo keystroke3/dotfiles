@@ -971,12 +971,12 @@ end
 
 mp.register_script_message("playlistmanager", handlemessage)
 
-mp.add_key_binding("CTRL+p", "sortplaylist", sortplaylist)
-mp.add_key_binding("CTRL+P", "shuffleplaylist", shuffleplaylist)
-mp.add_key_binding("CTRL+R", "reverseplaylist", reverseplaylist)
+mp.add_key_binding("CTRL+p", "sortplaylist", sortplaylist(true))
+mp.add_key_binding("P", "shuffleplaylist", shuffleplaylist)
+mp.add_key_binding("CTRL+r", "reverseplaylist", reverseplaylist)
 mp.add_key_binding("p", "loadfiles", playlist)
 mp.add_key_binding("g", "startfromtop", startfromtop)
-mp.add_key_binding("P", "saveplaylist", save_playlist)
+mp.add_key_binding("CTRL+P", "saveplaylist", save_playlist)
 mp.add_key_binding("SHIFT+ENTER", "showplaylist", toggle_playlist)
 
 mp.register_event("file-loaded", on_loaded)
