@@ -19,7 +19,7 @@ colors:
   bright:
     black:   '0x565575'
     red:     '0xff5458'
-    green:   '0x62d196'
+    green:   '0x624196'
     yellow:  '0xffb378'
     blue:    '0x65b2ff'
     magenta: '0x906cff'
@@ -43,5 +43,5 @@ font:
     family: 'Source Code Pro'
     style: Bold Italic
 
-  size: 11
+  size: 10
 background_opacity: 0.8

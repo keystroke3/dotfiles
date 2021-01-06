@@ -1,6 +1,4 @@
 #!/bin/bash
-
-
 xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 declare -a programs=(
 "ssh-agent" 
@@ -14,7 +12,7 @@ declare -a programs=(
 declare -a lazy_load=(
 "thunderbird"
 exec /usr/lib/kdeconnectd
-indicator-kdeconnect
+
 #code
 )
 sleep 2
@@ -37,7 +35,7 @@ else
     bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 fi
 picom --daemon --config ~/.config/picom.conf
-~/.redpaper/wallpaper.sh $
+~/.redpaper/wallpaper.sh &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 sleep 10
 for program in "${lazy_load[@]}"; do
@@ -56,7 +54,7 @@ done
  fi
 #setxkbmap -option compose:ralt &
 xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
-xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7 &
+#xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7 &
 #xmodmap -e 'keycode 135 = Super_R' &
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &

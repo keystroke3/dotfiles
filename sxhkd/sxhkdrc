@@ -1,22 +1,20 @@
 super + g
   mpv --shuffle ~/Videos/Music\ Videos 
 super + shift + g
-  /home/ted/Carousel/scripts/wireguard-vpn change
+  /home/ted/Carousel/scripts/wireguard-vpn toggle
 ctrl + q
     echo "firefox"
 alt + space
    sh /home/ted/.bin/finder
 alt + shift + space
     sh /home/ted/.bin/videofinder >> ~/.local/videofinder.log
-super + n
-    kill -s USR1 $(pidof deadd-notification-center)
 #alt + 1
 #    xrandr --output HDMI1 --below eDP1 --mode 1920x1080 --same-as eDP1
 #alt + 2 
 #    xrandr --output HDMI1 --below eDP1 --mode 1280x720  --same-as eDP1
 
 super + q 
-    /home/ted/.config/rofi/powermenu/powermenu.sh
+    /home/ted/.config/rofi/powermenu/powermenu.sh &> ~/powermenu.log
 
 super + Tab
 	bspc  node -f {next.local}
@@ -46,10 +44,10 @@ super + shift + x
 	bspc  node -k
 
 super + b
-	alacritty  -e vim /home/ted/.config/bspwm/bspwmrc
+	kitty  -e vim /home/ted/.config/bspwm/bspwmrc
 
 super+shift+b
-	alacritty  -e vim /home/ted/.config/sxhkd/sxhkdrc
+	kitty  -e vim /home/ted/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
@@ -64,7 +62,7 @@ super + f
 	bspc node --state \~fullscreen
 
 super + r
-    alacritty -e ranger
+    kitty -e ranger
 
 #Hide polybar
 super + y
@@ -82,13 +80,13 @@ super + Escape
 
 #Terminal emulator
 super + Return
-	alacritty
+	kitty
 
 ctrl + Return
-	alacritty
+	kitty
 
 super + t
-    alacritty -e tomb -q open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen
+    kitty -e tomb -q open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen
 
 super + shift + t
 	tomb close
@@ -248,8 +246,10 @@ alt + shift + {1-9,0}
 super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 ctrl + super + p
-	alacritty  -e vim /home/ted/.config/picom.conf
+	kitty  -e vim /home/ted/.config/picom.conf
 super + grave
     dunstctl history-pop
 super + shift + grave
     dunstctl close
+super + n
+    /home/ted/.bin/yts
