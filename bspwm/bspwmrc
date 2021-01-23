@@ -1,13 +1,12 @@
 #!/bin/sh
 
 #LAUNCHERS
-#bspc config external_rules_command ~/.config/bspwm/scripts/external_rules_command
 #BSPWM configuration
 bspc config border_radius        20
 bspc config border_width         2
 bspc config window_gap           5
-bspc config top_padding          5
-bspc config bottom_padding       -15
+#bspc config top_padding          5
+#bspc config bottom_padding       -13
 bspc config left_padding         2
 bspc config right_padding        2
 bspc config single_monocle       true
@@ -26,7 +25,7 @@ bspc config remove_disabled_monitors true
 bspc config ignore_ewmh_struts false
 bspc config honor_size_hints false
 bspc config merge_overlapping_monitors false
-bspc config focused_border_color	#8D00E3
+bspc config focused_border_color	#98C379
 
 #Floating applications
 bspc rule -a crow state=floating
@@ -41,7 +40,6 @@ bspc rule -a Gnome-disks state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calender=floating
 bspc rule -a Carousel.py state=floating
-bspc rule -a persepolis state=floating
 bspc rule -a bluetooth state=floating
 bspc rule -a Glade-previewer state=floating
 bspc rule -a emacs state=tiling
@@ -56,7 +54,6 @@ bspc rule -a "Spotify" destkop='^9'
 #bspc rule -a TelegramDesktop desktop='^7'
 #bspc rule -a discord  desktop='^8'
 #bspc rule -a code-oss desktop='6'
-pidof bspswallow || bspswallow &
 $HOME/.config/bspwm/autostart.sh
 #polybar hidden when fullscreen for vlc, youtube, mpv ...
 #find out the name of your monitor with xrandr
