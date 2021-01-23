@@ -1,5 +1,6 @@
 #!/bin/bash
 xlayoutdisplay -p eDP1 -o HDMI1 -d 100
+$HOME/.config/polybar/launch.sh &
 declare -a programs=(
 "ssh-agent" 
 #"blueman-tray"
@@ -24,7 +25,6 @@ for program in "${programs[@]}"; do
    fi
 done 
 
-$HOME/.config/polybar/launch.sh &
 # 
 mons_num=$(xrandr --query | grep " connected" | cut -d" " -f1 | wc -w)
 xrandr --output HDMI1 --left-of eDP1 --output eDP1 --mode 1920x1080 
@@ -52,10 +52,11 @@ done
      python3 /opt/tauon-music-box/tauon.py %U &
      bspc desktop -f 9
  fi
-#setxkbmap -option compose:ralt &
+setxkbmap -option compose:ralt &
 xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
 #xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7 &
 #xmodmap -e 'keycode 135 = Super_R' &
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &
 wmname LG3D &
+

@@ -52,7 +52,7 @@ confirm_exit() {
 # Variable passed to rofi
 options="$shutdown\n$reboot\n$suspend\n$lock\n$logout"
 
-chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -dmenu -selected-row 2)"
+chosen="$(echo -e "$options" | $rofi_command -p "Uptime: $uptime" -m -1 -dmenu -selected-row 2)"
 case $chosen in
     $shutdown)
 		ans=$(confirm_exit &)
@@ -71,10 +71,7 @@ case $chosen in
         fi
         ;;
     $lock)
-		if [[ -f /usr/bin/multilockscreen ]]; then
-			multilockscreen -s &> ~/rofi.log
-
-		fi
+        /home/ted/.bin/lock -i ~/.config/i3lock/blue-wolf.jpg && systemctl suspend
         ;;
     $suspend)
         systemctl suspend

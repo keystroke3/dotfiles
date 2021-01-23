@@ -1,13 +1,13 @@
 super + g
   mpv --shuffle ~/Videos/Music\ Videos 
 super + shift + g
-  /home/ted/Carousel/scripts/wireguard-vpn toggle
+  /home/ted/Carousel/scripts/wireguard-vpn -t
 ctrl + q
     echo "firefox"
 alt + space
    sh /home/ted/.bin/finder
 alt + shift + space
-    sh /home/ted/.bin/videofinder >> ~/.local/videofinder.log
+    sh /home/ted/.bin/vp-finder
 #alt + 1
 #    xrandr --output HDMI1 --below eDP1 --mode 1920x1080 --same-as eDP1
 #alt + 2 
@@ -29,7 +29,7 @@ super + space
     /home/ted/.config/rofi/launchers/colorful/launcher.sh
 
 ctrl + space
-	rofi -show run -disable-history
+	rofi -show run -disable-history -1
 
 super + d
 	redpaper -d
@@ -114,9 +114,9 @@ super + shift + x
 #########################
 
 
-#Firefox
+#brave
 ctrl + alt + f
-     firefox
+     brave --profile-directory="Default"
 
 
 #Compton Toggle

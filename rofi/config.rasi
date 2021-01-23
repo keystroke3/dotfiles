@@ -32,7 +32,6 @@ window {
     location:                       0;
     x-offset:                       0;
     y-offset:                       0;
-    primary:                        -4;
 }
 
 prompt {
