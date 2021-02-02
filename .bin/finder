@@ -4,16 +4,5 @@ fuzz=$(rg --files ~/ | rofi -dmenu -m -1 -theme-str '#window { width: 66%; heigh
 # fuzz=$(fd . $HOME -H | dmenu)
 
 filetype=`xdg-mime query filetype "$fuzz" | awk -F/ '{print $1}'`
-case $filetype in
-    text )
-        kitty -e vim "$fuzz" ;;
-    audio )
-        mpv "$fuzz" & disown ;;
-    video )
-        mpv --no-resume-playback "$fuzz" & disown ;;
-    application )
-        kitty -e vim "$fuzz" ;;
-    * )
-        xdg-open "$fuzz" & disown
-esac
+xdg-open "$fuzz" & disown
 
