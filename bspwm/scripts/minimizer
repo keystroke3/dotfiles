@@ -1,0 +1,55 @@
+#!/usr/bin/sh
+desktop=$(bspc query -D -d focused --names)
+BUFFER=/tmp/minimizer.$desktop
+LAYOUT=$(bspc query -T -d | jq -r .layout)
+WINDOWS=$(bspc query -d -N -n .window | wc -l)
+count() {
+    if [ -f $BUFFER ]; then
+        if [ "$desktop" -lt 6 ]; then
+            wc -l <$BUFFER >/tmp/pbhdmi.count
+            echo "$LAYOUT $WINDOWS" >/tmp/hdmi.state
+            polybar-msg -p $(pidof polybar | awk '{print $1}') hook minimizer 2
+        else
+            wc -l <$BUFFER >/tmp/pbmain.count
+            echo "$LAYOUT $WINDOWS" >/tmp/main.state
+            polybar-msg -p $(pidof polybar | awk '{print $3}') hook minimizer 2
+        fi
+        echo "$LAYOUT"
+    else
+        echo "0"
+    fi
+
+}
+
+hide() {
+    focused=$(bspc query -N -n)
+    [ -z $focused ] && return
+    bspc node $focused -g hidden=on
+    echo $focused >>$BUFFER
+    count
+}
+
+unhide() {
+    if [ -f $BUFFER ]; then
+        last_node=$(tail -1 $BUFFER)
+        bspc desktop -l tiled
+        bspc node $last_node -g hidden=off
+        bspc node -f $last_node
+        sed -i '$ d' $BUFFER
+    else
+        echo "No hidden windows yet"
+    fi
+    count
+}
+
+case $1 in
+hide)
+    hide
+    ;;
+unhide)
+    unhide
+    ;;
+*)
+    count
+    ;;
+esac

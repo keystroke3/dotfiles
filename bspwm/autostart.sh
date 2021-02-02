@@ -37,6 +37,8 @@ fi
 picom --daemon --config ~/.config/picom.conf
 ~/.redpaper/wallpaper.sh &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+pkill -f minimizerd &
+minimizerd &
 sleep 10
 for program in "${lazy_load[@]}"; do
    if pgrep $program; then
@@ -58,5 +60,6 @@ xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
 #xmodmap -e 'keycode 135 = Super_R' &
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &
-wmname LG3D &
+#wmname LG3D &
+bspc subscribe node_add| while read line; do minimizer;done &
 
