@@ -1,3 +1,4 @@
+#!/bin/sh
 super + g
   mpv --shuffle ~/Videos/Music\ Videos 
 super + shift + g
@@ -8,10 +9,6 @@ alt + space
    sh /home/ted/.bin/finder
 alt + shift + space
     sh /home/ted/.bin/vp-finder
-#alt + 1
-#    xrandr --output HDMI1 --below eDP1 --mode 1920x1080 --same-as eDP1
-#alt + 2 
-#    xrandr --output HDMI1 --below eDP1 --mode 1280x720  --same-as eDP1
 
 super + q 
     /home/ted/.config/rofi/powermenu/powermenu.sh &> ~/powermenu.log
@@ -39,15 +36,15 @@ super + c
 
 super + shift + c
 	redpaper -bc
-
+pbmain
 super + shift + x
 	bspc  node -k
 
 super + b
-	kitty  -e vim /home/ted/.config/bspwm/bspwmrc
+	kitty  -e nvim /home/ted/.config/bspwm/bspwmrc
 
 super+shift+b
-	kitty  -e vim /home/ted/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd
+	kitty  -e nvim /home/ted/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
@@ -234,8 +231,11 @@ super + bracket{left,right}
 super + s
 	bspc node -t {floating,tiled}
 
-super + {_,shift + }i
-    whid {hide,last}
+super + shift + i
+    minimizer unhide
+
+super + i
+    minimizer hide
 
 super + o 
     pavucontrol
@@ -246,7 +246,7 @@ alt + shift + {1-9,0}
 super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 ctrl + super + p
-	kitty  -e vim /home/ted/.config/picom.conf
+	kitty  -e nvim /home/ted/.config/picom.conf
 super + grave
     dunstctl history-pop
 super + shift + grave
