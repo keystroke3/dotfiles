@@ -1,29 +1,35 @@
 #!/bin/sh
+super + r
+    mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
 super + g
-  mpv --shuffle ~/Videos/Music\ Videos 
+    mpv --shuffle ~/Videos/Music\ Videos 
+
 super + shift + g
-  /home/ted/Carousel/scripts/wireguard-vpn -t
+    $HOME/Carousel/scripts/wireguard-vpn -t
+
 ctrl + q
     echo "firefox"
+
 alt + space
-   sh /home/ted/.bin/finder
+    sh $HOME/.bin/finder
+
 alt + shift + space
-    sh /home/ted/.bin/vp-finder
+    sh $HOME/.bin/vp-finder
 
 super + q 
-    /home/ted/.config/rofi/powermenu/powermenu.sh &> ~/powermenu.log
+    $HOME/.config/rofi/powermenu/powermenu.sh 
 
 super + Tab
-	bspc  node -f {next.local}
+    bspc node -f next.local.\!hidden.window
 
 super + shift + Tab
-    bspc node -f {prev.local}
+    bspc node -f prev.local.\!hidden.window
 
 super + shift + y
-    /home/ted/.config/polybar/launch.sh
+    $HOME/.config/polybar/launch.sh
 
 super + space
-    /home/ted/.config/rofi/launchers/colorful/launcher.sh
+    $HOME/.config/rofi/launchers/colorful/launcher.sh
 
 ctrl + space
 	rofi -show run -disable-history -1
@@ -35,16 +41,16 @@ super + c
 	redpaper -c
 
 super + shift + c
-	redpaper -bc
-pbmain
+	redpaper -b
+
 super + shift + x
 	bspc  node -k
 
 super + b
-	kitty  -e nvim /home/ted/.config/bspwm/bspwmrc
+	kitty  -e nvim $HOME/.config/bspwm/bspwmrc
 
 super+shift+b
-	kitty  -e nvim /home/ted/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd
+	kitty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
@@ -54,25 +60,13 @@ super + p
 super + e
     caja
 
-#Toggle fullscreen of window
 super + f
 	bspc node --state \~fullscreen
 
-super + r
-    kitty -e ranger
-
-#Hide polybar
-super + y
+super + shift + p
     polybar-msg cmd toggle
 
-# lock the screen
-ctrl + super + l
-    mantablockscreen -sc
-/* super + x */
-    /* clearine */
-
-#Xkill
-super + Escape
+super + shift + Escape
     xkill
 
 #Terminal emulator
@@ -83,27 +77,26 @@ ctrl + Return
 	kitty
 
 super + t
-    kitty -e tomb -q open /home/ted/Desktop/lollypop -k /home/ted/Desktop/popen
+    kitty -e tomb -q open $HOME/Desktop/lollypop -k $HOME/Desktop/popen
 
 super + shift + t
 	tomb close
-
 
 super + shift + d
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
-super + shift + r
-	~/.config/bspwm/bspwmrc
+super + F5
+    bspc wm --restart
 
 super + shift + s
-	pkill -USR1 -x sxhkd
+	pkill -x sxhkd && sxhkd
 
 super + shift + q
 	bspc node -c
 
 super + shift + x
-	bspc quit
+    bspc quit
 
 
 #########################
@@ -113,16 +106,14 @@ super + shift + x
 
 #brave
 ctrl + alt + f
-     brave --profile-directory="Default"
-
+    brave --profile-directory="Default"
 
 #Compton Toggle
 ctrl + alt + o
      ~/.config/bspwm/scripts/compton-toggle.sh
 
 ctrl + alt + Delete
-	kill -9 -1
-
+    kill -9 -1
 
 
 #########################
@@ -130,7 +121,8 @@ ctrl + alt + Delete
 #########################
 
 Print
-	flameshot screen -r -c -p /home/ted/Pictures/screenshots
+	flameshot screen -r -c -p $HOME/Pictures/screenshots
+
 shift + Print
 	flameshot gui
 
@@ -150,84 +142,55 @@ XF86AudioLowerVolume
 XF86AudioMute
     amixer -D pulse set Master 1+ toggle
 
-#Playerctl works for Pragha, Spotify and others
-#DELETE the line for mpc if you want to use playerctl
-#putting a hashtag in front of the mpc line will NOT work
-#mpc works for ncmpcpp
-
-#PLAY
 XF86AudioPlay
     playerctl play-pause
 
-#Next
 XF86AudioNext
 	playerctl next
 
-#previous
 XF86AudioPrev
     playerctl previous
 
-#Stop
 XF86AudioStop
     playerctl stop
 
-#Brightness up
 XF86MonBrightnessUp
     xbacklight -inc 5
 
-#Brightness down
 XF86MonBrightnessDown
     xbacklight -dec 5
 
 
-#########################
-# BSPWM LAYOUT KEYS     #
-#########################
-
-
-#Focus selected desktop FOR QWERTY KEYBOARDS
 super + {1-9,0}
 	bspc desktop -f '^{1-9,10}'
 
-#Move window to selected desktop FOR QWERTY KEYBOARDS
 super + shift + {1-9,0}
     id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}}
 
-#################################################################
-
-
-#Focus selected desktop
-#alt + Tab
-#	bspc desktop -f '^{1-9,10}'
-#	bspc node -f {north,east,south,west}
-
-#Monocole mode
 super + v
-	bspc desktop -l next
+	minimizer layout
 
 super + {h,j,k,l}
     bspc node --focus {west,south,north,east}
 
-# Focus/swap windows by direction
 super + shift + {h,j,k,l}
 	bspc node --swap {west,south,north,east}
 
-# Flip layout vertically/horizontally
 super + {_,shift + }a
 	bspc node @/ --flip {vertical,horizontal}
 
 super + alt + {Left,Down,Up,Right}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
-# Contract tiled space
-#super + ctrl + {h,j,k,l}
-#	bspc node {@east -r -10,@north -r +10,@south -r -10,@west -r +10}
+super + {_,shift} + o
+    bspc node @/ --rotate {90, 270}
 
-# Increase/decrease window gap on focused desktop
+super + r
+    ~/.bin/open_in_mpv
+
 super + bracket{left,right}
 	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
 
-# set the window state
 super + s
 	bspc node -t {floating,tiled}
 
@@ -237,19 +200,20 @@ super + shift + i
 super + i
     minimizer hide
 
-super + o 
-    pavucontrol
-
 alt + shift + {1-9,0}
     bspc node -f @/ ; bspc node -d '^{1-9,10}' --follow
-# Move floating window
+
 super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
-ctrl + super + p
-	kitty  -e nvim /home/ted/.config/picom.conf
+
 super + grave
     dunstctl history-pop
+
 super + shift + grave
     dunstctl close
+
 super + n
-    /home/ted/.bin/yts
+    ~/.bin/yts -D
+
+super + u
+    rrbw

@@ -1,41 +1,66 @@
 #!/usr/bin/sh
 desktop=$(bspc query -D -d focused --names)
-BUFFER=/tmp/minimizer.$desktop
-LAYOUT=$(bspc query -T -d | jq -r .layout)
+STACK="/tmp/minimizer.$desktop.stack"
 WINDOWS=$(bspc query -d -N -n .window | wc -l)
+desktops=$(bspc query -D --names)
+
+for d in "$desktops"; do
+    if [ ! -f /tmp/desktop.$d.layout ]; then
+        echo $(bspc query -T -d $d | jq -r .layout) > "/tmp/desktop.$d.layout"
+        echo "made /tmp/desktop.$d.layout"
+    fi
+done
+
+LAYOUT="/tmp/desktop.$desktop.layout"
+
+
 count() {
-    if [ -f $BUFFER ]; then
+    if [ -f "$STACK" ]; then
         if [ "$desktop" -lt 6 ]; then
-            wc -l <$BUFFER >/tmp/pbhdmi.count
-            echo "$LAYOUT $WINDOWS" >/tmp/hdmi.state
+            wc -l <"$STACK" >/tmp/pbhdmi.count
+            echo "$(cat "$LAYOUT") $WINDOWS" | tee /tmp/hdmi.state /tmp/minimizerd-toggle.log
             polybar-msg -p $(pidof polybar | awk '{print $1}') hook minimizer 2
         else
-            wc -l <$BUFFER >/tmp/pbmain.count
-            echo "$LAYOUT $WINDOWS" >/tmp/main.state
-            polybar-msg -p $(pidof polybar | awk '{print $3}') hook minimizer 2
+            wc -l <"$STACK" >/tmp/pbmain.count
+            echo "$(cat $LAYOUT) $WINDOWS" | tee /tmp/main.state /tmp/minimizerd-toggle.log
+            polybar-msg -p $(pidof polybar | awk '{print $3}') hook minimizer 2 
         fi
-        echo "$LAYOUT"
     else
-        echo "0"
+        HIDDEN=$(bspc query -d focused -N -n .hidden.window)
+        [ -z $HIDDEN ] && echo 0 > $STACK || echo $HIDDEN > $STACK
+        count
     fi
 
+}
+
+toggle_layout(){
+    CURRENT_LAYOUT=$(cat "$LAYOUT")
+    echo "$desktop layout = $LAYOUT" >> /tmp/minimizerd-toggle.log
+    if [[ $CURRENT_LAYOUT = monocle ]]; then
+        bspc desktop -l tiled
+        echo "tiled" > $LAYOUT
+        count
+    else
+        bspc desktop -l monocle
+        echo "monocle" > $LAYOUT
+        count
+    fi
 }
 
 hide() {
     focused=$(bspc query -N -n)
     [ -z $focused ] && return
     bspc node $focused -g hidden=on
-    echo $focused >>$BUFFER
+    echo $focused >>"$STACK"
     count
 }
 
 unhide() {
-    if [ -f $BUFFER ]; then
-        last_node=$(tail -1 $BUFFER)
-        bspc desktop -l tiled
+    if [ -f "$STACK" ]; then
+        last_node=$(tail -1 $STACK)
         bspc node $last_node -g hidden=off
         bspc node -f $last_node
-        sed -i '$ d' $BUFFER
+        sed -i '$ d' "$STACK"
     else
         echo "No hidden windows yet"
     fi
@@ -48,6 +73,9 @@ hide)
     ;;
 unhide)
     unhide
+    ;;
+layout)
+    toggle_layout
     ;;
 *)
     count

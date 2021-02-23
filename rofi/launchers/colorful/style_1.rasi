@@ -4,7 +4,7 @@
  * Mail    : adi1090x@gmail.com
  * Github  : @adi1090x
  * Twitter : @adi1090x
- *
+ * -me-select-entry '' -me-accept-entry 'MousePrimary' 
  */
 
 configuration {
@@ -17,6 +17,8 @@ configuration {
     fullscreen:                     false;
 	hide-scrollbar: 				true;
 	sidebar-mode: 					false;
+    me-select-entry:                "";
+    me-accept-entry:                "MousePrimary";
 }
 
 @import "/home/ted/.config/rofi/launchers/colorful/colors.rasi"

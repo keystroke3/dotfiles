@@ -5,8 +5,6 @@
 bspc config border_radius        20
 bspc config border_width         2
 bspc config window_gap           5
-#bspc config top_padding          5
-#bspc config bottom_padding       -13
 bspc config left_padding         2
 bspc config right_padding        2
 bspc config single_monocle       true
@@ -25,44 +23,21 @@ bspc config remove_disabled_monitors true
 bspc config ignore_ewmh_struts false
 bspc config honor_size_hints false
 bspc config merge_overlapping_monitors false
-bspc config focused_border_color	#98C379
+bspc config focused_border_color "#98C379"
 
 #Floating applications
-bspc rule -a crow state=floating
+bspc rule -a crx_nngceckbapebfimnlniiiahkandclblb state=floating
 bspc rule -a file-roller state=floating
-bspc rule -a foliate state=floating
-bspc rule -a java-lang-Thread state=floating desktop='^5'
 bspc rule -a Arandr state=floating
-bspc rule -a mpv state=tiling sticky=off
-bspc rule -a Galculator state=floating
-bspc rule -a Oblogout state=floating
 bspc rule -a Gnome-disks state=floating
 bspc rule -a Yad state=floating
 bspc rule -a yad-calender=floating
 bspc rule -a Carousel.py state=floating
 bspc rule -a bluetooth state=floating
-bspc rule -a Glade-previewer state=floating
-bspc rule -a emacs state=tiling
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
-bspc rule -a "sticky notes" state=floating
 
 #open applications on specific workspaces
 bspc rule -a Thunderbird  desktop='^10'
-bspc rule -a "Tauon Music Box" desktop='^9'
-bspc rule -a "Spotify" destkop='^9'
-#bspc rule -a TelegramDesktop desktop='^7'
-#bspc rule -a discord  desktop='^8'
-#bspc rule -a code-oss desktop='6'
+bspc rule -a "Tauon Music Box" desktop='^9' focus='on'
 $HOME/.config/bspwm/autostart.sh
-#polybar hidden when fullscreen for vlc, youtube, mpv ...
-#find out the name of your monitor with xrandr
-#xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_DP-1)
-#xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_HDMI1)
-#xdo below -t $(xdo id -n root) $(xdo id -a polybar-main_HDMI2)
-
-###External rules
-##Pseudo automatic mode: always splits focused window when opening new window
-#bspc config external_rules_command ~/.config/bspwm/scripts/pseudo_automatic_mode
-##Adjust new window: splits biggest windows to keep windows about the same size
-#bspc config external_rules_command ~/.config/bspwm/scripts/adjust-new-window
