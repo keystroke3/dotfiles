@@ -1,10 +1,8 @@
 #!/bin/bash
 xlayoutdisplay -p eDP1 -o HDMI1 -d 100
-$HOME/.config/polybar/launch.sh &
 declare -a programs=(
 "ssh-agent" 
 #"blueman-tray"
-"sxhkd"
 "nm-applet"
 "flameshot"
 "dunst"
@@ -34,6 +32,7 @@ if [ $mons_num -eq 2 ]; then
 else
     bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 fi
+$HOME/.config/polybar/launch.sh &
 picom --daemon --config ~/.config/picom.conf
 ~/.redpaper/wallpaper.sh &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
@@ -51,7 +50,7 @@ done
  if pgrep -f "tauon";then 
      :
  else 
-     python3 /opt/tauon-music-box/tauon.py %U &
+     python3 ~/Projects/TauonMusicBox/tauon.py %U &
      bspc desktop -f 9
  fi
 setxkbmap -option compose:ralt &
@@ -61,5 +60,4 @@ xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &
 #wmname LG3D &
-bspc subscribe node_add| while read line; do minimizer;done &
 
