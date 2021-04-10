@@ -5,7 +5,7 @@ from os.path import join, exists
 import shutil
 
 
-def mover():
+def dir_mover():
     path = getcwd()
     for working_dir, dirs, files in walk(path, topdown=False):
         for dir in dirs:
@@ -20,4 +20,18 @@ def mover():
                 continue
             print(f"{oldpath} ---> {newpath}")
 
-mover()
+def file_mover():
+    path = getcwd()
+    for working_dir, dirs, files in walk(path, topdown=False):
+        for file in files:
+            oldpath = join(working_dir,file)
+            newpath = join(path, file)
+            try:
+                shutil.move(oldpath, newpath)
+            except shutil.Error:
+                newpath = f"{newpath}(copy)"
+            except FileExistsError:
+                continue
+            print(f"{oldpath} ---> {newpath}")
+
+file_mover()

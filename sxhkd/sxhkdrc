@@ -1,8 +1,15 @@
 #!/bin/sh
+
+super + colon
+    $HOME/.virtualenvs/yat/bin/python $HOME/Projects/yat/src/gui.py
+
+super + semicolon
+    dialect
+
 super + r
     mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
 super + g
-    mpv --shuffle ~/Videos/Music\ Videos 
+    mpv --no-resume-playback --shuffle ~/Videos/Music\ Videos 
 
 super + shift + g
     $HOME/Carousel/scripts/wireguard-vpn -t
@@ -47,10 +54,10 @@ super + shift + x
 	bspc  node -k
 
 super + b
-	kitty  -e nvim $HOME/.config/bspwm/bspwmrc
+	WINIT_X11_SCALE_FACTOR=1.1 alacritty  -e nvim $HOME/.config/bspwm/bspwmrc
 
 super+shift+b
-	kitty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
+	WINIT_X11_SCALE_FACTOR=1.1 alacritty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
@@ -71,13 +78,10 @@ super + shift + Escape
 
 #Terminal emulator
 super + Return
-	kitty
-
-ctrl + Return
-	kitty
+	WINIT_X11_SCALE_FACTOR=1.2 alacritty
 
 super + t
-    kitty -e tomb -q open $HOME/Desktop/lollypop -k $HOME/Desktop/popen
+    WINIT_X11_SCALE_FACTOR=1.2 alacritty -e tomb -q open $HOME/Desktop/lollypop -k $HOME/Desktop/popen
 
 super + shift + t
 	tomb close
@@ -104,9 +108,12 @@ super + shift + x
 #########################
 
 
-#brave
+#firefox
 ctrl + alt + f
-    brave --profile-directory="Default"
+    firefox
+
+ctrl + shift + alt + p
+    firefox --private-window
 
 #Compton Toggle
 ctrl + alt + o
@@ -212,8 +219,8 @@ super + grave
 super + shift + grave
     dunstctl close
 
-super + n
+super + u
     ~/.bin/yts -D
 
-super + u
+super + n
     rrbw

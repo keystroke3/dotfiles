@@ -23,14 +23,15 @@ bspc config remove_disabled_monitors true
 bspc config ignore_ewmh_struts false
 bspc config honor_size_hints false
 bspc config merge_overlapping_monitors false
-bspc config focused_border_color "#98C379"
+bspc config focused_border_color "#E5C07B"
 
 #Floating applications
+
+bspc rule -a Dialect state=floating
 bspc rule -a crx_nngceckbapebfimnlniiiahkandclblb state=floating
 bspc rule -a file-roller state=floating
 bspc rule -a Arandr state=floating
 bspc rule -a Gnome-disks state=floating
-bspc rule -a Yad state=floating
 bspc rule -a yad-calender=floating
 bspc rule -a Carousel.py state=floating
 bspc rule -a bluetooth state=floating
