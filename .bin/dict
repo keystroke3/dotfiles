@@ -1,2 +1,0 @@
-kitty -e echo "hellow" &
-disown 

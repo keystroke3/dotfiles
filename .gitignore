@@ -3,3 +3,4 @@ vim/*.tmp
 vim/pack/
 vim/viminfo
 .bin/videofinder.log
+mpv/watch_later/
