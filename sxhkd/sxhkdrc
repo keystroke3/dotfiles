@@ -1,5 +1,6 @@
 #!/bin/sh
-
+power
+    echo 'power'
 super + colon
     $HOME/.virtualenvs/yat/bin/python $HOME/Projects/yat/src/gui.py
 
@@ -33,6 +34,9 @@ super + shift + Tab
     bspc node -f prev.local.\!hidden.window
 
 super + shift + y
+    polybar-msg cmd toggle
+
+super + y
     $HOME/.config/polybar/launch.sh
 
 super + space
@@ -63,15 +67,17 @@ super + w
 	bspc node -g {sticky=on, sticky=off}
 
 super + p
-    sh ~/.bin/cpicker
+    sh ~/.bin/cpicker -h
+
+super + shift + p
+    sh ~/.bin/cpicker -r
+
 super + e
     caja
 
 super + f
 	bspc node --state \~fullscreen
 
-super + shift + p
-    polybar-msg cmd toggle
 
 super + shift + Escape
     xkill
@@ -179,9 +185,18 @@ super + v
 
 super + {h,j,k,l}
     bspc node --focus {west,south,north,east}
-
-super + shift + {h,j,k,l}
-	bspc node --swap {west,south,north,east}
+    
+super + shift + {h,j,k,l} 
+    { dir=west \
+    , dir=south \
+    , dir=north \
+    , dir=east  \
+    }; \
+    if bspc query -n $dir.window -N; then \
+        bspc node --swap $dir --focus;\
+    else \
+        bspc node -m $dir --focus;\
+    fi
 
 super + {_,shift + }a
 	bspc node @/ --flip {vertical,horizontal}
@@ -195,8 +210,11 @@ super + {_,shift} + o
 super + r
     ~/.bin/open_in_mpv
 
-super + bracket{left,right}
-	bspc config -d focused window_gap $((`bspc config -d focused window_gap` {-,+} 5 ))
+super + bracket{left}
+    copyq menu clipboard
+	
+super + bracket{right}
+    copyq show notes
 
 super + s
 	bspc node -t {floating,tiled}

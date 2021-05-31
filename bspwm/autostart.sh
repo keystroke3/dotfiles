@@ -47,12 +47,12 @@ for program in "${lazy_load[@]}"; do
    fi
 done 
 
- if pgrep -f "tauon";then 
-     :
- else 
-     python3 ~/Projects/TauonMusicBox/tauon.py %U &
-     bspc desktop -f 9
- fi
+# if pgrep -f "tauon";then 
+#     :
+# else 
+#     python3 ~/Projects/TauonMusicBox/tauon.py %U &
+#     bspc desktop -f 9
+# fi
 setxkbmap -option compose:ralt &
 xinput set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 &
 #xinput set-button-map "Elan Touchpad" 1 3 2 4 5 6 7 &

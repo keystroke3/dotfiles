@@ -27,6 +27,8 @@ bspc config focused_border_color "#E5C07B"
 
 #Floating applications
 
+bspc rule -a copyq state=floating
+bspc rule -a MEGASync state=floating
 bspc rule -a Dialect state=floating
 bspc rule -a crx_nngceckbapebfimnlniiiahkandclblb state=floating
 bspc rule -a file-roller state=floating
@@ -40,5 +42,6 @@ bspc rule -a "Network Connections" state=floating
 
 #open applications on specific workspaces
 bspc rule -a Thunderbird  desktop='^10'
-bspc rule -a "Tauon Music Box" desktop='^9' focus='on'
+#bspc rule -a "Tauon Music Box" desktop='^9' focus='on'
+bspc rule -a "Spotify" desktop='^9' focus='off'
 $HOME/.config/bspwm/autostart.sh
