@@ -210,8 +210,8 @@ super + {_,shift} + o
 super + r
     ~/.bin/open_in_mpv
 
-super + bracket{left}
-    copyq menu clipboard
+super + {_,shift} + bracket{left}
+    copyq {menu,show} clipboard
 	
 super + bracket{right}
     copyq show notes
