@@ -9,8 +9,8 @@
 
 configuration {
 	font:							"FantasqueSansMono Nerd Font 12";
-    show-icons:                     false;
-	icon-theme: 					"Papirus";
+    show-icons:                     true;
+	icon-theme: 					"Reverse";
     display-drun: 					"";
     drun-display-format:            "{name}";
     disable-history:                false;

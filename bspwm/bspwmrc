@@ -37,6 +37,7 @@ bspc rule -a Gnome-disks state=floating
 bspc rule -a yad-calender=floating
 bspc rule -a Carousel.py state=floating
 bspc rule -a bluetooth state=floating
+bspc rule -a lxsession-default-apps state=floating
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
 

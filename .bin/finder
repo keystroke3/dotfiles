@@ -1,8 +1,8 @@
-#/bin/bash
+#!/bin/bash
 # fuzz=$(fd . $HOME -H | rofi -dmenu -theme-str '#window { width: 70%; }' 20 -i -p 'Open Files: ')
-fuzz=$(rg --files ~/ | rofi -dmenu -m -1 -theme-str '#window { width: 66%; height: 40%; }' 20 -i -p 'File Name:')
+# fuzz=$(rg --files ~/ | rofi -dmenu -m -1 --show-icons false -theme-str '#window { width: 66%; height: 40%; }' 20 -i -p 'File Name:')
 # fuzz=$(fd . $HOME -H | dmenu)
-
+fuzz=$(rg --files ~/ | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
 filetype=`xdg-mime query filetype "$fuzz" | awk -F/ '{print $1}'`
 xdg-open "$fuzz" & disown
 
