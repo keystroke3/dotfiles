@@ -10,7 +10,7 @@
 configuration {
 	font:							"Iosevka Nerd Font 10";
     show-icons:                     true;
-	icon-theme: 					"Papirus";
+	icon-theme: 					"Papyrus";
     display-drun: 					"";
     drun-display-format:            "{name}";
     disable-history:                false;
