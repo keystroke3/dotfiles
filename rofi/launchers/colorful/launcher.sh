@@ -18,7 +18,9 @@ dir="$HOME/.config/rofi/launchers/colorful"
 ALPHA="#00000000"
 BG="#1A1C36ff"
 FG="#FFFFFFff"
-SELECT="#36386CCC"
+SELECT="#36386C"
+# SELECT="#36386CCC"
+GREEN="#98c37950"
 
 # light
 #ALPHA="#00000000"
@@ -27,13 +29,13 @@ SELECT="#36386CCC"
 #SELECT="#f3f3f3ff"
 
 # accent colors
-COLORS=('#EC7875' '#61C766' '#FDD835' '#42A5F5' '#BA68C8' '#4DD0E1' '#00B19F' \
-		'#FBC02D' '#E57C46' '#AC8476' '#6D8895' '#EC407A' '#B9C244' '#6C77BB')
+COLORS=('#EC7875' '#61C766' '#FDD835' '#42A5F5' '#BA68C8' '#4DD0E1' '#00B19F'
+	'#FBC02D' '#E57C46' '#AC8476' '#6D8895' '#EC407A' '#B9C244' '#6C77BB')
 #ACCENT="${COLORS[$(( $RANDOM % 14 ))]}ff"
 ACCENT="#E5C07Bff"
 
 # overwrite colors file
-cat > $dir/colors.rasi <<- EOF
+cat >$dir/colors.rasi <<-EOF
 	/* colors */
 
 	* {
@@ -42,6 +44,7 @@ cat > $dir/colors.rasi <<- EOF
 	  se:  $SELECT;
 	  fg:  $FG;
 	  ac:  $ACCENT;
+	  green:  $GREEN;
 	}
 EOF
 
