@@ -8,14 +8,14 @@
  */
 
 configuration {
-	font:							"Iosevka Nerd Font 10";
+	// font:							"Iosevka Nerd Font 10";
+	font:							"Comfortaa 10";
     show-icons:                     true;
-	icon-theme: 					"Papyrus";
+	// icon-theme: 					"Sardi Flat Evopop";
+	icon-theme: 					"Tela circle";
     display-drun: 					"";
     drun-display-format:            "{name}";
     disable-history:                false;
-    fullscreen:                     false;
-	hide-scrollbar: 				true;
 	sidebar-mode: 					false;
     me-select-entry:                "";
     me-accept-entry:                "MousePrimary";
@@ -25,8 +25,10 @@ configuration {
 
 window {
     transparency:                   "real";
+    fullscreen:                     false;
+	hide-scrollbar: 				true;
     background-color:               @bg;
-    text-color:                     @fg;
+    text-color:                     @bg;
 	border:							1px;
 	border-color:					@ac;
     border-radius:                  12px;
@@ -73,8 +75,8 @@ listview {
     columns:                        5;
     lines:                          3;
     spacing:                        0%;
-    cycle:                          false;
-    dynamic:                        true;
+    cycle:                          true;
+    dynamic:                        false;
     layout:                         vertical;
 }
 
@@ -89,28 +91,35 @@ mainbox {
 }
 
 element {
-    background-color:               @al;
+    background-color:               @bg;
     text-color:                     @fg;
     orientation:                    vertical;
     border-radius:                  0%;
     padding:                        2% 0% 2% 0%;
+    cursor:                         pointer;
 }
 
 element-icon {
     size:                           49px;
     border:                         0px;
+    horizontal-align:               0.5;
+    vertical-align:                 0.5;
+    cursor:                         pointer;
 }
-
 element-text {
     expand:                         true;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
     margin:                         0.5% 0.5% -0.5% 0.5%;
 }
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       @ac;
+}
 
 element selected {
     background-color:               @se;
-    text-color:                     @fg;
+    text-color:                     #98c379;
 	border:							0% 0% 0% 0%;
     border-radius:                  12px;
     border-color:                  	@bg;
