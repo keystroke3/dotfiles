@@ -42,8 +42,8 @@ super + y
 super + space
     $HOME/.config/rofi/launchers/colorful/launcher.sh
 
-ctrl + space
-	rofi -show run -disable-history -1
+# ctrl + space
+# 	rofi -show run -disable-history -1
 
 super + d
 	redpaper -d
@@ -58,19 +58,22 @@ super + shift + x
 	bspc  node -k
 
 super + b
-	WINIT_X11_SCALE_FACTOR=1.1 alacritty  -e nvim $HOME/.config/bspwm/bspwmrc
+	WINIT_X11_SCALE_FACTOR=1.12 alacritty  -e nvim $HOME/.config/bspwm/bspwmrc
 
 super+shift+b
-	WINIT_X11_SCALE_FACTOR=1.1 alacritty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
+	WINIT_X11_SCALE_FACTOR=1.12 alacritty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
 
 super + w
 	bspc node -g {sticky=on, sticky=off}
 
 super + p
-    sh ~/.bin/cpicker -h
+    sh ~/.bin/cpicker hex
 
 super + shift + p
-    sh ~/.bin/cpicker -r
+    sh ~/.bin/cpicker hsl
+
+super + alt + p
+    sh ~/.bin/cpicker rgb
 
 super + e
     caja
@@ -133,7 +136,7 @@ ctrl + alt + Delete
 #     SCREENSHOTS       #
 #########################
 
-Print
+ctrl+Print
 	flameshot screen -r -c -p $HOME/Pictures/screenshots
 
 shift + Print
@@ -214,7 +217,8 @@ super + {_,shift} + bracket{left}
     copyq {menu,show} clipboard
 	
 super + bracket{right}
-    copyq show notes
+    ~/.bin/vsc-open
+    
 
 super + s
 	bspc node -t {floating,tiled}

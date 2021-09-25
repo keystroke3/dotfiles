@@ -40,9 +40,11 @@ bspc rule -a bluetooth state=floating
 bspc rule -a lxsession-default-apps state=floating
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
+bspc rule -a "Picture in picture" state=floating
 
 #open applications on specific workspaces
 bspc rule -a Thunderbird  desktop='^10'
 #bspc rule -a "Tauon Music Box" desktop='^9' focus='on'
 bspc rule -a "Spotify" desktop='^9' focus='off'
 $HOME/.config/bspwm/autostart.sh
+

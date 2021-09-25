@@ -1,0 +1,4 @@
+#!/bin/bash
+fuzz=$(fd  . /home/ted/ -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
+[ -z $fuzz ] && : || code "$fuzz"  
+
