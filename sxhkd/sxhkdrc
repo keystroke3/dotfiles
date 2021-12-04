@@ -119,7 +119,7 @@ super + shift + x
 
 #firefox
 ctrl + alt + f
-    firefox
+    brave --profile-directory='Profile 1'
 
 ctrl + shift + alt + p
     firefox --private-window

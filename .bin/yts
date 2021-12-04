@@ -49,7 +49,9 @@ cache_dir=${YTFZF_CACHE-${cache_dir-$HOME/.cache/ytfzf}}
 #video type preference (mp4/1080p, mp4/720p, etc..)
 video_pref=${YTFZF_PREF-${video_pref-}}
 #the menu to use instead of fzf when -D is specified
-external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30 -p Search:}}
+external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30 -p Search: }}
+#external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30  -p Search: -sb "#98C379"}}
+#dmenu -i -l 30 -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31' -p Search: 
 #number of columns (characters on a line) the external menu can have
 #necessary for formatting text for external menus
 external_menu_len=${YTFZF_EXTMENU_LEN-${external_menu_len-220}}
