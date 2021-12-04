@@ -9,7 +9,7 @@
 
 configuration {
 	font:							"FantasqueSansMono Nerd Font 12";
-    show-icons:                     true;
+    show-icons:                     false;
 	icon-theme: 					"Reverse";
     display-drun: 					"";
     drun-display-format:            "{name}";
@@ -112,4 +112,9 @@ element selected {
 	border:							0% 0% 0% 0%;
     border-radius:                  12px;
     border-color:                  	@bg;
+}
+
+element-text, element-icon {
+    background-color: inherit;
+    text-color:       inherit;
 }

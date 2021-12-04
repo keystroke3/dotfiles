@@ -27,7 +27,7 @@ done
 xsetroot -cursor_name left_ptr &
 dirmngr --daemon &
 mons_num=$(xrandr --query | grep " connected" | cut -d" " -f1 | wc -w)
-xrandr --output HDMI1 --left-of eDP1 --output eDP1 --mode 1920x1080 
+xrandr --output HDMI1 --rate 144.00 --mode 1920x1080 --left-of eDP1 --output eDP1 --mode 1920x1080 
 if [ $mons_num -eq 2 ]; then
     bspc monitor eDP1 -d  6 7 8 9 0
     bspc monitor HDMI1 -d 1 2 3 4 5

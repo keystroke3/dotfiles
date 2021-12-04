@@ -7,7 +7,7 @@ bspc config border_width         2
 bspc config window_gap           5
 bspc config left_padding         2
 bspc config right_padding        2
-bspc config single_monocle       true
+bspc config single_monocle       false
 bspc config click_to_focus       true
 bspc config split_ratio          0.50
 bspc config borderless_monocle   false
@@ -20,10 +20,12 @@ bspc config pointer_action1 move
 bspc config pointer_action2 resize_side
 bspc config pointer_action3 resize_corner
 bspc config remove_disabled_monitors true
-bspc config ignore_ewmh_struts false
-bspc config honor_size_hints false
+# bspc config ignore_ewmh_struts false
+# bspc config honor_size_hints true
 bspc config merge_overlapping_monitors false
-bspc config focused_border_color "#E5C07B"
+bspc config active_border_color "#E5C07B"
+bspc config focused_border_color "#e06c75"
+
 
 #Floating applications
 
@@ -41,10 +43,11 @@ bspc rule -a lxsession-default-apps state=floating
 bspc rule -a polybar private
 bspc rule -a "Network Connections" state=floating
 bspc rule -a "Picture in picture" state=floating
+bspc rule -a Picture-in-Picture state=floating
 
 #open applications on specific workspaces
 bspc rule -a Thunderbird  desktop='^10'
 #bspc rule -a "Tauon Music Box" desktop='^9' focus='on'
-bspc rule -a "Spotify" desktop='^9' focus='off'
+bspc rule -a Spotify desktop='^9' focus='off'
 $HOME/.config/bspwm/autostart.sh
 
