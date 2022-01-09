@@ -1,25 +1,26 @@
 #!/bin/bash
-fuzz=$(rg --files ~/ | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
-mime=$(xdg-mime query filetype "$fuzz")
-fileclass=$(echo $mime | awk -F/ '{print $1}' | tr -d "\n")
-filetype=$(echo $mime | awk -F/ '{print $2}' | tr -d "\n")
-case $fileclass in 
-	"video"|"audio")
-		mpv "$fuzz" --no-resume-playback & disown ;;
-	"image")
-		sxiv "$fuzz" & disown ;;
-	"text")
-	WINIT_X11_SCALE_FACTOR=1.12 -e nvim "$fuzz" & disown ;;
-	"appplication")
-		case $filetype in
-			"pdf")
-				zathura "$fuzz" & disown ;;
-			"plain")
-			 	WINIT_X11_SCALE_FACTOR=1.12 -e nvim "$fuzz" & disown ;;
-		esac ;;
-	*)
-		xdg-open "$fuzz" & disown ;;
-esac
+fuzz=$(rg -j 4 --files ~/ | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+mimeo "$fuzz"
+# mime=$(xdg-mime query filetype "$fuzz")
+# fileclass=$(echo $mime | awk -F/ '{print $1}' | tr -d "\n")
+# filetype=$(echo $mime | awk -F/ '{print $2}' | tr -d "\n")
+# case $fileclass in 
+# 	"video"|"audio")
+# 		mpv "$fuzz" --no-resume-playback & disown ;;
+# 	"image")
+# 		sxiv "$fuzz" & disown ;;
+# 	"text")
+# 	WINIT_X11_SCALE_FACTOR=1.12 -e nvim "$fuzz" & disown ;;
+# 	"appplication")
+# 		case $filetype in
+# 			"pdf")
+# 				zathura "$fuzz" & disown ;;
+# 			"plain")
+# 			 	WINIT_X11_SCALE_FACTOR=1.12 -e nvim "$fuzz" & disown ;;
+# 		esac ;;
+# 	*)
+# 		xdg-open "$fuzz" & disown ;;
+# esac
 		
 		
 
