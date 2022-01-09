@@ -22,6 +22,9 @@ alt + space
     sh $HOME/.bin/finder
 
 alt + shift + space
+    sh $HOME/.bin/vp-finder resume
+
+super + shift + space
     sh $HOME/.bin/vp-finder
 
 super + q 
@@ -119,7 +122,7 @@ super + shift + x
 
 #firefox
 ctrl + alt + f
-    brave --profile-directory='Profile 1'
+    firefox
 
 ctrl + shift + alt + p
     firefox --private-window
@@ -229,9 +232,6 @@ super + shift + i
 super + i
     minimizer hide
 
-alt + shift + {1-9,0}
-    bspc node -f @/ ; bspc node -d '^{1-9,10}' --follow
-
 super + {_,shift + }{Left,Down,Up,Right}
 	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 
@@ -248,3 +248,8 @@ super + n
     rrbw
 super + m
 	WINIT_X11_SCALE_FACTOR=1.1 alacritty  -e ssh salvahe.co
+super + F9
+    xrandr --output eDP1 --off
+super + {shift + } + F9
+    xrandr --output eDP1 --right-of HDMI1 --rate 60 --mode 1920x1080 
+

@@ -1,5 +1,4 @@
 #!/bin/bash
-xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 declare -a programs=(
 "ssh-agent" 
 #"blueman-tray"
@@ -38,8 +37,6 @@ $HOME/.config/polybar/launch.sh &
 picom --daemon --config ~/.config/picom.conf
 ~/.cache/redpaper/wallpaper.sh &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-pkill -f minimizerd &
-minimizerd &
 sleep 10
 for program in "${lazy_load[@]}"; do
    if pgrep $program; then

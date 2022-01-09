@@ -49,9 +49,7 @@ cache_dir=${YTFZF_CACHE-${cache_dir-$HOME/.cache/ytfzf}}
 #video type preference (mp4/1080p, mp4/720p, etc..)
 video_pref=${YTFZF_PREF-${video_pref-}}
 #the menu to use instead of fzf when -D is specified
-external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30 -p Search: }}
-#external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30  -p Search: -sb "#98C379"}}
-#dmenu -i -l 30 -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31' -p Search: 
+external_menu=${YTFZF_EXTMENU-${external_menu-dmenu -i -l 30 -p Search:}}
 #number of columns (characters on a line) the external menu can have
 #necessary for formatting text for external menus
 external_menu_len=${YTFZF_EXTMENU_LEN-${external_menu_len-220}}
@@ -98,7 +96,7 @@ search_prompt=${search_prompt-Search: }
 #used when getting the html from youtube
 
 useragent=${useragent-'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.152 Safari/537.36'}
-#used when fancy_subsciptions_menu is 1
+#used when fancy_subscriptions_menu is 1
 fancy_subscriptions_text=${fancy_subscriptions_text-             -------%s-------}
 
 #> config scripting settings
@@ -478,8 +476,7 @@ preview_img () {
 	shorturl=${args##*${tab_space}|}
 	shorturl="${shorturl%% *}"
 
-	json_obj=$(printf "%s" "$videos_json" | jq '.[]|select( .videoID == "'"$shorturl"'")')
-
+	json_obj=$(jq '.[]|select( .videoID == "'"$shorturl"'")' "$tmp_video_json_file")
 
 	IFS=$tab_space read -r title channel duration views date description <<-EOF
 	$(
@@ -778,7 +775,7 @@ scrape_pt () {
 	    {
 		title: .name,
 		channel: .channel.displayName,
-		duration: .duration,
+		duration: "\(.duration / 60 | floor):\(.duration % 60)",
 		views: .views,
 		date: .publishedAt,
 		videoID: .uuid,
@@ -786,7 +783,7 @@ scrape_pt () {
 		thumbs: .thumbnailUrl
 	    }
 	]')
-     export videos_json
+     printf "%s" "$videos_json" > "$tmp_video_json_file"
      videos_data="$(get_video_data "$videos_json")"
      function_exists "on_video_data_gotten" && on_video_data_gotten "$videos_data" "$videos_json" "$pt_json"
      [ $show_thumbnails -eq 1 ] && download_thumbnails "$videos_json"
@@ -861,7 +858,7 @@ scrape_yt () {
 	]')
 
 	videos_json=$playlist_json$videos_json
-	export videos_json
+	printf "%s" "$videos_json" > "$tmp_video_json_file"
 
 	#checks if it's empty in case it was defined in a config function eg: on_get_search
 	[ -z "$videos_data" ] && videos_data=$(get_video_data "$videos_json")
@@ -1047,10 +1044,10 @@ open_player () {
 
 	if [ $detach_player -eq 1 ]; then
 		if [ -z "$video_pref" ] || [ $is_audio_only -eq 1 ]; then
-			printf "Opening Player: %s\n" "$video_player $*"
+			printf "Opening Player: %s\n" "$video_player \"$*\""
 			setsid -f $video_player "$@"  $YTFZF_SUBT_NAME >/dev/null 2>&1
 		else
-			printf "Opening Player: %s\n" "$video_player_format$video_pref $*"
+			printf "Opening Player: %s\n" "$video_player_format$video_pref \"$*\""
 			setsid -f $video_player_format"$video_pref"  "$@"  $YTFZF_SUBT_NAME >/dev/null 2>&1
 		fi
 		return
@@ -1058,18 +1055,22 @@ open_player () {
 
 	if [ $is_download -eq 0 ]; then
 		if [ -z "$video_pref" ] || [ $is_audio_only -eq 1 ]; then
-			printf "Opening Player: %s\n" "$video_player $*"
+			printf "Opening Player: %s\n" "$video_player \"$*\""
 			$video_player "$@"  $YTFZF_SUBT_NAME
 		else
-			printf "Opening Player: %s\n" "$video_player_format$video_pref $*"
+			printf "Opening Player: %s\n" "$video_player_format$video_pref \"$*\""
 			$video_player_format"$video_pref"  "$@"  $YTFZF_SUBT_NAME || [ $? -eq 4 ] || video_pref= open_player "$@"
 		fi
 	elif [ $is_download -eq 1 ]; then
 		if [ -z "$video_pref" ]; then
 			youtube-dl "$@"  "$YTFZF_SUBT_NAME"
+      dl_status=`[ $? -eq 0 ] && echo Successful || echo Failed`
 		else
 			youtube-dl -f "$video_pref"  "$@"  $YTFZF_SUBT_NAME || video_pref= open_player "$@"
+      dl_status=`[ $? -eq 0 ] && echo Successful || echo Failed`
 		fi
+
+    notify-send "[ytfzf] Download $dl_status!" "$*"
 	fi
 }
 
@@ -1263,21 +1264,28 @@ EOF
 
 update_ytfzf () {
 	branch="$1"
-	updatefile="/tmp/ytfzf-update"
+	updatefile="$(mktemp)"
 	curl -L "https://raw.githubusercontent.com/pystardust/ytfzf/$branch/ytfzf" -o "$updatefile"
 
 	if sed -n '1p' < "$updatefile" | grep -q '#!/bin/sh'; then
 		chmod 755 "$updatefile"
-		[ "$(uname)" = "Darwin" ] && prefix="/usr/local/bin" || prefix="/usr/bin"
 		function_exists "sudo" && doasroot="sudo" || doasroot="doas"
-		$doasroot cp "$updatefile" "$prefix/ytfzf"
-		unset prefix doasroot
+		mv -f "$updatefile" "$0" 2>/dev/null || $doasroot mv -f "$updatefile" "$0"
+		if [ $? -eq 0 ] ; then
+			unset doasroot
+			printf "%bytfzf successfully updated.%b\n" "$c_green" "$c_reset"
+			exit 0
+		else
+			unset doasroot
+			printf "%bFailed to update ytfzf.%b\n" "$c_red" "$c_reset"
+			rm "$updatefile"
+			exit 1
+		fi
 	else
-		printf "%bFailed to update ytfzf. Try again later.%b" "$c_red" "$c_reset"
+		printf "%bFailed to update ytfzf. Try again later.%b\n" "$c_red" "$c_reset"
+		rm "$updatefile"
+		exit 1
 	fi
-
-	rm "$updatefile"
-	exit 0
 }
 
 #gives a value to sort by (this will give the unix time the video was uploaded)
@@ -1323,8 +1331,6 @@ scrape_subscriptions () {
 	"$subscriptions_file")
 	EOF
 	wait
-	videos_json="$(cat "$tmp_video_json_file")"
-	export videos_json
 	if [ $sort_videos_data -eq 1 ]; then 
 		videos_data=$(sort_video_data_fn < "$tmp_video_data_file")
 	else
