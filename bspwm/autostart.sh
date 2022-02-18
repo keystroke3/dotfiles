@@ -10,6 +10,13 @@ declare -a programs=(
 declare -a lazy_load=(
 "thunderbird"
 exec /usr/lib/kdeconnectd
+LIBVA_DRIVER_NAME=i915 discord \
+    --ignore-gpu-blocklist \
+    --disable-features=UseOzonePlatform \
+    --enable-features=VaapiVideoDecoder \
+    --use-gl=desktop \
+    --enable-gpu-rasterization \ 
+    --enable-zero-copy
 
 #code
 )
@@ -34,7 +41,7 @@ else
     bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
 fi
 $HOME/.config/polybar/launch.sh &
-picom --daemon --config ~/.config/picom.conf
+picom --experimental-backends --daemon 
 ~/.cache/redpaper/wallpaper.sh &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 sleep 10

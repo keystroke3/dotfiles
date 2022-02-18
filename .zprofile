@@ -1,34 +1,35 @@
-# Add `~/bin` to the `$PATH`
 export PATH="$HOME/bin:$PATH";
-export PATH="$home/.config/composer/vendor/bin:$PATH"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
-[[ $- != *i* ]] && return
-export VISUAL="gvim"
-export PATH="/home/ted/.gem/ruby/2.7.0/bin:$PATH"
 export FZF_DEFAULT_COMMAND='fd --hidden --type f . $HOME'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-# export FZF_ALT_C_COMMAND='fd --hidden -type d'
+export TERMINAL=/usr/bin/alacritty
+export PATH=$HOME/.bin:/usr/local/bin:$PATH
+export PATH="$HOME/.local/bin:$PATH"
+export EDITOR="nvim"
+export VISUAL="nvim"
+#set history size
+export HISTSIZE=10000
+#save history after logout
+export SAVEHIST=10000
+#history file
+export HISTFILE=~/.zhistory
+#append into history file
+setopt INC_APPEND_HISTORY
+#save only one command if 2 common are same and consistent
+setopt HIST_IGNORE_DUPS
+# add timestamp for each entry
+setopt EXTENDED_HISTORY
 
-# Load the shell dotfiles, and then some:
-# * ~/.path can be used to extend `$PATH`.
-# * ~/.extra can be used for other settings you don’t want to commit.
-for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
-	[ -r "$file" ] && [ -f "$file" ] && source "$file";
-done;
-unset file;
+# export PYTHONPATH="${PYTHONPATH}:/home/ted/.local/bin"
 
+### "bat" as manpager
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
-if which brew &> /dev/null && [ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]; then
-	# Ensure existing Homebrew v1 completions continue to work
-	export BASH_COMPLETION_COMPAT_DIR="$(brew --prefix)/etc/bash_completion.d";
-	source "$(brew --prefix)/etc/profile.d/bash_completion.sh";
-elif [ -f /etc/bash_completion ]; then
-	source /etc/bash_completion;
-fi;
-
-source ~/.cache/wal/colors-tty.sh
-EDITOR=/usr/bin/vim
-TERMINAL=/usr/bin/kitty
-export NNN_BMS="d:~/Downloads;p:~/Pictures;m:~/Videos/Music Videos;v:~/Videos;s:~/Videos/Series"
-export NNN_PLUG='k:kdeconnect'
-export NNN_TRASH=1
+# if [[ "$(tty)" = "/dev/tty1" ]]; then
+#     pgrep bspwm || startx "$HOME/.xinitrc"
+# fi
+# [[ $- != *i* ]] && return
+# for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+# 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+# done;
+# unset file;

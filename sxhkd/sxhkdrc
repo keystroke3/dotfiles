@@ -8,7 +8,8 @@ super + semicolon
     dialect
 
 super + r
-    mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
+    notify-send "mpv" "Loading content" && mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
+
 super + g
     mpv --no-resume-playback --shuffle ~/Videos/Music\ Videos 
 
@@ -252,4 +253,5 @@ super + F9
     xrandr --output eDP1 --off
 super + {shift + } + F9
     xrandr --output eDP1 --right-of HDMI1 --rate 60 --mode 1920x1080 
-
+super + F4
+    clockify
