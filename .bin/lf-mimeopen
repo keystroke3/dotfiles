@@ -1,2 +1,0 @@
-#!/bin/zsh
-mimeopen $(IFS='\n';</tmp/fx-files)

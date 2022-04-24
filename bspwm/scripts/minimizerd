@@ -1,6 +1,0 @@
-#!/usr/bin/sh
-events=(node_add desktop_layout node_remove node_transfer desktop_focus)
-for event in ${events[@]};do
-  bspc subscribe $event | while read line;do minimizer >> /tmp/minimizerd.log; done &
-  echo "$event listener added"
-done

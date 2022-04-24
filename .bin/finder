@@ -1,6 +1,14 @@
-#!/bin/bash
-fuzz=$(rg -j 4 --files ~/ | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
-mimeo "$fuzz"
+#!/bin/zsh
+HIST_FILE=~/.cache/finders/dmenufinder
+RG="$(rg -j 4 --files ~/)"
+HIST="$(head -n9 $HIST_FILE)"
+FUZZ="$(echo $HIST $RG | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')"
+if [[ -f $FUZZ ]]
+then 
+  echo "$HIST" | grep -vF "$FUZZ" | sed "1i$FUZZ" > $HIST_FILE
+  mimeo "$FUZZ"
+fi
+
 # mime=$(xdg-mime query filetype "$fuzz")
 # fileclass=$(echo $mime | awk -F/ '{print $1}' | tr -d "\n")
 # filetype=$(echo $mime | awk -F/ '{print $2}' | tr -d "\n")

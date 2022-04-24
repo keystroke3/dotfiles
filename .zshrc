@@ -7,7 +7,7 @@ source ~/.config/zsh/zsh-autosuggestions.zsh
 source ~/.config/zsh/zsh-vim-mode.zsh
 source ~/.config/zsh/zsh-history-substring-search.zsh
 source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.config/zsh/autoswitch_virtualenv.plugin.zsh
+source ~/.config/zsh/autoswitch_virtualenv.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zprofile ] && source ~/.zprofile
 [ -f ~/.aliases ] && source ~/.aliases
@@ -15,6 +15,16 @@ source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 autoload -U +X compinit && compinit
 autoload -Uz url-quote-magic
 autoload -Uz bracketed-paste-magic
+
+open-file(){
+  fzfopen
+}
+jump(){
+  _dir="$(fzfjump)"
+  [ -n $_dir ] && cd "$_dir" && zle reset-prompt
+}
+zle -N jump{,}
+bindkey '^o' jump 
 
 
 # ++++ New history commands ++++
@@ -33,3 +43,7 @@ bindkey -M emacs '^N' history-substring-search-down
 
 eval "$(starship init zsh)"
 
+
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
