@@ -1,6 +1,7 @@
 #!/bin/bash
 # fuzz=$(fd . $HOME -H | rofi -dmenu -theme-str '#window { width: 70%; }' 20 -i -p 'Open Files: ')
-# fuzz=$(fd  . /home/ted/Videos/ -pt d | rofi -dmenu -m -1 -theme-str '#window { width: 70%; height: 50%; } #listview { columns: 1;}' 20 -i -p 'Folder Name:')
-fuzz=$(fd  . /home/ted/Videos/ -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
+# 
+[[ "$1" == "resume" ]] && color=#98c379 || color=#e06c75
+fuzz=$(fd  . /home/ted/Videos/ -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb $color -sf '#1E1C31')
 [[ "$1" == "resume" ]] &&  mpv "$fuzz" --resume-playback || mpv "$fuzz" --no-resume-playback
 
