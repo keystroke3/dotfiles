@@ -3,13 +3,14 @@
 *fzfjump
 *fzfopen
 *videofinder.log
-!.config/alacritty/
-!.config/paru/
+!.config/alacritty
+!.config/paru
 !.config/bspwm
-!.config/dunst/*
+!.config/dunst
 !.config/kitty
 !.config/lf
 !.config/mpv
+!.config/copyq
 .config/mpv/watch_later
 !.config/ranger
 !.config/rofi
