@@ -1,65 +1,67 @@
 #!/bin/sh
-
 #custom functions
 
 # Allows killing of processes using fzf
+# save path on cd
+fr(){
+    [[ -z $1 ]] && echo 'No find string provided' && exit 1
+    [[ -z $2 ]] && echo 'No replace string provided' && exit 1
+    if [[ -n $3 ]]; then
+        sed -i "s/$1/$2/g" $3
+    else
+        rg "$1" "$(pwd)" | xargs sed -i "s/$1/$2/g" 
+    fi
+}
+
+dbexport(){
+    for i in $apps; do py manage.py dumpdata "$i" > "$i.json" && echo "exported $i";done
+}
+
+dbimport(){
+    for i in $apps; do py manage.py loaddata "$i.json" && echo "imported $i";done
+}
+
+function cd {
+    builtin cd "$@"
+    pwd > ~/.config/zsh/lastdir
+}
+
+# restore last saved path
+if [ -f ~/.config/zsh/lastdir ]
+    then cd "$(cat ~/.config/zsh/lastdir)"
+fi
+
+swap(){
+    mv "$1" "/tmp/$1"
+    mv "$2" "$1"
+    mv "/tmp/$1" "$2"
+}
+
 o(){
-    fuzz=$(rg --files ~/ | fzf --reverse --height 40%)
-    if [ -z $fuzz ]
-    then 
-        return 0
-    elif [ -f $fuzz ]
-    then
-        filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
-        case $filetype in
-            text)
-                echo "$fuzz" | xargs -o vim && echo "done" ;;
-            audio)
-                mpv $fuzz & disown ;;
-            application )
-                echo "$fuzz" | xargs -o vim && echo "done";;
-            *)
-                xdg-open $fuzz & disown 
-        esac
-    fi
+    fuzz=$(rg -j 4 --no-ignore --files ~/ ~/.ssh/ ~/.config/ ~/.local/share/applications/ ~/.bin/ | fzf --reverse --height 40%)
+    [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || mimeo "$fuzz") || return 0
 }
 
-ol(){
-    fuzz=`rg --files | fzf --reverse --height 40%`
-    if [ -z $fuzz ]
-    then 
-        return 0
-    elif [ -f $fuzz ]
-    then
-        filetype=`xdg-mime query filetype $fuzz | awk -F/ '{print $1}'`
-        case $filetype in
-            text )
-                echo "$fuzz" | xargs -o vim ;;
-            audio )
-                mpv $fuzz & disown ;;
-            application )
-                echo "$fuzz" | xargs -o vim ;;
-            * )
-                xdg-open $fuzz & disown 
-        esac
-    fi
-}
-
-
-# Jump to directory. Much faster than regular cd
 j(){
-    fuzz=`fd -t d . $HOME | fzf --reverse --height 40%`
+    fuzz=$(fd -t d . $HOME $HOME/.config/ $HOME/.bin/ $HOME/.local/share/applications/ | fzf --reverse --height 40%)
     if [ -z $fuzz ]
     then 
         return 0
     elif [ -d $fuzz ]
     then
-        cd "$fuzz" && reset
+        cd "$fuzz" && reset 
     fi
 }
 
+ol(){
+    fuzz=$(rg --files | fzf --reverse --height 40%)
+    [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || mimeo "$fuzz") || return 0
+    #[ -f "$fuzz" ] && mimeo "$fuzz" || return 0
+}
+
+
 jl(){
-    fuzz=`fd -Ht d . $(pwd) | fzf --reverse --height 40%`
+    fuzz=`fd -Ht d . "$(pwd)" | fzf --reverse --height 40%`
     if [ -z $fuzz ]
     then 
         return 0
@@ -67,44 +69,154 @@ jl(){
     then
         if [ "$1" != "mpv" ]
         then
-            cd $fuzz
+            cd $fuzz && reset 
         else
             mpv $fuzz & disown
         fi
     fi
 }
 
-rfile(){
-    file=$@
-    cat $file /home/ted/Documents/teams/teamfiles | fzf
+gr(){
+    rundir=/run/media/$(whoami)
+    list=$(ls $rundir | wc -l)
+    if [ $list -eq 1 ];then
+        cd "$rundir/$(ls $rundir)"
+    elif [ $list -eq 0 ]; then
+        echo "no drives"
+    else
+        cd "$rundir/$(ls $rundir | fzf --reverse)"
+    fi
 }
 
-#custom commands
-alias kc="kdeconnect-cli -d 889bfa8ba2d67e9b "$1""
+
+
+
+py(){
+    $VIRTUAL_ENV/bin/python "$@"
+}
+
+remind(){
+    while getopts d:t:n: flag
+    do
+    case "${flag}" in
+        d) d=${OPTARG}
+            delay=$d;;
+        t) t=${OPTARG}
+            hour=$(date --date="$t" "+%H")
+            current_hour=$(date "+%H")
+            current_time=$(date "+%s")
+            ((hour < current_hour)) && 
+                delay=$(($(date --date="$t 1 day" "+%s") - $current_time)) ||
+                delay=$(($(date --date="$t" "+%s") - $current_time));;
+        n) note=${OPTARG};;
+        *) echo 'unknown flag' && return 1
+    esac 
+    done
+    (sleep $delay && notify-send "$note" &&
+        mpv /usr/share/sounds/freedesktop/stereo/service-login.oga) & disown
+}
+ytd(){
+    a=
+    r=
+    while getopts r:a flag
+    do
+    case "${flag}" in
+        r) r=${OPTARG}
+            [ "$r" -eq "$r" ] &> /dev/null && continue || echo 'Resolution not an integer' && return 1 ;;
+        a)
+        link="${@:${OPTIND}}"
+        [ $link = '-a' ] && echo 'no link provided' && return 1 
+        yt-dlp --audio-format mp3 -x ${@:(( OPTIND+1 ))} && return 0  ;;
+        ?) echo "unknown flag -${OPTARG}" && return 1
+    esac 
+    done
+    link="${@:${OPTIND}}"
+    [ -z $r ] && r=1080
+    [ -z $link ] && echo 'no link provided' && return 1
+    yt-dlp -f "bestvideo[height<="$r"]+bestaudio" $link
+}
+
+bt(){
+    remind -d $1 -n 'Water'
+}
+
+pid(){
+    ps ax | fzf | awk '{print $1}'
+}
+
+swapname(){
+    mv "$1" "$1.tmp" > /dev/null
+    mv "$2" "$1" > /dev/null
+    mv "$1.tmp" "$2" > /dev/null
+    echo "names swapped"
+}
+
+unepoch(){
+    date -d @$1 "+%F %H:%M:%S"
+}
+
+venv(){
+    source $VIRTUAL_ENV/bin/activate
+}
+pt(){
+    cd ~/Projects/Foto-Dino/backend-todo/
+    git add -A
+    git commit -m 'update todo'
+    git push
+    cd -
+}
+localip(){
+    ip a | grep 192.168 | cut -d ' ' -f6 | cut -d '/' -f1
+}
+ignore() {
+    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" ;
+}
+
+# end functions
+alias lp="l -p"
+alias cronhelp=" echo '
+# ┌───────────── minute (0 - 59)
+# │ ┌───────────── hour (0 - 23)
+# │ │ ┌───────────── day of the month (1 - 31)
+# │ │ │ ┌───────────── month (1 - 12)
+# │ │ │ │ ┌───────────── day of the week (0 - 6) (Sunday to Saturday;
+# │ │ │ │ │                                   7 is also Sunday on some systems)
+# │ │ │ │ │
+# │ │ │ │ │
+# * * * * * <command to execute>
+'"
+
+#alias exa="ls"
+alias ovim="/usr/bin/vim"
+alias vim="nvim"
+#alias ls="exa --color=always --group-directories-first"
+#alias ll="exa -l --color=always --group-directories-first"
+#alias lla="exa -al --color=always --group-directories-first"
+#alias la="exa -a --color=always --group-directories-first"
+alias kc="kdeconnect-cli -d edd439448e1817fa "$1""
 alias move="find . -mindepth 2 -type f -print -exec mv {} . \;"
 alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
 alias bp="bpython"
-alias pkg="yay -Q | fzf"
+alias pkg="paru -Q | fzf"
 alias gp="cd ~/Pictures"
 alias gv="cd ~/Videos"
 alias gd="cd ~/Downloads"
-alias gm="cd ~/Music"
 alias fzf="fzf --layout=reverse --height=40%"
 alias zz="vim ~/.zprofile"
-alias cp="cp -i"                          # confirm before overwriting something
+alias zh="bat ~/.zhistory"
 alias vi="vim"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias more=less
-alias update="yay -Syu"
-alias get="yay -S"
-alias search="yay -Fs"
+alias update="paru -Syu"
+alias get="paru -S"  
+alias search="paru -Fs"
 alias wr="wget -r -np -nH --cut-dirs=3 -p -e robots=off -U mozilla -c -R.html"
 alias yl="youtube-dl -f '[height<=480]'"
-alias kick="yay -Rns"
+alias kick="paru -Rns"
 alias profile="sudo vim ~/.bash_profile"
 alias wipe="wipe -rp3"
 alias mv="mv -v"
@@ -116,9 +228,7 @@ alias wget="wget -U Mozilla/5.0 -c"
 alias s="speedtest --no-up"
 alias wl="wget -U Mozilla/5.0 -c --limit-rate=300K"
 alias rm="rm -r"
-alias nc="ncmpcpp"
 alias clone="cd gitclones& git clone"
-alias py="python"
 alias y="youtube-dl -f '[height<=1080]'"
 alias ..="cd .."
 alias ...="cd ../.."
@@ -126,22 +236,24 @@ alias ....="cd ../../.."
 alias .....="cd ../../../.."
 alias ~="cd ~" # `cd` is probably faster to type though
 alias -- -="cd -"
-alias prompt="cd& code .bash_prompt"
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias sudo='sudo '
-alias reload="exec ${SHELL} -l && clear"
+alias reload="exec ${SHELL} -l; clear"
 alias sc="vim ~/.config/sxhkd/sxhkdrc"
 alias pb="bpython"
 alias sb="vim ~/.config/bspwm/bspwmrc"
 alias as="vim ~/.config/bspwm/autostart.sh"
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias al="vim ~/.aliases && clear && souce ~/.zshrc"
+alias tv="ping -c 1 -w 2 192.168.100.2 &>/dev/null && echo 'on' || echo 'off'"
+alias al="vim ~/.aliases && clear && source ~/.zshrc"
 alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
+alias tw1='mpv --ytdl-format="(best[height=480])"'
+alias tw2='mpv --ytdl-format="(best[height=360])"'
 alias xfluxx="xflux -l 1 -g 38 -k 4000"
 alias lampp="sudo /opt/lampp/lampp"
 alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
@@ -152,19 +264,70 @@ alias nano='nano -x'
 alias dd='dd status=progress'
 alias cm="find ~/Music -empty -type d -delete& echo music cleaned..."
 alias mh="find -type f -exec mv -v {} . \;"
-alias python="/usr/bin/python3"
+alias python="env python3"
 alias carousel="~/.config/polybar/scripts/theme-change-prompt.sh --show"
 alias ytv="cd ~/Videos/youtube"
 alias copy="xclip -sel c < $1"
 alias rp="cd ~/Pictures/Redpaper"
 alias v="vim ~/.vim/vimrc"
 alias z="vim ~/.zshrc"
-alias ytd="youtube-dl"
+#alias ytd="youtube-dl -f 'bestvideo[height<=1080]+bestaudio' "$@""
 alias rsync="rsync -ah --progress"
-# alias ytd="youtube-dl --no-playlist"
 alias halfdark="vim /home/ted/.config/wal/colorschemes/dark/one-half-dark.json"
-alias h="howdoi" 
 alias pq="pacman -Q | fzf"
 alias pr="sudo protonvpn r"
 alias pd="sudo protonvpn d"
 alias feh="feh -d --edit -. -B black ."
+alias gst="git status"
+alias ga="git add -A"
+alias gch="git checkout"
+alias gcm="git checkout main"
+alias gcd="git checkout dev"
+alias gcs="git checkout staging"
+alias gcg="git checkout graphql"
+alias gmg="git merge"
+alias start="sudo systemctl start"
+alias stop="sudo systemctl stop"
+alias restart="sudo systemctl restart"
+alias pipm="python3 -m pip"
+alias pyserv="python -m http.server"
+alias crontab="export VISUAL=nvim; crontab"
+alias myip="wget http://ipecho.net/plain -O - -q ; echo"
+alias lorem="lazylorem"
+alias batt="upower -i `upower -e | grep 'BAT'` | grep percentage | awk -F ' ' '{print $2}'"
+alias migrate="python manage.py migrate"
+alias mm="python manage.py makemigrations"
+alias runserver="export DEBUG=True;python manage.py runserver"
+alias xp="xprop | grep WM_CLASS"
+alias status="sudo systemctl status"
+alias enable="sudo systemctl enable"
+alias mlock="multilockscreen"
+alias ipy="ipython"
+alias lamp="sudo /opt/lampp/xampp"
+alias uc="ucollage"
+alias yay="paru"
+alias vs="nvim ~/.config/nvim/general/settings.vim"
+alias vn="nvim ~/.config/nvim/init.vim"
+alias kdif="kitty +kitten diff"
+alias ex="extract"
+alias less="bat"
+alias dupe="czkawka_cli"
+alias pc="sudo netstat -tulnp | grep "$1""
+alias sst="ssh linkastream.co"
+alias ddev="ssh ubuntu@photodino.de"
+alias dutils="ssh ubuntu@135.125.132.210"
+alias dstage="ssh foto-dino.com"
+alias dprod="ssh ubuntu@foto-dino.de"
+alias dprodf="ssh react@foto-dino.de"
+alias dprodb="ssh backend@foto-dino.de"
+alias cvr="coverage run --omit='*/.virtualenvs/*,*/tests_/*' manage.py test "$1""
+alias cvs="coverage html"
+alias ls="exa --color=always --group-directories-first"
+alias ll="exa -l --color=always --group-directories-first"
+alias lla="exa -al --color=always --group-directories-first"
+alias la="exa -a --color=always --group-directories-first"
+alias dshell="py manage.py shell"
+alias dbshell="py manage.py dbshell"
+alias mpn="mpv --no-resume-playback"
+alias cp="cp -r"
+alias rr="sed -i 's/==.*//g' requirements.txt"
