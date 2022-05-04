@@ -1,9 +1,11 @@
-*
-!.bin/
-!.git
-!.config/alacritty
-!.config/bspwm
-!.config/dunst
+.config/*
+!.bin/*
+*fzfjump
+*fzfopen
+*videofinder.log
+!.config/alacritty/
+!.config/bspwm/*
+!.config/dunst/*
 !.config/kitty
 !.config/lf
 !.config/mpv
@@ -12,6 +14,7 @@
 !.config/screenshots
 !.config/sxhkd
 !.config/vim
+.config/vim/plugged
 !.config/wallpapers
 !.config/yay
 !.config/zathura
@@ -28,3 +31,4 @@
 !.zshrc
 !picom.conf
 !README.md
+
