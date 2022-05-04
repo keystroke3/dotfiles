@@ -1,0 +1,4 @@
+#!/bin/sh
+link=$(xclip -o)
+if [[ $(youtube-dl -j "$link") ]]
+then 
