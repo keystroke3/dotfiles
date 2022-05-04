@@ -4,11 +4,13 @@
 *fzfopen
 *videofinder.log
 !.config/alacritty/
-!.config/bspwm/*
+!.config/paru/
+!.config/bspwm
 !.config/dunst/*
 !.config/kitty
 !.config/lf
 !.config/mpv
+.config/mpv/watch_later
 !.config/ranger
 !.config/rofi
 !.config/screenshots
