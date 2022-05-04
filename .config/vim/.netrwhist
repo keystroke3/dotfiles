@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/ted/.pyload'
+let g:netrw_dirhist_6='/home/ted/.icons'
+let g:netrw_dirhist_5='/home/ted/Pictures'
+let g:netrw_dirhist_4='/home/ted/Projects'
+let g:netrw_dirhist_3='/home/ted/playground/start'
+let g:netrw_dirhist_2='/home/ted/.redpaper'
+let g:netrw_dirhist_1='/home/ted/.config/ranger'

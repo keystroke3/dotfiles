@@ -1,0 +1,154 @@
+configuration {
+	display-drun: "";
+	display-run: "";
+	display-window: "";
+	display-ssh: "~#";
+	show-icons: true;
+	sidebar-mode: false;
+	font: "Source Code Pro 15";
+}
+
+* {
+     text-color: @foreground;
+     active-background: #DB5722;
+     active-foreground: @foreground;
+     normal-background: @background;
+     normal-foreground: @foreground;
+     urgent-background: #F46E19;
+     urgent-foreground: @foreground;
+    
+     alternate-active-background: @background;
+     alternate-active-foreground: @foreground;
+     alternate-normal-background: @background;
+     alternate-normal-foreground: @foreground;
+     alternate-urgent-background: @background;
+     alternate-urgent-foreground: @foreground;
+    
+     selected-active-background: #F46E19;
+     selected-active-foreground: @foreground;
+     selected-normal-background: #DB5750;
+     selected-normal-foreground: @foreground;
+     selected-urgent-background: #F35031;
+     selected-urgent-foreground: @foreground;
+    
+     background-color: @background;
+     background: #0c0410;
+     foreground: #ef999a;
+     border-color: @background;
+     spacing: 2;
+    
+}
+
+window {
+	location: west;
+	anchor: west;
+	height: 70%;
+	width: 25%;
+	orientation: vertical;
+	children: [mainbox];
+	border: 2px 2px 2px 0px;
+	border-color: @foreground;
+	hide-scrollbar: true;
+	padding: 0 20px 0 15px;
+}
+
+mainbox {
+	spacing: 0.2em;
+	children: [inputbar, listview];
+	padding: 20px 0 0 0;
+}
+
+/* button {
+	padding: 2px 2px;
+
+} */
+/* 
+button selected {
+	background-color: @active-background;
+	text-color: @background;
+} */
+
+
+listview {
+	spacing: 0.6em;
+	dynamic: false;
+	cycle: true;
+	padding: 0px 5px 0px 5px;
+}
+
+inputbar {
+	border-radius: 50%;
+	padding: 5px;
+	border-spacing: 5px 0 0 0;
+	border: 1px;
+	spacing: 10px;
+	margin: 5px 0 10px;
+	border-color: @foreground;
+
+}
+
+entry{
+	padding: 2px;
+}
+
+
+prompt{
+	padding: 5px;
+	background-color: @foreground;
+	text-color: @background-color;
+	border: 1px;
+	border-radius: 50%;
+
+}
+
+
+element {
+	padding: 10px;
+	border-radius: 50%;
+}
+
+element normal.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element normal.urgent {
+	background-color: @urgent-background;
+	text-color: @urgent-foreground;
+}
+
+element normal.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}
+
+element selected.normal {
+	background-color: @selected-normal-background;
+	text-color: @background;
+	border-color: @active-background;
+}
+
+element selected.urgent {
+	background-color: @selected-urgent-background;
+	text-color: @selected-urgent-foreground;
+}
+
+element selected.active {
+	background-color: @selected-active-background;
+	text-color: @selected-active-foreground;
+}
+
+element alternate.normal {
+	background-color: @normal-background;
+	text-color: @normal-foreground;
+}
+
+element alternate.urgent {
+	background-color: @urgent-background;
+	text-color: @urgent-foreground;
+}
+
+element alternate.active {
+	background-color: @active-background;
+	text-color: @active-foreground;
+}

@@ -1,0 +1,106 @@
+env:
+    TERM: xterm-256color
+window:
+    opacity:
+        0.90
+
+    startup_mode: Windowed
+
+    padding:
+        x: 10
+        y: 5
+# tabspaces: 4
+
+draw_bold_text_with_bright_colors: false
+
+font:
+    normal:
+        # family: Source Code Pro
+        # family: 'SF Mono Powerline'
+        # family: 'Ubuntu Mono derivative Powerline'
+        family: 'Fira Code'
+        # family: "Iosevka Term"
+        # family: 'Iosevka Nerd Font Mono'
+        style: Regular
+
+    bold:
+        # family: Source Code Pro
+        # family: 'SF Mono Powerline'
+        # family: 'Ubuntu Mono derivative Powerline'
+        family: 'Fira Code'
+        # family: "Iosevka Term"
+        # family: 'Iosevka Nerd Font Mono'
+        style: Bold
+
+    italic:
+        family: "Iosevka Term"
+        # family: 'Iosevka Nerd Font Mono'
+        style: Italic
+
+    size: 10.0
+
+    # Thin strokes = true on retina displays, Non-retina disp = false
+    use_thin_strokes: false
+
+cursor:
+    # - ▇ Block
+    # - _ Underline
+    # - | Beam
+    style: Block
+    thickness: 0.15
+    unfocused_hollow: true
+
+mouse:
+    double_click: { threshold: 300 }
+    triple_click: { threshold: 300 }
+    hide_when_typing: false
+
+selection:
+    save_to_clipboard: false
+
+window.dynamic_title: true
+
+live_config_reload: true
+
+debug:
+    render_timer: false
+    persistent_logging: false
+    log_level: Warn
+    print_events: false
+    ref_test: false
+
+alt_send_esc: false
+
+# Colors (Argonaut)
+colors:
+    # Default colors
+    primary:
+        background: "#292C3E"
+        foreground: "#EBEBEB"
+
+    # Normal colors
+    normal:
+        black: "#0d0d0d"
+        red: "#FF301B"
+        green: "#A0E521"
+        yellow: "#FFC620"
+        blue: "#1BA6FA"
+        magenta: "#8763B8"
+        cyan: "#21DEEF"
+        white: "#EBEBEB"
+
+    # Bright colors
+    bright:
+        black: "#6D7070"
+        red: "#FF4352"
+        green: "#B8E466"
+        yellow: "#FFD750"
+        blue: "#1BA6FA"
+        magenta: "#A578EA"
+        cyan: "#73FBF1"
+        white: "#FEFEF8"
+
+    # Cursor colors
+    cursor:
+        text: "#e6e1e0"
+        cursor: "#b0db64"
