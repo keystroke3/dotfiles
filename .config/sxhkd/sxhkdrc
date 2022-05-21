@@ -101,7 +101,7 @@ super + shift + d
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
 super + F5
-    bspc wm --restart
+    	~/.config/bspwm/scripts/switch-displays
 
 super + shift + s
 	pkill -x sxhkd && sxhkd
@@ -149,15 +149,16 @@ shift + Print
 
 #Raises volume
 XF86AudioRaiseVolume
-    amixer set Master 5%+
+    pamixer -i 5
 
 #Lowers volume
 XF86AudioLowerVolume
-    amixer set Master 5%-
+    pamixer -d 5
 
 #Mute
 XF86AudioMute
-    amixer -D pulse set Master 1+ toggle
+	[ $(pamixer --get-mute) = "true" ] && pamixer -u || pamixer -m
+
 
 XF86AudioPlay
     playerctl play-pause
@@ -252,6 +253,6 @@ super + u
 super + F9
     xrandr --output eDP1 --off
 super + {shift + } + F9
-    xrandr --output eDP1 --right-of HDMI1 --rate 60 --mode 1920x1080 
+    xrandr --output eDP1 --rate 144.00 --right-of HDMI1 --rate 144.00
 super + F4
     clockify

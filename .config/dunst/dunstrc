@@ -29,7 +29,7 @@
     show_indicators = yes
     icon_position = left
     max_icon_size = 90
-    icon_path = /home/ted/.icons/Tela-circle-blue/16/apps:/home/ted/.icons/Tela-circle-blue/16/devices:/home/ted/.icons/Tela-circle-blue/16/mimetypes:/home/ted/.icons/Tela-circle-blue/16/status: 
+    icon_path = /home/salvaje/.icons/Tela-circle-blue/16/apps:/home/salvaje/.icons/Tela-circle-blue/16/devices:/home/salvaje/.icons/Tela-circle-blue/16/mimetypes:/home/salvaje/.icons/Tela-circle-blue/16/status: 
     sticky_history = yes
     history_length = 20
     always_run_script = true
