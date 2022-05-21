@@ -3,10 +3,10 @@ TERM=xterm-256color
 zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/zsh-autosuggestions.zsh
 source ~/.config/zsh/zsh-vim-mode.zsh
 source ~/.config/zsh/zsh-history-substring-search.zsh
-source ~/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.config/zsh/autoswitch_virtualenv.plugin.zsh
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zprofile ] && source ~/.zprofile

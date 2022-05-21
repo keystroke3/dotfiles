@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 import sys
-teamdir = "/home/ted/Documents/teams/"
+teamdir = "$HOME/Documents/teams/"
 files = ["team1.tree", "team2.tree", "team3.tree", "team4.tree", "team5.tree"]
 
 

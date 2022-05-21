@@ -75,7 +75,8 @@ alt_send_esc: false
 colors:
     # Default colors
     primary:
-        background: "#292C3E"
+        background: "#1e1c31"
+        # background: "#292C3E"
         foreground: "#EBEBEB"
 
     # Normal colors

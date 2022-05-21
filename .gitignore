@@ -18,6 +18,7 @@
 !.config/sxhkd
 !.config/vim
 .config/vim/plugged
+*.tmp
 !.config/wallpapers
 !.config/yay
 !.config/zathura

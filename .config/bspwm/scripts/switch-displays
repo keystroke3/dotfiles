@@ -1,0 +1,11 @@
+#!/bin/bash
+mons_num=$(xrandr --query | grep " connected" | cut -d" " -f1 | wc -w)
+xrandr --output HDMI1 --rate 144.00 --mode 1920x1080 --left-of eDP1 --output eDP1 --rate 144.00 --mode 1920x1080
+if [ $mons_num -eq 2 ]; then
+    bspc monitor eDP1 -d  6 7 8 9 0
+    bspc monitor HDMI1 -d 1 2 3 4 5
+else
+    bspc monitor eDP1 -d 1 2 3 4 5 6 7 8 9 0
+fi
+$HOME/.config/polybar/launch.sh &
+~/.cache/redpaper/wallpaper.sh &
