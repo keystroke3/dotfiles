@@ -19,7 +19,7 @@ configuration {
 	sidebar-mode: 					false;
 }
 
-@import "/home/ted/.config/rofi/launchers/colorful/colors.rasi"
+@import "/home/salvaje/.config/rofi/launchers/colorful/colors.rasi"
 
 window {
     transparency:                   "real";

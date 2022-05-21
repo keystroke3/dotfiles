@@ -23,7 +23,6 @@ configuration {
 window {
     transparency:                   "real";
     background-color:               @background;
-    text-color:                     @foreground;
     border-radius:                  15px;
     border-color:                   @border;
     height:                         30%;
@@ -56,7 +55,7 @@ inputbar {
     border:                  		0% 0% 0.2% 0.2%;
     border-radius:                  1%;
     border-color:                  	@border;
-    margin:                         0% 0% 0% 0%;
+    margin:                         0% 0% 3% 0%;
     padding:                        0.5%;
     position:                       center;
 }
@@ -88,10 +87,12 @@ element {
 
 element-text {
 	font:							"feather 32";
+    text-color:                     @border;
     expand:                         true;
+    background-color:               #303261;
     horizontal-align:               0.5;
     vertical-align:                 0.5;
-    margin:                         2.7% 2.7% 6.8% 2.7%;
+    margin:                         4.7% 2.7% 4.7% 2.7%;
 }
 
 element normal.urgent,
@@ -105,14 +106,18 @@ element normal.active,
 element alternate.active {
     background-color:               @background-alt;
     text-color:                     @foreground;
+    text-background:                @selected;
 }
 
 element selected {
     background-color:               @selected;
-    text-color:                     @foreground;
     border:                  		0% 0% 0.2% 0.2%;
     border-radius:                  4%;
     border-color:                  	@border;
+}
+element-text selected{
+    text-color:                     @background;
+    background-color:               @selected;
 }
 
 element selected.urgent {

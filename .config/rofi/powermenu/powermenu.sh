@@ -34,13 +34,13 @@ uptime=$(uptime -p | sed -e 's/up //g')
 rofi_command="rofi -theme $dir/$theme"
 
 # Options
-shutdown=""
-reboot=""
-suspend=""
-lock=""
-logout=""
-yes=""
-no=""
+shutdown="⏻"
+reboot=""
+suspend=""
+lock=""
+logout=""
+yes=""
+no=""
 # Confirmation
 confirm_exit() {
     echo -e "$yes\n$no" | $rofi_command -dmenu \
@@ -71,7 +71,7 @@ case $chosen in
         fi
         ;;
     $lock)
-        /home/ted/.bin/lock -i ~/.config/i3lock/blue-wolf.jpg && systemctl suspend
+        /home/salvaje/.bin/lock -i ~/.config/i3lock/blue-wolf.jpg && systemctl suspend
         ;;
     $suspend)
         systemctl suspend
