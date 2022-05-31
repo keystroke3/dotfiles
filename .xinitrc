@@ -1,5 +1,5 @@
 #/usr/bin/prime-offload
-sxhkd &
+sxhkdd &
 lxsession &
 eval $(gnome-keyring-daemon --start)
 export SSH_AUTH_SOCK

@@ -1,0 +1,16 @@
+#!/bin/bash
+# Load History or set to empty string
+HIST_FILE=~/.cache/spellqhist
+[ -f $HIST_FILE ] && HIST="$(cat $HIST_FILE)" || touch $HIST_FILE
+
+# Get query from user. If already in history add to clipboard else check spelling
+QUERY=$(echo "$HIST" | dmenu  -i -p Word: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+[ -z $QUERY ] && exit 0
+if (echo "$HIST" | fgrep -q "$QUERY"); then
+	CHOICE="$QUERY"
+else
+	CHOICE=$(dym -c -n 10 "$QUERY" | dmenu -i -p Options: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+[ -z $CHOICE ] && exit 0 || echo $CHOICE | tr -d "\n" | xclip -sel c
+
+# Add to history or move to top
+echo "$HIST" | grep -vF "$CHOICE" | sed "1i$CHOICE" > $HIST_FILE
