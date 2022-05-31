@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 #power
 #    echo 'power'
 super + colon
@@ -254,5 +254,10 @@ super + F9
     xrandr --output eDP1 --off
 super + {shift + } + F9
     xrandr --output eDP1 --rate 144.00 --right-of HDMI1 --rate 144.00
+
 super + F4
     clockify
+
+super + question
+    ~/.bin/spellq
+

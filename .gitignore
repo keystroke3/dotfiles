@@ -35,4 +35,6 @@
 !.zshrc
 !picom.conf
 !README.md
-
+*.lock
+*.dat
+*bck*
