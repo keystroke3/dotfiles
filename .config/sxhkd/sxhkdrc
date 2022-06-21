@@ -101,7 +101,7 @@ super + shift + d
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
 super + F5
-    	~/.config/bspwm/scripts/switch-displays
+    	~/.config/bspwm/scripts/switch-displays 'restart'
 
 super + shift + s
 	pkill -x sxhkd && sxhkd

@@ -1,9 +1,6 @@
-#/usr/bin/prime-offload
-sxhkdd &
-lxsession &
-eval $(gnome-keyring-daemon --start)
+sxhkdd &> ~/logs/sxhkd &
+lxsession &> ~/logs/lxsession &
+eval $(gnome-keyring-daemon --start) 
 export SSH_AUTH_SOCK
-xrdb -load ~/.Xresources &
-# exec tdm --xstart
-exec bspwm
-#sudo /usr/bin/prime-switch
+xrdb -load ~/.Xresources &> ~/logs/xrdb &
+exec bspwm &> ~/logs/bspwm
