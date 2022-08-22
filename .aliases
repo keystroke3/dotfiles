@@ -169,7 +169,10 @@ localip(){
     ip a | grep 192.168 | cut -d ' ' -f6 | cut -d '/' -f1
 }
 ignore() {
-    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" ;
+    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" |
+	    sed 's/^#.*$//g' |
+	    sed '/^$/d' > .gitignore &&
+	    echo ".gitignore" >> .gitignore;
 }
 
 # end functions
@@ -295,9 +298,9 @@ alias crontab="export VISUAL=nvim; crontab"
 alias myip="wget http://ipecho.net/plain -O - -q ; echo"
 alias lorem="lazylorem"
 alias batt="upower -i `upower -e | grep 'BAT'` | grep percentage | awk -F ' ' '{print $2}'"
-alias migrate="python manage.py migrate"
-alias mm="python manage.py makemigrations"
-alias runserver="export DEBUG=True;python manage.py runserver"
+alias migrate="/usr/bin/env python manage.py migrate"
+alias mm="/usr/bin/env python manage.py makemigrations"
+alias rs="export DEBUG=True;/usr/bin/env python manage.py runserver"
 alias xp="xprop | grep WM_CLASS"
 alias status="sudo systemctl status"
 alias enable="sudo systemctl enable"
