@@ -1,17 +1,17 @@
 #!/bin/bash
 edp=$(xrandr | grep connected | awk '{print $1}' | grep eDP | tr -d '\n')
 hdmi=$(xrandr | grep connected | awk '{print $1}' | grep HDMI | tr -d '\n')
-if [ ! -z $hdmi ];then
-	xrandr --output $hdmi --rate 144.00 --mode 1920x1080 --left-of $edp --output $edp --rate 144.00 --mode 1920x1080
+if [ ! -z "$hdmi" ];then
+	xrandr --output "$hdmi" --rate 144.00 --mode 1920x1080 --left-of "$edp" --output "$edp" --rate 144.00 --mode 1920x1080
 else
-	xrandr --output $edp --rate 144.00 --mode 1920x1080
+	xrandr --output "$edp" --rate 144.00 --mode 1920x1080
 fi
 
-if [ ! -z $hdmi ]; then
-    bspc monitor $edp -d  6 7 8 9 0
-    bspc monitor $hdmi-1 -d 1 2 3 4 5
+if [ ! -z "$hdmi" ]; then
+    bspc monitor "$edp" -d  6 7 8 9 0
+    bspc monitor "$hdmi" -d 1 2 3 4 5
 else
-    bspc monitor $edp -d 1 2 3 4 5 6 7 8 9 0
+    bspc monitor "$edp" -d 1 2 3 4 5 6 7 8 9 0
 fi
 
 [$1 == "restart"] && bspc wm --restart

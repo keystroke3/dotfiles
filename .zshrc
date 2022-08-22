@@ -1,5 +1,6 @@
 [[ $(tty) == '/dev/tty1' ]] && startx
 TERM=xterm-256color
+setopt autocd
 zle -N self-insert url-quote-magic
 zle -N bracketed-paste bracketed-paste-magic
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
