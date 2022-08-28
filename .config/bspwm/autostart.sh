@@ -1,5 +1,6 @@
 #!/bin/bash
-
+echo 'bspwm' > /tmp/wm &
+sxhkdd &> ~/logs/sxhkd &
 LOG_DIR=~/logs/autostart
 declare -a programs=(
 nm-applet

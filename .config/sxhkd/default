@@ -1,10 +1,12 @@
 #!/bin/bash
-[[ $(cat /tmp/wm) == "bspwm" ]] && source bspwm
 super + colon
     $HOME/.virtualenvs/yat/bin/python $HOME/Projects/yat/src/gui.py
 
 super + semicolon
     dialect
+
+super + r
+    notify-send "MPV" "Loading content" && mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
 
 super + g
     mpv --no-resume-playback --shuffle ~/Videos/Music\ Videos 
@@ -27,6 +29,18 @@ super + shift + space
 super + q 
     $HOME/.config/rofi/powermenu/powermenu.sh 
 
+super + Tab
+    bspc node -f next.local.\!hidden.window
+
+super + shift + Tab
+    bspc node -f prev.local.\!hidden.window
+
+super + shift + y
+    polybar-msg cmd toggle
+
+super + y
+    $HOME/.config/polybar/launch.sh
+
 super + space
     $HOME/.config/rofi/launchers/colorful/launcher.sh
 
@@ -39,6 +53,18 @@ super + c
 super + shift + c
 	redpaper -b
 
+super + shift + x
+	bspc node -k
+
+super + b
+	WINIT_X11_SCALE_FACTOR=1.12 alacritty  -e nvim $HOME/.config/bspwm/bspwmrc
+
+super + shift + b
+	WINIT_X11_SCALE_FACTOR=1.12 alacritty  -e nvim $HOME/.config/sxhkd/sxhkdrc && pkill -USR1 -x sxhkd && sxhkd
+
+super + w
+	bspc node -g {sticky=on, sticky=off}
+
 super + p
     ~/.bin/cpicker hex
 
@@ -50,6 +76,10 @@ super + alt + p
 
 super + e
     caja
+
+super + f
+	bspc node --state \~fullscreen
+
 
 super + shift + Escape
     xkill
@@ -68,20 +98,42 @@ super + shift + d
 	dmenu_run -i -nb '#191919' -nf '#fea63c' -sb '#fea63c' -sf '#191919' -fn 'NotoMonoRegular:bold:pixelsize=14'
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
+super + F5
+    	~/.config/bspwm/scripts/switch-displays 'restart'
+
 super + shift + s
 	pkill -x sxhkd && sxhkd
 
+super + shift + q
+	bspc node -c
+
+super + shift + x
+    bspc quit
+
+
+#########################
+# CONTROL + ALT KEYS    #
+#########################
+
+
+#firefox
 ctrl + alt + f
     firefox
 
 ctrl + shift + alt + p
     firefox --private-window
 
+#Compton Toggle
 ctrl + alt + o
      ~/.config/bspwm/scripts/compton-toggle.sh
 
 ctrl + alt + Delete
     kill -9 -1
+
+
+#########################
+#     SCREENSHOTS       #
+#########################
 
 ctrl+Print
 	flameshot screen -r -c -p $HOME/Pictures/screenshots
@@ -123,6 +175,44 @@ XF86MonBrightnessUp
 XF86MonBrightnessDown
     xbacklight -dec 5
 
+
+super + {1-9,0}
+	bspc desktop -f '^{1-9,10}'
+
+super + shift + {1-9,0}
+    id=$(bspc query -N -n); bspc node -d ^{1-9,10}; bspc node -f ${id}
+
+super + v
+    ~/.config/bspwm/scripts/minimizer layout
+
+super + {h,j,k,l}
+    bspc node --focus {west,south,north,east}
+    
+super + shift + {h,j,k,l} 
+    { dir=west \
+    , dir=south \
+    , dir=north \
+    , dir=east  \
+    }; \
+    if bspc query -n $dir.window -N; then \
+        bspc node --swap $dir --focus;\
+    else \
+        bspc node -m $dir --focus;\
+    fi
+
+super + {_,shift + }a
+	bspc node @/ --flip {vertical,horizontal}
+
+super + {Left,Down,Up,Right}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+super + shift + {Left,Down,Up,Right}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+
+super + {_,shift} + o
+    bspc node @/ --rotate {90, 270}
+
 super + r
     ~/.bin/open_in_mpv
 
@@ -131,15 +221,22 @@ super + {_,shift} + bracket{left}
 	
 super + bracket{right}
     ~/.bin/vsc-open
+    
 
 super + s
 	bspc node -t {floating,tiled}
-
 super + m
     ~/.config/bspwm/scripts/toggle-audio-profile
-
 super + shift + m
     pavucontrol &
+super + shift + i
+    ~/.config/bspwm/scripts/minimizer unhide
+
+super + i
+    ~/.config/bspwm/scripts/minimizer hide
+
+super + {_,shift + }{Left,Down,Up,Right}
+	~/.config/bspwm/scripts/move-window {_,edge-}{west,south,north,east}
 
 super + grave
     dunstctl history-pop
@@ -152,9 +249,11 @@ super + u
 
 super + F9
     xrandr --output eDP1 --off
-
 super + {shift + } + F9
     xrandr --output eDP1 --rate 144.00 --right-of HDMI1 --rate 144.00
+
+super + F4
+    clockify
 
 super + question
     ~/.bin/spellq

@@ -1,6 +1,9 @@
 #!/bin/sh
-[[ $(pgrep -x sxhkd) ]] || sxhkd & 
-while inotifywait -qe modify ~/dotfiles/.config/sxhkd/sxhkdrc > /dev/null;do
+CONF="$HOME/.config/sxhkd/$(cat /tmp/wm)"
+[[ $(pgrep -x sxhkd) ]] || sxhkd -c "$CONF" & 
+
+
+while inotifywait -qe modify "$CONF" > /dev/null;do
 	pkill -x sxhkd && sxhkd &
 done
 

@@ -22,6 +22,7 @@ zsh/
 *.tmp
 !.config/wallpapers
 !.config/yay
+!.config/qtile
 !.config/zathura
 !.aliases
 !.bash_profile

@@ -1,0 +1,4 @@
+#!/bin/bash
+notify-send "MPV" "Loading content" && mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
+
+
