@@ -1,0 +1,8 @@
+nm-applet &
+/usr/bin/emacs --daemon &
+dunst &
+./.fehbg & 
+picom --experimental-backends -b &
+xfce-polkit &
+xss-lock --transfer-sleep-lock -- i3lock -c 00000000 --nofork &
+# play-with-mpv &

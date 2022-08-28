@@ -1,0 +1,79 @@
+#+TITLE: My config for Qtile
+
+** Requirements:
+***** * Nerd fonts
+***** * Qtile 21+
+***** * Qtile-extras
+***** * Picom ( I use jonaburg-fix )
+***** * Xbacklight ( This is default but you can change in keys.py )
+***** * Playerctl
+***** * i3lock-color
+***** * Betterlockscreen
+***** * Maim + Xclip
+
+** Defaults:
+
+*** Reload Config
+***** * Mod + C
+*** Restart Qtile
+***** * Mod + Control + R
+
+*** Launchers:
+**** Rofi:
+******      Mod + D -> drun
+******      Mod + R -> run
+******      Mod + Z -> window
+******      Mod + g -> filebrowser
+**** Dmenu:
+****** Mod + Shift + Return -> dmenu_run -i -h 28 -p 'RUN:'
+
+**** Terminal Emulators:
+***** Mod + Return
+****** Kitty
+
+**** Editors:
+****** Mod + E
+*******  E     -> emacs
+*******  V     -> vscodium
+*******  N     -> neovide
+
+**** Scratchpads:
+***** Terminal ( Kitty )
+****** Mod + P
+***** Editor ( Emacs )
+****** Mod + O
+***** Editor ( Kitty -e nvim )
+****** Mod + Space
+***** File Manager
+****** Mod + Shift + Space ( Nautilus )
+****** Ctrl + Space ( Ranger -> Kitty )
+***** System Monitor
+****** Alt + Space ( Btop )
+****** Alt + Shift + Space ( Htop )
+***** Chat
+****** Mod + Shift + V ( Signal )
+****** Mod + Shift + D ( Gord -> Kitty )
+
+**** Other Apps:
+***** Pavucontrol
+****** Mod + V
+***** Browsers
+****** Mod + I
+******* b -> Brave ( bin )
+******* l -> Librewolf ( bin )
+******* f -> Firefox
+******* v -> Vivaldi
+******* q -> QuteBrowser
+***** Screenshots ( You do need to place all the scripts in the scripts folder to path )
+****** Print -> Full screen ( Saved )
+****** Shift + Print -> Rectangular selection ( Clipboard )
+****** Ctrl + Print -> Rectangular selection ( Saved )
+***** Redshift
+****** Mod + Shift + R
+******* x -> kills redshift
+******* 1
+******* 2
+******* 3
+******* 4
+******* 5
+******* 6
