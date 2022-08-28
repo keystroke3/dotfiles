@@ -12,6 +12,7 @@ zsh/
 !.config/lf
 !.config/mpv
 !.config/copyq
+.config/copyq/copyq_tabs.ini
 .config/mpv/watch_later
 !.config/ranger
 !.config/rofi
@@ -23,6 +24,10 @@ zsh/
 !.config/wallpapers
 !.config/yay
 !.config/qtile
+.config/qtile/groups.py
+.config/qtile/keys.py
+.config/qtile/.xprofile
+.config/qtile/__pycache__/
 !.config/zathura
 !.aliases
 !.bash_profile
