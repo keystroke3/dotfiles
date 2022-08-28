@@ -5,7 +5,7 @@ from qtile_extras.widget.decorations import RectDecoration
 from qtile_extras.bar import Bar
 from qtile_extras import widget
 
-theme = "frappe"
+theme = "purple"
 
 colours = {
     "purple": [
@@ -320,54 +320,6 @@ default = [
         padding=4,
     ),
 ]
-if len(os.listdir("/sys/class/power_supply")) == 0:
-    default.extend(
-        [
-            widget.CapsNumLockIndicator(
-                fontsize=xx,
-                font=xf,
-                foreground=colours[theme][1],
-                background=colours[theme][7],
-                **decor,
-            ),
-            widget.TextBox(
-                foreground=colours[theme][7],
-                text="|",
-                font=xf,
-            ),
-        ]
-    )
-else:
-    default.extend(
-        [
-            # widget.UPowerWidget(
-            #     font=xf,
-            #     battery_width=27,
-            #     battery_height=14,
-            #     fontsize=xx,
-            #     percentage_low=0.5,
-            #     percentage_critical=0.3,
-            #     fill_critical="#ff0000",
-            #     fill_charge=colours[theme][3],
-            #     fill_low=colours[theme][4],
-            #     fill_normal=colours[theme][1],
-            #     background=colours[theme][7],
-            #     border_colour=colours[theme][1],
-            #     border_critical_colour=colours[theme][1],
-            #     border_charge_colour=colours[theme][1],
-            #     text_charging="",
-            #     text_discharging="",
-            #     text_displaytime="",
-            #     margin=10,
-            #     **decor1,
-            # ),
-            # widget.TextBox(
-            #     foreground=colours[theme][7],
-            #     text="|",
-            #     font=xf,
-            # ),
-        ]
-    )
 
 screens = [
     Screen(

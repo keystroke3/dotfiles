@@ -16,24 +16,24 @@ home = os.path.expanduser("~")
 
 
 groups = [
-    Group("1", label="1"),
-    Group("2", label="2"),
-    Group("3", label="3"),
-    Group("4", label="4"),
-    Group("5", label="5"),
-    Group("6", label="6"),
-    Group("7", label="7"),
-    Group("8", label="8"),
+    Group("1", label="Group 1"),
+    Group("2", label="Group 2"),
+    Group("3", label="Group 3"),
+    Group("4", label="Group 4"),
+    Group("5", label="Group 5"),
+    Group("6", label="Group 6"),
+    Group("7", label="Group 7"),
+    Group("8", label="Group 8"),
     Group(
         "9",
-        label="9",
+        label="Group 9",
         matches=[
             Match(wm_class=["discord"]),
         ],
     ),
     Group(
         "0",
-        label="0",
+        label="Group 10",
         matches=[
             Match(wm_class=["Thunderbird"]),
         ],
@@ -63,9 +63,7 @@ keys = [
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "x", lazy.shutdown()),
     Key([mod, "shift"], "r", lazy.restart()),
-    # QTILE LAYOUT KEYS
     Key([mod], "n", lazy.layout.normalize()),
-    # Key([mod], "v", lazy.next_layout()),
     Key([mod], "v", lazy.next_layout()),
     # CHANGE FOCUS
     Key([mod], "Up", lazy.layout.up()),
@@ -199,10 +197,10 @@ def go_to_group(name: str):
             return
 
         if name in "12345":
-            qtile.focus_screen(0)
+            qtile.focus_screen(1)  # this was 0 set to zero which corresponded to eDP2
             qtile.groups_map[name].cmd_toscreen()
         else:
-            qtile.focus_screen(1)
+            qtile.focus_screen(0)
             qtile.groups_map[name].cmd_toscreen()
 
     return _inner
@@ -211,21 +209,16 @@ def go_to_group(name: str):
 for i in groups:
     keys.extend(
         [
-            # CHANGE WORKSPACES
-            # Key([mod], i.name, lazy.group[i.name].toscreen()),
             Key([mod], i.name, lazy.function(go_to_group(i.name))),
             Key([mod], "Tab", lazy.group.next_window()),
             Key([mod, "shift"], "Tab", lazy.group.prev_window()),
             Key(["mod1"], "Tab", lazy.group.next_window()),
             Key(["mod1", "shift"], "Tab", lazy.group.prev_window()),
-            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND STAY ON CURRENT WORKSPACE
-            # Key([mod, "shift"], i.name, lazy.window.togroup(i.name)),
-            # MOVE WINDOW TO SELECTED WORKSPACE 1-10 AND FOLLOW MOVED WINDOW TO WORKSPACE
             Key(
                 [mod, "shift"],
                 i.name,
                 lazy.window.togroup(i.name),
-                lazy.group[i.name].toscreen(),
+                lazy.function(go_to_group(i.name)),
             ),
         ]
     )
@@ -270,7 +263,7 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = False
+cursor_warp = True
 reconfigure_screens = True
 wmname = "LG3D"
 
@@ -284,4 +277,3 @@ def autostart():
 @hook.subscribe.startup
 def start_always():
     subprocess.Popen(["xsetroot", "-curser_name", "left_ptr"])
-    # subprocess.Popen(['xsetroot', '-curser_name', 'left_ptr'])

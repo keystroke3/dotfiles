@@ -1,7 +1,7 @@
 #!/bin/bash
 echo 'qtile' > /tmp/wm &
-~/.cache/redpaper/wallpaper.sh &
-sxhkd -c ~/
+~/.config/sxhkd/sxhkdd &
+~/.config/qtile/scripts/xrandr-manager &
 LOG_DIR=/home/salvaje/logs
 nm-applet & disown
 flameshot & disown
@@ -24,3 +24,4 @@ LIBVA_DRIVER_NAME=i914 discord \
       --use-gl=desktop \
       --enable-gpu-rasterization \ 
       --enable-zero-copy &
+
