@@ -14,26 +14,25 @@ mod2 = "control"
 mod3 = "shift"
 home = os.path.expanduser("~")
 
-
 groups = [
-    Group("1", label="Group 1"),
-    Group("2", label="Group 2"),
-    Group("3", label="Group 3"),
-    Group("4", label="Group 4"),
-    Group("5", label="Group 5"),
-    Group("6", label="Group 6"),
-    Group("7", label="Group 7"),
-    Group("8", label="Group 8"),
+    Group("1", label=""),
+    Group("2", label=""),
+    Group("3", label=""),
+    Group("4", label=""),
+    Group("5", label=""),
+    Group("6", label=""),
+    Group("7", label=""),
+    Group("8", label=""),
     Group(
         "9",
-        label="Group 9",
+        label="",
         matches=[
             Match(wm_class=["discord"]),
         ],
     ),
     Group(
         "0",
-        label="Group 10",
+        label="",
         matches=[
             Match(wm_class=["Thunderbird"]),
         ],
@@ -57,19 +56,12 @@ def window_to_next_group(qtile):
 
 keys = [
     # Most of our keybindings are in sxhkd file - except these
-    # SUPER + FUNCTION KEYS
     Key([mod], "f", lazy.window.toggle_fullscreen()),
-    # SUPER + SHIFT KEYS
     Key([mod, "shift"], "q", lazy.window.kill()),
     Key([mod, "shift"], "x", lazy.shutdown()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "v", lazy.next_layout()),
-    # CHANGE FOCUS
-    Key([mod], "Up", lazy.layout.up()),
-    Key([mod], "Down", lazy.layout.down()),
-    Key([mod], "Left", lazy.layout.left()),
-    Key([mod], "Right", lazy.layout.right()),
     Key([mod], "k", lazy.layout.up()),
     Key([mod], "j", lazy.layout.down()),
     Key([mod], "h", lazy.layout.left()),
@@ -223,15 +215,16 @@ for i in groups:
         ]
     )
 
-
 border = dict(
     border_focus="#E06C75",
     border_normal="#E5C07B",
+    border_on_single=True,
     border_width=2,
+    margin=5,
 )
 layouts = [
-    layout.Bsp(fair=False, margin=2, shift_windows=False, **border),
-    layout.Max(margin=2, **border),
+    layout.Bsp(fair=False, shift_windows=False, **border),
+    layout.Max(),
 ]
 
 floating_layout = layout.Floating(
@@ -250,9 +243,10 @@ floating_layout = layout.Floating(
         Match(wm_class="lxsession-default-apps"),
         Match(wm_class="polybar"),
         Match(wm_class="Network Connections"),
+        Match(wm_class="Pinentry-gtk-2"),
         Match(wm_class="Picture in picture"),
         Match(wm_class="Picture-in-Picture"),
-    ]
+    ],
 )
 
 auto_fullscreen = True
@@ -263,7 +257,7 @@ dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = True
+cursor_warp = False
 reconfigure_screens = True
 wmname = "LG3D"
 
@@ -273,7 +267,6 @@ def autostart():
     subprocess.Popen([home + "/.config/qtile/scripts/autostart.sh"])
 
 
-#  subprocess.call([home + "/.cache/redpaper/wallpaper.sh"])
 @hook.subscribe.startup
 def start_always():
     subprocess.Popen(["xsetroot", "-curser_name", "left_ptr"])

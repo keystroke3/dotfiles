@@ -19,6 +19,7 @@ zsh/
 !.config/screenshots
 !.config/sxhkd
 !.config/vim
+!.config/nvim
 .config/vim/plugged
 *.tmp
 !.config/wallpapers

@@ -9,7 +9,7 @@ set t_Co=256
 if &term =~ '256color'
     set t_ut=
 endif
-# set number relativenumber
+set number relativenumber
 set wildmode=longest,list,full
 set splitbelow splitright
 set laststatus=2
@@ -18,7 +18,7 @@ set shiftwidth=4
 set expandtab
 set nofoldenable
 set t_Co=256
-# set background=dark
+" set background=dark
 set termguicolors
 set encoding=utf-8
 set timeoutlen=10
@@ -36,9 +36,9 @@ if &term =~ "xterm\\|rxvt"
 endif
 autocmd BufNewFile,BufRead *.rasi set syntax=css
 map ; :
-# map <C-p> "+P
-# vnoremap <C-c> "*Y :let @+=@<CR>
-# map <C-q> quit!
+" map <C-p> "+P
+" vnoremap <C-c> "*Y :let @+=@<CR>
+" map <C-q> quit!
 nmap <tab> gt
 nmap <shift-tab> gT
 nnoremap <C-b> <C-O>:w<CR>
