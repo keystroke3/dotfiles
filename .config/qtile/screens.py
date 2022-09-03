@@ -2,12 +2,23 @@ import os
 from libqtile.config import Screen
 from libqtile import layout, bar, widget, hook
 from qtile_extras.widget.decorations import RectDecoration
-from qtile_extras.bar import Bar
-from qtile_extras import widget
 
-theme = "purple"
+theme = "primera"
 
 colours = {
+    "primera": [
+        ["#36386c"],  # colour 0
+        ["#1e1c31"],  # colour 1
+        ["#e06c75"],  # colour 2
+        ["#e5c07b"],  # colour 3
+        ["#98c379"],  # colour 4
+        ["#c678dd"],  # colour 5
+        ["#61afef"],  # colour 6
+        ["#dcdfe4"],  # colour 7
+        ["#777777"],  # colour 8
+        ["#ffa1a1"],  # colour 9
+        ["#ff6e6e"],  # Colour 10
+    ],
     "purple": [
         ["#9CA5D6"],  # Colour 0
         ["#20212C"],  # Colour 1
@@ -163,24 +174,27 @@ decor2 = {
 }
 
 
-xx = 12
-xf = "M Plus 1 Code Semi-Bold"
+xx = 14
+xf = "UbuntuMono Nerd"
+pd = 2
 hdmi = [
     widget.GroupBox(
         fontsize=xx,
-        margin_y=4,
+        margin_y=2,
         margin_x=5,
-        padding_y=3,
-        padding_x=2,
+        padding_y=8,
+        padding_x=4,
         borderwidth=8,
         inactive=colours[theme][8],
-        active=colours[theme][2],
-        rounded=True,
-        urgent_alert_method="text",
+        active=colours[theme][4],
+        highlight_color=colours[theme][2],
         urgent_text=colours[theme][10],
-        highlight_color=colours[theme][4],
-        highlight_method="text",
-        this_current_screen_border=colours[theme][3],
+        rounded=False,
+        urgent_alert_method="line",
+        highlight_method="block",
+        this_current_screen_border=colours[theme][2],
+        other_current_screen_border=colours[theme][2],
+        other_screen_border=colours[theme][3],
         block_highlight_text_color=colours[theme][1],
         visible_groups=["1", "2", "3", "4", "5"],
     ),
@@ -189,32 +203,40 @@ hdmi = [
         custom_icon_paths=[os.path.expanduser("~/.config/qtile/icons")],
     ),
     widget.Spacer(),
+    widget.Mpris2(
+        foreground=colours[theme][4],
+        background=colours[theme][1],
+        display_metadata=["xesam:title", "xesam:artist"],
+        format="{title}:{artist}",
+        font=xf,
+        fontsize=12,
+    ),
     widget.Clock(
         foreground=colours[theme][1],
-        background=colours[theme][8],
-        format=" %a %d %b %Y | %H:%M",
+        background=colours[theme][4],
+        format=" %a %d %b %Y | %H:%M ",
         font=xf,
-        fontsize=xx,
-        **decor,
+        fontsize=12,
     ),
 ]
-
-default = [
+eDP = [
     widget.GroupBox(
         fontsize=xx,
-        margin_y=4,
+        margin_y=2,
         margin_x=5,
-        padding_y=3,
-        padding_x=2,
+        padding_y=8,
+        padding_x=4,
         borderwidth=8,
         inactive=colours[theme][8],
-        active=colours[theme][2],
-        rounded=True,
-        urgent_alert_method="text",
+        active=colours[theme][4],
+        highlight_color=colours[theme][2],
         urgent_text=colours[theme][10],
-        highlight_color=colours[theme][4],
-        highlight_method="text",
-        this_current_screen_border=colours[theme][3],
+        rounded=False,
+        urgent_alert_method="line",
+        highlight_method="block",
+        this_current_screen_border=colours[theme][2],
+        other_current_screen_border=colours[theme][2],
+        other_screen_border=colours[theme][3],
         block_highlight_text_color=colours[theme][1],
         visible_groups=["6", "7", "8", "9", "0"],
     ),
@@ -230,6 +252,7 @@ default = [
     widget.Battery(
         fontsize=xx,
         font=xf,
+        padding=pd,
         low_percentage=0.25,
         low_background=colours[theme][7],
         low_foreground=colours[theme][1],
@@ -238,26 +261,16 @@ default = [
         charge_char="↑",
         discharge_char="",
         update_interval=1,
-        format="{percent:2.0%}{char}",
-        **decor2,
-    ),
-    widget.TextBox(
-        foreground=colours[theme][9],
-        text="|",
-        font=xf,
+        format=" {percent:2.0%}{char} ",
+        # **decor2,
     ),
     widget.CPU(
-        background=colours[theme][9],
+        background=colours[theme][3],
         foreground=colours[theme][1],
-        format=" {load_percent}%",
+        format="  {load_percent}% ",
         font=xf,
         fontsize=xx,
         **decor,
-    ),
-    widget.TextBox(
-        foreground=colours[theme][4],
-        text="|",
-        font=xf,
     ),
     widget.Memory(
         font=xf,
@@ -266,55 +279,37 @@ default = [
         foreground=colours[theme][1],
         measure_mem="G",
         measure_swap="G",
-        format="{MemUsed: .2f} GB",
-        **decor,
+        padding=pd,
+        format="  {MemUsed: .2f} GB ",
+        # # **decor,
     ),
-    widget.TextBox(
-        foreground=colours[theme][6],
-        text="|",
+    widget.Net(
+        foreground=colours[theme][1],
+        background=colours[theme][2],
         font=xf,
-    ),
-    widget.Net(foreground=colours[theme][6], font=xf, fontsize=xx, interface="eno1"),
-    widget.TextBox(
-        foreground=colours[theme][3],
-        text="|",
-        font=xf,
+        fontsize=xx,
+        format=" ↓ {down} ",
+        interface="eno1",
     ),
     widget.Volume(
         mouse_callbacks={},
         background=colours[theme][3],
         foreground=colours[theme][1],
         update_interval=0.001,
-        format="{} %",
+        format="  {} % ",
         font=xf,
         fontsize=xx,
-        **decor,
-    ),
-    widget.TextBox(
-        foreground=colours[theme][8],
-        text="|",
-        font=xf,
+        padding=pd,
+        # **decor,
     ),
     widget.Clock(
         foreground=colours[theme][1],
-        background=colours[theme][8],
-        format=" %a %d %b %Y | %H:%M",
+        background=colours[theme][6],
+        format="  %a %d,| %H:%M ",
         font=xf,
         fontsize=xx,
-        **decor,
+        # # **decor,
     ),
-    widget.TextBox(
-        foreground=colours[theme][7],
-        text="|",
-        font=xf,
-    ),
-    # widget.CapsNumLockIndicator(
-    #     fontsize=xx,
-    #     font=xf,
-    #     foreground=colours[theme][1],
-    #     background=colours[theme][7],
-    #     **decor,
-    # ),
     widget.Systray(
         icon_size=20,
         padding=4,
@@ -324,18 +319,30 @@ default = [
 screens = [
     Screen(
         top=bar.Bar(
-            default,
-            30,
+            widgets=eDP,
+            size=30,
+            margin=[7, 3, 0, 5],
             background=colours[theme][1],
             foreground=colours[theme][0],
         ),
     ),
     Screen(
         top=bar.Bar(
-            hdmi,
-            30,
+            widgets=hdmi,
+            size=30,
+            margin=[5, 5, 0, 5],
             background=colours[theme][1],
             foreground=colours[theme][0],
         ),
     ),
 ]
+
+
+@hook.subscribe.screens_reconfigured
+async def _():
+    if len(qtile.screens) > 1:
+        eDP.visible_groups = ["6", "7", "8", "9", "0"]
+    else:
+        eDP.visible_groups = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"]
+    if hasattr(eDP, "bar"):
+        eDP.bar.draw()
