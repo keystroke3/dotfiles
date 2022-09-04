@@ -15,26 +15,26 @@ mod3 = "shift"
 home = os.path.expanduser("~")
 
 groups = [
-    Group("1", label=""),
-    Group("2", label=""),
-    Group("3", label=""),
-    Group("4", label=""),
-    Group("5", label=""),
-    Group("6", label=""),
-    Group("7", label=""),
-    Group("8", label=""),
+    Group("1", label="ﱣ"),
+    Group("2", label="ﱣ"),
+    Group("3", label="ﱣ"),
+    Group("4", label="ﱣ"),
+    Group("5", label="ﱣ"),
+    Group("6", label="ﱣ"),
+    Group("7", label="ﱣ"),
+    Group("8", label="ﱣ"),
     Group(
         "9",
-        label="",
+        label="ﱣ",
         matches=[
             Match(wm_class=["discord"]),
         ],
     ),
     Group(
         "0",
-        label="",
+        label="ﱣ",
         matches=[
-            Match(wm_class=["Thunderbird"]),
+            Match(wm_class=["thunderbird"]),
         ],
     ),
 ]

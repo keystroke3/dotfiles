@@ -42,7 +42,7 @@ bspc rule -a "Picture in picture" state=floating
 bspc rule -a Picture-in-Picture state=floating
 
 #open applications on specific workspaces
-bspc rule -a Thunderbird  desktop='^10'
+bspc rule -a thunderbird  desktop='^10'
 bspc rule -a discord  desktop='^9' 
 $HOME/.config/bspwm/autostart.sh
 
