@@ -250,3 +250,5 @@ super + {shift + } + F9
 super + question
     ~/.bin/spellq
 
+super + b
+    ~/.bin/configfinder
