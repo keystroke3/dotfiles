@@ -1,6 +1,6 @@
 #!/bin/bash
 echo 'bspwm' > /tmp/wm &
-sxhkdd &> ~/logs/sxhkd &
+~/.bin/sxhkdd &> ~/logs/sxhkd &
 LOG_DIR=~/logs/autostart
 declare -a programs=(
 nm-applet
@@ -38,19 +38,20 @@ done
 
 setxkbmap -option compose:ralt &
 wmname LG3D &
-if pgrep -f 'discord';then
-	:
-else
-LIBVA_DRIVER_NAME=i914 discord \
-      --ignore-gpu-blocklist \
-      --disable-features=UseOzonePlatform \
-      --enable-features=VaapiVideoDecoder \
-      --use-gl=desktop \
-      --enable-gpu-rasterization \ 
-      --enable-zero-copy &
-fi
-if pgrep -f 'qjackctl';then
-	:
-else
-	pw-jack qjackctl &
-fi
+alacritty &
+# if pgrep -f 'discord';then
+# 	:
+# else
+# LIBVA_DRIVER_NAME=i914 discord \
+#       --ignore-gpu-blocklist \
+#       --disable-features=UseOzonePlatform \
+#       --enable-features=VaapiVideoDecoder \
+#       --use-gl=desktop \
+#       --enable-gpu-rasterization \ 
+#       --enable-zero-copy &
+# fi
+# if pgrep -f 'qjackctl';then
+# 	:
+# else
+# 	pw-jack qjackctl &
+# fi

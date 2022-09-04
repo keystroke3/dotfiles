@@ -1,5 +1,4 @@
 #!/bin/bash
-[[ $(cat /tmp/wm) == "bspwm" ]] && source bspwm
 super + colon
     $HOME/.virtualenvs/yat/bin/python $HOME/Projects/yat/src/gui.py
 
@@ -159,3 +158,5 @@ super + {shift + } + F9
 super + question
     ~/.bin/spellq
 
+super + b
+    ~/.bin/configfinder

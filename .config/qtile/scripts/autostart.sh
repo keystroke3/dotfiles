@@ -9,7 +9,7 @@ dunst & disown
 copyq & disown
 gnome-keyring-daemon --start &> /dev/null
 dirmngr --daemon &> $LOG_DIR/xsetroot
-picom --experimental-backends --daemon --log-level WARN --log-file $LOG_DIR/picom &> /dev/null
+picom --experimental-backends --daemon --log-level DEBUG --log-file $LOG_DIR/picom &> /dev/null
 
 sleep 10
 thunderbird &
