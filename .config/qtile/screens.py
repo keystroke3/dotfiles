@@ -38,14 +38,16 @@ def one_to_five():
 
 
 def six_to_ten():
-    return [str(i) for i in range(5, 11)]
+    d = [str(i) for i in range(6, 10)]
+    d.append("0")
+    return d
 
 
 primary_box = widget.GroupBox(
-    name="primary", visible_groups=one_to_five(), **group_props
+    name="primary", visible_groups=six_to_ten(), **group_props
 )
 secondary_box = widget.GroupBox(
-    name="secondary", visible_groups=six_to_ten(), **group_props
+    name="secondary", visible_groups=one_to_five(), **group_props
 )
 secondary_bar = [
     secondary_box,
@@ -195,8 +197,8 @@ screens = [
 ]
 
 
-@hook.subscribe.screen_change
-def reconfigure_bars(_):
+@hook.subscribe.screens_reconfigured
+def reconfigure_bars():
     if len(get_monitors()) > 1:
         primary_box.visible_groups = six_to_ten()
         secondary_box.visible_groups = one_to_five()
