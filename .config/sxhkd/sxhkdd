@@ -4,6 +4,6 @@ CONF="$HOME/.config/sxhkd/$(cat /tmp/wm)"
 
 
 while inotifywait -qe modify "$CONF" > /dev/null;do
-	pkill -x sxhkd && sxhkd &
+	pkill -x sxhkd && sxhkd -c $CONF &
 done
 

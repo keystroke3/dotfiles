@@ -6,5 +6,5 @@ FUZZ="$(echo $HIST $RG | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '
 if [[ -f $FUZZ ]]
 then 
   echo "$HIST" | grep -vF "$FUZZ" | sed "1i$FUZZ" > $HIST_FILE
-  alacritty -e nvim "$FUZZ"
+  kitty -e nvim "$FUZZ"
 fi

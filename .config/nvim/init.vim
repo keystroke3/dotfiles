@@ -1,6 +1,3 @@
-if has ('mouse')
-   set mouse=a
-endif
 set updatetime=10
 set ignorecase
 set smartcase

@@ -11,8 +11,7 @@ zsh/
 !.config/kitty
 !.config/lf
 !.config/mpv
-!.config/copyq
-.config/copyq/copyq_tabs.ini
+!.config/copyq/copyq.conf
 .config/mpv/watch_later
 !.config/ranger
 !.config/rofi
@@ -46,3 +45,4 @@ zsh/
 *.lock
 *.dat
 *bck*
+*test*

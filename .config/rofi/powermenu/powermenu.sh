@@ -1,4 +1,5 @@
 #!/bin/bash
+WM=$(cat /tmp/wm)
 theme="neptune_card_alt.rasi"
 dir="$HOME/.config/rofi/powermenu"
 uptime=$(uptime -p | sed -e 's/up //g')
@@ -44,7 +45,8 @@ case $chosen in
     $salido)
 	ans=$(confirm_exit &)
 	if [[ $ans == "" ]]; then
-		bspc quit
+		[[ $WM == "bspwm" ]] && bspc quit || 
+            /usr/bin/python -c "from libqtile.command.client import InteractiveCommandClient as qtile; qtile.shutdown()"
 	elif [[ $ans == "" ]]; then
 		exit 0
         else

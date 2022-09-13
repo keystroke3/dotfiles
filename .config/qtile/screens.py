@@ -1,8 +1,10 @@
+import logging
 from os.path import expanduser
-from time import timezone
+from re import I
 from libqtile.config import Screen
-from libqtile import bar, widget
+from libqtile import bar, widget, hook
 from colors import colors
+from screeninfo import get_monitors
 
 theme = "primera"
 xx = 15
@@ -14,14 +16,14 @@ group_props = dict(
     margin_y=2,
     margin_x=5,
     padding_y=8,
-    padding_x=4,
+    padding_x=11,
     borderwidth=8,
     center_aligned=True,
     inactive=colors[theme][8],
     active=colors[theme][4],
     highlight_color=colors[theme][2],
     urgent_text=colors[theme][10],
-    rounded=False,
+    rounded=True,
     urgent_alert_method="line",
     highlight_method="block",
     this_current_screen_border=colors[theme][2],
@@ -29,8 +31,24 @@ group_props = dict(
     this_screen_border=colors[theme][3],
     block_highlight_text_color=colors[theme][1],
 )
-hdmi = [
-    widget.GroupBox(visible_groups=["1", "2", "3", "4", "5"], **group_props),
+
+
+def one_to_five():
+    return [str(i) for i in range(1, 6)]
+
+
+def six_to_ten():
+    return [str(i) for i in range(5, 11)]
+
+
+primary_box = widget.GroupBox(
+    name="primary", visible_groups=one_to_five(), **group_props
+)
+secondary_box = widget.GroupBox(
+    name="secondary", visible_groups=six_to_ten(), **group_props
+)
+secondary_bar = [
+    secondary_box,
     widget.CurrentLayoutIcon(
         scale=0.45,
         custom_icon_paths=[expanduser("~/.config/qtile/icons")],
@@ -52,8 +70,8 @@ hdmi = [
         fontsize=12,
     ),
 ]
-eDP = [
-    widget.GroupBox(visible_groups=["6", "7", "8", "9", "0"], **group_props),
+primary_bar = [
+    primary_box,
     widget.Sep(
         padding=2,
         linewidth=0,
@@ -65,7 +83,7 @@ eDP = [
     widget.WindowName(
         foreground=colors[theme][9],
         background=colors[theme][1],
-        format="{state} {name}",
+        format="{name}",
         for_current_screen=True,
         max_chars=30,
         font=xf,
@@ -105,14 +123,6 @@ eDP = [
         update_interval=1,
         format="{char} {percent:2.0%}",
     ),
-    # widget.Backlight(
-    #     background=colors[theme][1],
-    #     foreground=colors[theme][3],
-    #     format=" {percent:2.0%}",
-    #     backlight_name="card0-eDP-1",
-    #     font=xf,
-    #     fontsize=xx,
-    # ),
     widget.CPU(
         background=colors[theme][3],
         foreground=colors[theme][1],
@@ -144,7 +154,7 @@ eDP = [
         background=colors[theme][2],
         font=xf,
         fontsize=xx,
-        format=" {down} ",
+        format="  {down} ",
         interface="eno1",
     ),
     widget.PulseVolume(
@@ -166,7 +176,7 @@ eDP = [
 screens = [
     Screen(
         top=bar.Bar(
-            widgets=eDP,
+            widgets=primary_bar,
             size=30,
             margin=[7, 3, 0, 5],
             background=colors[theme][1],
@@ -175,7 +185,7 @@ screens = [
     ),
     Screen(
         top=bar.Bar(
-            widgets=hdmi,
+            widgets=secondary_bar,
             size=30,
             margin=[5, 5, 0, 5],
             background=colors[theme][1],
@@ -183,3 +193,15 @@ screens = [
         ),
     ),
 ]
+
+
+@hook.subscribe.screen_change
+def reconfigure_bars(_):
+    if len(get_monitors()) > 1:
+        primary_box.visible_groups = six_to_ten()
+        secondary_box.visible_groups = one_to_five()
+    else:
+        primary_box.visible_groups = one_to_five() + six_to_ten()
+        primary_box.margin_x = 5
+    if hasattr(primary_box, "bar"):
+        primary_box.bar.draw()

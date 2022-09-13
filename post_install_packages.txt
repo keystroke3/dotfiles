@@ -162,3 +162,12 @@ python-black
 python-psutil
 python-dbus-next
 font-awesome-5
+mimeo
+syncthing
+qtutilities
+c++utilties
+qtforkawesome
+syncthingtray
+pastel
+colorpicker
+bpython
