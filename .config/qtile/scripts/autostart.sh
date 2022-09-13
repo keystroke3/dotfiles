@@ -1,15 +1,16 @@
 #!/bin/bash
 echo 'qtile' > /tmp/wm &
 ~/.config/sxhkd/sxhkdd &
-~/.config/qtile/scripts/xrandr-manager &
 LOG_DIR=/home/salvaje/logs
 nm-applet & disown
 flameshot & disown
+caffeine & disown
 dunst & disown
 copyq & disown
 gnome-keyring-daemon --start &> /dev/null
 dirmngr --daemon &> $LOG_DIR/xsetroot
 picom --experimental-backends --daemon --log-level DEBUG --log-file $LOG_DIR/picom &> /dev/null
+~/.config/qtile/scripts/xrandr-manager &
 
 sleep 10
 thunderbird &

@@ -6,8 +6,6 @@ from screens import screens
 import os
 import subprocess
 
-# from keys import keys
-
 mod = "mod4"
 mod1 = "mod1"
 mod2 = "control"
@@ -22,7 +20,13 @@ groups = [
     Group("5", label="ﱣ"),
     Group("6", label="ﱣ"),
     Group("7", label="ﱣ"),
-    Group("8", label="ﱣ"),
+    Group(
+        "8",
+        label="ﱣ",
+        matches=[
+            Match(wm_class=["Tauon Music Box"]),
+        ],
+    ),
     Group(
         "9",
         label="ﱣ",
@@ -187,7 +191,6 @@ def go_to_group(name: str):
         if len(qtile.screens) == 1:
             qtile.groups_map[name].cmd_toscreen()
             return
-
         if name in "12345":
             qtile.focus_screen(1)  # this was 0 set to zero which corresponded to eDP2
             qtile.groups_map[name].cmd_toscreen()
@@ -218,13 +221,18 @@ for i in groups:
 border = dict(
     border_focus="#E06C75",
     border_normal="#E5C07B",
-    border_on_single=True,
+    border_width=2,
+    margin=5,
+)
+max_border = dict(
+    border_focus="#C678DD",
+    border_normal="#E5C07B",
     border_width=2,
     margin=5,
 )
 layouts = [
-    layout.Bsp(fair=False, shift_windows=False, **border),
-    layout.Max(),
+    layout.Bsp(fair=False, border_on_single=True, **border),
+    layout.Max(**max_border),
 ]
 
 floating_layout = layout.Floating(
@@ -259,6 +267,7 @@ follow_mouse_focus = True
 bring_front_click = False
 cursor_warp = False
 reconfigure_screens = True
+focus_on_window_activation = "never"
 wmname = "LG3D"
 
 

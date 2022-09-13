@@ -68,7 +68,7 @@ super + shift + d
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
 super + shift + s
-	pkill -x sxhkd && sxhkd
+	pkill -f sxhkd && ~/.bin/sxhkdd & disown
 
 ctrl + alt + f
     firefox
@@ -152,8 +152,11 @@ super + u
 super + F9
     xrandr --output eDP1 --off
 
-super + {shift + } + F9
-    xrandr --output eDP1 --rate 144.00 --right-of HDMI1 --rate 144.00
+super + shift + F9
+    xrandr --output eDP1 --rate 144.00 --mode 1920x1080 --right-of HDMI1
+
+super + F11
+    ~/.config/qtile/scripts/xrandr-manager
 
 super + question
     ~/.bin/spellq
