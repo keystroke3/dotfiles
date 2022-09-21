@@ -1,4 +1,4 @@
 #!/bin/bash
-fuzz=$(fd  . $HOME/ -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
+fuzz=$(fd  . $HOME/ --ignore-file $HOME/dotfiles/.gitignore -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
 [ -z $fuzz ] && : || code "$fuzz"  
 
