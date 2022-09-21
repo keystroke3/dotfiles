@@ -1,23 +1,24 @@
-import logging
 from os.path import expanduser
-from re import I
 from libqtile.config import Screen
 from libqtile import bar, widget, hook
 from colors import colors
+from libqtile import qtile
 from screeninfo import get_monitors
 
 theme = "primera"
 xx = 15
 xf = "UbuntuMono Nerd Font"
 pd = 2
+
+
 group_props = dict(
+    margin_y=3,
+    spacing=3,
+    padding_y=8,
+    padding_x=9,
+    borderwidth=8,
     fontsize=xx,
     font=xf,
-    margin_y=2,
-    margin_x=5,
-    padding_y=8,
-    padding_x=11,
-    borderwidth=8,
     center_aligned=True,
     inactive=colors[theme][8],
     active=colors[theme][4],
@@ -30,6 +31,7 @@ group_props = dict(
     other_current_screen_border=colors[theme][4],
     this_screen_border=colors[theme][3],
     block_highlight_text_color=colors[theme][1],
+    disable_drag=True,
 )
 
 
@@ -43,8 +45,20 @@ def six_to_ten():
     return d
 
 
+def primary_box_groups():
+    if len(get_monitors()) > 1:
+        return six_to_ten()
+    return one_to_five() + six_to_ten()
+
+
+def secondary_box_groups():
+    if len(get_monitors()) > 1:
+        return one_to_five()
+    return None
+
+
 primary_box = widget.GroupBox(
-    name="primary", visible_groups=six_to_ten(), **group_props
+    name="primary", visible_groups=primary_box_groups(), **group_props
 )
 secondary_box = widget.GroupBox(
     name="secondary", visible_groups=one_to_five(), **group_props
@@ -60,7 +74,17 @@ secondary_bar = [
         foreground=colors[theme][4],
         background=colors[theme][1],
         display_metadata=["xesam:title", "xesam:artist"],
-        # format="{title}:{artist}",
+        paused_text="  {track} ",
+        playing_text="  {track} ",
+        no_metadata_text="No Meta",
+        max_chars=30,
+        scroll=False,
+        mouse_callbacks={
+            "Button1": lambda: qtile.cmd_spawn(["playerctl", "previous"]),
+            "Button2": lambda: qtile.cmd_spawn(["playerctl", "play-pause"]),
+            "Button3": lambda: qtile.cmd_spawn(["playerctl", "next"]),
+        },
+        fmt="{}",
         font=xf,
         fontsize=xx,
     ),
@@ -135,7 +159,7 @@ primary_bar = [
     widget.ThermalSensor(
         background=colors[theme][3],
         foreground=colors[theme][1],
-        format="{tag}: {temp:.0f}{unit}",
+        format="{temp:.0f}{unit}",
         tag_sensor="Package id 0",
         threshold=80,
         font=xf,
@@ -198,12 +222,13 @@ screens = [
 
 
 @hook.subscribe.screens_reconfigured
-def reconfigure_bars():
-    if len(get_monitors()) > 1:
+async def reconfigure_bar():
+    if len(qtile.screens) > 1:
         primary_box.visible_groups = six_to_ten()
         secondary_box.visible_groups = one_to_five()
     else:
         primary_box.visible_groups = one_to_five() + six_to_ten()
-        primary_box.margin_x = 5
     if hasattr(primary_box, "bar"):
         primary_box.bar.draw()
+    if hasattr(secondary_box, "bar"):
+        secondary_box.bar.draw()

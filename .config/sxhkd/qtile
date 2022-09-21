@@ -58,7 +58,7 @@ super + Return
 	WINIT_X11_SCALE_FACTOR=1.2 alacritty
 
 super + t
-    WINIT_X11_SCALE_FACTOR=1.2 alacritty -e tomb -q open $HOME/Desktop/lollypop -k $HOME/Desktop/popen
+    WINIT_X11_SCALE_FACTOR=1.2 alacritty -e tomb -q open /polaris/sys.o -k /polaris/sys.so
 
 super + shift + t
 	tomb close
@@ -135,10 +135,10 @@ super + s
 	bspc node -t {floating,tiled}
 
 super + m
-    ~/.config/bspwm/scripts/toggle-audio-profile
-
-super + shift + m
     pavucontrol &
+
+super + shift m
+    ~/.config/bspwm/scripts/toggle-audio-profile
 
 super + grave
     dunstctl history-pop

@@ -227,7 +227,7 @@ border = dict(
 max_border = dict(
     border_focus="#C678DD",
     border_normal="#E5C07B",
-    border_width=2,
+    border_width=4,
     margin=5,
 )
 layouts = [
@@ -258,8 +258,7 @@ floating_layout = layout.Floating(
 )
 
 auto_fullscreen = True
-focus_on_window_activation = "smart"
-reconfigure_screens = True
+reconfigure_screens = False
 auto_minimize = True
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: List
