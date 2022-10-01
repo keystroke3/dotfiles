@@ -32,9 +32,9 @@ if [ -f ~/.config/zsh/lastdir ]
 fi
 
 swap(){
-    mv "$1" "/tmp/$1"
+    mv "$1" "_$1"
     mv "$2" "$1"
-    mv "/tmp/$1" "$2"
+    mv "_$1" "$2"
 }
 
 o(){
@@ -337,3 +337,4 @@ alias cp="cp -r"
 alias rr="exec ${SHELL} -l; clear"
 alias arco="ssh ted@192.168.1.9"
 alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
+alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
