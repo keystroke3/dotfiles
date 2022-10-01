@@ -84,7 +84,6 @@ secondary_bar = [
             "Button2": lambda: qtile.cmd_spawn(["playerctl", "play-pause"]),
             "Button3": lambda: qtile.cmd_spawn(["playerctl", "next"]),
         },
-        fmt="{}",
         font=xf,
         fontsize=xx,
     ),

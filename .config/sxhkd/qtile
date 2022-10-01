@@ -58,7 +58,7 @@ super + Return
 	WINIT_X11_SCALE_FACTOR=1.2 alacritty
 
 super + t
-    WINIT_X11_SCALE_FACTOR=1.2 alacritty -e tomb -q open /polaris/sys.o -k /polaris/sys.so
+    WINIT_X11_SCALE_FACTOR=1.2 alacritty -e tomb -q open /polaris/catacomb -k /polaris/skeleton
 
 super + shift + t
 	tomb close

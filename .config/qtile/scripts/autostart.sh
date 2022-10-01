@@ -8,6 +8,7 @@ caffeine & disown
 dunst & disown
 copyq & disown
 gnome-keyring-daemon --start &> /dev/null
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown
 dirmngr --daemon &> $LOG_DIR/xsetroot
 picom --experimental-backends --daemon --log-level DEBUG --log-file $LOG_DIR/picom &> /dev/null
 ~/.config/qtile/scripts/xrandr-manager &

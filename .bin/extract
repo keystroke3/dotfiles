@@ -1,33 +1,46 @@
 #!/bin/bash
-# there are two different ways this script can work.
-# for the first way, uncomment the two lines after the if and place two '.' in front of th$1 
-#       this creates a new directory in the directory where the compressed file is and dumps the content in it
-# for the second way, comment the two lines under the if and place just one '.' in front of th$1
-#       this just dumps the content of the compressed file in the same directory of the compressed file 
-notify-send  "extract" "$1"
-if [ -f $1 ] ; then
-  #NAME=${1%.*}
-  NAME="$(echo "$1"|cut -d\. -f1)"
-  mkdir $NAME && cd $NAME
-  case $1 in
-    *.tar.bz2) tar xvjf $1 ;;
-    *.tar.gz) tar xvzf $1 ;;
-    *.tar.xz) tar xvJf $1 ;;
-    *.lzma) unlzma $1 ;;
-    *.bz2) bunzip2 $1 ;;
-    *.rar) unrar x -ad $1 ;;
-    *.gz) gunzip $1 ;;
-    *.tar) tar xvf $1 ;;
-    *.tbz2) tar xvjf $1 ;;
-    *.tgz) tar xvzf $1 ;;
-    *.zip) unzip $1 ;;
-    *.Z) uncompress $1 ;;
-    *.7z) 7z x $1 ;;
-    *.xz) unxz $1 ;;
-    *.exe) cabextract $1 ;;
-    *) echo "extract: '$1' - unknown archive method" ;;
+# This scripts works by first extracting the filepath and filename without extension. 
+# It assumes that the file has multiple dots (.) in the name but only
+# the last one is relevant. So /some/path/foo.bar.buzz.tar.gz will result in /some/path/foo.bar.buzz.tar
+# this is just to simplify the commands and make it so there is no littering of the current directory.
+
+# It creates a directory with the name extracted before and moves the archive to said directory
+# It then checks for the extension and maps it to known extensions and commands.
+
+# this part is only for loggin purposes
+exec 3>&1 4>&2
+trap 'exec 2>&4 1>&3' 0 1 2 3
+exec &> /tmp/extract.log
+
+
+if [ -f "$1" ] ; then
+  NAME="$(echo "$1" | rev | cut -d\. -f2- | rev)"
+  # [ -d "$NAME" ] && rm -r "$NAME"; 
+  mkdir "$NAME"
+  mv "$1" "$NAME"
+  cd "$NAME"
+  f="$(basename $1)"
+  echo "$f"
+  case "$1" in
+    *.tar)  tar --overwrite xvf "$f" && rm "$f" ;;
+    *.tar.bz2) tar --overwrite xvjf "$f" && rm "$f" ;;
+    *.tar.gz) tar --overwrite xvzf "$f" && rm "$f" ;;
+    *.tar.xz) tar --overwrite xvJf "$f" && rm "$f" ;;
+    *.tbz2) tar xvjf --overwrite "$f" && rm "$f" ;;
+    *.tgz) tar xvzf --overwrite "$f" && rm "$f" ;;
+    *.lzma) unlzma "$f" && rm "$f" ;;
+    *.bz2) bunzip2 -f "$f" && rm "$f" ;;
+    *.rar) unrar x -o "$f" && rm "$f" ;;
+    *.gz) gunzip -f "$f" && rm "$f" ;;
+    *.zip) unzip -o "$f" && rm "$f" ;;
+    *.Z) uncompress -f "$f" && rm "$f" ;;
+    *.7z) 7z x "$f" && rm "$f" ;;
+    *.xz) unxz -f "$f" && rm "$f" ;;
+    *.exe) cabextract "$f" && rm "$f" ;;
+    *) echo "extract: '"$1"' - unknown archive method" ;;
+
   esac
 else
-  echo "$1 - file does not exist"
+  echo ""$1" - file does not exist"
 fi
 

@@ -1,6 +1,7 @@
 from libqtile import layout, hook
-from libqtile.config import Group, Key, Match, ScratchPad, DropDown
+from libqtile.config import Group, Key, Match, Drag
 from libqtile.command import lazy
+from scripts import traverse
 from typing import List  # noqa: F401
 from screens import screens
 import os
@@ -62,14 +63,20 @@ keys = [
     # Most of our keybindings are in sxhkd file - except these
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key([mod, "shift"], "q", lazy.window.kill()),
+    Key([mod], "i", lazy.window.toggle_minimize()),
+    Key([mod, "shift"], "i", lazy.window.toggle_minimize()),
     Key([mod, "shift"], "x", lazy.shutdown()),
     Key([mod, "shift"], "r", lazy.restart()),
     Key([mod], "n", lazy.layout.normalize()),
     Key([mod], "v", lazy.next_layout()),
-    Key([mod], "k", lazy.layout.up()),
-    Key([mod], "j", lazy.layout.down()),
-    Key([mod], "h", lazy.layout.left()),
-    Key([mod], "l", lazy.layout.right()),
+    Key([mod], "k", lazy.function(traverse.up)),
+    Key([mod], "j", lazy.function(traverse.down)),
+    Key([mod], "h", lazy.function(traverse.left)),
+    Key([mod], "l", lazy.function(traverse.right)),
+    # Key([mod], "k", lazy.layout.up()),
+    # Key([mod], "j", lazy.layout.down()),
+    # Key([mod], "h", lazy.layout.left()),
+    # Key([mod], "l", lazy.layout.right()),
     # RESIZE UP, DOWN, LEFT, RIGHT
     Key(
         [mod, "control"],
@@ -148,6 +155,19 @@ keys = [
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
     # TOGGLE FLOATING LAYOUT
     Key([mod], "s", lazy.window.toggle_floating()),
+]
+
+
+mouse = [
+    Drag(
+        [mod],
+        "Button1",
+        lazy.window.set_position(),
+        start=lazy.window.get_position(),
+    ),
+    Drag(
+        [mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()
+    ),
 ]
 
 
@@ -278,3 +298,4 @@ def autostart():
 @hook.subscribe.startup
 def start_always():
     subprocess.Popen(["xsetroot", "-curser_name", "left_ptr"])
+    subprocess.Popen(["setxkbmap" "-option" "compose:ralt"])
