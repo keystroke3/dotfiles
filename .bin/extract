@@ -22,12 +22,12 @@ if [ -f "$1" ] ; then
   f="$(basename $1)"
   echo "$f"
   case "$1" in
-    *.tar)  tar --overwrite xvf "$f" && rm "$f" ;;
-    *.tar.bz2) tar --overwrite xvjf "$f" && rm "$f" ;;
-    *.tar.gz) tar --overwrite xvzf "$f" && rm "$f" ;;
-    *.tar.xz) tar --overwrite xvJf "$f" && rm "$f" ;;
-    *.tbz2) tar xvjf --overwrite "$f" && rm "$f" ;;
-    *.tgz) tar xvzf --overwrite "$f" && rm "$f" ;;
+    *.tar)  tar --overwrite -xvf "$f" && rm "$f" ;;
+    *.tar.bz2) tar --overwrite -xvjf "$f" && rm "$f" ;;
+    *.tar.gz) tar --overwrite -xvzf "$f" && rm "$f" ;;
+    *.tar.xz) tar --overwrite -xvJf "$f" && rm "$f" ;;
+    *.tbz2) tar --overwrite -xvjf "$f" && rm "$f" ;;
+    *.tgz) tar --overwrite -xvzf "$f" && rm "$f" ;;
     *.lzma) unlzma "$f" && rm "$f" ;;
     *.bz2) bunzip2 -f "$f" && rm "$f" ;;
     *.rar) unrar x -o "$f" && rm "$f" ;;
