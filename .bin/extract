@@ -22,21 +22,21 @@ if [ -f "$1" ] ; then
   f="$(basename $1)"
   echo "$f"
   case "$1" in
-    *.tar)  tar --overwrite -xvf "$f" && rm "$f" ;;
-    *.tar.bz2) tar --overwrite -xvjf "$f" && rm "$f" ;;
-    *.tar.gz) tar --overwrite -xvzf "$f" && rm "$f" ;;
-    *.tar.xz) tar --overwrite -xvJf "$f" && rm "$f" ;;
-    *.tbz2) tar --overwrite -xvjf "$f" && rm "$f" ;;
-    *.tgz) tar --overwrite -xvzf "$f" && rm "$f" ;;
-    *.lzma) unlzma "$f" && rm "$f" ;;
-    *.bz2) bunzip2 -f "$f" && rm "$f" ;;
-    *.rar) unrar x -o "$f" && rm "$f" ;;
-    *.gz) gunzip -f "$f" && rm "$f" ;;
-    *.zip) unzip -o "$f" && rm "$f" ;;
-    *.Z) uncompress -f "$f" && rm "$f" ;;
-    *.7z) 7z x "$f" && rm "$f" ;;
-    *.xz) unxz -f "$f" && rm "$f" ;;
-    *.exe) cabextract "$f" && rm "$f" ;;
+    *.tar)  tar --overwrite -xvf "$f" ;;
+    *.tar.bz2) tar --overwrite -xvjf "$f" ;;
+    *.tar.gz) tar --overwrite -xvzf "$f" ;;
+    *.tar.xz) tar --overwrite -xvJf "$f" ;;
+    *.tbz2) tar --overwrite -xvjf "$f" ;;
+    *.tgz) tar --overwrite -xvzf "$f" ;;
+    *.lzma) unlzma "$f" ;;
+    *.bz2) bunzip2 -f "$f" ;;
+    *.rar) unrar x -o "$f" ;;
+    *.gz) gunzip -f "$f" ;;
+    *.zip) unzip -o "$f" ;;
+    *.Z) uncompress -f "$f" ;;
+    *.7z) 7z x "$f" ;;
+    *.xz) unxz -f "$f" ;;
+    *.exe) cabextract "$f" ;;
     *) echo "extract: '"$1"' - unknown archive method" ;;
 
   esac

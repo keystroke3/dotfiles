@@ -163,3 +163,5 @@ super + question
 
 super + b
     ~/.bin/configfinder
+super + alt + c
+    setxkbmap -option compose:ralt &

@@ -173,6 +173,8 @@ ignore() {
 	    sed 's/^#.*$//g' |
 	    sed '/^$/d' > .gitignore &&
 	    echo ".gitignore" >> .gitignore;
+	    echo ".vscode" >> .gitignore;
+        
 }
 
 # end functions
@@ -288,6 +290,7 @@ alias gcm="git checkout main"
 alias gcd="git checkout dev"
 alias gcs="git checkout staging"
 alias gcg="git checkout graphql"
+alias gam="git add \*migrations\*"
 alias gmm="git merge "$1" -m "$(git log -1 --pretty=%B $1)""
 alias start="sudo systemctl start"
 alias stop="sudo systemctl stop"
@@ -338,3 +341,4 @@ alias rr="exec ${SHELL} -l; clear"
 alias arco="ssh ted@192.168.1.9"
 alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
+alias ctlu="systemctl --user"
