@@ -32,7 +32,6 @@ if &term =~ "xterm\\|rxvt"
   " use \003]12;gray\007 for gnome-terminal
 endif
 autocmd BufNewFile,BufRead *.rasi set syntax=css
-map ; :
 " map <C-p> "+P
 " vnoremap <C-c> "*Y :let @+=@<CR>
 " map <C-q> quit!

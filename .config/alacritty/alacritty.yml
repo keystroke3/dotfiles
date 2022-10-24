@@ -39,8 +39,6 @@ font:
 
     size: 10.0
 
-    # Thin strokes = true on retina displays, Non-retina disp = false
-    use_thin_strokes: false
 
 cursor:
     # - ▇ Block
