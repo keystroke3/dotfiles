@@ -1,4 +1,4 @@
-from libqtile import layout, hook
+from libqtile import layout, hook, qtile
 from libqtile.config import Group, Key, Match, Drag
 from libqtile.command import lazy
 from scripts import traverse
@@ -58,6 +58,20 @@ def window_to_next_group(qtile):
         i = qtile.groups.index(qtile.currentGroup)
         qtile.currentWindow.togroup(qtile.groups[i + 1].name)
 
+
+win_list = []
+def sticky_win(qtile):
+    global win_list
+    if qtile.current_window in win_list:
+        win_list.remove(qtile.current_window)
+    else:
+        win_list.append(qtile.current_window)
+
+@hook.subscribe.setgroup
+def move_win():
+    for w in win_list:
+        if not w.is_visible():
+            w.togroup(qtile.current_group.name)
 
 keys = [
     # Most of our keybindings are in sxhkd file - except these
@@ -155,6 +169,7 @@ keys = [
     Key([mod, "shift"], "Right", lazy.layout.swap_right()),
     # TOGGLE FLOATING LAYOUT
     Key([mod], "s", lazy.window.toggle_floating()),
+    Key([mod], "w", lazy.function(sticky_win), desc="toggle sticky window"),
 ]
 
 
@@ -177,7 +192,7 @@ def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
         group = qtile.screens[i - 1].group.name
         qtile.current_window.togroup(group, switch_group=switch_group)
         if switch_screen == True:
-            qtile.cmd_to_screen(i - 1)
+            qtile.toscreen(i - 1)
 
 
 def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
@@ -186,7 +201,7 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
         group = qtile.screens[i + 1].group.name
         qtile.current_window.togroup(group, switch_group=switch_group)
         if switch_screen == True:
-            qtile.cmd_to_screen(i + 1)
+            qtile.toscreen(i + 1)
 
 
 keys.extend(
@@ -288,6 +303,7 @@ cursor_warp = False
 reconfigure_screens = True
 focus_on_window_activation = "never"
 wmname = "LG3D"
+
 
 
 @hook.subscribe.startup_once

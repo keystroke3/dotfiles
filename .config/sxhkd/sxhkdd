@@ -1,9 +1,7 @@
-#!/bin/sh
+#!/bin/bash
+[[ ! -f "/tmp/wm" ]] && echo 'qtile' > cat /tmp/wm
 CONF="$HOME/.config/sxhkd/$(cat /tmp/wm)"
-[[ $(pgrep -x sxhkd) ]] || sxhkd -c "$CONF" & 
-
-
-while inotifywait -qe modify "$CONF" > /dev/null;do
-	pkill -x sxhkd && sxhkd -c $CONF &
-done
+pkill -x sxhkd
+echo $CONF
+sxhkd -c "$CONF"
 

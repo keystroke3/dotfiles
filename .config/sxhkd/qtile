@@ -30,7 +30,7 @@ super + space
     $HOME/.config/rofi/launchers/colorful/launcher.sh
 
 super + d
-	redpaper -d
+	redpaper -a
 
 super + c
 	redpaper -c
@@ -68,7 +68,7 @@ super + shift + d
     xlayoutdisplay -p eDP1 -o HDMI1 -d 100
 
 super + shift + s
-	pkill -f sxhkd && ~/.bin/sxhkdd & disown
+	~/.bin/sxhkdd
 
 ctrl + alt + f
     firefox

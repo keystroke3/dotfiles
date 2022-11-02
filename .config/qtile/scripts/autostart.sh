@@ -6,7 +6,6 @@ nm-applet & disown
 flameshot & disown
 caffeine & disown
 dunst & disown
-copyq & disown
 gnome-keyring-daemon --start &> /dev/null
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 & disown
 dirmngr --daemon &> $LOG_DIR/xsetroot
@@ -19,6 +18,7 @@ kdeconnectd &
 kdeconnect-indicator & 
 setxkbmap -option compose:ralt &
 pw-jack qjackctl &
+copyq & disown
 LIBVA_DRIVER_NAME=i914 discord \
       --ignore-gpu-blocklist \
       --disable-features=UseOzonePlatform \
@@ -27,3 +27,4 @@ LIBVA_DRIVER_NAME=i914 discord \
       --enable-gpu-rasterization \ 
       --enable-zero-copy &
 
+qbittorrent-nox -d &

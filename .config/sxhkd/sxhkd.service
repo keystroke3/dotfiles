@@ -1,0 +1,12 @@
+[Unit]
+Description=sxhkd daemon 
+
+[Service]
+User=salvaje
+Group=salvaje
+WorkingDirectory=/home/salvaje/.config/sxhkd/
+ExecStart=/home/salvaje/.config/sxhkd/sxhkdd
+PrivateTmp=1
+
+[Install]
+WantedBy=graphical.target

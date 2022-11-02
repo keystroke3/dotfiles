@@ -6,7 +6,7 @@ if [ ! -z "$hdmi" ];then
     echo "Hdmi set to $hdmi"
 else
 	xrandr --output "$edp" --rate 144.00 --mode 1920x1080
-    xrandr --output $(xrandr --listactivemonitors | cut -d' ' -f6 | grep HDMI | tr -d '\n') --off
+    xrandr --output $hdmi --off
     echo "No HDMI"
 fi
 ~/.cache/redpaper/wallpaper.sh
