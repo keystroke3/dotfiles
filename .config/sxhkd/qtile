@@ -30,7 +30,7 @@ super + space
     $HOME/.config/rofi/launchers/colorful/launcher.sh
 
 super + d
-	redpaper -a
+	redpaper -d
 
 super + c
 	redpaper -c

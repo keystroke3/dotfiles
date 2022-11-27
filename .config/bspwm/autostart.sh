@@ -37,8 +37,8 @@ for program in "${lazy_load[@]}"; do
 done 
 
 setxkbmap -option compose:ralt &
+qbittorrent-nox -d &
 wmname LG3D &
-alacritty &
 # if pgrep -f 'discord';then
 # 	:
 # else

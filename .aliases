@@ -3,9 +3,12 @@
 
 # Allows killing of processes using fzf
 # save path on cd
+
+
+
 fr(){
-    [[ -z $1 ]] && echo 'No find string provided' && exit 1
-    [[ -z $2 ]] && echo 'No replace string provided' && exit 1
+    [[ -z $1 ]] && echo 'No find string provided' && return 1
+    [[ -z $2 ]] && echo 'No replace string provided' && return 1
     if [[ -n $3 ]]; then
         sed -i "s/$1/$2/g" $3
     else
@@ -291,7 +294,7 @@ alias gcd="git checkout dev"
 alias gcs="git checkout staging"
 alias gcg="git checkout graphql"
 alias gam="git add \*migrations\*"
-alias gmm="git merge "$1" -m "$(git log -1 --pretty=%B $1)""
+# alias gmm="git merge "$1" -m "$(git log -1 --pretty=%B $1)""
 alias start="sudo systemctl start"
 alias stop="sudo systemctl stop"
 alias restart="sudo systemctl restart"
@@ -341,4 +344,6 @@ alias rr="exec ${SHELL} -l; clear"
 alias arco="ssh ted@192.168.1.9"
 alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
-alias ctlu="systemctl --user"
+alias uctl="systemctl --user"
+alias du="du -h"
+alias ffhvec="ffmpeg -i $1 -c:v hevc_nvenc -preset slow -rc vbr -cq 0 -qmin:v 19 -qmax:v 25 -look_ahead 32 -pix_fmt p010le -c:a copy -c:s copy -vf scale=768:480"

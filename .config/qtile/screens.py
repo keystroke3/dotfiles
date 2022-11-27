@@ -179,7 +179,7 @@ primary_bar = [
         background=colors[theme][2],
         font=xf,
         fontsize=xx,
-        format="  {down} ",
+        format="  {down}|{up} ",
         interface="eno1",
     ),
     widget.PulseVolume(

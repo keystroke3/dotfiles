@@ -19,12 +19,13 @@ kdeconnect-indicator &
 setxkbmap -option compose:ralt &
 pw-jack qjackctl &
 copyq & disown
-LIBVA_DRIVER_NAME=i914 discord \
-      --ignore-gpu-blocklist \
-      --disable-features=UseOzonePlatform \
-      --enable-features=VaapiVideoDecoder \
-      --use-gl=desktop \
-      --enable-gpu-rasterization \ 
-      --enable-zero-copy &
+discord &
+# LIBVA_DRIVER_NAME=i914 discord \
+#       --ignore-gpu-blocklist \
+#       --disable-features=UseOzonePlatform \
+#       --enable-features=VaapiVideoDecoder \
+#       --use-gl=desktop \
+#       --enable-gpu-rasterization \ 
+#       --enable-zero-copy &
 
 qbittorrent-nox -d &
