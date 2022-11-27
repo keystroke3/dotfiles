@@ -1,4 +1,13 @@
 #!/bin/bash
-notify-send "MPV" "Loading content" && mpv $(xclip -o) || notify-send   "Mpv" "Invlid Url"
+link="$(xclip -o)"
+if echo "$link" | grep -q youtu.be; then
+    link=$(echo "$link" | sed 's|youtu.be/|youtube.com/watch?v=|')
+fi
+if echo "$link" | grep -q instagram; then
+    loop=inf
+    link=$(echo $link | sed 's/?.*//')
+else
+    loop=no
+fi
 
-
+notify-send "MPV" "Loading content" && mpv "$link" --loop=$loop || notify-send   "MPV - Unable to open link" "$link"

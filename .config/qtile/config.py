@@ -61,7 +61,6 @@ def window_to_next_group(qtile):
 
 win_list = []
 def sticky_win(qtile):
-    global win_list
     if qtile.current_window in win_list:
         win_list.remove(qtile.current_window)
     else:
@@ -69,9 +68,26 @@ def sticky_win(qtile):
 
 @hook.subscribe.setgroup
 def move_win():
+    c_win = qtile.current_window
     for w in win_list:
-        if not w.is_visible():
+        if not w.cmd_is_visible:
             w.togroup(qtile.current_group.name)
+            if w.info()['floating']:
+                w.cmd_bring_to_front()
+            if c_win:
+                c_win.focus(warp=False)
+
+@hook.subscribe.group_window_add
+def sticky_to_front(g, new_w):
+    for w in win_list:
+        if w.cmd_is_visible and w.info()['floating']:
+            w.cmd_bring_to_front()
+            new_w.focus(warp=False)
+
+@hook.subscribe.client_killed
+def remove_sticky_windows(window):
+    if window in win_list:
+        win_list.remove(window)
 
 keys = [
     # Most of our keybindings are in sxhkd file - except these
@@ -96,61 +112,41 @@ keys = [
         [mod, "control"],
         "l",
         lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
     ),
     Key(
         [mod, "control"],
         "Right",
         lazy.layout.grow_right(),
-        lazy.layout.grow(),
-        lazy.layout.increase_ratio(),
-        lazy.layout.delete(),
     ),
     Key(
         [mod, "control"],
         "h",
         lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
     ),
     Key(
         [mod, "control"],
         "Left",
         lazy.layout.grow_left(),
-        lazy.layout.shrink(),
-        lazy.layout.decrease_ratio(),
-        lazy.layout.add(),
     ),
     Key(
         [mod, "control"],
         "k",
         lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
     ),
     Key(
         [mod, "control"],
         "Up",
         lazy.layout.grow_up(),
-        lazy.layout.grow(),
-        lazy.layout.decrease_nmaster(),
     ),
     Key(
         [mod, "control"],
         "j",
         lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
     ),
     Key(
         [mod, "control"],
         "Down",
         lazy.layout.grow_down(),
-        lazy.layout.shrink(),
-        lazy.layout.increase_nmaster(),
     ),
     # FLIP LAYOUT FOR BSP
     Key([mod, "mod1"], "k", lazy.layout.flip_up()),
@@ -192,7 +188,7 @@ def window_to_previous_screen(qtile, switch_group=False, switch_screen=False):
         group = qtile.screens[i - 1].group.name
         qtile.current_window.togroup(group, switch_group=switch_group)
         if switch_screen == True:
-            qtile.toscreen(i - 1)
+            qtile.cmd_to_screen(i - 1)
 
 
 def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
@@ -201,7 +197,7 @@ def window_to_next_screen(qtile, switch_group=False, switch_screen=False):
         group = qtile.screens[i + 1].group.name
         qtile.current_window.togroup(group, switch_group=switch_group)
         if switch_screen == True:
-            qtile.toscreen(i + 1)
+            qtile.cmd_to_screen(i + 1)
 
 
 keys.extend(
@@ -209,12 +205,12 @@ keys.extend(
         # MOVE WINDOW TO NEXT SCREEN
         Key(
             [mod, "shift"],
-            "Right",
+            "Left",
             lazy.function(window_to_next_screen, switch_screen=True),
         ),
         Key(
             [mod, "shift"],
-            "Left",
+            "Right",
             lazy.function(window_to_previous_screen, switch_screen=True),
         ),
     ]
@@ -309,9 +305,9 @@ wmname = "LG3D"
 @hook.subscribe.startup_once
 def autostart():
     subprocess.Popen([home + "/.config/qtile/scripts/autostart.sh"])
+    subprocess.Popen(["xsetroot", "-curser_name", "left_ptr"])
 
 
 @hook.subscribe.startup
 def start_always():
-    subprocess.Popen(["xsetroot", "-curser_name", "left_ptr"])
-    subprocess.Popen(["setxkbmap" "-option" "compose:ralt"])
+    subprocess.run([home + "/.bin/setcompose"])
