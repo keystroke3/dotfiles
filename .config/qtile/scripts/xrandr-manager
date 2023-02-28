@@ -1,14 +1,14 @@
 #!/bin/bash
 edp=$(xrandr | grep -w connected | awk '{print $1}' | grep eDP | tr -d '\n')
 hdmi=$(xrandr | grep -w connected | awk '{print $1}' | grep HDMI | tr -d '\n')
-if [ ! -z "$hdmi" ];then
-	xrandr --output "$hdmi" --rate 144.00 --mode 1920x1080 --left-of "$edp" --output "$edp" --rate 144.00 --mode 1920x1080
-    echo "Hdmi set to $hdmi"
-else
-	xrandr --output "$edp" --rate 144.00 --mode 1920x1080
-    xrandr --output $hdmi --off
-    echo "No HDMI"
-fi
+# if [ ! -z "$hdmi" ];then
+# 	xrandr --output "$hdmi" --rate 144.00 --mode 1920x1080 --right-of "$edp" --output "$edp" --rate 144.00 --mode 1920x1080
+#     echo "Hdmi set to $hdmi"
+# else
+# 	xrandr --output "$edp" --rate 144.00 --mode 1920x1080
+#     xrandr --output $hdmi --off
+#     echo "No HDMI"
+# fi
 ~/.cache/redpaper/wallpaper.sh
 	
 	

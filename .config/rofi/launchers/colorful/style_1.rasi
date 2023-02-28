@@ -8,7 +8,6 @@
  */
 
 configuration {
-	// font:							"Iosevka Nerd Font 10";
 	font:							"Comfortaa 10";
     show-icons:                     true;
 	// icon-theme: 					"Sardi Flat Evopop";

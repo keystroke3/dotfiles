@@ -47,13 +47,13 @@ def six_to_ten():
 
 def primary_box_groups():
     if len(get_monitors()) > 1:
-        return six_to_ten()
+        return one_to_five()
     return one_to_five() + six_to_ten()
 
 
 def secondary_box_groups():
     if len(get_monitors()) > 1:
-        return one_to_five()
+        return six_to_ten()
     return None
 
 
@@ -61,7 +61,7 @@ primary_box = widget.GroupBox(
     name="primary", visible_groups=primary_box_groups(), **group_props
 )
 secondary_box = widget.GroupBox(
-    name="secondary", visible_groups=one_to_five(), **group_props
+    name="secondary", visible_groups=secondary_box_groups(), **group_props
 )
 secondary_bar = [
     secondary_box,
@@ -203,7 +203,7 @@ screens = [
         top=bar.Bar(
             widgets=primary_bar,
             size=30,
-            margin=[7, 3, 0, 5],
+            margin=[5, 5, 0, 5],
             background=colors[theme][1],
             foreground=colors[theme][0],
         ),
@@ -212,7 +212,7 @@ screens = [
         top=bar.Bar(
             widgets=secondary_bar,
             size=30,
-            margin=[5, 5, 0, 5],
+            margin=[7, 3, 0, 5],
             background=colors[theme][1],
             foreground=colors[theme][0],
         ),

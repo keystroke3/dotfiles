@@ -15,6 +15,10 @@ fr(){
         rg "$1" "$(pwd)" | xargs sed -i "s/$1/$2/g" 
     fi
 }
+scratch(){
+    [ -z $1 ] && vim
+    vim ~/scratchpad/"$1"
+}
 
 dbexport(){
     for i in $apps; do py manage.py dumpdata "$i" > "$i.json" && echo "exported $i";done
@@ -32,6 +36,9 @@ function cd {
 # restore last saved path
 if [ -f ~/.config/zsh/lastdir ]
     then cd "$(cat ~/.config/zsh/lastdir)"
+    else
+        echo "$HOME" > ~/.config/zsh/lastdir
+        cd $HOME
 fi
 
 swap(){
@@ -172,11 +179,9 @@ localip(){
     ip a | grep 192.168 | cut -d ' ' -f6 | cut -d '/' -f1
 }
 ignore() {
-    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" |
-	    sed 's/^#.*$//g' |
-	    sed '/^$/d' > .gitignore &&
-	    echo ".gitignore" >> .gitignore;
-	    echo ".vscode" >> .gitignore;
+    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" > .gitignore
+    echo ".gitignore" >> .gitignore;
+    echo ".vscode" >> .gitignore;
         
 }
 
@@ -214,7 +219,7 @@ alias gv="cd ~/Videos"
 alias gd="cd ~/Downloads"
 alias fzf="fzf --layout=reverse --height=40%"
 alias zz="vim ~/.zprofile"
-alias zh="bat ~/.zhistory"
+alias zh="cat ~/.zhistory | fzf"
 alias vi="vim"
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
@@ -255,7 +260,7 @@ alias sb="vim ~/.config/bspwm/bspwmrc"
 alias as="vim ~/.config/bspwm/autostart.sh"
 alias path='echo -e ${PATH//:/\\n}'
 alias p="ping google.com"
-alias tv="ping -c 1 -w 2 192.168.100.2 &>/dev/null && echo 'on' || echo 'off'"
+alias tv="ping -c 1 -w 2 192.168.0.4 &>/dev/null && echo 'on' || echo 'off'"
 alias al="vim ~/.aliases && clear && source ~/.zshrc"
 alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
@@ -283,8 +288,8 @@ alias z="vim ~/.zshrc"
 alias rsync="rsync -ah --progress"
 alias halfdark="vim /home/ted/.config/wal/colorschemes/dark/one-half-dark.json"
 alias pq="pacman -Q | fzf"
-alias pr="sudo protonvpn r"
-alias pd="sudo protonvpn d"
+alias pr="protonvpn r"
+alias pd="protonvpn d"
 alias feh="feh -d --edit -. -B black ."
 alias gst="git status"
 alias ga="git add -A"
@@ -322,14 +327,11 @@ alias ex="extract"
 alias less="bat"
 alias dupe="czkawka_cli"
 alias pc="sudo netstat -tulnp | grep "$1""
-alias sst="ssh linkastream.co"
-alias ddev="ssh ubuntu@photodino.de"
-alias dutils="ssh ubuntu@shop.foto-dino.de"
-alias dstage="ssh foto-dino.com"
-alias dprod="ssh ubuntu@foto-dino.de"
-alias dprodf="ssh react@foto-dino.de"
-alias dprodb="ssh backend@foto-dino.de"
-alias sheena="ssh sheena"
+alias sst="ssh primera"
+alias ddev="ssh dino-dev"
+alias dutils="ssh dino-utils"
+alias dstage="ssh dino-stage"
+alias dprod="ssh dino-prod"
 alias cvr="coverage run --omit='*/.virtualenvs/*,*/tests_/*' manage.py test "$1""
 alias cvs="coverage html"
 alias ls="exa --color=always --group-directories-first"
@@ -346,4 +348,6 @@ alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
 alias uctl="systemctl --user"
 alias du="du -h"
-alias ffhvec="ffmpeg -i $1 -c:v hevc_nvenc -preset slow -rc vbr -cq 0 -qmin:v 19 -qmax:v 25 -look_ahead 32 -pix_fmt p010le -c:a copy -c:s copy -vf scale=768:480"
+alias ffhvec="ffmpeg -i $1 -c:v: hevc_nvenc -preset slow -rc vbr -cq 0 -qmin:v 19 -qmax:v 25 -look_ahead 32 -pix_fmt p010le -c:a copy -c:s copy -vf scale=768:480 $2"
+alias gtr="cd ~/Projects/Foto-Dino/refactor/Foto_Dino"
+alias diffc="diff --text --color"
