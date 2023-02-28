@@ -1,0 +1,9 @@
+#!/bin/bash
+SLEEP=$(journalctl -n2 -u sleep.target | awk -F' ' '/Reached/ {print $3}' | xargs -I '{}' date -d '{}' "+%s")
+WAKE=$(journalctl -n2 -u sleep.target | awk -F' ' '/Stopped/ {print $3}' | xargs -I '{}' date -d '{}' "+%s")
+DIFF=$(($WAKE-$SLEEP))
+((h=${DIFF}/3600))
+((m=(${DIFF}%3600)/60))
+((s=${DIFF}%60))
+printf "%02dh:%02dm:%02ds\n" $h $m $s
+

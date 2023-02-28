@@ -14,34 +14,34 @@ mod3 = "shift"
 home = os.path.expanduser("~")
 
 groups = [
-    Group("1", label="ﱣ"),
-    Group("2", label="ﱣ"),
-    Group("3", label="ﱣ"),
-    Group("4", label="ﱣ"),
-    Group("5", label="ﱣ"),
-    Group("6", label="ﱣ"),
-    Group("7", label="ﱣ"),
     Group(
-        "8",
+        "1",
         label="ﱣ",
         matches=[
-            Match(wm_class=["Tauon Music Box"]),
+            Match(wm_class=["thunderbird"]),
         ],
     ),
     Group(
-        "9",
+        "2",
         label="ﱣ",
         matches=[
             Match(wm_class=["discord"]),
         ],
     ),
     Group(
-        "0",
+        "3",
         label="ﱣ",
         matches=[
-            Match(wm_class=["thunderbird"]),
+            Match(wm_class=["Tauon Music Box"]),
         ],
     ),
+    Group("4", label="ﱣ"),
+    Group("5", label="ﱣ"),
+    Group("6", label="ﱣ"),
+    Group("7", label="ﱣ"),
+    Group("8", label="ﱣ"),
+    Group("9", label="ﱣ"),
+    Group("0", label="ﱣ"),
 ]
 
 
@@ -223,10 +223,10 @@ def go_to_group(name: str):
             qtile.groups_map[name].cmd_toscreen()
             return
         if name in "12345":
-            qtile.focus_screen(1)  # this was 0 set to zero which corresponded to eDP2
+            qtile.focus_screen(0)  # this was 0 set to zero which corresponded to eDP2
             qtile.groups_map[name].cmd_toscreen()
         else:
-            qtile.focus_screen(0)
+            qtile.focus_screen(1)
             qtile.groups_map[name].cmd_toscreen()
 
     return _inner

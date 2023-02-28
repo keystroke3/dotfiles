@@ -48,3 +48,5 @@ let g:ycm_add_preview_to_completeopt = 1
 let g:ycm_autoclose_preview_window_after_insertion = 0
 set viminfo+=n~/.vim/viminfo
 set nu rnu
+nnoremap <silent> <F2> :set relativenumber! <bar> set nu!<CR>
+

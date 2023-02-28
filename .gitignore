@@ -4,6 +4,7 @@ zsh/
 *fzfjump
 *fzfopen
 *videofinder.log
+!.config/logid.cfg
 !.config/alacritty
 !.config/paru
 !.config/bspwm
