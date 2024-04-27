@@ -1,0 +1,7 @@
+mimeo
+hyprpicker
+grimblast-git
+fuzzel
+wlogout
+catppuccin
+freetube
