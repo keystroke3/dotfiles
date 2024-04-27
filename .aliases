@@ -1,10 +1,17 @@
-#!/bin/sh
-#custom functions
+#!/bin/bash
+#
 
-# Allows killing of processes using fzf
-# save path on cd
-
-
+wgc(){
+    if [ "$1" == "d" ]; then
+        profile=$(ip a | grep POINTOPOINT | cut -d':' -f2 | tr -d ' ')
+        sudo wg-quick down $profile
+        return 0
+    fi
+    profile=$(ls ~/wireguard/ --color=never | fzf)
+    if [ -n profile ];then
+        sudo wg-quick up $( echo $profile | cut -d'.' -f1)
+    fi
+}
 
 fr(){
     [[ -z $1 ]] && echo 'No find string provided' && return 1
@@ -30,30 +37,58 @@ dbimport(){
 
 function cd {
     builtin cd "$@"
-    pwd > ~/.config/zsh/lastdir
+    pwd > ~/.zsh/lastdir
 }
 
 # restore last saved path
-if [ -f ~/.config/zsh/lastdir ]
-    then cd "$(cat ~/.config/zsh/lastdir)"
+if [ -f ~/.zsh/lastdir ]
+    then cd "$(cat ~/.zsh/lastdir)"
     else
-        echo "$HOME" > ~/.config/zsh/lastdir
+        echo "$HOME" > ~/.zsh/lastdir
         cd $HOME
 fi
 
 swap(){
-    mv "$1" "_$1"
-    mv "$2" "$1"
-    mv "_$1" "$2"
+    mv "$1" "$1_" &&
+    mv "$2" "$1" &&
+    mv "$1_" "$2"
 }
 
 o(){
-    fuzz=$(rg -j 4 --no-ignore --files ~/ ~/.ssh/ ~/.config/ ~/.local/share/applications/ ~/.bin/ | fzf --reverse --height 40%)
+    fuzz=$(rg -j 4 --no-ignore --files ~/ ~/.ssh/ ~/.bin /media/videos  | fzf --reverse --height 40%)
     [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || mimeo "$fuzz") || return 0
 }
 
+cfg(){
+    fuzz=$(rg -j 4 --no-ignore --files ~/.config | fzf --reverse --height 40%)
+    [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || vim "$fuzz") || return 0
+}
+
+pj(){
+    fuzz=$(fd -t d . $HOME/Projects | fzf --reverse --height 40%)
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -d $fuzz ]
+    then
+        cd "$fuzz" && reset 
+    fi
+}
+
+
+mntj(){
+    fuzz=$(fd -t d . $HOME/ | fzf --reverse --height 40%)
+    if [ -z $fuzz ]
+    then 
+        return 0
+    elif [ -d $fuzz ]
+    then
+        cd "$fuzz" && reset 
+    fi
+}
+
 j(){
-    fuzz=$(fd -t d . $HOME $HOME/.config/ $HOME/.bin/ $HOME/.local/share/applications/ | fzf --reverse --height 40%)
+    fuzz=$(fd -t d . $HOME $HOME/Music/ $HOME/Videos | fzf --reverse --height 40%)
     if [ -z $fuzz ]
     then 
         return 0
@@ -86,20 +121,18 @@ jl(){
     fi
 }
 
-gr(){
-    rundir=/run/media/$(whoami)
-    list=$(ls $rundir | wc -l)
-    if [ $list -eq 1 ];then
-        cd "$rundir/$(ls $rundir)"
-    elif [ $list -eq 0 ]; then
-        echo "no drives"
-    else
-        cd "$rundir/$(ls $rundir | fzf --reverse)"
-    fi
+
+
+mkpw(){
+  lenth=8
+  [ ! -z $1 ] && lenth=$1
+  PW=$(tr -dc 'A-Za-z0-9!$%&*+,-./=?@^_~' </dev/urandom | head -c $lenth)
+  echo $PW
 }
 
-
-
+secret(){
+    echo "$(tr -dc 'A-Za-z0-9!$%&()*+,-./<=>?@[]^_{|}~' </dev/urandom | head -c 50)"
+}
 
 py(){
     $VIRTUAL_ENV/bin/python "$@"
@@ -123,7 +156,7 @@ remind(){
     esac 
     done
     (sleep $delay && notify-send "$note" &&
-        mpv /usr/share/sounds/freedesktop/stereo/service-login.oga) & disown
+        mpv /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
 }
 ytd(){
     a=
@@ -175,17 +208,31 @@ pt(){
     git push
     cd -
 }
+hclient(){
+    clients=$(hyprctl clients | sed 's/\t//g' |  grep -iE 'class|title' | grep -v ': $')
+    [ ! -z $1 ] && echo $(echo $clients | grep -i $1) || echo $clients
+}
+
 localip(){
     ip a | grep 192.168 | cut -d ' ' -f6 | cut -d '/' -f1
 }
 ignore() {
-    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" > .gitignore
-    echo ".gitignore" >> .gitignore;
-    echo ".vscode" >> .gitignore;
+    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" | grep -v 'http' > .gitignore
+    echo ".gitignore\n.vscode\n.env" >> .gitignore;
         
+}
+aignore(){
+    echo '\n' >> .gitignore
+    curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" | grep -v 'http' >> .gitignore
+}
+
+mvshuffle(){
+    mpv --shuffle "$HOME/Videos/Music Videos/" & disown
 }
 
 # end functions
+
+
 alias lp="l -p"
 alias cronhelp=" echo '
 # ┌───────────── minute (0 - 59)
@@ -214,15 +261,13 @@ alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
 alias bp="bpython"
 alias pkg="paru -Q | fzf"
-alias gp="cd ~/Pictures"
-alias gv="cd ~/Videos"
-alias gd="cd ~/Downloads"
+alias gd="go doc"
 alias fzf="fzf --layout=reverse --height=40%"
 alias zz="vim ~/.zprofile"
 alias zh="cat ~/.zhistory | fzf"
 alias vi="vim"
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
+alias df="df -h"                          # human-readable size
+alias free="free -m"                      # show sizes in MB
 alias more=less
 alias update="paru -Syu"
 alias get="paru -S"  
@@ -230,19 +275,9 @@ alias search="paru -Fs"
 alias wr="wget -r -np -nH --cut-dirs=3 -p -e robots=off -U mozilla -c -R.html"
 alias yl="youtube-dl -f '[height<=480]'"
 alias kick="paru -Rns"
-alias profile="sudo vim ~/.bash_profile"
-alias wipe="wipe -rp3"
 alias mv="mv -v"
-alias reghelp="gthumb /home/ted/Pictures/file-help.png"
-alias c="clear"
-alias greeters="ls -l /usr/share/xgreeters"
-alias blacklist="sudo nano /etc/modprobe.d/blacklist.conf"
 alias wget="wget -U Mozilla/5.0 -c"
 alias s="speedtest --no-up"
-alias wl="wget -U Mozilla/5.0 -c --limit-rate=300K"
-alias rm="rm -r"
-alias clone="cd gitclones& git clone"
-alias y="youtube-dl -f '[height<=1080]'"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
@@ -254,31 +289,14 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias sudo='sudo '
 alias reload="exec ${SHELL} -l; clear"
-alias sc="vim ~/.config/sxhkd/sxhkdrc"
 alias pb="bpython"
-alias sb="vim ~/.config/bspwm/bspwmrc"
-alias as="vim ~/.config/bspwm/autostart.sh"
 alias path='echo -e ${PATH//:/\\n}'
-alias p="ping google.com"
-alias tv="ping -c 1 -w 2 192.168.0.4 &>/dev/null && echo 'on' || echo 'off'"
-alias al="vim ~/.aliases && clear && source ~/.zshrc"
+alias al="vim ~/.aliases && clear && reload"
 alias smb="sudo vim /etc/samba/smb.conf"
 alias mpvhd='mpv --ytdl-format="(best[height<=1080]/bestvideo+bestaudio)"'
 alias mpv10='mpv --ytdl-format="(best[height=1080])"'
-alias tw1='mpv --ytdl-format="(best[height=480])"'
-alias tw2='mpv --ytdl-format="(best[height=360])"'
-alias xfluxx="xflux -l 1 -g 38 -k 4000"
-alias lampp="sudo /opt/lampp/lampp"
-alias keygen='ssh-keygen -t rsa -b 4096 -C "keystroke33@gmail.com"'
-alias wgeta="wget --recursive --no-parent"
-alias wgeti='wget -r -np -R "index.html*"'
-alias wipe='wipe -rvVp 3'
-alias nano='nano -x'
 alias dd='dd status=progress'
-alias cm="find ~/Music -empty -type d -delete& echo music cleaned..."
-alias mh="find -type f -exec mv -v {} . \;"
-alias python="env python3"
-alias carousel="~/.config/polybar/scripts/theme-change-prompt.sh --show"
+# alias python="env python3"
 alias ytv="cd ~/Videos/youtube"
 alias copy="xclip -sel c < $1"
 alias rp="cd ~/Pictures/Redpaper"
@@ -286,19 +304,17 @@ alias v="vim ~/.vim/vimrc"
 alias z="vim ~/.zshrc"
 #alias ytd="youtube-dl -f 'bestvideo[height<=1080]+bestaudio' "$@""
 alias rsync="rsync -ah --progress"
-alias halfdark="vim /home/ted/.config/wal/colorschemes/dark/one-half-dark.json"
 alias pq="pacman -Q | fzf"
 alias pr="protonvpn r"
 alias pd="protonvpn d"
 alias feh="feh -d --edit -. -B black ."
 alias gst="git status"
-alias ga="git add -A"
 alias gch="git checkout"
 alias gcm="git checkout main"
 alias gcd="git checkout dev"
 alias gcs="git checkout staging"
-alias gcg="git checkout graphql"
 alias gam="git add \*migrations\*"
+alias gcon="git diff --name-only --diff-filter=U"
 # alias gmm="git merge "$1" -m "$(git log -1 --pretty=%B $1)""
 alias start="sudo systemctl start"
 alias stop="sudo systemctl stop"
@@ -306,28 +322,23 @@ alias restart="sudo systemctl restart"
 alias pipm="python3 -m pip"
 alias pyserv="python -m http.server"
 alias crontab="export VISUAL=nvim; crontab"
-alias myip="wget http://ipecho.net/plain -O - -q ; echo"
+alias myip="curl -s 'https://api.myip.com' | jq"
 alias lorem="lazylorem"
-alias batt="upower -i `upower -e | grep 'BAT'` | grep percentage | awk -F ' ' '{print $2}'"
 alias migrate="/usr/bin/env python manage.py migrate"
+alias gomigrate="$HOME/go/bin/migrate"
 alias mm="/usr/bin/env python manage.py makemigrations"
-alias rs="export DEBUG=True;/usr/bin/env python manage.py runserver"
+alias rs="export DEBUG=True;/usr/bin/env python manage.py runserver 127.0.0.1:8002"
 alias xp="xprop | grep WM_CLASS"
 alias status="sudo systemctl status"
 alias enable="sudo systemctl enable"
 alias mlock="multilockscreen"
 alias ipy="ipython"
-alias lamp="sudo /opt/lampp/xampp"
-alias uc="ucollage"
 alias yay="paru"
-alias vs="nvim ~/.config/nvim/general/settings.vim"
-alias vn="nvim ~/.config/nvim/init.vim"
 alias kdif="kitty +kitten diff"
 alias ex="extract"
-alias less="bat"
+# alias less="bat --pager=always"
 alias dupe="czkawka_cli"
 alias pc="sudo netstat -tulnp | grep "$1""
-alias sst="ssh primera"
 alias ddev="ssh dino-dev"
 alias dutils="ssh dino-utils"
 alias dstage="ssh dino-stage"
@@ -347,7 +358,42 @@ alias arco="ssh ted@192.168.1.9"
 alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
 alias uctl="systemctl --user"
-alias du="du -h"
 alias ffhvec="ffmpeg -i $1 -c:v: hevc_nvenc -preset slow -rc vbr -cq 0 -qmin:v 19 -qmax:v 25 -look_ahead 32 -pix_fmt p010le -c:a copy -c:s copy -vf scale=768:480 $2"
-alias gtr="cd ~/Projects/Foto-Dino/refactor/Foto_Dino"
 alias diffc="diff --text --color"
+alias hcs="sudo hwclock -s"
+alias codeapi="cd ~/Projects/dino/api/Foto_Dino && code ~/Projects/dino/api"
+alias codesala="cd ~/Projects/copysala && code ~/Projects/copysala"
+alias codeplay="cd ~/Projects/goplay && code ~/Projects/goplay"
+alias codeblog="cd ~/Projects/blog && code ~/Projects/blog"
+alias codepenny="cd ~/Projects/pennychart/ && code ~/Projects/pennychart/"
+alias codedev="cd ~/Projects/bootdev && code ~/Projects/bootdev"
+alias codeknown="cd ~/Projects/known && code ~/Projects/known"
+alias raptorcode="code ~/Projects/dino/DinoRatpor"
+alias postjson="curl -H 'Content-Type:application/json' -X POST -s"
+alias patchjson="curl -H 'Content-Type:application/json' -X PATCH -s"
+alias curljson="curl -H 'Content-Type:application/json' -X -s"
+alias utc="date +'%Y-%m-%d %H:%M:%S' -d"
+alias djangologs="less ~/.api_data/logs/django_debug.log"
+alias hserve="hugo serve --noHTTPCache --ignoreCache --disableFastRender --port=9000"
+alias denv="less --plain ~/.api_data/local_env"
+alias codegoss="cd ~/Projects/gowsc && code ."
+alias leetcode="cd ~/Projects/LeetCode && code ."
+alias dc="docker compose"
+alias dps="docker ps"
+alias dcu="docker compose up -d"
+alias dcd="docker compose down"
+alias dports="docker ps --format \"table {{.Names}}\t{{.Ports}}\""
+alias vdc="vim docker-compose.yml"
+alias dtoken="grep -i 'ACCESS' ~/.api_data/local_env | cut -d'=' -f2 | clip.exe"
+alias gr="go run ."
+alias hyprgrep="hyprctl clients -j | grep -v 'grep' | grep $1 -B 12 -A 11"
+alias vcfg="cd ~/.config/nvim/ && vim ."
+alias du="du -h"
+alias nv="neovide"
+alias nrs="npm run serve"
+alias rsn="npm run serve"
+alias rns="npm run serve"
+alias h="cat ~/.zhistory | fzf "
+alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
+alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
+alias wrandr='wlr-randr'

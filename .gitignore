@@ -1,4 +1,5 @@
 zsh/
+*.tmp
 .config/*
 !.bin/*
 *fzfjump
@@ -13,6 +14,10 @@ zsh/
 !.config/lf
 !.config/mpv
 !.config/copyq/copyq.conf
+!.config/MangoHud
+!.config/waybar
+!.config/hypr
+!.config/wlogout
 .config/mpv/watch_later
 !.config/ranger
 !.config/rofi
@@ -21,7 +26,6 @@ zsh/
 !.config/vim
 !.config/nvim
 .config/vim/plugged
-*.tmp
 !.config/wallpapers
 !.config/yay
 !.config/qtile
