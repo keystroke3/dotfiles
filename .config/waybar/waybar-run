@@ -1,0 +1,7 @@
+#!/bin/bash
+pkill -x waybar
+waybar
+inotifywait -m -e modify --format '%w%f' ~/.config/waybar --exclude ~/.config/waybar/waybar-run | while read FILE
+do
+    pkill -x waybar && waybar
+done
