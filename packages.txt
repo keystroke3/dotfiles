@@ -31,3 +31,4 @@ yt-dlp
 cronie
 bind
 7zip
+distutils

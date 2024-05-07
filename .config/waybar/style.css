@@ -15,14 +15,15 @@ window#waybar {
 }
 
 #workspaces {
-	background: #282828;
-	 margin: 0 5px;
-  padding: 0px 5px 0px 5px;
-	border-radius: 8px;
-  border: solid 0px #f4d9e1;
-  font-weight: normal;
-  font-style: normal;
+    background: #282828;
+    margin: 0 5px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 8px;
+    border: solid 0px #f4d9e1;
+    font-weight: normal;
+    font-style: normal;
 }
+
 #workspaces button {
     padding: 0px 5px;
     border-radius: 8px;
@@ -36,32 +37,38 @@ window#waybar {
 }
 
 #workspaces button:hover {
-	background-color: #E6B9C6;
-	color: black;
-	border-radius: 8px;
+    background-color: #E6B9C6;
+    color: black;
+    border-radius: 8px;
 }
 
-#custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher {
-	background: transparent;
-	padding: 5px 5px 5px 5px;
-	margin: 0 5px;
+#custom-date,
+#clock,
+#battery,
+#pulseaudio,
+#network,
+#custom-randwall,
+#custom-launcher {
+    background: transparent;
+    padding: 5px 5px 5px 5px;
+    margin: 0 5px;
     border-radius: 8px;
     border: solid 0px #f4d9e1;
 }
 
 #custom-date {
-	color: #D3869B;
+    color: #D3869B;
 }
 
 #custom-power {
-	color: #24283b;
-	background-color: #db4b4b;
-	border-radius: 5px;
-	margin-right: 10px;
-	margin-top: 5px;
-	margin-bottom: 5px;
-	margin-left: 0px;
-	padding: 5px 10px;
+    color: #24283b;
+    background-color: #db4b4b;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    padding: 5px 10px;
 }
 
 #tray {
@@ -155,18 +162,18 @@ window#waybar {
 }
 
 #custom-playerctl {
-	background: #282828;
-	padding-left: 15px;
-  padding-right: 14px;
-	border-radius: 8px;
-  /*border-left: solid 1px #282738;*/
-  /*border-right: solid 1px #282738;*/
-  margin-top: 5px;
-  margin-bottom: 5px;
-  margin-left: 0px;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 16px;
+    background: #282828;
+    padding-left: 15px;
+    padding-right: 14px;
+    border-radius: 8px;
+    /*border-left: solid 1px #282738;*/
+    /*border-right: solid 1px #282738;*/
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 0px;
+    font-weight: normal;
+    font-style: normal;
+    font-size: 16px;
 }
 
 #custom-playerlabel {
@@ -199,6 +206,17 @@ window#waybar {
     padding: 0 20px;
     color: #e5809e;
     background-color: #1E1E2E;
+}
+
+#custom-gpuinfo {
+    background-color: #282828;
+    /*color: #FABD2D;*/
+    border-radius: 8px;
+    margin: 0 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 0px 10px 0px 10px;
+    font-weight: bold;
 }
 
 #cpu {
