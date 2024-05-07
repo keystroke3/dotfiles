@@ -17,6 +17,7 @@
         "custom/vpnstatus",
         "cpu",
         "memory",
+        "custom/gpuinfo",
         "pulseaudio",
         "tray",
         "clock"
@@ -134,13 +135,13 @@
         ]
     },
     "memory": {
-        "format": "󰍛 {}%",
-        "format-alt": "󰍛 {used}/{total} GiB",
+        "format": " {}%",
+        "format-alt": " {used}/{total} GiB",
         "interval": 5
     },
     "cpu": {
-        "format": "󰻠 {usage}%",
-        "format-alt": "󰻠 {avg_frequency} GHz",
+        "format": " 󰍛 {usage}%",
+        "format-alt": "󰍛 {avg_frequency} GHz",
         "interval": 5
     },
     "disk": {
@@ -151,10 +152,10 @@
     },
     "network": {
         "format-wifi": "󰤨",
-        "format-ethernet": " {bandwidthDownBytes}",
-        "format-linked": " {ifname} (No IP)",
+        "format-ethernet": "󰈀  {bandwidthDownBytes}",
+        "format-linked": "󰈀  {ifname} (No IP)",
         "format-disconnected": "󰤭",
-        "format-alt": " {ipaddr}",
+        "format-alt": "󰈀  {ipaddr}",
         "tooltip-format": "{essid}",
         "interval": 1,
         "on-click-right": "nm-connection-editor"
@@ -207,6 +208,16 @@
         "exec": "exec $HOME/.config/waybar/scripts/vpnstatus",
         "tooltip": "false",
         "signal": 8,
+        // "all-outputs": "true",
+        // "return-type": "string"
+    },
+    "custom/gpuinfo": {
+        "format": "󰢮  {}",
+        "interval": 5,
+        "exec": "exec $HOME/.config/waybar/scripts/gpu_info m",
+        "tooltip": "false",
+        "signal": 8,
+        "on-click": "exec $HOME/.config/waybar/scripts/gpu_info m",
         // "all-outputs": "true",
         // "return-type": "string"
     },

@@ -1,7 +1,13 @@
 #!/bin/bash 
-if ip a | grep 'tun' -q;then
-    printf " $(ps -p $(pgrep -f openvpn) -o cmd --no-headers | cut -d' ' -f3 | rev | cut -d'/' -f1 | rev | cut -d'.' -f1 | tr '[:lower:]' '[:upper:]')"
+if ip a | grep -iE 'tun|proton' -q;then
+    if [ -f /tmp/last_cc ]; then
+        printf " $(cat /tmp/last_cc)"
+    else
+        curl -s 'https://api.myip.com' | jq .cc | sed 's/"//g' > /tmp/last_cc
+    fi
+    # printf " $(ps -p $(pgrep -f openvpn) -o cmd --no-headers | cut -d' ' -f3 | rev | cut -d'/' -f1 | rev | cut -d'.' -f1 | tr '[:lower:]' '[:upper:]')"
 else
+    [ -f /tmp/last_cc ] && rm /tmp/lastvpn
     printf ""
 fi
 
