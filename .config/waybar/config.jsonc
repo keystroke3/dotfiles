@@ -135,7 +135,7 @@
         ]
     },
     "memory": {
-        "format": " {}%",
+        "format": "  {}%",
         "format-alt": " {used}/{total} GiB",
         "interval": 5
     },

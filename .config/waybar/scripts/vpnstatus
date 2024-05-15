@@ -7,7 +7,7 @@ if ip a | grep -iE 'tun|proton' -q;then
     fi
     # printf " $(ps -p $(pgrep -f openvpn) -o cmd --no-headers | cut -d' ' -f3 | rev | cut -d'/' -f1 | rev | cut -d'.' -f1 | tr '[:lower:]' '[:upper:]')"
 else
-    [ -f /tmp/last_cc ] && rm /tmp/lastvpn
+    [ -f /tmp/last_cc ] && rm /tmp/last_cc
     printf ""
 fi
 

@@ -32,3 +32,4 @@ cronie
 bind
 7zip
 distutils
+wakeonlan
