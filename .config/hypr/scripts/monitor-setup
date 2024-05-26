@@ -1,0 +1,9 @@
+#!/bin/bash
+
+ID=$(wlr-randr | head -n1 | cut -d' ' -f1)
+MODE=$(wlr-randr | grep current -A 1 | grep -vE '60.*Hz'| sed 's/ //g' | sed 's/px,/@/g')
+
+if wlr-randr | grep current | grep -E '60.*Hz' -q; then
+    wlr-randr --output $ID --custom-mode $MODE --adaptive-sync enabled
+fi
+echo "$MODE" | grep current | sed 's/(current)//g'
