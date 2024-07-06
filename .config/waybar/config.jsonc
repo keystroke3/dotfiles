@@ -7,7 +7,7 @@
     "margin-left": 0,
     "margin-right": 0,
     "modules-left": [
-        "custom/launcher",
+        "custom/wlogout",
         "hyprland/workspaces",
         "mpris",
     ],
@@ -194,7 +194,7 @@
         "on-click": "bash ~/.scripts/volume mute",
         "on-scroll-up": "bash ~/.scripts/volume up",
         "on-scroll-down": "bash ~/.scripts/volume down",
-        "scroll-step": 5,
+        "scroll-step": 1,
         "on-click-right": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
     },
@@ -222,11 +222,12 @@
         // "all-outputs": "true",
         // "return-type": "string"
     },
-    "custom/launcher": {
-        "format": "󰈸",
-        "on-click": "bash $HOME/.config/rofi/launcher.sh",
+    "custom/wlogout": {
+        // "format": "󰈸",
+        "format": "⏻",
+        "on-click": "wlogout",
         //    "on-click": "wofi --show drun -I -a -n -W 500 -H 376 -s ~/.config/wofi/themes/gruvbox.css",
-        "on-click-right": "bash $HOME/.config/rofi/run.sh"
+        // "on-click-right": "bash $HOME/.config/rofi/run.sh"
         //    "on-click-right": "wofi --show run -I -a -n -W 500 -H 376 -s ~/.config/wofi/themes/gruvbox.css"  
     },
     "custom/wf-recorder": {

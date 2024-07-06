@@ -1,7 +1,7 @@
 #!/bin/bash
-mem_used=$(cat /sys/class/hwmon/hwmon2/device/mem_info_vram_used)
-mem_total=$(cat /sys/class/hwmon/hwmon2/device/mem_info_vram_total)
-gpu_busy=$(cat /sys/class/hwmon/hwmon2/device/gpu_busy_percent)
+mem_used=$(cat /sys/class/graphics/fb0/device/mem_info_vram_used)
+mem_total=$(cat /sys/class/graphics/fb0/device/mem_info_vram_total)
+gpu_busy=$(cat /sys/class/graphics/fb0/device/gpu_busy_percent)
 
 mem_usage=$(bc <<< "scale=2; $mem_used / 1048576")
 
