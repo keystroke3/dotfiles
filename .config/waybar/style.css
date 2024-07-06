@@ -48,7 +48,7 @@ window#waybar {
 #pulseaudio,
 #network,
 #custom-randwall,
-#custom-launcher {
+#custom-wlogout {
     background: transparent;
     padding: 5px 5px 5px 5px;
     margin: 0 5px;
@@ -144,16 +144,16 @@ window#waybar {
     margin-right: 0px;
 }
 
-#custom-launcher {
+#custom-wlogout {
     color: #e5809e;
     background-color: #282828;
     border-radius: 0px 24px 0px 0px;
     margin: 0px 0px 0px 0px;
     padding: 0 20px 0 13px;
-    font-size: 20px;
+    font-size: 13px;
 }
 
-#custom-launcher button:hover {
+#custom-wlogout button:hover {
     background-color: #FB4934;
     color: transparent;
     border-radius: 8px;
