@@ -1,0 +1,13 @@
+#!/bin/bash
+if [ "$1" == "d" ]; then
+    profile=$(ip a | grep POINTOPOINT | cut -d':' -f2 | tr -d ' ')
+    sudo wg-quick down "$profile"
+fi
+if [ "$1" == "u" ]; then
+    profile=$(ls ~/wireguard/ --color=never | fzf)
+    if [ -n "$profile" ];then
+        sudo wg-quick up $( echo $profile | cut -d'.' -f1)
+    fi
+    exit 0
+fi
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+ACTIVE=""
+set_active(){
+    ACTIVE=$(hyprctl activewindow | head -n1 | cut -d' ' -f2)
+}
+
+if [ "$1" == "fullscreen" ]; then

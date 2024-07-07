@@ -1,12 +1,28 @@
 #!/bin/zsh
-HIST_FILE=~/.cache/finders/dmenufinder
-RG="$(rg -j 4 --files ~/)"
-HIST="$(head -n9 $HIST_FILE)"
-FUZZ="$(echo $HIST $RG | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')"
-if [[ -f $FUZZ ]]
+#
+[ -d ~/.cache/finders/ ] || mkdir -p ~/.cache/finders
+hist_file=~/.cache/finders/dmenufinder
+[ ! -f $hist_file ] && mkdir -p ~/.cache/finders && touch $hist_file
+rg="$($HOME/.bin/fs  -p /media -p /usb -i services --host 'zen:10002')"
+hist="$(head -n9 $hist_file)"
+if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
+    fuzz="$(print $rg | fuzzel --dmenu \
+        -b '1e1e2eff' -t 'cdd6f4ff' -s 'f9e2afff' -S '313244ff'\
+        -f 'Fira Mono Nerd Font'\
+        -p 'File: '\
+        -w 150 \
+        -r 0 -C 'f9e2afff' -B 2 \
+        -i \
+        --no-exit-on-keyboard-focus-loss \
+        )"
+else
+    fuzz="$(echo $hist $rg | dmenu -i -l 10  -p file: -nb '#1e1c31' -nf '#ccc' -sb '#e5c07b' -sf '#1e1c31')"
+fi
+
+if [ ! -z $fuzz ] && [ -f $fuzz ]
 then 
-  echo "$HIST" | grep -vF "$FUZZ" | sed "1i$FUZZ" > $HIST_FILE
-  mimeo "$FUZZ"
+  echo "$hist" | grep -vF $fuzz | sed "1i$fuzz" > $hist_file
+  mimeo $fuzz & disown
 fi
 
 # mime=$(xdg-mime query filetype "$fuzz")

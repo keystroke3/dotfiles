@@ -1,0 +1,61 @@
+#!/bin/bash
+
+tup="$HOME/.cache/total-up"
+tdown="$HOME/.cache/total-down"
+pup="$HOME/.cache/prev-up"
+pdown="$HOME/.cache/prev-down"
+
+files=($tup $tdown $pup $pdown)
+
+for file in ${files[@]};do
+    [ -f $file ] || echo "0" > $file
+done
+
+total_up=$(cat $tup)
+total_down=$(cat $tdown)
+prev_down=$(cat $pdown)
+prev_up=$(cat $pup)
+
+format() {
+    if [ "$1" -eq 0 ] || [ "$1" -lt 1000 ]; then
+        bytes="off"
+    elif [ "$1" -lt 1000000 ]; then
+        bytes="$(echo "scale=0;$1/1000" | bc -l ) KB"
+    else
+        bytes="$(echo "scale=1;$1/1000000" | bc -l ) MB"
+    fi
+    echo "$bytes"
+}
+
+calc(){
+    interface=`ip route | grep -oPm1 "(?<=dev )[^ ]+"`
+    declare -A bytes
+    down_file=/sys/class/net/"$interface"/statistics/rx_bytes
+    up_file=/sys/class/net/"$interface"/statistics/tx_bytes
+    if [ -f $down_file ];then
+        current_down=$(cat $down_file)
+        current_up=$(cat $up_file)
+        up_diff=$(( current_up-prev_up ))
+        down_diff=$(( current_down-prev_down ))
+        new_up=$(( total_up+up_diff ))
+        new_down=$(( total_down+down_diff )) 
+        echo $current_down > $pdown
+        echo $current_up > $pup
+        echo $new_down > $tdown
+        echo $new_up > $tup
+    else
+        down=0
+        up=0
+    fi
+}
+case $1 in
+    total)
+        calc
+        echo $(format $(( new_up+new_down ))) ;;
+    split)
+        calc
+        echo $(format $new_down) Down / $(format $new_up) Up ;;
+    *)
+        calc
+esac
+
