@@ -1,0 +1,75 @@
+#!/bin/bash
+
+process_name="protonvpn"
+CONFIGS_LOCATION="$HOME.local/share/ovpn"
+LAST=$CONFIGS_LOCATION/last_cc
+CONFIG_FILE=
+COUNTRY=""
+
+mode=""
+
+
+off() {
+    if pgrep -f $process_name > /dev/null;then
+        pkexec pkill -f $process_name &> $CONFIGS_LOCATION/toggle.log
+    fi
+}
+
+# enabletun(){
+#     pkexec bash -c '
+#         mkdir -p /dev/net &&
+#         mknod /dev/net/tun c 10 200 &&
+#         chmod 600 /dev/net/tun
+#     '
+# }
+
+startvpn(){
+    # if ! ls /dev/net/ | grep -q tun;then
+    #     enabletun
+    # fi
+    pkexec openvpn --config $CONFIG_FILE && notify
+}
+
+on(){
+    echo "Config file: $CONFIG_FILE"
+    if [ -n "$CONFIG_FILE" ] && [ -f "$CONFIG_FILE" ];then
+         startvpn
+    else
+        choose && on 
+    fi
+}
+
+choose(){
+    if [ ! -f "$LAST" ];then
+        python /home/ted/.bin/vpnprompt > $LAST
+    fi
+
+    if ! grep ',' $LAST -q;then notify-send "No country selected"; exit 0; fi
+    COUNTRY=$(cut -d"," -f2 $LAST)
+    CONFIG_FILE=$(cut -d"," -f1 $LAST)
+}
+
+notify(){
+    while ! ip a | grep -iE 'tun|proton' -q;do
+        sleep 1
+    done
+    notify-send "VPN connected to $COUNTRY"
+}
+
+toggle(){
+    if ip a | grep tun -q;then
+        off && notify-send "VPN Disconnected"
+    else
+        on
+    fi
+}
+
+
+if [ -z "$1" ];then
+    toggle
+    exit
+fi
+
+if [ $1 == "choose" ];then
+    rm $LAST && choose && off && on
+fi

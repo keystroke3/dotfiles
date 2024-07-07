@@ -1,0 +1,167 @@
+#!/bin/python3
+
+import subprocess
+
+process_name = "protonvpn"
+PROMPT = [
+    "fuzzel", "--dmenu", "-b", "1e1e2eff", "-t", "cdd6f4ff", "-s",
+    "a6e3a1ff", "-S", "313244ff", "-f", "Fira", "Mono", "Nerd", "Font",
+    "-p", "Country:", "", "-w", "50", "-r", "0", "-C", "f9e2afff", "-B",
+    "2", "-i", "-format", "f", "--no-exit-on-keyboard-focus-loss",
+]
+
+
+CONFIGS_LOCATION = "/home/ted/.local/share/ovpn"
+COUNTRY_CODES = {
+    "ar": "Argentina",
+    "au": "Australia",
+    "at": "Austria",
+    "be": "Belgium",
+    "br": "Brazil",
+    "bg": "Bulgaria",
+    "kh": "Cambodia",
+    "ca": "Canada",
+    "cl": "Chile",
+    "co": "Colombia",
+    "cr": "Costa Rica",
+    "hr": "Croatia",
+    "cy": "Cyprus",
+    "cz": "Czechia",
+    "dk": "Denmark",
+    "ec": "Ecuador",
+    "eg": "Egypt",
+    "ee": "Estonia",
+    "fi": "Finland",
+    "fr": "France",
+    "ge": "Georgia",
+    "de": "Germany",
+    "gr": "Greece",
+    "hk": "Hong Kong",
+    "hu": "Hungary",
+    "is": "Iceland",
+    "in": "India",
+    "id": "Indonesia",
+    "ie": "Ireland",
+    "il": "Israel",
+    "it": "Italy",
+    "jp": "Japan",
+    "lv": "Latvia",
+    "lt": "Lithuania",
+    "lu": "Luxembourg",
+    "my": "Malaysia",
+    "mt": "Malta",
+    "mx": "Mexico",
+    "md": "Moldova",
+    "ma": "Morocco",
+    "mm": "Myanmar (Burma)",
+    "nl": "Netherlands",
+    "nz": "New Zealand",
+    "ng": "Nigeria",
+    "mk": "North Macedonia",
+    "no": "Norway",
+    "pk": "Pakistan",
+    "pe": "Peru",
+    "ph": "Philippines",
+    "pl": "Poland",
+    "pt": "Portugal",
+    "pr": "Puerto Rico",
+    "ro": "Romania",
+    "ru": "Russia",
+    "rs": "Serbia",
+    "sg": "Singapore",
+    "sk": "Slovakia",
+    "si": "Slovenia",
+    "za": "South Africa",
+    "kr": "South Korea",
+    "es": "Spain",
+    "se": "Sweden",
+    "ch": "Switzerland",
+    "tw": "Taiwan",
+    "th": "Thailand",
+    "tr": "Türkiye",
+    "ua": "Ukraine",
+    "ae": "United Arab Emirates",
+    "gb": "United Kingdom",
+    "us": "United States",
+    "vn": "Vietnam"
+}
+
+
+def vpn_is_running() -> bool:
+    """Check if a process with the given name is running."""
+    try:
+        subprocess.check_output(['pgrep', "-f", process_name])
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+def stop_vpn() -> bool:
+    try:
+        subprocess.run(["pkexec", "pkill", "-f", process_name])
+        subprocess.Popen(["notify-send", "VPN off"])
+        return True
+    except subprocess.CalledProcessError:
+        return False
+
+
+def get_country(path: str) -> str:
+    return COUNTRY_CODES[path.split("/")[-1].split(".")[0]]
+
+
+def get_config() -> list[str]:
+    res = subprocess.run(
+        ["/home/ted/.bin/fs", "-g", "\\.ovpn", "-p", CONFIGS_LOCATION],
+        capture_output=True
+    )
+    configs_paths = res.stdout.decode().strip().split('\n')
+    configs = {
+        get_country(c): c for c in configs_paths
+    }
+    options = '\n'.join(configs.keys())
+    choice = subprocess.run(
+        PROMPT, input=options,
+        text=True, capture_output=True
+    ).stdout.strip()
+    if not choice:
+        exit(0)
+    cfg_path = configs.get(choice)
+    if cfg_path:
+        try:
+            with open(f"{CONFIGS_LOCATION}/lastcfg", 'w') as cfg_file:
+                cfg_file.write(cfg_path)
+                country = get_country(cfg_path)
+                return cfg_path, country
+        except FileNotFoundError:
+            pass
+    return cfg_path, ""
+
+
+def enable_vpn(config: str = None):
+    if not config:
+        config = get_config()
+    print("starting", config)
+    subprocess.run(["pkexec", "openvpn", config, "&"])
+    # subprocess.Popen(
+    #     ['nohup', 'pkexec', 'openvpn', config, '&'],
+    #     stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    # )
+    country = COUNTRY_CODES[config.split("/")[-1].split(".")[0]]
+    subprocess.Popen(["notify-send", f"VPN connected to {country}"])
+
+
+def toggle_vpn():
+    # subprocess.run(["pkexec", "echo", "hello world"], shell=True)
+    if vpn_is_running():
+        stop_vpn()
+        return
+    config = ""
+    try:
+        with open(f"{CONFIGS_LOCATION}/lastcfg", 'r') as cfg:
+            config = cfg.read()
+    except FileNotFoundError:
+        pass
+    enable_vpn(config)
+
+
+print(",".join(get_config()))

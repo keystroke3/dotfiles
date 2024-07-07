@@ -2,3 +2,5 @@ themes
 .git
 *.png
 *.jpg
+/media/services/*
+*/go/*

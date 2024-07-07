@@ -1,0 +1,3 @@
+#!/bin/bash
+
+wl-paste > /tmp/screenshot && hyprctl dispatch exec [floating] sxiv /tmp/screenshot

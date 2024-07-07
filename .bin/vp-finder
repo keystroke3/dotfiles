@@ -1,7 +1,24 @@
-#!/bin/bash
-# fuzz=$(fd . $HOME -H | rofi -dmenu -theme-str '#window { width: 70%; }' 20 -i -p 'Open Files: ')
-# 
-[[ "$1" == "resume" ]] && color=#98c379 || color=#e06c75
-fuzz=$(fd  . $HOME/Videos/ -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb $color -sf '#1E1C31')
+#!/bin/zsh
+video_path=/media/
+folders=$($HOME/.bin/fs -d -p /media -i services --host='10.0.0.2:10002')
+[[ "$1" == "resume" ]] && color='#a6e3a1ff' || color='#e06c75ff'
+if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+    fuzz="$(print $folders | fuzzel --dmenu \
+        -b '1e1e2eff' -t 'cdd6f4ff' -s $color -S '313244ff'\
+        -f 'Fira Mono Nerd Font'\
+        -p 'Folder: '\
+        -w 150 \
+        -r 0 -C 'f9e2afff' -B 2 \
+        -i \
+        --no-exit-on-keyboard-focus-loss \
+        )"
+
+else
+    fuzz=$(echo $folders | dmenu -i -l 10  -p file: -nb '#1e1c31' -nf '#ccc' -sb $color -sf '#1e1c31')
+    # fuzz=$(echo $folders | wofi --show dmenu)
+fi
+
 [[ "$1" == "resume" ]] &&  mpv "$fuzz" --resume-playback || mpv "$fuzz" --no-resume-playback
+    
+    
 
