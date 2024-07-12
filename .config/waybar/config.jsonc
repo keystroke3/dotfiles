@@ -9,7 +9,7 @@
     "modules-left": [
         "custom/wlogout",
         "hyprland/workspaces",
-        "mpris",
+        "mpris"
     ],
     //"modules-center": [],
     "modules-right": [
@@ -191,9 +191,9 @@
                 "󰕾"
             ]
         },
-        "on-click": "bash ~/.scripts/volume mute",
-        "on-scroll-up": "bash ~/.scripts/volume up",
-        "on-scroll-down": "bash ~/.scripts/volume down",
+        "on-click": "bash ~/.bin/volume mute",
+        "on-scroll-up": "bash ~/.bin/volume up",
+        "on-scroll-down": "bash ~/.bin/volume down",
         "scroll-step": 1,
         "on-click-right": "pavucontrol",
         "ignored-sinks": ["Easy Effects Sink"]
