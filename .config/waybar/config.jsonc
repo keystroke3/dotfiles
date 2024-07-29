@@ -16,8 +16,10 @@
         "network",
         "custom/vpnstatus",
         "cpu",
-        "memory",
+        "custom/cputemp",
+        "temperature",
         "custom/gpuinfo",
+        "memory",
         "pulseaudio",
         "tray",
         "clock"
@@ -27,7 +29,7 @@
         "format": "{:%H:%M}",
         "tooltip": "true",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%a %d/%m}"
+        "format-alt": "{:%a %d/%b}"
     },
     "hyprland/workspaces": {
         "active-only": false,
@@ -37,6 +39,11 @@
         "on-scroll-down": "hyprctl dispatch workspace +1",
         "format": "{icon}",
         "on-click": "activate",
+        // "persistent-workspaces":{
+        //     "*":[
+        //         1,2,3,4,5,6,7,8,9,10
+        //     ]
+        // },
         "persistent-workspaces": {
             "DP-1": [
                 1,
@@ -146,6 +153,17 @@
         "format": "   {usage}%",
         "format-alt": "  {avg_frequency} GHz",
         "interval": 5
+    },
+    "custom/cputemp": {
+        "format": "| {}",
+        "interval": 5,
+        "exec": "~/.config/waybar/scripts/cputemp",
+
+    },
+    "temperature": {
+        "critical-threshold": 82,
+        "format": "{temperatureC}°C",
+        "interval": 1,
     },
     "disk": {
         "format": "󰋊 {}%",

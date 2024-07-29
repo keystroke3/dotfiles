@@ -14,16 +14,15 @@
 * {
     border: none;
     border-radius: 0px;
-    /*font-family: VictorMono, Iosevka Nerd Font, Noto Sans CJK;*/
     font-family: "Iosevka Nerd", FontAwesome, Noto Sans CJK;
     font-size: 12px;
     font-style: normal;
     min-height: 0;
+    border-radius: 25px;
 }
 
 
 window#waybar {
-    /* background: rgba(30, 30, 46, 0.5); */
     background-color: @navy;
     border-bottom: 1px solid #282828;
     color: #f4d9e1;
@@ -33,8 +32,8 @@ window#waybar {
     background-color: @navy;
     margin: 0 10px;
     padding: 0px 5px 0px 5px;
-    border-radius: 8px;
-    border: solid 1px @yellow;
+    border-radius: 25px;
+    border: solid 2px @yellow;
     font-weight: normal;
     font-style: normal;
 }
@@ -47,13 +46,14 @@ window#waybar {
 #workspaces button.active {
     color: @text-dark;
     background-color: @yellow;
+    margin:0;
 }
 
 #workspaces button:hover {
     background-color: #E6B9C6;
     color: black;
+    margin:0;
 }
-#workspaces button.
 
 #custom-date,
 #clock,
@@ -86,11 +86,10 @@ window#waybar {
 }
 
 #tray {
-    background: @midnight-purle;
-    margin: 1px;
-    border-radius: 8px;
+    background-color: @midnight-purle;
+    border-radius: 25px;
     padding: 0px 5px;
-    border: solid 1px @blue;
+    border: solid 2px @blue;
 }
 
 #clock {
@@ -104,7 +103,6 @@ window#waybar {
     margin-top: 0px;
     margin-bottom: 0px;
     font-weight: bold;
-    /*border-left: solid 1px #282738;*/
 }
 
 
@@ -141,8 +139,10 @@ window#waybar {
 #pulseaudio {
     background-color: @navy;
     color: @text-light;
-    border-radius: 8px;
-    margin-left: 0px;
+    margin: 0 3px;
+    border-radius: 25px;
+    margin: 0 5px;
+    border: 2px solid @text-light;
 }
 
 #pulseaudio.muted {
@@ -180,8 +180,6 @@ window#waybar {
     padding-left: 15px;
     padding-right: 14px;
     border-radius: 8px;
-    /*border-left: solid 1px #282738;*/
-    /*border-right: solid 1px #282738;*/
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 0px;
@@ -195,8 +193,6 @@ window#waybar {
     padding-left: 10px;
     padding-right: 15px;
     border-radius: 8px;
-    /*border-left: solid 1px #282738;*/
-    /*border-right: solid 1px #282738;*/
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: normal;
@@ -208,8 +204,6 @@ window#waybar {
     padding-left: 15px;
     padding-right: 15px;
     border-radius: 8px;
-    /*border-left: solid 1px #282738;*/
-    /*border-right: solid 1px #282738;*/
     margin-top: 5px;
     margin-bottom: 5px;
     font-weight: normal;
@@ -225,51 +219,50 @@ window#waybar {
 #custom-gpuinfo {
     background-color: @blue;
     color: @text-dark;
-    /* border-radius: 8px; */
-    /* margin: 0 5px; */
-    /* margin-left: 5px; */
-    /* margin-right: 5px; */
-    padding: 0px 3px 0px 3px;
+    margin: 0 3px;
+    padding: 0px 5px 0px 5px;
     font-weight: bold;
 }
 
 #cpu {
     background-color: @yellow;
     color: @text-dark;
-    /* border-radius: 8px; */
-    /* margin: 0 5px; */
-    /* margin-left: 5px; */
-    /* margin-right: 5px; */
-    padding: 0px 3px 0px 3px;
+    margin: 0 0 0 5px;
+    padding: 0px 5px 0px 5px;
+    border-radius: 25px 0 0 25px;
     font-weight: bold;
 }
+
+#custom-cputemp {
+    background-color: @yellow;
+    color: @text-dark;
+    margin: 0;
+    padding: 0;
+    padding-right: 5px;
+    border-radius: 0 25px 25px 0;
+    font-weight: bold;
+}
+
 
 #memory {
     background-color: @green;
     color: @text-dark;
-    /* border-radius: 8px; */
-    /* margin: 0 5px; */
-    /* margin-left: 5px; */
-    /* margin-right: 5px; */
-    /* padding: 0px 3px 0px 3px; */
-    padding: 0px 3px 0px 3px;
+    padding: 0px 5px 0px 5px;
     font-weight: bold;
 }
 
 #disk {
     background-color: #282828;
-    /*color: #8EC07C;*/
     border-radius: 8px;
     margin: 0 5px;
     margin-left: 5px;
     margin-right: 5px;
-    padding: 0px 3px 0px 3px;
+    padding: 0px 5px 0px 5px;
     font-weight: bold;
 }
 
 #custom-hyprpicker {
     background-color: #282828;
-    /*color: #8EC07C;*/
     border-radius: 8px;
     margin: 0 5px;
     margin-left: 5px;
