@@ -1,0 +1,12 @@
+#!/bin/bash
+wall=$(wl-paste)
+new_path=~/Pictures/wallpapers/$(echo $wall | rev | cut -d'/' -f1 | rev)
+if echo $wall | grep -q Pictures/wallpapers;then
+    echo $wall
+else
+    mv $wall $new_path
+fi
+
+swww img $new_path
+echo $newpath > ~/.cache/last_wall
+

@@ -1,3 +1,6 @@
 #!/bin/bash
 
-wl-paste > /tmp/screenshot && hyprctl dispatch exec [floating] sxiv /tmp/screenshot
+bmp="/tmp/screenshot.bmp"
+jpg="/tmp/screenshot.jpg"
+
+wl-paste > "$bmp" && magick convert "$bmp" "$jpg" && rm "$bmp" && hyprctl dispatch exec [floating] sxiv "$jpg"
