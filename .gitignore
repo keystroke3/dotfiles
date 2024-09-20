@@ -24,7 +24,6 @@ zsh/
 !.config/screenshots
 !.config/sxhkd
 !.config/vim
-!.config/nvim
 .config/vim/plugged
 !.config/wallpapers
 !.config/yay

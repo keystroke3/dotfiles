@@ -2,12 +2,12 @@
 #
 
 wgc(){
-    if [ "$1" == "d" ]; then
+    if [ "$1" = "d" ]; then
         profile=$(ip a | grep POINTOPOINT | cut -d':' -f2 | tr -d ' ')
         sudo wg-quick down $profile
         return 0
     fi
-    profile=$(ls ~/wireguard/ --color=never | fzf)
+    profile=$(ls /etc/wireguard/ --color=never | fzf)
     if [ -n profile ];then
         sudo wg-quick up $( echo $profile | cut -d'.' -f1)
     fi
@@ -60,8 +60,18 @@ o(){
 }
 
 cfg(){
-    fuzz=$(rg -j 4 --no-ignore --files ~/.config | fzf --reverse --height 40%)
+    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/| fzf --reverse --height 40%)
     [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || vim "$fuzz") || return 0
+}
+
+vsc(){
+    fuzz=$(fs -d -p  ~/dev -p ~/work -i node_modules | fzf --reverse --height 40%)
+    [ -d "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || code --ozone-platform=wayland "$fuzz") || return 0
+}
+
+ovim(){
+    fuzz=$(fs -d -p  ~/dev -p ~/work -i node_modules/ | fzf --reverse --height 40%)
+    [ -d "$fuzz" ] && nvim --cmd "cd $fuzz" "$fuzz" || return 0
 }
 
 pj(){
@@ -156,7 +166,7 @@ remind(){
     esac 
     done
     (sleep $delay && notify-send "$note" &&
-        mpv /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
+        mpv --force-window=no /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
 }
 ytd(){
     a=
@@ -214,7 +224,7 @@ hclient(){
 }
 
 localip(){
-    ip a | grep 192.168 | cut -d ' ' -f6 | cut -d '/' -f1
+    ip a | grep -E '192.168|10.0' | cut -d ' ' -f6 | cut -d '/' -f1
 }
 ignore() {
     curl -sLw "\n" "https://www.toptal.com/developers/gitignore/api/$@" | grep -v 'http' > .gitignore
@@ -230,7 +240,11 @@ mvshuffle(){
     mpv --shuffle "$HOME/Videos/Music Videos/" & disown
 }
 
-# end functions
+godoc(){
+    go doc $1 | bat --language=go
+}
+
+# functions
 
 
 alias lp="l -p"
@@ -246,20 +260,14 @@ alias cronhelp=" echo '
 # * * * * * <command to execute>
 '"
 
-#alias exa="ls"
-alias ovim="/usr/bin/vim"
 alias vim="nvim"
-#alias ls="exa --color=always --group-directories-first"
-#alias ll="exa -l --color=always --group-directories-first"
-#alias lla="exa -al --color=always --group-directories-first"
-#alias la="exa -a --color=always --group-directories-first"
 alias kc="kdeconnect-cli -d edd439448e1817fa "$1""
 alias move="find . -mindepth 2 -type f -print -exec mv {} . \;"
 alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
-alias bp="bpython"
+alias bp="py -m bpython"
 alias pkg="paru -Q | fzf"
 alias gd="go doc"
 alias fzf="fzf --layout=reverse --height=40%"
@@ -314,11 +322,13 @@ alias gcm="git checkout main"
 alias gcd="git checkout dev"
 alias gcs="git checkout staging"
 alias gam="git add \*migrations\*"
+alias gtm="git commit -m"
 alias gcon="git diff --name-only --diff-filter=U"
 # alias gmm="git merge "$1" -m "$(git log -1 --pretty=%B $1)""
 alias start="sudo systemctl start"
 alias stop="sudo systemctl stop"
 alias restart="sudo systemctl restart"
+alias sysenable="sudo systemctl enable"
 alias pipm="python3 -m pip"
 alias pyserv="python -m http.server"
 alias crontab="export VISUAL=nvim; crontab"
@@ -345,16 +355,15 @@ alias dstage="ssh dino-stage"
 alias dprod="ssh dino-prod"
 alias cvr="coverage run --omit='*/.virtualenvs/*,*/tests_/*' manage.py test "$1""
 alias cvs="coverage html"
-alias ls="exa --color=always --group-directories-first"
-alias ll="exa -l --color=always --group-directories-first"
-alias lla="exa -al --color=always --group-directories-first"
-alias la="exa -a --color=always --group-directories-first"
+alias ls="eza --color=always --group-directories-first"
+alias ll="eza -l --color=always --group-directories-first"
+alias lla="eza -al --color=always --group-directories-first"
+alias la="eza -a --color=always --group-directories-first"
 alias dshell="py manage.py shell"
 alias dbshell="py manage.py dbshell"
 alias mpn="mpv --no-resume-playback"
 alias cp="cp -r"
 alias rr="exec ${SHELL} -l; clear"
-alias arco="ssh ted@192.168.1.9"
 alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
 alias uctl="systemctl --user"
@@ -395,5 +404,18 @@ alias rsn="npm run serve"
 alias rns="npm run serve"
 alias h="cat ~/.zhistory | fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
+alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
 alias wrandr='wlr-randr'
+alias kp='cd "$(fs -p ~/work/kupiku/ -d --depth=1 | fzf)"'
+alias vpnr="sudo protonvpn d && sudo protonvpn c -cc $1"
+alias vpn="sudo protonvpn c --cc"
+alias vpnd="sudo protonvpn d"
+alias reflect="sudo reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist"
+alias suspend="sudo systemctl suspend"
+alias currencies="smarial -e 'select * from shipping_currencyconversion'"
+alias orderstatus="smarial -e 'select * from shipping_orderstatus;'"
+alias gears="vkcube"
+alias code="code --ozone-platform=wayland"
+alias nvc="nvim --cmd \"cd ~/.config/nvim\" ~/.config/nvim"
+alias lf="yazi"

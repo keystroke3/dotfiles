@@ -4,61 +4,86 @@ This repo contains my most frequently used config files. If you use the same pro
 then they may be useful to you. Please make sure you read through the config files to know if
 they will be useful to you and what you may want to change.
 
-![Colorful Theme Desktop](https://github.com/keystroke3/dotfiles/blob/master/screenshots/Colorful%20Theme%20shot2.png?raw=true)
-**Colorful Theme**
+![Colorful Theme Hyprland](./screenshots/hyprland-colorful.png)
+**Colorful Theme Hyprland**
 
-![Stripes Theme Desktop](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/Stripes%20Desktop.png)
-**Stripes Theme**
+![Colorful Theme Hyprland](./screenshots/hyprland-colorful-desktop.png)
+**Colorful Theme Hyprland Desktop**
 
-![Kitty/Prompt](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/kitty.png)
-Kitty with Powerlevel10k themed prompt.
-
-![ranger](https://raw.githubusercontent.com/keystroke3/dotfiles/master/screenshots/ranger.png)
+![Colorful Theme Desktop BSPWM](https://github.com/keystroke3/dotfiles/blob/master/screenshots/Colorful%20Theme%20shot2.png?raw=true)
+**Colorful Theme BSPWM**
 
 ## Prerequisites
 Before you attempt to install these dots, you must first make sure your system is ready. Otherwise
 they may not work as intended.
-#### Polybar
-If you choose to use my polybar configs, you can find them in my [Carousel Repo](https://github.com/keystroke3/Carousel)
+
 #### Fonts
 For a basic install, you will need to have [Powerline](https://github.com/powerline/powerline) and [Font Awesome](https://github.com/FortAwesome/Font-Awesome) which will work fine for most of the
 symbols to be visible. There are however, some widgets in polybar that will not load properly
 and I would highly recommend getting the [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts) and Noto Fonts packages. For polybar specifically, the necessary
 fonts are `UbuntuMono Nerd` and `Noto Fonts Symbols`. These can be installed individually or as part of the previously
 mentioned packages.
+Terminals use `JetBrainsMono Nerd` so make sure that is also installed.
 
 #### Colors
 Colors are not that important to get right and you can go with whatever color scheme you wish. To manage
-and control colors I use a [Pywal](https://github.com/dylanaraps/pywal). This program can be used to generate colors schemes and palettes which can 
+and control colors I use a [Pywal (Archved)](https://github.com/dylanaraps/pywal). This program can be used to generate colors schemes and palettes which can 
 the be integrated into other programs like terminals and Polybar. It is not a must you use it, but if you
 want a consistent color scheme throughout your setup, it is recommended to use it.
 
-#### Shell
-I had used Bash since I began using Linux, and had been told many great things about Zsh. After using it
-I can now say that I am a firm believer in Zsh. If you are still using Bash, you can use the bash files that
+#### Zsh
 I have here, but keep in mind that the screenshots you see are all with Zsh. The outcome will therefor not look exactly the same.
-For my Zsh install I use [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh) to manage my configuration. Visit their Wiki to find out how to use it. To get the prompt
-bling, you will need a theme called [Powerlevel10k](https://github.com/romkatv/powerlevel10k). This is a reimplementation of the Powerlevel9k theme with a few additions to it.
-You can view their respective Wikis to find out how to install them. If you already have 9k, you can just "upgrade" to 10k:
+For my Zsh install I used to use [Oh-My-Zsh](https://github.com/ohmyzsh/ohmyzsh) to manage my configuration. I now just use my own dots since they are now mature and do everything I want them to. Visit their Wiki to find out how to use it.
+I use [Starship](https://starship.rs/) for the prompt with basically no modifications. The default works fine for me and is easy to re-deploy on other machines. 
 
->For Powerlevel9k users  
-If you've been using Powerlevel9k before, **do not remove the configuration options**. Powerlevel10k
-will pick them up and provide you with the same prompt UI you are used to. Powerlevel10k recognized
-all configuration options used by Powerlevel9k. See Powerlevel9k
-[configuration guide](https://github.com/Powerlevel9k/powerlevel9k/blob/master/README.md#prompt-customization).
-To go beyond the functionality of Powerlevel9k, type `p10k configure` and explore the unique styles
-and features Powerlevel10k has to offer. You can further customize your prompt by editing
-`~/.p10k.zsh`.
+#### Polybar
+I only use polybar BSPWM. I have not used BSPWM in over a year two years, but if you choose to use my polybar configs, you can find them in my [Carousel Repo](https://github.com/keystroke3/Carousel)
 
-#### Vim
-There's nothing much going on with Vim. The only extra thing you need [Plugged](https://github.com/junegunn/vim-plug). This will
-allow you to get the plugins that are in `.vimrc`. I am not using Powerline status here but [vim-airline](https://github.com/vim-airline/vim-airline) instead.
+#### Waybar
+Since I use Hyprland, I use [Waybar](https://github.com/Alexays/Waybar) instead of Polybar. The font I am using is a paid font called Miriam Vaez, so I can't share freely. 
 
-#### Icons
-You may notice that file names have been prepended by small icons. This does not come by default to get the icons, you will need to use a tool called `lsd` which is a replacement for the traditional `ls` command. You can find out about how to install and use it in the [here](https://github.com/Peltoche/lsd)
+#### NeoVim
+![Neovim in action](./screenshots/hyprland-neovim-bat.png)
+I use [KickStart.nvim](https://github.com/nvim-lua/kickstart.nvim) with [my fork](https://github.com/keystroke3/kickstart.nvim). I don't use the nvim configs here and I can't be bothered to remove them.
+
+#### Wallpaper
+The full resolution wallapper by Alx can be found on [wallhaven](https://wallhaven.cc/w/1pzdvw). I stretched it a bit since it looked a bit squished despite being very high resolution.
+
+## Apps
+I will try to list all the things I use here, but I can't grantee that the list is up to date or that it includes everything. These are the ones I interact with on a daily basis
+
+- Os
+     - Arch Linux
+- WM
+    - Hyprland
+    - Waybar
+    - Fuzzel (rofi alternative for wayland)
+    - wlogout
+    - [Hyprman](https://github.com/keystroke3/hyprman) (work in progress)
+    - Thunar
+    - [FileSurf](https://github.com/keystroke3/FileSurf) (better for piping into things)
+    - Hyprpicker
+    - Grimblast with satty (flameshot alternative)
+
+- Misc
+    - Alacritty
+    - Kitty
+    - KDE Connect
+    - Yazi (TUI file manager)
+    - Firefox
+    - Fzf (for my fuzzy finding needs)
+    - Copyq
+    - Easyeffects
+    - Solarr
+    - Thunderbird
+    - NeoVim
+    - VSCode
+    - [Tauon](https://tauonmusicbox.rocks/)
+
 
 
 ## Installation
 If you have all things set up correctly, you can start copying the files. First, clone the repo:  
 `git clone https://github.com/keystroke3/dotfiles.git`  
 After cloning, you can copy the files to their respective locations and then logout and log back in to apply changes.
+
