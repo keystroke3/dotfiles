@@ -1,0 +1,82 @@
+import = [
+  # uncomment the flavour you want below:
+  "~/.config/alacritty/catppuccin-mocha.toml"
+  # "~/.config/alacritty/catppuccin-macchiato.toml"
+  # "~/.config/alacritty/catppuccin-frappe.toml"
+  # "~/.config/alacritty/catppuccin-latte.toml"
+]
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = false
+
+# [colors.bright]
+# black = "#6D7070"
+# blue = "#1BA6FA"
+# cyan = "#73FBF1"
+# green = "#B8E466"
+# magenta = "#A578EA"
+# red = "#FF4352"
+# white = "#FEFEF8"
+# yellow = "#FFD750"
+# 
+# [colors.cursor]
+# cursor = "#b0db64"
+# text = "#e6e1e0"
+# 
+# [colors.normal]
+# black = "#0d0d0d"
+# blue = "#1BA6FA"
+# cyan = "#21DEEF"
+# green = "#A0E521"
+# magenta = "#8763B8"
+# red = "#FF301B"
+# white = "#EBEBEB"
+# yellow = "#FFC620"
+# 
+# [colors.primary]
+# background = "#1e1c31"
+# foreground = "#EBEBEB"
+
+[cursor]
+style = "Block"
+thickness = 0.15
+unfocused_hollow = true
+
+[debug]
+log_level = "Warn"
+persistent_logging = false
+print_events = false
+render_timer = false
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 9.0
+
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.normal]
+family = "JetBrainsMono Nerd Font"
+style = "Regular"
+
+[mouse]
+hide_when_typing = false
+
+[selection]
+save_to_clipboard = false
+
+[window]
+opacity = 0.9
+startup_mode = "Windowed"
+
+[window.padding]
+x = 10
+y = 5

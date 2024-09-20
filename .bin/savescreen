@@ -1,0 +1,22 @@
+#!/bin/bash
+save_dir=$HOME/Pictures/Screenshots
+fuzz="$(fuzzel --dmenu \
+        -b '1e1e2eff' -t 'cdd6f4ff' -s 'f9e2afff' -S '313244ff'\
+        -f 'Fira Mono Nerd Font'\
+        -p 'File name: '\
+        -w 50 \
+        -l 2 \
+        -r 0 -C 'f9e2afff' -B 2 \
+        -i \
+        --no-exit-on-keyboard-focus-loss \
+)"
+
+[ -z $fuzz ] && exit 0
+bmp="/tmp/screenshot.bmp"
+jpg="/tmp/screenshot.jpg"
+
+wl-paste > "$bmp" && magick "$bmp" "$jpg" && rm "$bmp"
+
+[ ! -d "$save_dir" ]  && mkdir -p $save_dir
+
+mv $jpg "$save_dir/$fuzz.jpg"

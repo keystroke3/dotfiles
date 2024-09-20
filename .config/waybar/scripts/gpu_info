@@ -4,7 +4,7 @@ mem_total=$(cat /sys/class/graphics/fb0/device/mem_info_vram_total)
 gpu_busy=$(cat /sys/class/graphics/fb0/device/gpu_busy_percent)
 
 mem_usage=$(bc <<< "scale=2; $mem_used / 1048576")
-temp=$(sensors | grep -i edge | awk '{print $2}' | sed 's/\+//')
+temp=$(sensors | grep -i edge | awk '{print $2}' | sed 's/\+//' | sed 's/\.0//')
 if [ "$1" = "m" ]; then
     mem_usage=$(bc <<< "scale=2; $mem_used / 1073741824")
     printf "%s%% | %.2fGB | %s" "$gpu_busy" "$mem_usage" "$temp"

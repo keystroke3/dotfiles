@@ -1,13 +1,13 @@
-@define-color text-light  #ffa1a1;
-@define-color text-gray  #928374;
-@define-color text-dark  #282828;
+@define-color text-light #ffa1a1;
+@define-color text-gray #928374;
+@define-color text-dark #282828;
 @define-color yellow #E5C07B;
 @define-color rose #E06C75;
 @define-color blue #61AFEF;
 @define-color navy #1E1C31;
 @define-color charcol #1E1C31;
-@define-color slate  #36386C;
-@define-color midnight-purple  #1E1C31;
+@define-color slate #36386C;
+@define-color midnight-purple #1E1C31;
 @define-color cyan #00BCC0;
 @define-color green #98C379;
 
@@ -143,6 +143,7 @@ window#waybar {
     border-radius: 25px;
     margin: 0 5px;
     border: 2px solid @text-light;
+    font-size: 15px;
 }
 
 #pulseaudio.muted {
@@ -268,7 +269,8 @@ window#waybar {
     padding: 0px 11px 0px 9px;
     font-weight: bold;
 }
-#mpris{
+
+#mpris {
     color: @green;
     font-family: "MiriamVaez";
     font-size: 18px;
