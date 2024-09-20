@@ -22,7 +22,7 @@ fi
 if [ ! -z $fuzz ] && [ -f $fuzz ]
 then 
   echo "$hist" | grep -vF $fuzz | sed "1i$fuzz" > $hist_file
-  mimeo $fuzz & disown
+  xdg-open $fuzz & disown
 fi
 
 # mime=$(xdg-mime query filetype "$fuzz")

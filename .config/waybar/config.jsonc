@@ -29,7 +29,20 @@
         "format": "{:%H:%M}",
         "tooltip": "true",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%a %d/%b}"
+        "format-alt": "{:%a %d/%b}",
+        "calendar": {
+            "mode": "year",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
     },
     "hyprland/workspaces": {
         "active-only": false,
@@ -52,7 +65,7 @@
                 4,
                 5
             ],
-            "DP-3":[
+            "DP-3": [
                 6,
                 7,
                 8,
@@ -158,7 +171,6 @@
         "format": "| {}",
         "interval": 5,
         "exec": "~/.config/waybar/scripts/cputemp",
-
     },
     "temperature": {
         "critical-threshold": 82,
@@ -204,20 +216,29 @@
     },
     "pulseaudio": {
         "format": "{icon} {volume}%",
-        "format-muted": "󰝟",
+        //"format-muted": "󰝟",
+        "format-mute": "󰓄",
         "format-icons": {
             "default": [
-                "󰕿",
-                "󰖀",
-                "󰕾"
-            ]
+                //"󰕿",
+                //"󰖀",
+                //"󰕾"
+                "󰓃",
+                "󰜟"
+            ],
+            "headphones": "",
+            "headphones-muted": "󰟎",
+            "hdmi": " ",
+            "hdmi-muted": "󰟎"
         },
         "on-click": "bash ~/.bin/volume mute",
         "on-scroll-up": "bash ~/.bin/volume up",
         "on-scroll-down": "bash ~/.bin/volume down",
         "scroll-step": 1,
         "on-click-right": "pavucontrol",
-        "ignored-sinks": ["Easy Effects Sink"]
+        "ignored-sinks": [
+            "Easy Effects Sink"
+        ]
     },
     "custom/randwall": {
         "format": "󰏘",

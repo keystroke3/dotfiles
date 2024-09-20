@@ -1,1 +1,2 @@
-echo $(sensors | grep 'AMD TSI' | awk '{print$5}' | sed 's/\+//')
+#!/bin/bash
+printf $(sensors | grep 'AMD TSI' | awk '{print$5}' | sed 's/\+//' | sed 's/\.0//')

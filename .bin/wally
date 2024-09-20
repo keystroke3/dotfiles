@@ -1,12 +1,26 @@
 #!/bin/bash
-wall=$(wl-paste)
-new_path=~/Pictures/wallpapers/$(echo $wall | rev | cut -d'/' -f1 | rev)
-if echo $wall | grep -q Pictures/wallpapers;then
-    echo $wall
-else
-    mv $wall $new_path
+#wall=$(wl-paste)
+cache="$HOME/.cache/wally"
+wall="$1"
+monitor="$2"
+if $wall | grep -q -iE 'png|jpg|jpeg';then
+    if [ -z monitor ]; then
+        swww img $wall -o $monitor && echo $wall > "$cache/$monitor"
+    else
+        sww img $wall && echo $wall > "$cache/all"
+    fi
+    return
 fi
+# else
+#     swww img 
 
-swww img $new_path
-echo $newpath > ~/.cache/last_wall
+# new_path=~/Pictures/wallpapers/$(echo $wall | rev | cut -d'/' -f1 | rev)
+# if echo $wall | grep -q Pictures/wallpapers;then
+#     echo $wall
+# else
+#     mv $wall $new_path
+# fi
+
+swww img $wall
+echo $wall > ~/.cache/last_wall
 

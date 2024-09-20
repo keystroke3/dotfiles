@@ -1,5 +1,6 @@
 #!/bin/bash
-link="$(xclip -o)"
+link=""
+[[ "$XDG_SESSION_TYPE" == "wayland" ]] && link="$(wl-paste)" || link="$(xclip -o)"
 if echo "$link" | grep -q youtu.be; then
     link=$(echo "$link" | sed 's|youtu.be/|youtube.com/watch?v=|')
 fi
