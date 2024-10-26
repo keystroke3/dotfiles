@@ -1,0 +1,24 @@
+#!/bin/bash
+a=
+r=
+d=
+directory=
+while getopts r:a:d flag
+do
+case "${flag}" in
+    r) r=${OPTARG}
+        [ "$r" -eq "$r" ] &> /dev/null && continue || echo 'Resolution not an integer' && return 1 ;;
+    d)
+        d=$(fs -d -g ${OPTARG} /media/videos/music)
+        [ "$r" -eq "$r" ] &> /dev/null && continue || echo 'Resolution not an integer' && return 1 ;;
+    a)
+    link="${@:${OPTIND}}"
+    [ $link = '-a' ] && echo 'no link provided' && return 1
+    yt-dlp --no-playlist --audio-format mp3 -x ${@:(( OPTIND+1 ))} && return 0  ;;
+    ?) echo "unknown flag -${OPTARG}" && return 1
+esac
+done
+link="${@:${OPTIND}}"
+[ -z $r ] && r=1080
+[ -z $link ] && echo 'no link provided' && return 1
+yt-dlp -f "bestvideo[height<="$r"]+bestaudio" $link
