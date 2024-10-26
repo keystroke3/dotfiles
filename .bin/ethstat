@@ -1,0 +1,44 @@
+#!/usr/bin env python
+
+import subprocess
+import threading
+import json
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+
+INTERFACE = "enp14s0"
+INTERVAL = 2
+KB = 1024
+MB = 1024 * KB
+
+
+rx_rate = 0
+tx_tate = 0
+
+
+def update():
+    last_tx = 0
+    last_rx = 0
+    while True:
+        all_stats = json.loads(
+            subprocess.run(["ifstat", "-j"], capture_output=True).stdout
+        )
+
+        # print(json.dumps(all_stats, indent=2))
+        stat = all_stats[next(iter(all_stats))][INTERFACE]
+        rx = stat["rx_bytes"]
+        tx = stat["tx_bytes"]
+
+        rx_delta = rx - last_rx
+        tx_delta = tx - last_tx
+        rx_rate = rx_delta / INTERVAL
+        tx_tate = tx_delta / INTERVAL
+        last_rx = rx
+        last_tx = tx
+
+
+def listen():
+    handler = SimpleHTTPRequestHandler()
+    server = ThreadingHTTPServer()
+
+
+threading.Thread()

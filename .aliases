@@ -1,6 +1,14 @@
 #!/bin/bash
 #
 
+sqlf(){
+    fuzz=$(fs -g '.sql$' | fzf --reverse --height 40%)
+    [ -f "$fuzz" ] || return 0
+    sqlformat -ask upper $fuzz -o $fuzz
+    sed -i 's/;--/;\n--/g' $fuzz
+    sed -i 's/;/;\n\n/g' $fuzz
+}
+
 wgc(){
     if [ "$1" = "d" ]; then
         profile=$(ip a | grep POINTOPOINT | cut -d':' -f2 | tr -d ' ')
@@ -60,7 +68,7 @@ o(){
 }
 
 cfg(){
-    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/| fzf --reverse --height 40%)
+    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/| fzf --reverse --height 40%)
     [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || vim "$fuzz") || return 0
 }
 
@@ -70,7 +78,12 @@ vsc(){
 }
 
 ovim(){
-    fuzz=$(fs -d -p  ~/dev -p ~/work -i node_modules/ | fzf --reverse --height 40%)
+    fuzz=$(fs -p  ~/dev -p ~/work -i node_modules/  -i '.git'| fzf --reverse --height 40%)
+    [ -f "$fuzz" ] && nvim "$fuzz" || return 0
+}
+
+ovimd(){
+    fuzz=$(fs -d -p  ~/dev -p ~/work -i node_modules/  -i '.git'| fzf --reverse --height 40%)
     [ -d "$fuzz" ] && nvim --cmd "cd $fuzz" "$fuzz" || return 0
 }
 
@@ -148,26 +161,26 @@ py(){
     $VIRTUAL_ENV/bin/python "$@"
 }
 
-remind(){
-    while getopts d:t:n: flag
-    do
-    case "${flag}" in
-        d) d=${OPTARG}
-            delay=$d;;
-        t) t=${OPTARG}
-            hour=$(date --date="$t" "+%H")
-            current_hour=$(date "+%H")
-            current_time=$(date "+%s")
-            ((hour < current_hour)) && 
-                delay=$(($(date --date="$t 1 day" "+%s") - $current_time)) ||
-                delay=$(($(date --date="$t" "+%s") - $current_time));;
-        n) note=${OPTARG};;
-        *) echo 'unknown flag' && return 1
-    esac 
-    done
-    (sleep $delay && notify-send "$note" &&
-        mpv --force-window=no /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
-}
+# remind(){
+#     while getopts d:t:n: flag
+#     do
+#     case "${flag}" in
+#         d) d=${OPTARG}
+#             delay=$d;;
+#         t) t=${OPTARG}
+#             hour=$(date --date="$t" "+%H")
+#             current_hour=$(date "+%H")
+#             current_time=$(date "+%s")
+#             ((hour < current_hour)) && 
+#                 delay=$(($(date --date="$t 1 day" "+%s") - $current_time)) ||
+#                 delay=$(($(date --date="$t" "+%s") - $current_time));;
+#         n) note=${OPTARG};;
+#         *) echo 'unknown flag' && return 1
+#     esac 
+#     done
+#     (sleep $delay && notify-send "$note" &&
+#         mpv --force-window=no /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
+# }
 ytd(){
     a=
     r=
@@ -348,7 +361,6 @@ alias kdif="kitty +kitten diff"
 alias ex="extract"
 # alias less="bat --pager=always"
 alias dupe="czkawka_cli"
-alias pc="sudo netstat -tulnp | grep "$1""
 alias ddev="ssh dino-dev"
 alias dutils="ssh dino-utils"
 alias dstage="ssh dino-stage"
@@ -406,6 +418,8 @@ alias h="cat ~/.zhistory | fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
+alias dpgl="psql -U kiss -d discogs"
+alias dpgp="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
 alias wrandr='wlr-randr'
 alias kp='cd "$(fs -p ~/work/kupiku/ -d --depth=1 | fzf)"'
 alias vpnr="sudo protonvpn d && sudo protonvpn c -cc $1"
