@@ -1,4 +1,4 @@
 #!/bin/bash
 /usr/bin/protonmail-bridge-core -n & disown
-sleep 20
+sleep 12
 /usr/bin/thunderbird & disown
