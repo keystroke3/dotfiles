@@ -1,0 +1,7 @@
+#!/bin/bash
+mkdir -p "/tmp/kdeconnect/"
+file_name="/tmp/kdeconnect/$(date +%s).png"
+device_name="SiliconNote"
+wl-paste > $file_name
+kdeconnect-cli -n $device_name --share $file_name && notify-send -i "kdeconnect" "ScreenSend" "Sent Screenshot to $device_name"
+

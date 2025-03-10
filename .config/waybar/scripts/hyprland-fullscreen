@@ -1,0 +1,36 @@
+#!/bin/python
+
+import json
+import subprocess
+import sys
+import time
+
+if len(sys.argv) == 1:
+    print("monitor not specified")
+    exit(1)
+
+monitor_name = sys.argv[1]
+
+
+def work():
+    workspaces = json.loads(
+        subprocess.run(["hyprctl", "workspaces", "-j"], capture_output=True).stdout
+    )
+    fullscreen = {space["id"]: True for space in workspaces if space["hasfullscreen"]}
+
+    monitors_array = json.loads(
+        subprocess.run(["hyprctl", "monitors", "-j"], capture_output=True).stdout
+    )
+
+    for mon in monitors_array:
+        active = mon["activeWorkspace"]["id"]
+        if mon["name"] == monitor_name and fullscreen.get(active):
+            print("󰹑 ")
+
+
+if len(sys.argv) == 3:
+    while True:
+        work()
+        time.sleep(0.5)
+else:
+    work()

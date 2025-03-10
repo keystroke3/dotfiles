@@ -117,7 +117,7 @@ j(){
         return 0
     elif [ -d $fuzz ]
     then
-        cd "$fuzz" && reset 
+        cd "$fuzz" && clear
     fi
 }
 
@@ -154,7 +154,7 @@ mkpw(){
 }
 
 secret(){
-    echo "$(tr -dc 'A-Za-z0-9!$%&()*+,-./<=>?@[]^_{|}~' </dev/urandom | head -c 50)"
+    echo "$(tr -dc 'A-Za-z0-9!$%&()*./<>_~' </dev/urandom | head -c 50)"
 }
 
 py(){
@@ -353,7 +353,11 @@ alias mm="/usr/bin/env python manage.py makemigrations"
 alias rs="export DEBUG=True;/usr/bin/env python manage.py runserver 127.0.0.1:8002"
 alias xp="xprop | grep WM_CLASS"
 alias status="sudo systemctl status"
+alias ustatus="systemctl --user status"
 alias enable="sudo systemctl enable"
+alias uenable="systemctl --user enable"
+alias ustop="systemctl --user stop"
+alias urestart="systemctl --user restart"
 alias mlock="multilockscreen"
 alias ipy="ipython"
 alias yay="paru"
@@ -418,8 +422,10 @@ alias h="cat ~/.zhistory | fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
-alias dpgl="psql -U kiss -d discogs"
-alias dpgp="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
+alias lpgd="psql -U kiss -d discogs"
+alias ppgd="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
+alias lpgm="psql -U kiss -d mercari"
+alias ppgm="psql -h 95.216.65.50 -U releases -d mercari -p 5433"
 alias wrandr='wlr-randr'
 alias kp='cd "$(fs -p ~/work/kupiku/ -d --depth=1 | fzf)"'
 alias vpnr="sudo protonvpn d && sudo protonvpn c -cc $1"
@@ -433,3 +439,9 @@ alias gears="vkcube"
 alias code="code --ozone-platform=wayland"
 alias nvc="nvim --cmd \"cd ~/.config/nvim\" ~/.config/nvim"
 alias lf="yazi"
+alias jbat="wl-paste | jq | bat --language=json"
+alias stress="s-tui"
+alias rgpy="rg --glob '*.py'"
+alias rgjs="rg --glob '*.js' --glob '!*.min*.js'"
+alias jctl="journalctl"
+alias remind="PYTHONPATH=/home/salvaje/work/kupiku/interview/nzioki;reminder_cli"
