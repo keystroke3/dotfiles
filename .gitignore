@@ -18,6 +18,9 @@ zsh/
 !.config/waybar
 !.config/hypr
 !.config/wlogout
+!.config/sway
+!.config/swaylock
+!.config/foot
 .config/mpv/watch_later
 !.config/ranger
 !.config/rofi
@@ -46,6 +49,7 @@ zsh/
 !.zshrc
 !picom.conf
 !README.md
+*cloudflare*
 *.lock
 *.dat
 *bck*
