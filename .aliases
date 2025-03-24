@@ -280,7 +280,8 @@ alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
-alias bp="py -m bpython"
+alias bp="py -m iptyhon"
+alias pb="py -m ipython"
 alias pkg="paru -Q | fzf"
 alias gd="go doc"
 alias fzf="fzf --layout=reverse --height=40%"
@@ -310,7 +311,6 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 alias sudo='sudo '
 alias reload="exec ${SHELL} -l; clear"
-alias pb="bpython"
 alias path='echo -e ${PATH//:/\\n}'
 alias al="vim ~/.aliases && clear && reload"
 alias smb="sudo vim /etc/samba/smb.conf"
