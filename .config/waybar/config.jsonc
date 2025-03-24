@@ -70,5 +70,41 @@
             "interval": 1,
             "exec": "exec $HOME/.config/waybar/scripts/hyprland-fullscreen DP-3"
         }
+    },
+    {
+        "position": "top",
+        "layer": "top",
+        "height": 16,
+        "margin-top": 0,
+        "margin-bottom": 0,
+        "margin-left": 0,
+        "margin-right": 0,
+        "output": "HDMI-A-1",
+        "modules-left": [
+            "custom/wlogout",
+            "hyprland/workspaces",
+            "mpris"
+        ],
+        "modules-center": [
+            "custom/fullscreen-HDMI-A-1"
+        ],
+        "modules-right": [
+            "network",
+            "custom/vpnstatus",
+            "cpu",
+            "custom/cputemp",
+            "temperature",
+            "custom/gpuinfo",
+            "memory",
+            "pulseaudio",
+            "tray",
+            "clock"
+        ],
+        "include": "~/.config/waybar/common.jsonc",
+        "custom/fullscreen-HDMI-A-1": {
+            "format": "{}",
+            "interval": 1,
+            "exec": "exec $HOME/.config/waybar/scripts/hyprland-fullscreen HDMI-A-1"
+        }
     }
 ]

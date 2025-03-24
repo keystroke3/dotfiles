@@ -1,0 +1,286 @@
+# Default config for sway
+#
+# Copy this to ~/.config/sway/config and edit it to your liking.
+#
+# Read `man 5 sway` for a complete reference.
+
+include /etc/sway/config.d/*
+include ~/.config/sway/*.swayconf
+
+
+### Output configuration
+#
+# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+output * bg ~/Desktop/Backgrounds/wallpaper.jpg fill
+#
+# Example configuration:
+#
+#   output HDMI-A-1 resolution 1920x1080 position 1920,0
+#
+# You can get the names of your outputs by running: swaymsg -t get_outputs
+output eDP-1 position 864,1440
+output DP-1 position 864,0
+output DP-2 position 0,0 scale 1.25 transform 270
+#output eDP-1 position 0,2304
+#output DP-1 position 0,0
+#output DP-2 position 0,1440 scale 1.25
+
+
+### Idle configuration
+#
+# Example configuration:
+#
+# exec swayidle -w \
+#          timeout 300 'swaylock -f -c 000000' \
+#          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#          before-sleep 'swaylock -f -c 000000'
+#
+# This will lock your screen after 300 seconds of inactivity, then turn off
+# your displays after another 300 seconds, and turn your screens back on when
+# resumed. It will also lock your screen before your computer goes to sleep.
+
+### Input configuration
+#
+input "1133:45108:Logitech_MX_Master_3S" {
+  natural_scroll enabled
+}
+
+input "1133:45108:MX_Master_3S" {
+  natural_scroll enabled
+}
+
+input "1118:2479:Microsoft_Surface_045E:09AF_Touchpad" {
+  dwt enabled
+  tap enabled
+  natural_scroll enabled
+  middle_emulation enabled
+}
+
+input "1118:3127:IPTS_Touch" {
+  drag enable
+  drag_lock enable
+  map_to_output eDP-1
+}
+
+input "1118:3127:IPTS_Stylus" {
+  drag enable
+  drag_lock enable
+  map_to_output eDP-1
+}
+
+#input "1118:2479:Microsoft_Surface_045E:09AF_Mouse" {
+#  dwt enabled
+#  tap enabled
+#  click_method clickfinger
+#  scroll_method two_finger
+#  natural_scroll enabled
+#  middle_emulation enabled
+#}
+#
+#input "1118:2480:Microsoft_Surface_045E:09B0_Keyboard" {
+#  dwt enabled
+#  tap enabled
+#  natural_scroll enabled
+#  middle_emulation enabled
+#}
+#
+#{
+#  "identifier": "1118:2479:Microsoft_Surface_045E:09AF_Touchpad",
+#  "name": "Microsoft Surface 045E:09AF Touchpad",
+#  "vendor": 1118,
+#  "product": 2479,
+#  "type": "touchpad",
+#  "libinput": {
+#    "send_events": "enabled",
+#    "tap": "enabled",
+#    "tap_button_map": "lrm",
+#    "tap_drag": "enabled",
+#    "tap_drag_lock": "disabled",
+#    "accel_speed": 0,
+#    "accel_profile": "none",
+#    "natural_scroll": "enabled",
+#    "left_handed": "disabled",
+#    "click_method": "button_areas",
+#    "middle_emulation": "disabled",
+#    "scroll_method": "two_finger",
+#    "dwt": "disabled"
+#  }
+#},
+
+
+# You can get the names of your inputs by running: swaymsg -t get_inputs
+# Read `man 5 sway-input` for more information about this section.
+
+
+# set inner and outer gaps
+#gaps inner 28
+#gaps outer -8
+#default_border none
+#
+#border_images.focused ~/.config/sway/borders/focused.png
+#border_images.focused_inactive ~/.config/sway/borders/focused_inactive.png
+#border_images.unfocused ~/.config/sway/borders/unfocused.png
+#border_images.urgent ~/.config/sway/borders/urgent.png
+
+gaps outer 1
+gaps inner 5
+default_border pixel 3
+
+blur enable
+blur_passes 2
+blur_radius 10
+corner_radius 10
+
+shadows disable
+shadow_blur_radius 10
+#shadow_inactive_color #00000000
+
+default_dim_inactive 0.2
+dim_inactive_colors.unfocused #00000000
+dim_inactive_colors.urgent    #00000088
+titlebar_separator enable
+
+
+### Window rules configuration
+#
+#for_window [class=".*"] split toggle
+for_window [class=".*"] opacity 0.9
+
+
+for_window [app_id="foot"] {
+  dim_inactive 0.15
+}
+
+for_window [app_id="firefox"] {
+  border pixel 3
+  opacity 0.75
+  dim_inactive 0.25
+}
+
+for_window [app_id="chromium"] {
+  border pixel 3
+}
+
+for_window [app_id="org.gnome.Nautilus"] {
+  floating enable
+  border pixel 3
+}
+
+for_window [app_id="org.gnome.FileRoller"] {
+  floating enable
+  border pixel 3
+}
+
+for_window [app_id="mpv"] {
+  floating enable
+}
+
+for_window [app_id="nwg-look"] {
+  floating enable
+}
+
+for_window [app_id="nm-connection-editor"] {
+  floating enable
+}
+
+for_window [app_id="pavucontrol"] {
+  floating enable
+}
+
+for_window [app_id="blueman-manager"] {
+  floating enable
+}
+
+for_window [app_id="copyq"] {
+  floating enable
+}
+
+for_window [app_id="remmina"] {
+  floating enable
+  border pixel 3
+}
+
+for_window [app_id="gsimplecal"] {
+  floating enable
+  sticky enable
+  border none
+  move up 365 px
+  move right 595 px
+}
+
+for_window [app_id="avizo"] {
+  floating enable
+  sticky enable
+  border none
+}
+
+for_window [app_id="firefox"] [title="Library"] {
+  floating enable
+}
+
+for_window [app_id="firefox"] [title="File Upload"] {
+  floating enable
+}
+
+for_window [app_id="logout.py"] {
+  floating enable
+}
+
+for_window [app_id="reboot.py"] {
+  floating enable
+}
+
+for_window [app_id="shutdown.py"] {
+  floating enable
+}
+
+for_window [app_id="org.fcitx.fcitx5-config-qt"] {
+  floating enable
+  sticky enable
+}
+
+for_window [app_id="Calculator.Skia.Gtk"] {
+  floating enable
+  resize set width 600 px
+  resize set height 500 px
+}
+
+for_window [class="GStreamer"] {
+  floating enable
+}
+
+for_window [class="Viewnior"] {
+  floating enable
+  resize set width 1200 px
+  resize set height 800 px
+}
+
+for_window [class="floating"] {
+  floating enable
+  sticky enable
+  border enable
+}
+
+
+#
+# Status Bar:
+#
+# define status bar
+bar {
+  swaybar_command waybar
+}
+
+set $bg             #a48abfcc
+set $bg-inactive    #120e1200
+set $bg-urgent      #d9236588
+set $text-light     #f2d8e988
+set $text-dark      #0b0b0b88
+set $text-inactive  #59485000
+
+# set color theme
+# class                 border        bground       text            indicator     child_border
+client.focused          $bg           $bg           $text-dark      $bg           $bg
+client.focused_inactive $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
+client.unfocused        $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
+client.urgent           $bg-urgent    $bg-urgent    $text-light     $bg-urgent    $bg-urgent
+client.placeholder      $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
