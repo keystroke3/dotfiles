@@ -18,12 +18,62 @@
             }
         }
     },
-    "hyprland/workspaces": {
+    "sway/workspaces": {
         "active-only": false,
         "all-outputs": false,
         "disable-scroll": true,
         "on-scroll-up": "hyprctl dispatch workspace -1",
         "on-scroll-down": "hyprctl dispatch workspace +1",
+        "format": "{icon}",
+        "on-click": "activate",
+        "persistent-workspaces": {
+            "HDMI-A-2": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "DP-1": [
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "DP-3": [
+                6,
+                7,
+                8,
+                9,
+                10
+            ], // workspaces 2 and 3 shown on DP-1
+            "HDMI-A-1": [
+                6,
+                7,
+                8,
+                9,
+                10
+            ]
+        },
+        "format-icons": {
+            //			"1": "一",
+            //			"2": "二",
+            //			"3": "三",
+            //			"4": "四",
+            //			"5": "五",
+            "urgent": "",
+            "active": "",
+            "default": "",
+            "empty": "󰧞",
+            "special": "󰓏",
+            "sort-by-number": true
+        }
+    },
+    "hyprland/workspaces": {
+        "active-only": false,
+        "all-outputs": false,
+        "disable-scroll": true,
         "format": "{icon}",
         "on-click": "activate",
         "persistent-workspaces": {
