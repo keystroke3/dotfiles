@@ -1,23 +1,22 @@
 ## environment
 #
 # set desktop environment unique variables
+exec autotiling
 exec avizo-service
 exec nm-applet --indicator
 exec blueman-applet
-exec pasystray
+# exec pasystray
 exec copyq --start-server
 exec --no-startup-id fcitx5
 exec swayidle -w timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"'
 exec swayidle -w timeout 1200 'swaymsg "output * power on" && ~/.config/sway/scripts/screen-lock.sh suspend'
 
 exec easyeffects --gapplication-service
-exec hyprctl setcursor "Banana" 24
 exec ~/.config/hypr/scripts/resetxdgportal.sh # reset XDPH for screenshare
-exec swww-daemon || swww img $(cat ~/.cache/last_wall) || swww img `find $wallpaper_path -type f | shuf -n 1` # Set wallpaper
-exec ~/.bin/hyprman &> /tmp/hyprman.log
-exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
+# exec swww-daemon || swww img $(cat ~/.cache/last_wall) || swww img `find $wallpaper_path -type f | shuf -n 1` # Set wallpaper
+# exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # authentication dialogue for GUI apps
-exec ~/.config/waybar/waybar-run # launch the system panel
+# exec ~/.config/waybar/waybar-run # launch the system panel
 exec dunst # start notification demon
 exec copyq
 exec kdeconnectd
@@ -28,7 +27,7 @@ exec xrdb -load ~/.Xresources
 exec auto_media
 exec solaar -w hide
 # exec-once = ~/.config/hypr/scripts/monitor-setup
-exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
+# exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 
 # set window settings
 exec_always autotiling
@@ -38,10 +37,10 @@ exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 exec dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK XDG_CURRENT_DESKTOP=sway
 
 # start sway systemd target
-exec_always systemctl --user start sway-session.target
+# exec_always systemctl --user start sway-session.target
 
 # cursor theme
-seat seat0 xcursor_theme "Catppuccin-Frappe-Dark-Cursors"
+# seat seat0 xcursor_theme "Catppuccin-Frappe-Dark-Cursors"
 # exec_always gsettings set org.gnome.desktop.interface cursor-theme Catppuccin-Frappe-Dark-Cursors
 # exec_always gsettings set org.gnome.desktop.interface color-scheme prefer-dark
 #

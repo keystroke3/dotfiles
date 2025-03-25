@@ -4,27 +4,37 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-include /etc/sway/config.d/*
-include ~/.config/sway/*.swayconf
-
-
+### Variables
+#
+# Logo key. Use Mod1 for Alt.
+set $mod Mod4
+# Home row direction keys, like vim
+set $left h
+set $down j
+set $up k
+set $right l
+# Your preferred terminal emulator
+set $term alacritty
+# Your preferred application launcher
+set $menu fuzzel
+set $browser librewolf
+set $files nemo
+include ~/.config/sway/exec.swayconf
+include ~/.config/sway/rules.swayconf
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg ~/Desktop/Backgrounds/wallpaper.jpg fill
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+output * bg $(cat $HOME/.cache/last_wall) fill
+output DP-1 mode 3840x2160@144Hz pos 0 0 scale 2
+output HDMI-A-1 mode 1920x1080@144Hz pos 1920 0
+# output HDMI-A-1 resolution 1920x1080 position 3840,0
 #
 # Example configuration:
 #
 #   output HDMI-A-1 resolution 1920x1080 position 1920,0
 #
 # You can get the names of your outputs by running: swaymsg -t get_outputs
-output eDP-1 position 864,1440
-output DP-1 position 864,0
-output DP-2 position 0,0 scale 1.25 transform 270
-#output eDP-1 position 0,2304
-#output DP-1 position 0,0
-#output DP-2 position 0,1440 scale 1.25
-
 
 ### Idle configuration
 #
@@ -41,246 +51,237 @@ output DP-2 position 0,0 scale 1.25 transform 270
 
 ### Input configuration
 #
-input "1133:45108:Logitech_MX_Master_3S" {
-  natural_scroll enabled
-}
-
-input "1133:45108:MX_Master_3S" {
-  natural_scroll enabled
-}
-
-input "1118:2479:Microsoft_Surface_045E:09AF_Touchpad" {
-  dwt enabled
-  tap enabled
-  natural_scroll enabled
-  middle_emulation enabled
-}
-
-input "1118:3127:IPTS_Touch" {
-  drag enable
-  drag_lock enable
-  map_to_output eDP-1
-}
-
-input "1118:3127:IPTS_Stylus" {
-  drag enable
-  drag_lock enable
-  map_to_output eDP-1
-}
-
-#input "1118:2479:Microsoft_Surface_045E:09AF_Mouse" {
-#  dwt enabled
-#  tap enabled
-#  click_method clickfinger
-#  scroll_method two_finger
-#  natural_scroll enabled
-#  middle_emulation enabled
-#}
+# Example configuration:
 #
-#input "1118:2480:Microsoft_Surface_045E:09B0_Keyboard" {
-#  dwt enabled
-#  tap enabled
-#  natural_scroll enabled
-#  middle_emulation enabled
-#}
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
+#       dwt enabled
+#       tap enabled
+#       natural_scroll enabled
+#       middle_emulation enabled
+#   }
 #
-#{
-#  "identifier": "1118:2479:Microsoft_Surface_045E:09AF_Touchpad",
-#  "name": "Microsoft Surface 045E:09AF Touchpad",
-#  "vendor": 1118,
-#  "product": 2479,
-#  "type": "touchpad",
-#  "libinput": {
-#    "send_events": "enabled",
-#    "tap": "enabled",
-#    "tap_button_map": "lrm",
-#    "tap_drag": "enabled",
-#    "tap_drag_lock": "disabled",
-#    "accel_speed": 0,
-#    "accel_profile": "none",
-#    "natural_scroll": "enabled",
-#    "left_handed": "disabled",
-#    "click_method": "button_areas",
-#    "middle_emulation": "disabled",
-#    "scroll_method": "two_finger",
-#    "dwt": "disabled"
-#  }
-#},
-
-
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
-
-# set inner and outer gaps
-#gaps inner 28
-#gaps outer -8
-#default_border none
+### Key bindings
 #
-#border_images.focused ~/.config/sway/borders/focused.png
-#border_images.focused_inactive ~/.config/sway/borders/focused_inactive.png
-#border_images.unfocused ~/.config/sway/borders/unfocused.png
-#border_images.urgent ~/.config/sway/borders/urgent.png
-
-gaps outer 1
-gaps inner 5
-default_border pixel 3
-
-blur disable
-blur_passes 2
-blur_radius 10
-corner_radius 10
-
-shadows disable
-shadow_blur_radius 10
-#shadow_inactive_color #00000000
-
-default_dim_inactive 0.2
-dim_inactive_colors.unfocused #00000000
-dim_inactive_colors.urgent    #00000088
-titlebar_separator enable
-
-
-### Window rules configuration
+# Basics:
 #
-#for_window [class=".*"] split toggle
-for_window [class=".*"] opacity 0.9
+    # Start a terminal
+    bindsym $mod+Return exec $term
+
+    # Kill focused window
+    bindsym $mod+Shift+q kill
+
+    # Start your launcher
+    # bindsym $mod+d exec $menu
+
+    # Drag floating windows by holding down $mod and left mouse button.
+    # Resize them with right mouse button + $mod.
+    # Despite the name, also works for non-floating windows.
+    # Change normal to inverse to use left mouse button for resizing and right
+    # mouse button for dragging.
+    floating_modifier $mod normal
+
+    # Reload the configuration file
+    bindsym $mod+Shift+r reload
+
+    # Exit sway (logs you out of your Wayland session)
+    bindsym $mod+Shift+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+#
+# Moving around:
+#
+    # Move your focus around
+    bindsym $mod+$left focus left
+    bindsym $mod+$down focus down
+    bindsym $mod+$up focus up
+    bindsym $mod+$right focus right
+    # Or use $mod+[up|down|left|right]
+    bindsym $mod+Left focus left
+    bindsym $mod+Down focus down
+    bindsym $mod+Up focus up
+    bindsym $mod+Right focus right
+
+    # Move the focused window with the same, but add Shift
+    bindsym $mod+Shift+$left move left
+    bindsym $mod+Shift+$down move down
+    bindsym $mod+Shift+$up move up
+    bindsym $mod+Shift+$right move right
+    # Ditto, with arrow keys
+    bindsym $mod+Shift+Left move left
+    bindsym $mod+Shift+Down move down
+    bindsym $mod+Shift+Up move up
+    bindsym $mod+Shift+Right move right
+#
+# Workspaces:
+#
+    workspace 1 output DP-1
+    workspace 2 output DP-1
+    workspace 3 output DP-1
+    workspace 4 output DP-1
+    workspace 5 output DP-1
+    workspace 6 output HDMI-A-1
+    workspace 7 output HDMI-A-1
+    workspace 8 output HDMI-A-1
+    workspace 9 output HDMI-A-1
+    workspace 0 output HDMI-A-1
+    # Switch to workspace
+    bindsym $mod+1 workspace number 1
+    bindsym $mod+2 workspace number 2
+    bindsym $mod+3 workspace number 3
+    bindsym $mod+4 workspace number 4
+    bindsym $mod+5 workspace number 5
+    bindsym $mod+6 workspace number 6
+    bindsym $mod+7 workspace number 7
+    bindsym $mod+8 workspace number 8
+    bindsym $mod+9 workspace number 9
+    bindsym $mod+0 workspace number 10
+
+    # Move focused container to workspace
+    bindsym $mod+Shift+1 move container to workspace number 1, workspace number 1
+    bindsym $mod+Shift+2 move container to workspace number 2, workspace number 2
+    bindsym $mod+Shift+3 move container to workspace number 3, workspace number 3
+    bindsym $mod+Shift+4 move container to workspace number 4, workspace number 4
+    bindsym $mod+Shift+5 move container to workspace number 5, workspace number 5
+    bindsym $mod+Shift+6 move container to workspace number 6, workspace number 6
+    bindsym $mod+Shift+7 move container to workspace number 7, workspace number 7
+    bindsym $mod+Shift+8 move container to workspace number 8, workspace number 8
+    bindsym $mod+Shift+9 move container to workspace number 9, workspace number 9
+    bindsym $mod+Shift+0 move container to workspace number 10, workspace number 10
+    # Note: workspaces can have any name you want, not just numbers.
+    # We just use 1-10 as the default.
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    bindsym $mod+w splith
+    bindsym $mod+q splitv
+
+    # Switch the current container between different layout styles
+    bindsym $mod+s floating toggle
+    bindsym $mod+v exec swaymsg layout toggle tabbed split
+    # bindsym $mod+v layout toggle split
+    bindsym $mod+a layout toggle split
+    bindsym $mod+t layout stacking
+
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
+
+    # Toggle the current focus between tiling and floating mode
+    # bindsym $mod+Shift+space floating toggle
+
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+Shift+f focus mode_toggle
+
+    # Move focus to the parent container
+    # bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+minus move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+minus scratchpad show
+#
+# Resizing containers:
+#
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    # bindsym $left resize shrink width 10px
+    # bindsym $down resize grow height 10px
+    # bindsym $up resize shrink height 10px
+    # bindsym $right resize grow width 10px
 
 
-for_window [app_id="foot"] {
-  dim_inactive 0.15
+    bindsym $mod+Ctrl+h resize shrink width 30px
+    bindsym $mod+Ctrl+l resize grow width 30px
+    bindsym $mod+Ctrl+k resize shrink height 30px
+    bindsym $mod+Ctrl+j resize grow height 30px
+    # Ditto, with arrow keys
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    # Return to default mode
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
 }
+    # bindsym $mod+r mode "resize"
+    bindsym $mod+button1 move
+    bindsym $mod+button3 resize
+#
+# Utilities:
+#
+    # Special keys to adjust volume via PulseAudio
+    # bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+    # bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+    # bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+    # bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+    # # Special keys to adjust brightness via brightnessctl
+    # bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+    # bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    # Special key to take a screenshot with grim
 
-for_window [app_id="librefox"] {
-  border pixel 3
-  opacity 0.75
-  dim_inactive 0.25
-}
 
-for_window [app_id="chromium"] {
-  border pixel 3
-}
+    bindsym XF86AudioRaiseVolume exec bash ~/.bin/volume up
+    bindsym XF86AudioLowerVolume exec bash ~/.bin/volume down
+    bindsym XF86AudioMute exec bash ~/.bin/volume mute
+    bindsym XF86AudioPlay exec playerctl play-pause
+    bindsym XF86AudioNext exec playerctl next
+    bindsym XF86AudioPrev exec playerctl previous
 
-for_window [app_id="org.gnome.Nautilus"] {
-  floating enable
-  border pixel 3
-}
+    # bindsym Print exec grim
+    bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+    bindsym $mod+Print exec ~/.bin/screensend
+    bindsym $mod+Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd "Screenshot"
 
-for_window [app_id="org.gnome.FileRoller"] {
-  floating enable
-  border pixel 3
-}
+    bindsym $mod+Space exec $menu
+    bindsym $mod+bracketleft exec copyq menu
+    bindsym $mod+Shift+bracketleft exec copyq show
 
-for_window [app_id="mpv"] {
-  floating enable
-}
-
-for_window [app_id="nwg-look"] {
-  floating enable
-}
-
-for_window [app_id="nm-connection-editor"] {
-  floating enable
-}
-
-for_window [app_id="pavucontrol"] {
-  floating enable
-}
-
-for_window [app_id="blueman-manager"] {
-  floating enable
-}
-
-for_window [app_id="copyq"] {
-  floating enable
-}
-
-for_window [app_id="remmina"] {
-  floating enable
-  border pixel 3
-}
-
-for_window [app_id="gsimplecal"] {
-  floating enable
-  sticky enable
-  border none
-  move up 365 px
-  move right 595 px
-}
-
-for_window [app_id="avizo"] {
-  floating enable
-  sticky enable
-  border none
-}
-
-for_window [app_id="librefox"] [title="Library"] {
-  floating enable
-}
-
-for_window [app_id="librefox"] [title="File Upload"] {
-  floating enable
-}
-
-for_window [app_id="logout.py"] {
-  floating enable
-}
-
-for_window [app_id="reboot.py"] {
-  floating enable
-}
-
-for_window [app_id="shutdown.py"] {
-  floating enable
-}
-
-for_window [app_id="org.fcitx.fcitx5-config-qt"] {
-  floating enable
-  sticky enable
-}
-
-for_window [app_id="Calculator.Skia.Gtk"] {
-  floating enable
-  resize set width 600 px
-  resize set height 500 px
-}
-
-for_window [class="GStreamer"] {
-  floating enable
-}
-
-for_window [class="Viewnior"] {
-  floating enable
-  resize set width 1200 px
-  resize set height 800 px
-}
-
-for_window [class="floating"] {
-  floating enable
-  sticky enable
-  border enable
-}
-
+    bindsym $mod+g exec ~/.bin/shuffle
+    bindsym $mod+r exec ~/.bin/open_in_mpv
+    bindsym Ctrl+Alt+f exec librewolf
+    bindsym Alt+Space exec ~/.bin/finder
+    # bindsym $mod+Shift+x exec swaymsg exit
+    bindsym XF86PowerOff exec wlogout
+    bindsym $mod+Shift+b exec killall waybar && waybar || waybar
+    bindsym $mod+p exec hyprpicker -a
+    bindsym $mod+Shift+p exec hyprpicker -a --format=rgb
+    bindsym $mod+backslash exec pactl set-default-sink $(pactl list short sinks | grep -iv running | cut -d$'\t' -f2)
 
 #
 # Status Bar:
 #
-# define status bar
+# Read `man 5 sway-bar` for more information about this section.
 bar {
-  swaybar_command waybar
+    swaybar_command waybar
+    # mode invisible
+    # position top
+    #
+    # # When the status_command prints a new line to stdout, swaybar updates.
+    # # The default just shows the current date and time.
+    # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+    #
+    # colors {
+    #     # statusline #ffffff
+    #     # background #323232
+    #     # inactive_workspace #32323200 #32323200 #5c5c5c
+    # }
 }
 
-set $bg             #a48abfcc
-set $bg-inactive    #120e1200
-set $bg-urgent      #d9236588
-set $text-light     #f2d8e988
-set $text-dark      #0b0b0b88
-set $text-inactive  #59485000
+# exec waybar
 
-# set color theme
-# class                 border        bground       text            indicator     child_border
-client.focused          $bg           $bg           $text-dark      $bg           $bg
-client.focused_inactive $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
-client.unfocused        $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
-client.urgent           $bg-urgent    $bg-urgent    $text-light     $bg-urgent    $bg-urgent
-client.placeholder      $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
+
+include /etc/sway/config.d/*
