@@ -1,0 +1,134 @@
+#!/bin/python
+
+import json
+import subprocess
+from dataclasses import dataclass
+
+
+@dataclass
+class Mode:
+    width: int
+    height: int
+    refresh: float
+    preferred: bool = False
+    current: bool = False
+
+
+@dataclass
+class PhysicalSize:
+    width: int
+    height: int
+
+
+@dataclass
+class Position:
+    x: int
+    y: int
+
+
+@dataclass
+class Monitor:
+    name: str
+    description: str
+    make: str
+    model: str
+    serial: str
+    physical_size: PhysicalSize
+    enabled: bool
+    modes: list[Mode]
+    position: Position
+    transform: str
+    scale: float
+    adaptive_sync: bool
+
+
+# Example usage:
+def parse_monitor_data(json_data) -> list[Monitor]:
+    """Convert JSON data to Monitor dataclass instances"""
+    monitors = []
+    for item in json_data:
+        physical_size = PhysicalSize(
+            width=item["physical_size"]["width"], height=item["physical_size"]["height"]
+        )
+
+        modes = [
+            Mode(
+                width=mode["width"],
+                height=mode["height"],
+                refresh=mode["refresh"],
+                preferred=mode["preferred"],
+                current=mode["current"],
+            )
+            for mode in item["modes"]
+        ]
+
+        position = Position(x=item["position"]["x"], y=item["position"]["y"])
+
+        monitor = Monitor(
+            name=item["name"],
+            description=item["description"],
+            make=item["make"],
+            model=item["model"],
+            serial=item["serial"],
+            physical_size=physical_size,
+            enabled=item["enabled"],
+            modes=modes,
+            position=position,
+            transform=item["transform"],
+            scale=item["scale"],
+            adaptive_sync=item["adaptive_sync"],
+        )
+
+        monitors.append(monitor)
+
+    return monitors
+
+
+def get_command(mon: Monitor, pos: Position) -> tuple[list[str], Position]:
+    mode = Mode(width=0, height=0, refresh=0)
+    for m in mon.modes:
+        if m.width > mode.width:
+            mode.width = m.width
+        if m.height > mode.height:
+            mode.height = m.height
+        if m.refresh > mode.refresh:
+            mode.refresh = m.refresh
+
+    next_pos = pos
+    cmd = [
+        "sway",
+        "output",
+        mon.name,
+        "pos",
+        str(pos.x),
+        str(pos.y),
+        "scale",
+    ]
+    scale = 1
+    if mon.scale > 1:
+        next_pos.x += mode.width
+    elif mode.width > 1920:
+        scale = mode.width / 1920
+        next_pos.x += int(mode.width / scale)
+    cmd.append(str(scale))
+    return cmd, next_pos
+
+
+monitor_order = ["DP-1", "DP-2", "HDMI-A-1", "HDMI-A-2"]
+
+next_pos = Position(x=0, y=0)
+mons_map: dict[str, Monitor] = dict()
+
+current_config_str = subprocess.run(["wlr-randr", "--json"], capture_output=True).stdout
+cfg = json.loads(current_config_str)
+
+for mon in parse_monitor_data(cfg):
+    mons_map[mon.name] = mon
+
+for monitor in monitor_order:
+    mon = mons_map.get(monitor)
+    if mon is None:
+        continue
+    cmd, pos = get_command(mon, next_pos)
+    next_pos = pos
+    subprocess.run(cmd)

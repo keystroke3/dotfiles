@@ -50,6 +50,18 @@ window#waybar {
     background-color: @yellow;
 }
 
+#workspaces button.focused {
+    color: @navy;
+    background-color: @yellow;
+    padding: 4px;
+
+}
+
+#workspaces button.urgent {
+    color: @navy;
+    background-color: @rose;
+}
+
 #workspaces button:hover {
     background-color: #E6B9C6;
     color: black;

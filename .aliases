@@ -1,5 +1,19 @@
 #!/bin/bash
 #
+# find and attach to timux sessions
+ta(){
+    fuzz=$(tmux ls | awk -F':' '{print $1}' | fzf)
+    [ -z $fuzz ] && return 0
+    tmux attach -t $fuzz
+}
+
+gch(){
+    [ ! -z $1 ] && git checkout "$@"
+    return 0
+    fuzz=$(git branch | tr -d ' '| fzf)
+    [ -z $fuzz ] && return 0
+    git checkout $fuzz
+}
 
 sqlf(){
     fuzz=$(fs -g '.sql$' | fzf --reverse --height 40%)
@@ -41,6 +55,12 @@ dbexport(){
 
 dbimport(){
     for i in $apps; do py manage.py loaddata "$i.json" && echo "imported $i";done
+}
+
+dlogs(){
+	fuzz=$(docker ps --format '{{.Names}}' | fzf --reverse --height 40%)
+	[ ! -z $fuzz ] || return 0
+	docker logs $fuzz -f
 }
 
 function cd {
@@ -159,6 +179,10 @@ secret(){
 
 py(){
     $VIRTUAL_ENV/bin/python "$@"
+}
+
+bp(){
+    "$VIRTUAL_ENV/bin/ipython" "$@"
 }
 
 # remind(){
@@ -280,8 +304,6 @@ alias g="| grep"
 # alias rfile="grep "$1" /home/ted/Documents/teams/teamfiles"
 alias rcopy="rclone copy --progress --no-traverse"
 alias rdir="cat /home/ted/Documents/teams/teamdirs | fzf"
-alias bp="py -m iptyhon"
-alias pb="py -m ipython"
 alias pkg="paru -Q | fzf"
 alias gd="go doc"
 alias fzf="fzf --layout=reverse --height=40%"
@@ -330,7 +352,7 @@ alias pr="protonvpn r"
 alias pd="protonvpn d"
 alias feh="feh -d --edit -. -B black ."
 alias gst="git status"
-alias gch="git checkout"
+# alias gch="git checkout"
 alias gcm="git checkout main"
 alias gcd="git checkout dev"
 alias gcs="git checkout staging"
@@ -418,9 +440,10 @@ alias nv="neovide"
 alias nrs="npm run serve"
 alias rsn="npm run serve"
 alias rns="npm run serve"
-alias h="cat ~/.zhistory | fzf "
+alias h="cat ~/.zhistory | sort | uniq| fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
+alias smariap="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.prod.cnf"
 alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
 alias lpgd="psql -U kiss -d discogs"
 alias ppgd="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
@@ -445,3 +468,4 @@ alias rgpy="rg --glob '*.py'"
 alias rgjs="rg --glob '*.js' --glob '!*.min*.js'"
 alias jctl="journalctl"
 alias remind="PYTHONPATH=/home/salvaje/work/kupiku/interview/nzioki;reminder_cli"
+alias kconfig="vim ~/.ssh/kupiku-config"

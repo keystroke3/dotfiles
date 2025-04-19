@@ -1,0 +1,5 @@
+#!/bin/bash
+# sometimes copyq exits for no reason at all, so this makes sure it starts when it exits
+while true;do
+	(pgrep -f "copyq" && sleep 1) || (copyq --start-server && sleep 10)
+done
