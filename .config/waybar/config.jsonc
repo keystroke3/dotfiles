@@ -16,7 +16,7 @@
         ],
         "modules-center": [
             //"custom/fullscreen-DP1"
-            "sway/mode",
+            "sway/window",
             "sway/scratchpad"
         ],
         "modules-right": [
@@ -54,7 +54,8 @@
             "mpris"
         ],
         "modules-center": [
-            "custom/fullscreen-DP3"
+            "sway/window"
+            //"custom/fullscreen-DP3"
         ],
         "modules-right": [
             "network",
@@ -91,7 +92,8 @@
             "mpris"
         ],
         "modules-center": [
-            "custom/fullscreen-HDMI-A-1"
+            "sway/window"
+            //"custom/fullscreen-HDMI-A-1"
         ],
         "modules-right": [
             "network",

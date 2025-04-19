@@ -1,0 +1,389 @@
+{
+  "result": [
+    {
+      "id": "f08750ec7c422bcd4d43ca2cba775035",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "free.zenith.pm",
+      "type": "A",
+      "content": "95.215.19.22",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.812881Z",
+      "modified_on": "2024-05-05T03:38:39.771803Z"
+    },
+    {
+      "id": "b62ee1630cd0b9cf53612fcfcfd224cd",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "*.zenith.pm",
+      "type": "A",
+      "content": "41.90.172.147",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2025-01-03T10:44:28.403126Z",
+      "modified_on": "2025-01-03T10:44:28.403126Z"
+    },
+    {
+      "id": "d99bdfd9e9d2d9f939055a8aba1cdc47",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "dkim02._domainkey.zenith.pm",
+      "type": "CNAME",
+      "content": "dkim02._domainkey.simplelogin.co",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:41:59.324201Z",
+      "modified_on": "2024-05-05T03:41:59.324201Z"
+    },
+    {
+      "id": "311a5646ce99f9bc8fe38768c67bf9b4",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "dkim03._domainkey.zenith.pm",
+      "type": "CNAME",
+      "content": "dkim03._domainkey.simplelogin.co",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:42:31.755327Z",
+      "modified_on": "2024-05-05T03:42:31.755327Z"
+    },
+    {
+      "id": "cf424ab9413198c3bd884bf5820643c0",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "dkim._domainkey.zenith.pm",
+      "type": "CNAME",
+      "content": "dkim._domainkey.simplelogin.co",
+      "proxiable": true,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.809376Z",
+      "modified_on": "2024-05-05T03:38:46.889301Z"
+    },
+    {
+      "id": "426da0555cf5dca81cc24c6deb1870fa",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "jelly.zenith.pm",
+      "type": "CNAME",
+      "content": "7199ae08-36fb-483a-bb92-fcb20f40180b.cfargotunnel.com",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-11-22T13:48:53.15034Z",
+      "modified_on": "2024-11-22T13:48:53.15034Z"
+    },
+    {
+      "id": "81de5a8de94f5af7f2b5df3e73c0eb6e",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "pods.zenith.pm",
+      "type": "CNAME",
+      "content": "7199ae08-36fb-483a-bb92-fcb20f40180b.cfargotunnel.com",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-11-27T05:29:40.471069Z",
+      "modified_on": "2024-11-27T05:29:40.471069Z"
+    },
+    {
+      "id": "a31ea5aaa4752225243a5d09aba1ae33",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "pod.zenith.pm",
+      "type": "CNAME",
+      "content": "7199ae08-36fb-483a-bb92-fcb20f40180b.cfargotunnel.com",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-11-27T05:30:46.537326Z",
+      "modified_on": "2024-11-27T05:30:46.537326Z"
+    },
+    {
+      "id": "c7a38d17d8780d0ae6602da308e0da6f",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "red.zenith.pm",
+      "type": "CNAME",
+      "content": "7199ae08-36fb-483a-bb92-fcb20f40180b.cfargotunnel.com",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-12-26T11:52:46.918401Z",
+      "modified_on": "2024-12-26T11:52:46.918401Z"
+    },
+    {
+      "id": "982411e57709a9ee984de0ce05605264",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "seer.zenith.pm",
+      "type": "CNAME",
+      "content": "7199ae08-36fb-483a-bb92-fcb20f40180b.cfargotunnel.com",
+      "proxiable": true,
+      "proxied": true,
+      "ttl": 1,
+      "settings": {
+        "flatten_cname": false
+      },
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-10-05T16:29:21.150586Z",
+      "modified_on": "2024-10-05T16:29:21.150586Z"
+    },
+    {
+      "id": "1637e1044c7f6c3a8ccd1a2de7c35e1d",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "zenith.pm",
+      "type": "MX",
+      "content": "mx2.simplelogin.co",
+      "priority": 20,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.798338Z",
+      "modified_on": "2024-05-05T03:37:46.798338Z"
+    },
+    {
+      "id": "b26fa4908d374d91556a6676153d2542",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "zenith.pm",
+      "type": "MX",
+      "content": "mx1.simplelogin.co",
+      "priority": 10,
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.793751Z",
+      "modified_on": "2024-05-05T03:37:46.793751Z"
+    },
+    {
+      "id": "95d802a8da518d39ca126a02b187cdbd",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "_acme-challenge.zenith.pm",
+      "type": "TXT",
+      "content": "rVEhyoSds31GLqESWnCgnSykCE5nk32l83BrxmFBjjU",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 120,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-11-22T13:14:50.42469Z",
+      "modified_on": "2024-11-22T13:14:50.42469Z"
+    },
+    {
+      "id": "bff3f2541eaabf7b2b108ae9557a1648",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "_acme-challenge.zenith.pm",
+      "type": "TXT",
+      "content": "7UNi1eOD_tzi9QHzdrP_wTeOklZTxN7LUvArMYkVMqs",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 120,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-11-22T13:14:49.406669Z",
+      "modified_on": "2024-11-22T13:14:49.406669Z"
+    },
+    {
+      "id": "b1a69c203de585c5ee23b9d0f29b3b21",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "_dmarc.zenith.pm",
+      "type": "TXT",
+      "content": "\"v=DMARC1; p=quarantine; pct=100; adkim=s; aspf=s\"",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.801126Z",
+      "modified_on": "2024-05-05T03:37:46.801126Z"
+    },
+    {
+      "id": "27c93a3092bbf2d4020ef1f3253b5a43",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "zenith.pm",
+      "type": "TXT",
+      "content": "\"v=spf1 include:simplelogin.co ~all\"",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.806881Z",
+      "modified_on": "2024-05-05T03:37:46.806881Z"
+    },
+    {
+      "id": "1a357012fc22219f18106c966eed6b51",
+      "zone_id": "d8a56f70ffdebdd791a36550a76daaac",
+      "zone_name": "zenith.pm",
+      "name": "zenith.pm",
+      "type": "TXT",
+      "content": "\"sl-verification=dhwexcobuwyvpzvcvqqdvunpyrtuot\"",
+      "proxiable": false,
+      "proxied": false,
+      "ttl": 1,
+      "settings": {},
+      "meta": {
+        "auto_added": false,
+        "managed_by_apps": false,
+        "managed_by_argo_tunnel": false
+      },
+      "comment": null,
+      "tags": [],
+      "created_on": "2024-05-05T03:37:46.804113Z",
+      "modified_on": "2024-05-05T03:37:46.804113Z"
+    }
+  ],
+  "success": true,
+  "errors": [],
+  "messages": [],
+  "result_info": {
+    "page": 1,
+    "per_page": 100,
+    "count": 17,
+    "total_count": 17,
+    "total_pages": 1
+  }
+}
