@@ -8,8 +8,7 @@ ta(){
 }
 
 gch(){
-    [ ! -z $1 ] && git checkout "$@"
-    return 0
+    [ ! -z $1 ] && git checkout "$@" && return 0
     fuzz=$(git branch | tr -d ' '| fzf)
     [ -z $fuzz ] && return 0
     git checkout $fuzz
