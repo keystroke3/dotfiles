@@ -19,6 +19,7 @@ set $term alacritty
 set $menu fuzzel
 set $browser librewolf
 set $files nemo
+input type:keyboard xkb_options "compose:ralt"
 include ~/.config/sway/exec.swayconf
 include ~/.config/sway/rules.swayconf
 ### Output configuration
