@@ -54,3 +54,4 @@ zsh/
 *.dat
 *bck*
 *test*
+!.config/qutebrowser

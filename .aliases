@@ -1,6 +1,10 @@
 #!/bin/bash
 #
 # find and attach to timux sessions
+
+proxyls(){
+    docker container ls --format 'table {{.Names}}' | grep ipvanish
+}
 ta(){
     fuzz=$(tmux ls | awk -F':' '{print $1}' | fzf)
     [ -z $fuzz ] && return 0
@@ -43,10 +47,6 @@ fr(){
         rg "$1" "$(pwd)" | xargs sed -i "s/$1/$2/g" 
     fi
 }
-scratch(){
-    [ -z $1 ] && vim
-    vim ~/scratchpad/"$1"
-}
 
 dbexport(){
     for i in $apps; do py manage.py dumpdata "$i" > "$i.json" && echo "exported $i";done
@@ -54,6 +54,13 @@ dbexport(){
 
 dbimport(){
     for i in $apps; do py manage.py loaddata "$i.json" && echo "imported $i";done
+}
+dexec(){
+	fuzz=$(docker ps --format '{{.Names}}' | fzf --reverse --height 40%)
+	[ ! -z $fuzz ] || return 0
+        [ -z $1 ] &&
+	docker exec -it $fuzz bash ||
+	docker exec -it $fuzz "$@"
 }
 
 dlogs(){
@@ -401,7 +408,7 @@ alias dbshell="py manage.py dbshell"
 alias mpn="mpv --no-resume-playback"
 alias cp="cp -r"
 alias rr="exec ${SHELL} -l; clear"
-alias pc="[ -n $1 ] && sudo netstat -tulnp | grep $1"
+alias pc="[ -n $1 ] && ss -tulnp | grep $1"
 alias nu=" ~/Carousel/scripts/netusage/netusage.sh"
 alias uctl="systemctl --user"
 alias ffhvec="ffmpeg -i $1 -c:v: hevc_nvenc -preset slow -rc vbr -cq 0 -qmin:v 19 -qmax:v 25 -look_ahead 32 -pix_fmt p010le -c:a copy -c:s copy -vf scale=768:480 $2"
@@ -468,3 +475,4 @@ alias rgjs="rg --glob '*.js' --glob '!*.min*.js'"
 alias jctl="journalctl"
 alias remind="PYTHONPATH=/home/salvaje/work/kupiku/interview/nzioki;reminder_cli"
 alias kconfig="vim ~/.ssh/kupiku-config"
+alias qb="qutebrowser"

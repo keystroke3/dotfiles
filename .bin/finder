@@ -3,7 +3,7 @@
 [ -d ~/.cache/finders/ ] || mkdir -p ~/.cache/finders
 hist_file=~/.cache/finders/dmenufinder
 [ ! -f $hist_file ] && mkdir -p ~/.cache/finders && touch $hist_file
-rg="$($HOME/.bin/fs  -p /store/media/music -p /store/media/videos -i services -i xxx -i /store/media/downloads --host 'zen:10002')"
+rg="$($HOME/.bin/fs /store/media/music /store/media/videos -i services,/store/media/downloads --host 'zen:10002')"
 hist="$(head -n9 $hist_file)"
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
     fuzz="$(print $rg | fuzzel --dmenu \
