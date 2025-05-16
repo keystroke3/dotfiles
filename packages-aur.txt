@@ -4,4 +4,4 @@ grimblast-git
 fuzzel
 wlogout
 catppuccin
-freetube
+zsh-vi-mode
