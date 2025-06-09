@@ -258,7 +258,7 @@ mode "resize" {
     bindsym $mod+Shift+b exec killall waybar && waybar || waybar
     bindsym $mod+p exec hyprpicker -a
     bindsym $mod+Shift+p exec hyprpicker -a --format=rgb
-    bindsym $mod+backslash exec pactl set-default-sink $(pactl list short sinks | grep -iv running | cut -d$'\t' -f2)
+    bindsym $mod+backslash exec ~/.bin/audio_output_switch
     bindsym $mod+e exec $files
     bindsym $mod+Shift+g exec ~/.config/sway/scripts/monitor_rescale
     bindsym $mod+w exec swaymsg sticky toggle

@@ -5,10 +5,16 @@
 proxyls(){
     docker container ls --format 'table {{.Names}}' | grep ipvanish
 }
+
 ta(){
     fuzz=$(tmux ls | awk -F':' '{print $1}' | fzf)
     [ -z $fuzz ] && return 0
     tmux attach -t $fuzz
+}
+
+tn(){
+    [ -z $1 ] && return 0
+    tmux new -s $1
 }
 
 gch(){
@@ -476,3 +482,4 @@ alias jctl="journalctl"
 alias remind="PYTHONPATH=/home/salvaje/work/kupiku/interview/nzioki;reminder_cli"
 alias kconfig="vim ~/.ssh/kupiku-config"
 alias qb="qutebrowser"
+alias pcount="mariadb --defaults-file=~/.local/mariadb/local.db.cnf amazon_offers -e 'select count(*) from processed_asins'"
