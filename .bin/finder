@@ -1,9 +1,10 @@
 #!/bin/zsh
 #
+# This script looks for media stored in a custom NAS. The actual media paths are /media
 [ -d ~/.cache/finders/ ] || mkdir -p ~/.cache/finders
 hist_file=~/.cache/finders/dmenufinder
 [ ! -f $hist_file ] && mkdir -p ~/.cache/finders && touch $hist_file
-rg="$($HOME/.bin/fs /store/media/music /store/media/videos -i services,/store/media/downloads --host 'zen:10002')"
+rg="$($HOME/.bin/fs /media/music /store/media/videos -i services,/media/downloads --host 'zen:10002')"
 hist="$(head -n9 $hist_file)"
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
     fuzz="$(print $rg | fuzzel --dmenu \
@@ -19,13 +20,13 @@ else
     fuzz="$(echo $hist $rg | dmenu -i -l 10  -p file: -nb '#1e1c31' -nf '#ccc' -sb '#e5c07b' -sf '#1e1c31')"
 fi
 
-_fuzz=$(echo $fuzz|sed 's*/store/*/*')
-echo $_fuzz
+# _fuzz=$(echo $fuzz|sed 's*/store/*/*')
+# echo $_fuzz
 
-if [ ! -z $_fuzz ] && [ -f $_fuzz ]
+if [ ! -z $fuzz ] && [ -f $fuzz ]
 then 
   echo "$hist" | grep -vF $fuzz | sed "1i$fuzz" > $hist_file
-  xdg-open $_fuzz & disown
+  xdg-open $fuzz & disown
 else
     echo "Not a file"
 fi

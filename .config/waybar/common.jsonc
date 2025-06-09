@@ -219,16 +219,21 @@
         "format-mute": "󰓄",
         "format-icons": {
             "default": [
-                //"󰕿",
-                //"󰖀",
-                //"󰕾"
                 "󰓃",
                 "󰜟"
             ],
             "headphones": "",
             "headphones-muted": "󰟎",
             "hdmi": " ",
-            "hdmi-muted": "󰟎"
+            "hdmi-muted": "󰟎",
+            "handsfree": "",
+            "handsfree-muted": "󰋐",
+            "headset": " ",
+            "headset-muted": "󰋐",
+            "phone": "",
+            "phone-muted": "",
+            "portable": "",
+            "car": ""
         },
         "on-click": "bash ~/.bin/volume mute",
         "on-scroll-up": "bash ~/.bin/volume up",
