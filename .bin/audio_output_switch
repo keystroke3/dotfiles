@@ -1,0 +1,93 @@
+#!/bin/python
+
+import subprocess
+import sys
+from dataclasses import dataclass
+
+sink_cmd = subprocess.run(["pactl", "list", "sinks"], check=True, capture_output=True)
+sinks_props_string = (
+    subprocess.run(
+        ["grep", "State:", "-A", "2"], input=sink_cmd.stdout, capture_output=True
+    )
+    .stdout.decode("utf-8")
+    .strip()
+    .split("--")
+)
+
+current_name = (
+    subprocess.run(["pactl", "get-default-sink"], capture_output=True)
+    .stdout.decode()
+    .strip()
+)
+
+
+@dataclass
+class Sink:
+    state: str = ""
+    name: str = ""
+    description: str = ""
+
+
+current_default: str = ""
+
+sinks: dict[str, Sink] = dict()
+for sink_str in sinks_props_string:
+    sink = Sink()
+    props = sink_str.replace("\t", "").strip().split("\n")
+    for prop in props:
+        key, val = prop.split(": ")
+        setattr(sink, key.lower(), val)
+    sinks[sink.description] = sink
+
+sink_count = len(sinks_props_string)
+if sink_count == 1:
+    sys.exit()
+
+if sink_count == 2:
+    next_sink = [s for s in sinks.values() if s.name != current_name][0]
+    subprocess.run(["pactl", "set-default-sink", next_sink.name])
+    subprocess.run(["notify-send", "-i", "speaker", "Audio", next_sink.description])
+    sys.exit()
+
+
+sink_names = "\n".join(sinks)
+fuzz = (
+    subprocess.run(
+        [
+            "fuzzel",
+            "--dmenu",
+            "-b",
+            "1e1e2eff",
+            "-t",
+            "cdd6f4ff",
+            "-s",
+            "f9e2afff",
+            "-S",
+            "313244ff",
+            "-f",
+            "Fira Mono Nerd Font",
+            "-p",
+            "Device:",
+            "-w",
+            "50",
+            "-r",
+            "0",
+            "-l",
+            str(len(sinks)),
+            "-C",
+            "f9e2afff",
+            "-B",
+            "2",
+            "-i",
+            "--no-exit-on-keyboard-focus-loss",
+        ],
+        input=sink_names.encode(),
+        capture_output=True,
+    )
+    .stdout.decode()
+    .strip()
+)
+if not fuzz:
+    sys.exit()
+subprocess.run(["pactl", "set-default-sink", sinks[fuzz].name])
+subprocess.run(["notify-send", "-i", "speaker", "Audio", fuzz])
