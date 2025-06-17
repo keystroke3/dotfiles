@@ -19,7 +19,7 @@ tn(){
 
 gch(){
     [ ! -z $1 ] && git checkout "$@" && return 0
-    fuzz=$(git branch | tr -d ' '| fzf)
+    fuzz=$(git for-each-ref --sort -committerdate --format '%(refname:short)' | grep -v origin | fzf)
     [ -z $fuzz ] && return 0
     git checkout $fuzz
 }
