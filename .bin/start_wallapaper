@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# Ensure swww-daemon is running
+if ! pgrep -x "swww-daemon" > /dev/null; then
+    swww-daemon &
+    sleep 0.5
+fi
+
+# Try to use cached wallpaper
+if [[ -f "$HOME/.cache/last_wall" ]]; then
+    swww img "$(cat "$HOME/.cache/last_wall")" && exit 0
+fi
+
+# Fallback: pick a random wallpaper from $wallpaper_path
+wallpaper_path="$HOME/Pictures/Wallpapers"
+
+if [[ -d "$wallpaper_path" ]]; then
+    random_wall=$(find "$wallpaper_path" -type f | shuf -n 1)
+    [[ -n "$random_wall" ]] && swww img "$random_wall"
+fi
+

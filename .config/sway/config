@@ -245,7 +245,7 @@ mode "resize" {
     bindsym $mod+Print exec ~/.bin/screensend
     bindsym $mod+Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd "Screenshot"
 
-    bindsym $mod+Space exec $menu
+    bindsym $mod+Slash exec $menu
     bindsym $mod+bracketleft exec copyq menu
     bindsym $mod+Shift+bracketleft exec copyq show
 

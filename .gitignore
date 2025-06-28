@@ -55,3 +55,5 @@ zsh/
 *bck*
 *test*
 !.config/qutebrowser
+!.config/niri
+!.config/systemd/user/polkit-agent.service
