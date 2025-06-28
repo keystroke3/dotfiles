@@ -1,0 +1,6 @@
+#!/bin/bash
+
+uhd_mon="DP-1"
+_scale=1
+niri msg outputs | grep -qi 'scale: 2' && _scale=1 || _scale=2
+niri msg output $uhd_mon scale $_scale

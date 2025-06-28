@@ -27,6 +27,9 @@
             "(.*) - zsh": " [$1]"
         }
     },
+    "niri/workspaces": {
+        "disable-scroll": true
+    },
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -85,6 +88,9 @@
             "special": "󰓏",
             "sort-by-number": true
         }
+    },
+    "wlr/taskbar": {
+        "tooltip-format": "{title} | {app_id}"
     },
     "mpris": {
         "format-playing": "{player_icon} {artist} - {title}",

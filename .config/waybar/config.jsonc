@@ -15,9 +15,8 @@
             "mpris"
         ],
         "modules-center": [
-            //"custom/fullscreen-DP1"
             "sway/window",
-            "sway/scratchpad"
+            "wlr/taskbar"
         ],
         "modules-right": [
             "network",
@@ -54,7 +53,8 @@
             "mpris"
         ],
         "modules-center": [
-            "sway/window"
+            "sway/window",
+            "wlr/taskbar"
             //"custom/fullscreen-DP3"
         ],
         "modules-right": [

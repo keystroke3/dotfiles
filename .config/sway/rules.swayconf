@@ -16,7 +16,7 @@ default_border pixel 4
 # dim_inactive_colors.urgent    #00000088
 # titlebar_separator enable
 
-assign [class="Thunderbird"] workspace 10
+assign [class="Thunderbird"] workspace number 10
 assign [class="Librewolf"] workspace number 1
 
 for_window [app_id="foot"] {
@@ -28,12 +28,7 @@ for_window [app_id="librefox"] {
   dim_inactive 0.25
 }
 
-for_window [app_id="org.gnome.Nautilus"] {
-  floating enable
-  border pixel 3
-}
-
-for_window [app_id="org.gnome.FileRoller"] {
+for_window [app_id="org.gnome.Nautilus|org.gnome.FileRoller"] {
   floating enable
   border pixel 3
 }
@@ -42,10 +37,6 @@ for_window [app_id="mpv|nm-connection-editor|pavucontrol|blueman-manager|copyq"]
   floating enable
 }
 
-for_window [app_id="remmina"] {
-  floating enable
-  border pixel 3
-}
 
 for_window [app_id="gsimplecal"] {
   floating enable
@@ -66,18 +57,6 @@ for_window [app_id="librefox"] [title="Library"] {
 }
 
 for_window [app_id="librefox"] [title="File Upload"] {
-  floating enable
-}
-
-for_window [app_id="logout.py"] {
-  floating enable
-}
-
-for_window [app_id="reboot.py"] {
-  floating enable
-}
-
-for_window [app_id="shutdown.py"] {
   floating enable
 }
 
@@ -109,13 +88,13 @@ for_window [class="floating"] {
 }
 
 
-set $bg             #a48abfcc
+set $bg             #a48abfff
 set $fg             #98C379ff
-set $bg-inactive    #120e1200
-set $bg-urgent      #d9236588
-set $text-light     #f2d8e988
-set $text-dark      #0b0b0b88
-set $text-inactive  #59485000
+set $bg-inactive    #120e12ff
+set $bg-urgent      #d92365ff
+set $text-light     #f2d8e9ff
+set $text-dark      #0b0b0bff
+set $text-inactive  #594850ff
 
 # set color theme
 # class                 border        bground       text            indicator     child_border

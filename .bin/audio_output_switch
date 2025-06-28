@@ -1,8 +1,11 @@
 #!/bin/python
 
+import os
 import subprocess
 import sys
 from dataclasses import dataclass
+
+HOME = os.path.expanduser("~")
 
 sink_cmd = subprocess.run(["pactl", "list", "sinks"], check=True, capture_output=True)
 sinks_props_string = (
@@ -46,53 +49,39 @@ for sink_str in sinks_props_string:
 
 sink_count = len(sinks)
 if sink_count == 1:
+    print("only one sink", sinks)
     sys.exit()
 
 if sink_count == 2:
+    print("toggling between sinks")
     next_sink = [s for s in sinks.values() if s.name != current_name][0]
     subprocess.run(["pactl", "set-default-sink", next_sink.name])
     subprocess.run(["notify-send", "-i", "speaker", "Audio", next_sink.description])
     sys.exit()
 
-#
-# sink_names = "\n".join([s for s in sinks if s != current_default])
-# fuzz = (
-#     subprocess.run(
-#         [
-#             "fuzzel",
-#             "--dmenu",
-#             "-b",
-#             "1e1e2eff",
-#             "-t",
-#             "cdd6f4ff",
-#             "-s",
-#             "f9e2afff",
-#             "-S",
-#             "313244ff",
-#             "-f",
-#             "Fira Mono Nerd Font",
-#             "-p",
-#             "Device:",
-#             "-w",
-#             "50",
-#             "-r",
-#             "0",
-#             "-l",
-#             str(len(sinks)),
-#             "-C",
-#             "f9e2afff",
-#             "-B",
-#             "2",
-#             "-i",
-#             "--no-exit-on-keyboard-focus-loss",
-#         ],
-#         input=sink_names.encode(),
-#         capture_output=True,
-#     )
-#     .stdout.decode()
-#     .strip()
-# )
-# if not fuzz:
-#     sys.exit()
-# subprocess.run(["pactl", "set-default-sink", sinks[fuzz].name])
-# subprocess.run(["notify-send", "-i", "speaker", "Audio", fuzz])
+
+sink_names = "\n".join([s for s in sinks if s != current_default])
+fuzz = (
+    subprocess.run(
+        [
+            "fuzzel",
+            "--dmenu",
+            "--config",
+            os.path.join(HOME, ".bin/prompt-theme.ini"),
+            "-p",
+            "Device:",
+            "-l",
+            str(len(sinks)),
+            "-i",
+            # "--no-exit-on-keyboard-focus-loss",
+        ],
+        input=sink_names.encode(),
+        capture_output=True,
+    )
+    .stdout.decode()
+    .strip()
+)
+if not fuzz:
+    sys.exit()
+subprocess.run(["pactl", "set-default-sink", sinks[fuzz].name])
+subprocess.run(["notify-send", "-i", "speaker", "Audio", fuzz])
