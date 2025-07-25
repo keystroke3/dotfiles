@@ -1,4 +1,3 @@
-zsh/
 *.tmp
 .config/*
 !.bin/*
@@ -57,3 +56,5 @@ zsh/
 !.config/qutebrowser
 !.config/niri
 !.config/systemd/user/polkit-agent.service
+!zsh/
+*history
