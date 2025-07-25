@@ -6,6 +6,16 @@ proxyls(){
     docker container ls --format 'table {{.Names}}' | grep ipvanish
 }
 
+rprog(){
+    date &&
+    mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select count(*), date(last_modified) as modified from release_offers group by modified'
+}
+
+aprog(){
+    date &&
+        mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select date(date_offers_downloaded) as dl_date, count(asin) from inventory_items_scraper where doNotRun=0 group by dl_date'
+}
+
 ta(){
     fuzz=$(tmux ls | awk -F':' '{print $1}' | fzf)
     [ -z $fuzz ] && return 0
@@ -405,10 +415,9 @@ alias dstage="ssh dino-stage"
 alias dprod="ssh dino-prod"
 alias cvr="coverage run --omit='*/.virtualenvs/*,*/tests_/*' manage.py test "$1""
 alias cvs="coverage html"
-alias ls="eza --color=always --group-directories-first"
-alias ll="eza -l --color=always --group-directories-first"
-alias lla="eza -al --color=always --group-directories-first"
-alias la="eza -a --color=always --group-directories-first"
+alias ls="eza"
+alias ll="eza -lga"
+alias la="eza -a"
 alias dshell="py manage.py shell"
 alias dbshell="py manage.py dbshell"
 alias mpn="mpv --no-resume-playback"
@@ -456,7 +465,8 @@ alias h="cat ~/.zhistory | sort | uniq| fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias smariap="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.prod.cnf"
-alias kmariap="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
+alias kmp="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
+alias kmk="mariadb --defaults-file=~/.local/mariadb/kupiku.db.cnf"
 alias lpgd="psql -U kiss -d discogs"
 alias ppgd="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
 alias lpgm="psql -U kiss -d mercari"
