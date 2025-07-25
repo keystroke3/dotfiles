@@ -1,0 +1,121 @@
+#!/bin/zsh
+
+autoload -Uz add-zsh-hook
+setopt PROMPT_SUBST
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+rosewater=$'\e[38;5;217m'
+flamingo=$'\e[38;5;210m'
+pink=$'\e[38;5;211m'
+mauve=$'\e[38;5;176m'
+red=$'\e[38;5;168m'
+maroon=$'\e[38;5;132m'
+peach=$'\e[38;5;209m'
+yellow=$'\e[38;5;180m'
+green=$'\e[38;5;114m'
+teal=$'\e[38;5;116m'
+sky=$'\e[38;5;117m'
+sapphire=$'\e[38;5;74m'
+blue=$'\e[38;5;110m'
+lavender=$'\e[38;5;147m'
+text=$'\e[38;5;188m'
+subtext1=$'\e[38;5;145m'
+subtext0=$'\e[38;5;102m'
+overlay2=$'\e[38;5;59m'
+overlay1=$'\e[38;5;66m'
+overlay0=$'\e[38;5;60m'
+surface2=$'\e[38;5;242m'
+surface1=$'\e[38;5;239m'
+surface0=$'\e[38;5;236m'
+base=$'\e[38;5;234m'
+mantle=$'\e[38;5;233m'
+crust=$'\e[38;5;232m'
+reset=$'\e[0m'
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+# Variable to store command start time
+typeset -g command_start_time
+
+# Function to be called before each command
+preexec() {
+    command_start_time=$SECONDS
+}
+
+# Function to be called after each command
+precmd() {
+    # Capture last command's exit status
+    cmd_status=$?
+
+    if [ -n "$command_start_time" ]; then
+        local command_duration=$((SECONDS - command_start_time))
+        unset command_start_time
+
+        if ((command_duration >= 3600)); then
+            local hrs=$((command_duration / 3600))
+            local mins=$(( (command_duration % 3600) / 60 ))
+            local secs=$((command_duration % 60))
+            command_time_info="${subtext1}took ${hrs}h ${mins}m ${secs}s"
+        elif ((command_duration >= 60)); then
+            local mins=$((command_duration / 60))
+            local secs=$((command_duration % 60))
+            command_time_info="${subtext1}took ${mins}m ${secs}s"
+        elif ((command_duration >= 5)); then
+            command_time_info="${subtext1}took ${command_duration}s"
+        else
+            command_time_info=""
+        fi
+    else
+        command_time_info=""
+    fi
+}
+
+git_info() {
+    if git rev-parse --is-inside-work-tree &>/dev/null; then
+        local branch=$(git symbolic-ref --short -q HEAD 2>/dev/null)
+        local commit_hash=$(git rev-parse --short HEAD 2>/dev/null)
+        local dirty=""
+        [[ -n "$(git status --porcelain 2>/dev/null)" ]] && dirty="*"
+
+        if [[ -n "$branch" ]]; then
+            echo "$normal on$bold $maroon  $branch$dirty"
+        else
+            echo "$normal on$bold $maroon  (HEAD @ $commit_hash)$dirty"
+        fi
+    fi
+}
+
+venv_info() {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        echo "$yellow (v$(/usr/bin/env python --version | cut -d' ' -f2) $(basename "$VIRTUAL_ENV"))"
+    fi
+}
+
+screen_info(){
+    if [[ -n "$STY" ]]; then
+        echo "%{$subtext1%}[$STY:$WINDOW] %{$reset%}"
+    fi
+}
+
+prompt_char() {
+    [[ $cmd_status -eq 0 ]] && echo "%{$green%}❯" || echo "%{$red%}❯"
+}
+
+PROMPT='$(screen_info)%{$bold%}%{$teal%}%1~$(git_info)$(venv_info) ${command_time_info}
+$(prompt_char) %{$normal%}'
+
+# The prompt cursor in normal mode
+ZVM_NORMAL_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+
+# The prompt cursor in insert mode
+ZVM_INSERT_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BEAM
+
+# The prompt cursor in visual mode
+ZVM_VISUAL_MODE_CURSOR=$ZVM_CURSOR_BLINKING_BLOCK
+
+# The prompt cursor in visual line mode
+ZVM_VISUAL_LINE_MODE_CURSOR=$ZVM_CURSOR_BLOCK
+
+# The prompt cursor in operator pending mode
+ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
+
+source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
