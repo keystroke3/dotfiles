@@ -1,6 +1,15 @@
 #!/bin/bash
 
 uhd_mon="DP-1"
-_scale=1
-niri msg outputs | grep -qi 'scale: 2' && _scale=1 || _scale=2
-niri msg output $uhd_mon scale $_scale
+hd_mon="HDMI-A-1"
+if niri msg outputs | grep -qi 'scale: 2' ; then
+	uhd_scale=1
+	hd_mon_pos=3840
+else
+	uhd_scale=2
+	hd_mon_pos=1920
+fi
+echo $uhd_scale
+echo $hd_mon_pos
+niri msg output $uhd_mon scale $uhd_scale
+niri msg output $hd_mon position set $hd_mon_pos 0

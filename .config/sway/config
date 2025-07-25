@@ -75,7 +75,7 @@ output HDMI-A-1 mode 1920x1080@144Hz pos 1920 0
     bindsym $mod+Shift+q kill
 
     # Start your launcher
-    # bindsym $mod+d exec $menu
+    bindsym $mod+d exec $menu
 
     # Drag floating windows by holding down $mod and left mouse button.
     # Resize them with right mouse button + $mod.
@@ -253,6 +253,7 @@ mode "resize" {
     bindsym $mod+r exec ~/.bin/open_in_mpv
     bindsym Ctrl+Alt+f exec librewolf
     bindsym Alt+Space exec ~/.bin/finder
+    bindsym $mod+Space exec $menu
     # bindsym $mod+Shift+x exec swaymsg exit
     bindsym XF86PowerOff exec wlogout
     bindsym $mod+Shift+b exec killall waybar && waybar || waybar

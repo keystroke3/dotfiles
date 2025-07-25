@@ -5,3 +5,4 @@ fuzzel
 wlogout
 catppuccin
 zsh-vi-mode
+niri-git

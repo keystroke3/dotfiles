@@ -10,7 +10,7 @@ environment {
     // ELECTRON_OZONE_PLATFORM_HINT "auto"
     DISPLAY ":1"
     QT_QPA_PLATFORM "wayland"
-    XDG_CURRENT_DESKTOP "sway"
+    XDG_CURRENT_DESKTOP "niri"
 }
 
 overview{
@@ -129,7 +129,7 @@ layout {
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "on-overflow"
+    
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -300,7 +300,7 @@ spawn-at-startup "nm-applet"
 spawn-at-startup "~/.bin/startmail"
 spawn-at-startup "auto_media"
 spawn-at-startup "solaar" "-w" "hide"
-spawn-at-startup "~/bin/start_wallpaper"
+spawn-at-startup "swww-daemon"
 spawn-at-startup "xrdb" "-load" "~/.Xresources"
 
 
@@ -400,8 +400,6 @@ binds {
     XF86AudioPrev { spawn "playerctl" "previous"; }
     XF86PowerOff { spawn "wlogout"; }
 
-    Mod+Shift+s { spawn "grim" "-g" "$(slurp)" "-" "|" "wl-copy"; }
-    Mod+Print { spawn "~/.bin/screensend"; }
 
     // Mod+Shift+Print { spawn "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd 'Screenshot' }
     // window screenshot
@@ -416,7 +414,7 @@ binds {
     Mod+P { spawn "hyprpicker" "-a"; }
     Mod+Shift+P { spawn "hyprpicker" "-a" "--format=rgb"; }
     Mod+backslash { spawn "~/.bin/audio_output_switch"; }
-    Mod+e { spawn "caja"; }
+    Mod+e { spawn "thunar"; }
 
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 
@@ -492,25 +490,8 @@ binds {
     // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Shift+Ctrl+Left  { move-window-to-monitor-left; }
-    // ...
-
-    // And you can also move a whole workspace to another monitor:
-    // Mod+Shift+Ctrl+Left  { move-workspace-to-monitor-left; }
-    // ...
-
-    Mod+Ctrl+J      { focus-workspace-down; }
-    Mod+Ctrl+K        { focus-workspace-up; }
-    Mod+Shift+Ctrl+J { move-column-to-workspace-down; }
-    Mod+Shift+Ctrl+K   { move-column-to-workspace-up; }
-
-    // Alternatively, there are commands to move just a single window:
-    // Mod+Ctrl+Page_Down { move-window-to-workspace-down; }
-    // ...
-
-    Mod+Shift+Down { move-workspace-down; }
-    Mod+Shift+Up   { move-workspace-up; }
+    Mod+Alt+J { move-column-to-workspace-down; }
+    Mod+Alt+K   { move-column-to-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -588,8 +569,6 @@ binds {
     Mod+Shift+Period { expel-window-from-column; }
 
     // Mod+R { switch-preset-column-width; }
-    Mod+Shift+R { switch-preset-window-height; }
-    Mod+Ctrl+R { reset-window-height; }
     Mod+V { maximize-column; }
     Mod+F { fullscreen-window; }
     Mod+Shift+G { spawn "~/.config/niri/switch_monitor_scale"; }
@@ -635,9 +614,11 @@ binds {
     // Mod+Space       { switch-layout "next"; }
     // Mod+Shift+Space { switch-layout "prev"; }
 
+    Mod+Shift+s { screenshot; }
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+    Mod+Print { spawn "~/.bin/screensend"; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
