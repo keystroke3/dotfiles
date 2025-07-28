@@ -2,7 +2,7 @@
 
 mpv_player=$(playerctl -l | grep --color=no mpv)
 if [ -z $mpv_player ];then
-    mpv --shuffle /media/videos/music --no-resume-playback
+    mpv --shuffle /media/videos/music --no-resume-playback & disown
 else
     playerctl play-pause -p "$mpv_player"
 fi
