@@ -100,7 +100,17 @@ prompt_char() {
     [[ $cmd_status -eq 0 ]] && echo "%{$green%}❯" || echo "%{$red%}❯"
 }
 
-PROMPT='$(screen_info)%{$bold%}%{$teal%}%1~$(git_info)$(venv_info) ${command_time_info}
+ssh_info() {
+    # Check if we're in an SSH session
+    if [[ -n "$SSH_CLIENT" || -n "$SSH_TTY" || "$SSH_CONNECTION" ]]; then
+        echo "%{$rosewater%}%n@%m "
+    fi
+}
+
+# PROMPT='$(screen_info)%{$bold%}%{$teal%}%1~$(git_info)$(venv_info) ${command_time_info}
+# $(prompt_char) %{$normal%}'
+
+PROMPT='$(screen_info)$(ssh_info)%{$bold%}%{$teal%}%1~$(git_info)$(venv_info) ${command_time_info}
 $(prompt_char) %{$normal%}'
 
 # The prompt cursor in normal mode
