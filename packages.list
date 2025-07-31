@@ -87,6 +87,8 @@ inkscape
 ipython
 iwd
 jre
+jq
+slack-desktop
 kdeconnect
 kitty
 kvantum
@@ -180,6 +182,7 @@ python-sqlparse
 python-uv
 python-virtualenv
 python-weasyprint
+python-ufl
 python311
 qbittorrent
 qjackctl
@@ -193,7 +196,7 @@ reflector
 ripgrep
 rsync
 ruff
-rustdesk-bin
+rustdesk
 s-tui
 satty
 screen

@@ -252,7 +252,7 @@ window#waybar {
     color: @text-dark;
     margin: 0;
     padding: 0;
-    padding-right: 5px;
+    padding-right: 15px;
     border-radius: 0 25px 25px 0;
     font-weight: bold;
 }

@@ -2,6 +2,14 @@
 #
 # find and attach to timux sessions
 
+ssh(){
+    if [ ! $TMUX ];then
+        kitten ssh "$@"
+    else
+        /usr/bin/ssh "$@"
+    fi
+}
+
 proxyls(){
     docker container ls --format 'table {{.Names}}' | grep ipvanish
 }
@@ -13,7 +21,8 @@ rprog(){
 
 aprog(){
     date &&
-        mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select date(date_offers_downloaded) as dl_date, count(asin) from inventory_items_scraper where doNotRun=0 group by dl_date'
+        # mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select date(date_offers_downloaded) as dl_date, count(asin) from inventory_items_scraper where doNotRun=0 group by dl_date'
+        mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select asin, next_update_time as due, date_offers_downloaded from inventory_items_scraper where doNotRun=0 order by due limit 10'
 }
 
 ta(){
@@ -319,6 +328,7 @@ alias cronhelp=" echo '
 # * * * * * <command to execute>
 '"
 
+
 alias vim="nvim"
 alias kc="kdeconnect-cli -d edd439448e1817fa "$1""
 alias move="find . -mindepth 2 -type f -print -exec mv {} . \;"
@@ -330,7 +340,7 @@ alias pkg="paru -Q | fzf"
 alias gd="go doc"
 alias fzf="fzf --layout=reverse --height=40%"
 alias zz="vim ~/.zprofile"
-alias zh="cat ~/.zhistory | fzf"
+alias zh="cat ~/.config/zsh/zhistory | fzf"
 alias vi="vim"
 alias df="df -h"                          # human-readable size
 alias free="free -m"                      # show sizes in MB
@@ -461,7 +471,7 @@ alias nv="neovide"
 alias nrs="npm run serve"
 alias rsn="npm run serve"
 alias rns="npm run serve"
-alias h="cat ~/.zhistory | sort | uniq| fzf "
+alias h="cat ~/.config/zsh/zhistory | sort | uniq| fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias smariap="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.prod.cnf"
