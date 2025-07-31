@@ -30,6 +30,9 @@ class Sink:
     name: str = ""
     description: str = ""
 
+    def __str__(self) -> str:
+        return f"name: {self.name}, desc: {self.description}, state: {self.state}"
+
 
 current_default: str = ""
 
@@ -48,6 +51,8 @@ for sink_str in sinks_props_string:
 
 
 sink_count = len(sinks)
+for sink in sinks:
+    print(sink)
 if sink_count == 1:
     print("only one sink", sinks)
     sys.exit()

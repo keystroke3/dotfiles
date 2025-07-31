@@ -1,0 +1,78 @@
+#!/usr/bin/python3
+
+"""
+Automacitally enables and disables the internal keyboard on a laptop if an external keyboard is connected.
+The `KEYBOARD_NAME` variable is a regex of the keyboard names to match to trigger a toggle once dis/connected.
+"""
+import shlex
+import subprocess
+from subprocess import Popen, run
+from time import sleep
+
+KEYBOARD_NAME = "moonlander"
+
+
+def evtest_running() -> bool:
+    out = run(["pgrep", "evtest"], capture_output=True).stdout.decode("utf-8").strip()
+    return out != ""
+
+
+def libinput() -> bytes:
+    cmd = "doas libinput list-devices"
+    args = shlex.split(cmd)
+    return run(args, capture_output=True, check=True).stdout
+
+
+def moonlader_connected(input: bytes) -> bool:
+    cmd = f"grep -iE {KEYBOARD_NAME}"
+    args = shlex.split(cmd)
+    moonlander = (
+        run(args, input=input, capture_output=True).stdout.decode("utf-8").strip()
+    )
+
+    return moonlander != ""
+
+
+def internal_keyboard(input: bytes) -> str:
+    cmd = "awk '/AT Translated Set 2 keyboard/ {getline; print $2}'"
+    args = shlex.split(cmd)
+    return (
+        run(
+            args,
+            input=input,
+            capture_output=True,
+        )
+        .stdout.decode()
+        .strip()
+    )
+
+
+keyboard = internal_keyboard(libinput())
+print(f"internal  keyboard ={keyboard}")
+notified = False
+while True:
+    connected = moonlader_connected(libinput())
+    disabled = evtest_running()
+    if connected:
+        if not disabled:
+            print("disabling internal keyboard")
+            cmd = f"doas evtest --grab {keyboard}"
+            args = shlex.split(cmd)
+            Popen(args, stdout=subprocess.DEVNULL)
+            notified = False
+        if not notified:
+            cmd = "notify-send 'Internal Keyboard off' Keyboard"
+            args = shlex.split(cmd)
+            Popen(args, stdout=subprocess.DEVNULL)
+            notified = True
+    else:
+        if disabled:
+            print("enabling internal keyboard")
+            run(["doas", "pkill", "evtest"])
+            notified = False
+        if not notified:
+            cmd = "notify-send 'Internal Keyboard on' Keyboard"
+            args = shlex.split(cmd)
+            Popen(args, stdout=subprocess.DEVNULL)
+            notified = True
+    sleep(1)
