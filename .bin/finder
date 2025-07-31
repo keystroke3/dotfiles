@@ -4,12 +4,12 @@
 [ -d ~/.cache/finders/ ] || mkdir -p ~/.cache/finders
 hist_file=~/.cache/finders/dmenufinder
 [ ! -f $hist_file ] && mkdir -p ~/.cache/finders && touch $hist_file
-rg="$($HOME/.bin/fs /media/music /media/videos -i services,/media/downloads --host 'zen:10002')"
+rg="$($HOME/.bin/fs /media/music /media/videos -i services,/media/downloads --host '10.0.0.2:10002')"
 hist="$(head -n9 $hist_file)"
 if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
     fuzz="$(print $rg | fuzzel --dmenu \
         -b '1e1e2eff' -t 'cdd6f4ff' -s 'f9e2afff' -S '313244ff'\
-        -f 'Fira Mono Nerd Font'\
+        -f 'Fira Mono Nerd Font:size=9'\
         -p 'File: '\
         -w 150 \
         -r 0 -C 'f9e2afff' -B 2 \

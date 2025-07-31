@@ -10,7 +10,10 @@ environment {
     // ELECTRON_OZONE_PLATFORM_HINT "auto"
     DISPLAY ":1"
     QT_QPA_PLATFORM "wayland"
-    XDG_CURRENT_DESKTOP "niri"
+    ELECTRON_OZONE_PLATFORM_HINT "wayland"
+    ELECTRON_ENABLE_WAYLAND "1"
+    QT_STYLE_OVERRIDE "kvantum"
+    XDG_CURRENT_DESKTOP "LXQt"
 }
 
 overview{
@@ -24,28 +27,17 @@ gestures {
 }
 
 input {
+    touchpad {
+        tap
+    }
+
     keyboard {
         xkb {
-            // You can set rules, model, layout, variant and options.
-            // For more information, see xkeyboard-config(7).
             layout "us"
             options "compose:ralt"
         }
+
     }
-
-    mouse {
-        // off
-        // natural-scroll
-        // accel-speed 0.2
-        // accel-profile "flat"
-        // scroll-method "no-scroll"
-    }
-
-    // Uncomment this to make the mouse warp to the center of newly focused windows.
-    // warp-mouse-to-focus
-
-    // Focus windows and outputs automatically when moving the mouse into them.
-    // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
     focus-follows-mouse max-scroll-amount="1%"
     disable-power-key-handling
 }
@@ -88,33 +80,14 @@ window-rule {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "DP-1" {
+output "HDMI-A-1" {
     // off
     mode "3840x2160@144"
-    scale 2
-    // Transform allows to rotate the output counter-clockwise, valid values are:
-    // normal, 90, 180, 270, flipped, flipped-90, flipped-180 and flipped-270.
+    scale 1.5
     transform "normal"
-
-    // Position of the output in the global coordinate space.
-    // This affects directional monitor actions like "focus-monitor-left", and cursor movement.
-    // The cursor can only move between directly adjacent outputs.
-    // Output scale and rotation has to be taken into account for positioning:
-    // outputs are sized in logical, or scaled, pixels.
-    // For example, a 3840×2160 output with scale 2.0 will have a logical size of 1920×1080,
-    // so to put another output directly adjacent to it on the right, set its x to 1920.
-    // If the position is unset or results in an overlap, the output is instead placed
-    // automatically.
     position x=0 y=0
 }
 
-output "HDMI-A-1" {
-    // off
-    mode "1920x1080@144"
-    scale 1
-    transform "normal"
-    position x=1920 y=0
-}
 
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
@@ -302,6 +275,8 @@ spawn-at-startup "auto_media"
 spawn-at-startup "solaar" "-w" "hide"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "xrdb" "-load" "~/.Xresources"
+spawn-at-startup "~/.config/niri/toggle_internal_display"
+spawn-at-startup "~/.bin/disable_kbd_on_moonlander"
 
 
 
@@ -389,16 +364,19 @@ binds {
     // Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal: Foot" { spawn "foot"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
     XF86AudioRaiseVolume { spawn "~/.bin/volume" "up"; }
     XF86AudioLowerVolume { spawn "~/.bin/volume" "down"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "s" "5%-"; }
+    XF86MonBrightnessUp { spawn "brightnessctl" "s" "+5%"; }
     XF86AudioMute { spawn "~/.bin/volume" "mute"; }
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
     XF86PowerOff { spawn "wlogout"; }
+    Mod+Delete { spawn "wlogout"; }
 
 
     // Mod+Shift+Print { spawn "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd 'Screenshot' }

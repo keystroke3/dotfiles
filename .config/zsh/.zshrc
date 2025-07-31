@@ -13,7 +13,7 @@ autoload -Uz compinit
 compinit
 source $ZDIR/syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZDIR/autosuggestions.zsh
-source $ZDIR/autoswitch_virtualenv.plugin.zsh
+# source $ZDIR/autoswitch_virtualenv.plugin.zsh
 export GOPATH=${HOME}/go
 export PATH=/usr/local/go/bin:${PATH}:${GOPATH}/bin
 export PATH="$HOME/dev/caddy/cmd/caddy/:$PATH"
