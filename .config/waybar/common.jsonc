@@ -189,10 +189,10 @@
         "path": "/"
     },
     "network": {
-        "format-wifi": "󰤨",
+        "format-wifi": "󰤨  {bandwidthDownBytes}",
         "format-ethernet": "󰈀  {bandwidthDownBytes}",
         "format-linked": "󰈀  {ifname} (No IP)",
-        "format-disconnected": "󰤭",
+        "format-disconnected": "󰤭 ",
         "format-alt": "󰈀  {ipaddr}",
         "tooltip-format": "{essid}",
         "interval": 1,

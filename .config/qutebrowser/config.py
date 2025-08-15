@@ -22,7 +22,7 @@ config.load_autoconfig(False)
 #   - qt-quick: Tell Qt Quick to use a software renderer instead of OpenGL. (`QT_QUICK_BACKEND=software`)
 #   - chromium: Tell Chromium to disable GPU support and use Skia software rendering instead. (`--disable-gpu`)
 #   - none: Don't force software rendering.
-c.qt.force_software_rendering = 'chromium'
+c.qt.force_software_rendering = "chromium"
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -46,7 +46,7 @@ c.qt.force_software_rendering = 'chromium'
 #   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
 #   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 #   - never: Don't accept cookies at all.
-config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
+config.set("content.cookies.accept", "all", "chrome-devtools://*")
 
 # Which cookies to accept. With QtWebEngine, this setting also controls
 # other features with tracking capabilities similar to those of cookies;
@@ -70,12 +70,12 @@ config.set('content.cookies.accept', 'all', 'chrome-devtools://*')
 #   - no-3rdparty: Accept cookies from the same origin only. This is known to break some sites, such as GMail.
 #   - no-unknown-3rdparty: Accept cookies from the same origin only, unless a cookie is already set for the domain. On QtWebEngine, this is the same as no-3rdparty.
 #   - never: Don't accept cookies at all.
-config.set('content.cookies.accept', 'all', 'devtools://*')
+config.set("content.cookies.accept", "all", "devtools://*")
 
 # Value to send in the `Accept-Language` header. Note that the value
 # read from JavaScript is always the global value.
 # Type: String
-config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io/*')
+config.set("content.headers.accept_language", "", "https://matchmaker.krunker.io/*")
 
 # User agent to send.  The following placeholders are defined:  *
 # `{os_info}`: Something like "X11; Linux x86_64". * `{webkit_version}`:
@@ -92,39 +92,51 @@ config.set('content.headers.accept_language', '', 'https://matchmaker.krunker.io
 # increased compatibility.  Note that the value read from JavaScript is
 # always the global value.
 # Type: FormatString
-config.set('content.headers.user_agent', 'Mozilla/5.0 ({os_info}; rv:136.0) Gecko/20100101 Firefox/136.0', 'https://accounts.google.com/*')
+config.set(
+    "content.headers.user_agent",
+    "Mozilla/5.0 ({os_info}; rv:136.0) Gecko/20100101 Firefox/136.0",
+    "https://accounts.google.com/*",
+)
 
 # Load images automatically in web pages.
 # Type: Bool
-config.set('content.images', True, 'chrome-devtools://*')
+config.set("content.images", True, "chrome-devtools://*")
 
 # Load images automatically in web pages.
 # Type: Bool
-config.set('content.images', True, 'devtools://*')
+config.set("content.images", True, "devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome-devtools://*')
+config.set("content.javascript.enabled", True, "chrome-devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'devtools://*')
+config.set("content.javascript.enabled", True, "devtools://*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'chrome://*/*')
+config.set("content.javascript.enabled", True, "chrome://*/*")
 
 # Enable JavaScript.
 # Type: Bool
-config.set('content.javascript.enabled', True, 'qute://*/*')
+config.set("content.javascript.enabled", True, "qute://*/*")
 
 # Allow locally loaded documents to access remote URLs.
 # Type: Bool
-config.set('content.local_content_can_access_remote_urls', True, 'file:///home/salvaje/.local/share/qutebrowser/userscripts/*')
+config.set(
+    "content.local_content_can_access_remote_urls",
+    True,
+    "file:///home/salvaje/.local/share/qutebrowser/userscripts/*",
+)
 
 # Allow locally loaded documents to access other local URLs.
 # Type: Bool
-config.set('content.local_content_can_access_file_urls', False, 'file:///home/salvaje/.local/share/qutebrowser/userscripts/*')
+config.set(
+    "content.local_content_can_access_file_urls",
+    False,
+    "file:///home/salvaje/.local/share/qutebrowser/userscripts/*",
+)
 
 # Render all web contents using a dark theme. On QtWebEngine < 6.7, this
 # setting requires a restart and does not support URL patterns, only the
@@ -144,7 +156,7 @@ c.colors.webpage.darkmode.enabled = True
 #   - lightness-cielab: Modify colors by converting them to CIELAB color space and inverting the L value. Not available with Qt < 5.14.
 #   - lightness-hsl: Modify colors by converting them to the HSL color space and inverting the lightness (i.e. the "L" in HSL).
 #   - brightness-rgb: Modify colors by subtracting each of r, g, and b from their maximum value.
-c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
+c.colors.webpage.darkmode.algorithm = "lightness-cielab"
 
 # Which images to apply dark mode to.
 # Type: String
@@ -153,4 +165,14 @@ c.colors.webpage.darkmode.algorithm = 'lightness-cielab'
 #   - never: Never apply dark mode filter to any images.
 #   - smart: Apply dark mode based on image content. Not available with Qt 5.15.0.
 #   - smart-simple: On QtWebEngine 6.6, use a simpler algorithm for smart mode (based on numbers of colors and transparency), rather than an ML-based model. Same as 'smart' on older QtWebEnigne versions.
-c.colors.webpage.darkmode.policy.images = 'never'
+c.colors.webpage.darkmode.policy.images = "never"
+c.url.searchengines = {
+    "DEFAULT": "https://search.brave.com/search?q={}",
+    "dd": "https://duckduckgo.com/?q={}",
+    "g": "https://www.google.com/search?q={}",
+    "yt": "https://www.youtube.com/results?search_query={}",
+    "gh": "https://github.com/search?q={}",
+    "w": "https://en.wikipedia.org/wiki/{}",
+    "r": "https://www.reddit.com/search?q={}",
+}
+config.source("include/redirects.py")
