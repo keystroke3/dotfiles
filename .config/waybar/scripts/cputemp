@@ -1,2 +1,8 @@
 #!/bin/bash
-printf $(sensors | grep 'AMD TSI' | awk '{print$5}' | sed 's/\+//' | sed 's/\.0//')
+# printf $(sensors | grep 'AMD TSI' | awk '{print $5}' | sed 's/\+//' | sed 's/\.0//')
+if sensors | grep -i 'AMD TSI' -q; then
+	printf $(sensors | grep 'AMD TSI' | awk '{print $5}' | sed 's/\+//' | sed 's/\.0//')
+else
+	printf $(sensors | grep -i 'package id 0' | awk '{print $4}' | sed 's/\+//' | sed 's/\.0//')
+fi
+

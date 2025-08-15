@@ -7,7 +7,6 @@
 // Find the full list of options on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Input
 environment {
-    // ELECTRON_OZONE_PLATFORM_HINT "auto"
     DISPLAY ":1"
     QT_QPA_PLATFORM "wayland"
     ELECTRON_OZONE_PLATFORM_HINT "wayland"
@@ -20,6 +19,9 @@ overview{
     zoom 0.5
 }
 
+hotkey-overlay{
+    skip-at-startup
+}
 gestures {
     hot-corners {
         off
@@ -49,13 +51,11 @@ window-rule {
 }
 
 window-rule {
-    match app-id="librewolf";
     match title=r"Library|File Upload";
     open-floating true;
 }
 
 window-rule {
-    match app-id="librewolf"
     match title="Bitwarden"
     block-out-from "screencast"
 }
@@ -364,11 +364,11 @@ binds {
     // Mod+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "kitty"; }
+    Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
     Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
 
-    XF86AudioRaiseVolume { spawn "~/.bin/volume" "up"; }
-    XF86AudioLowerVolume { spawn "~/.bin/volume" "down"; }
+    XF86AudioRaiseVolume { spawn "pamixer" "-i" "1"; }
+    XF86AudioLowerVolume { spawn "pamixer" "-d" "1"; }
     XF86MonBrightnessDown { spawn "brightnessctl" "s" "5%-"; }
     XF86MonBrightnessUp { spawn "brightnessctl" "s" "+5%"; }
     XF86AudioMute { spawn "~/.bin/volume" "mute"; }
@@ -468,8 +468,8 @@ binds {
     // Mod+Shift+Ctrl+K     { move-column-to-monitor-up; }
     Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
 
-    Mod+Alt+J { move-column-to-workspace-down; }
-    Mod+Alt+K   { move-column-to-workspace-up; }
+    Mod+shift+m { move-column-to-workspace-down; }
+    Mod+shift+u   { move-column-to-workspace-up; }
 
     // You can bind mouse wheel scroll ticks using the following syntax.
     // These binds will change direction based on the natural-scroll setting.
@@ -614,7 +614,6 @@ binds {
 
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
-    Mod+Shift+M { power-off-monitors; }
 }
 
 // xwayland-satellite {

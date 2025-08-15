@@ -6,15 +6,5 @@
 
 config_version: 2
 settings:
-  colors.webpage.darkmode.algorithm:
-    global: lightness-hsl
-  colors.webpage.darkmode.enabled:
-    global: true
-  colors.webpage.darkmode.policy.images:
-    global: never
   content.javascript.clipboard:
-    https://github.com: access-paste
-  content.notifications.enabled:
-    https://jelly.seek.cafe: true
-  qt.force_software_rendering:
-    global: chromium
+    https://loremipsum.io: access-paste
