@@ -12,6 +12,7 @@
             "custom/wlogout",
             "hyprland/workspaces",
             "sway/workspaces",
+            "niri/workspaces",
             "mpris"
         ],
         "modules-center": [
@@ -23,8 +24,6 @@
             "custom/vpnstatus",
             "cpu",
             "custom/cputemp",
-            "temperature",
-            "custom/gpuinfo",
             "memory",
             "pulseaudio",
             "tray",
@@ -50,6 +49,7 @@
             "custom/wlogout",
             "sway/workspaces",
             "hyprland/workspaces",
+            "niri/workspaces",
             "mpris"
         ],
         "modules-center": [
@@ -62,8 +62,6 @@
             "custom/vpnstatus",
             "cpu",
             "custom/cputemp",
-            "temperature",
-            "custom/gpuinfo",
             "memory",
             "pulseaudio",
             "tray",
@@ -89,21 +87,20 @@
             "custom/wlogout",
             "sway/workspaces",
             "hyprland/workspaces",
+            "niri/workspaces",
             "mpris"
         ],
         "modules-center": [
             "sway/window"
-            //"custom/fullscreen-HDMI-A-1"
         ],
         "modules-right": [
             "network",
             "custom/vpnstatus",
             "cpu",
             "custom/cputemp",
-            "temperature",
-            "custom/gpuinfo",
             "memory",
             "pulseaudio",
+            "battery",
             "tray",
             "clock"
         ],
@@ -127,6 +124,7 @@
             "custom/wlogout",
             "sway/workspaces",
             "hyprland/workspaces",
+            "niri/workspaces",
             "mpris"
         ],
         "modules-center": [
@@ -138,8 +136,6 @@
             "custom/vpnstatus",
             "cpu",
             "custom/cputemp",
-            "temperature",
-            "custom/gpuinfo",
             "memory",
             "pulseaudio",
             "tray",

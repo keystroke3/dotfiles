@@ -2,14 +2,6 @@
 #
 # find and attach to timux sessions
 
-ssh(){
-    if [ ! $TMUX ];then
-        kitten ssh "$@"
-    else
-        /usr/bin/ssh "$@"
-    fi
-}
-
 proxyls(){
     docker container ls --format 'table {{.Names}}' | grep ipvanish
 }
@@ -23,6 +15,17 @@ aprog(){
     date &&
         # mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select date(date_offers_downloaded) as dl_date, count(asin) from inventory_items_scraper where doNotRun=0 group by dl_date'
         mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select asin, next_update_time as due, date_offers_downloaded from inventory_items_scraper where doNotRun=0 order by due limit 10'
+}
+astate(){
+        mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e 'select date(date_offers_downloaded) as dl_date, count(asin) from inventory_items_scraper where doNotRun=0 group by dl_date'
+}
+
+pysum(){
+    python -c "print(sum([$(wl-paste)]))"
+}
+
+pysumf(){
+    python -c "print(f'{sum([$(wl-paste)]):,}')"
 }
 
 ta(){
@@ -119,7 +122,7 @@ o(){
 }
 
 cfg(){
-    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/| fzf --reverse --height 40%)
+    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/ -i 'BraveSoftware,Slack'| fzf --reverse --height 40%)
     [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || vim "$fuzz") || return 0
 }
 
@@ -138,28 +141,6 @@ ovimd(){
     [ -d "$fuzz" ] && nvim --cmd "cd $fuzz" "$fuzz" || return 0
 }
 
-pj(){
-    fuzz=$(fd -t d . $HOME/Projects | fzf --reverse --height 40%)
-    if [ -z $fuzz ]
-    then 
-        return 0
-    elif [ -d $fuzz ]
-    then
-        cd "$fuzz" && reset 
-    fi
-}
-
-
-mntj(){
-    fuzz=$(fd -t d . $HOME/ | fzf --reverse --height 40%)
-    if [ -z $fuzz ]
-    then 
-        return 0
-    elif [ -d $fuzz ]
-    then
-        cd "$fuzz" && reset 
-    fi
-}
 
 j(){
     fuzz=$(fd -t d . $HOME $HOME/Music/ $HOME/Videos | fzf --reverse --height 40%)
@@ -503,3 +484,4 @@ alias remind="PYTHONPATH=/home/salvaje/work/kupiku/interview/nzioki;reminder_cli
 alias kconfig="vim ~/.ssh/kupiku-config"
 alias qb="qutebrowser"
 alias pcount="mariadb --defaults-file=~/.local/mariadb/local.db.cnf amazon_offers -e 'select count(*) from processed_asins'"
+alias lg="lazygit"
