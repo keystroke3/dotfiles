@@ -137,6 +137,7 @@
             "cpu",
             "custom/cputemp",
             "memory",
+            "battery",
             "pulseaudio",
             "tray",
             "clock"

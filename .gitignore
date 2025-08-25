@@ -59,3 +59,4 @@
 .config/qtile/groups.py
 .config/qtile/keys.py
 .config/vim/plugged
+*.env
