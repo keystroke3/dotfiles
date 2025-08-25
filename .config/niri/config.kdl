@@ -393,6 +393,7 @@ binds {
     Mod+Shift+P { spawn "hyprpicker" "-a" "--format=rgb"; }
     Mod+backslash { spawn "~/.bin/audio_output_switch"; }
     Mod+e { spawn "thunar"; }
+    Mod+t { spawn "~/.bin/totp"; }
 
     // Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }
 

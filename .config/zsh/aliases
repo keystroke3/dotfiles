@@ -1,6 +1,12 @@
 #!/bin/bash
-#
-# find and attach to timux sessions
+
+tpaste(){
+    if [ -z $1 ];then
+        :
+    else
+        wl-paste --type=TEXT $1
+    fi
+}
 
 proxyls(){
     docker container ls --format 'table {{.Names}}' | grep ipvanish
@@ -456,7 +462,7 @@ alias h="cat ~/.config/zsh/zhistory | sort | uniq| fzf "
 alias kmarial="mariadb --defaults-file=~/.local/mariadb/local.db.cnf"
 alias smarial="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.cnf"
 alias smariap="mariadb --defaults-file=~/work/kupiku/Shipping2/ship.prod.cnf"
-alias kmp="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf"
+alias kmp="mariadb --defaults-file=~/.local/mariadb/prod.db.cnf -e"
 alias kmk="mariadb --defaults-file=~/.local/mariadb/kupiku.db.cnf"
 alias lpgd="psql -U kiss -d discogs"
 alias ppgd="psql -h 95.216.65.50 -U releases -d discogs -p 5433"
@@ -485,3 +491,4 @@ alias kconfig="vim ~/.ssh/kupiku-config"
 alias qb="qutebrowser"
 alias pcount="mariadb --defaults-file=~/.local/mariadb/local.db.cnf amazon_offers -e 'select count(*) from processed_asins'"
 alias lg="lazygit"
+alias bw="flatpak run --command=bw com.bitwarden.desktop"
