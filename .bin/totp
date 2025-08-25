@@ -1,0 +1,39 @@
+#!/bin/bash
+
+secrets_dir="$HOME/.password-store/totp"
+secret=
+
+get_secret(){
+	account=
+	if [ -z $1 ];then
+		fuzz=$(~/.bin/fs $secrets_dir | grep -oP "totp.*" | tr '_' ':' | sed 's/totp\///' | sed 's/\.gpg//' | 
+			fuzzel --dmenu --config ~/.bin/prompt-theme.ini
+		)
+		if [ -z $fuzz ]; then 
+			echo "no account selected"
+			exit 0
+		fi
+		account="totp/$(echo $fuzz | tr ':' '_')"
+	else
+		if [ ! -f "${secrets_dir}/$1" ];then
+			echo "no such account totp/$1"
+			exit 1
+		else
+			account="totp/$1"
+		fi
+	fi
+	secret=$(pass show $account)
+}
+
+generate_totp(){
+	totp=$(oathtool --totp -b $secret)
+	if [ $XDG_SESSION_TYPE == 'wayland' ]; then
+		wl-copy $totp && notify-send 'totp copied' 'totp'
+	else
+		echo $totp | xclip -selection clipboard && notify-send 'totp copied' 'totp'
+	fi
+	echo $totp
+}
+
+get_secret
+generate_totp
