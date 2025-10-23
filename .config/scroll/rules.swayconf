@@ -1,0 +1,105 @@
+gaps inner 2
+gaps outer 2
+default_border pixel 4
+# 
+# blur off
+# blur_passes 2
+# blur_radius 10
+# corner_radius 10
+# 
+# shadows disable
+# shadow_blur_radius 10
+# #shadow_inactive_color #00000000
+# 
+# default_dim_inactive 0.2
+# dim_inactive_colors.unfocused #00000000
+# dim_inactive_colors.urgent    #00000088
+# titlebar_separator enable
+
+assign [class="Thunderbird"] workspace number 10
+assign [class="Librewolf"] workspace number 1
+
+for_window [app_id="foot"] {
+  dim_inactive 0.15
+}
+
+for_window [app_id="librefox"] {
+  border pixel 3
+  dim_inactive 0.25
+}
+
+for_window [app_id="org.gnome.Nautilus|org.gnome.FileRoller"] {
+  floating enable
+  border pixel 3
+}
+
+for_window [app_id="mpv|nm-connection-editor|pavucontrol|blueman-manager|copyq"] {
+  floating enable
+}
+
+
+for_window [app_id="gsimplecal"] {
+  floating enable
+  sticky enable
+  border none
+  move up 365 px
+  move right 595 px
+}
+
+for_window [app_id="avizo"] {
+  floating enable
+  sticky enable
+  border none
+}
+
+for_window [app_id="librefox"] [title="Library"] {
+  floating enable
+}
+
+for_window [app_id="librefox"] [title="File Upload"] {
+  floating enable
+}
+
+for_window [app_id="org.fcitx.fcitx5-config-qt"] {
+  floating enable
+  sticky enable
+}
+
+for_window [app_id="Calculator.Skia.Gtk"] {
+  floating enable
+  resize set width 600 px
+  resize set height 500 px
+}
+
+for_window [class="GStreamer"] {
+  floating enable
+}
+
+for_window [class="Viewnior"] {
+  floating enable
+  resize set width 1200 px
+  resize set height 800 px
+}
+
+for_window [class="floating"] {
+  floating enable
+  sticky enable
+  border enable
+}
+
+
+set $bg             #a48abfff
+set $fg             #98C379ff
+set $bg-inactive    #120e12ff
+set $bg-urgent      #d92365ff
+set $text-light     #f2d8e9ff
+set $text-dark      #0b0b0bff
+set $text-inactive  #594850ff
+
+# set color theme
+# class                 border        bground       text            indicator     child_border
+client.focused          $fg           $text-dark    $text-light     $bg           $bg
+client.focused_inactive $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
+client.unfocused        $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
+client.urgent           $bg-urgent    $bg-urgent    $text-light     $bg-urgent    $bg-urgent
+client.placeholder      $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive

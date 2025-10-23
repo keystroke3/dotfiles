@@ -3,6 +3,7 @@
 !.bash_prompt
 !.bashrc
 !.bin/*
+!.config/scroll/
 !.config/MangoHud
 !.config/alacritty
 !.config/bspwm
@@ -22,7 +23,7 @@
 !.config/rofi
 !.config/screenshots
 !.config/solarr/
-!.config/sway
+!.config/sway/
 !.config/swaylock
 !.config/sxhkd
 !.config/systemd/user/polkit-agent.service
