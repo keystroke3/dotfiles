@@ -5,6 +5,7 @@ import json
 import os
 import signal
 import subprocess
+import sys
 from dataclasses import dataclass
 from time import sleep
 from typing import Callable
@@ -173,6 +174,15 @@ def toggle_eDP():
 
 
 def auto_toggle_eDP():
+    subprocess.Popen(
+        [sys.executable, __file__, "daemon"],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.STDOUT,
+        close_fds=True,
+    )
+
+
+def run_toggle_daemon():
     pid = os.getpid()
     with open("/tmp/monitor_man", "w") as m:
         m.write(str(pid))
@@ -197,9 +207,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     actions: dict[str, Callable] = {
         "toggle": toggle_eDP,
-        "auto": auto_toggle_eDP,
+        "daemon": run_toggle_daemon,
         "quit": kill_auto_toggle,
         "scale": scale,
+        "auto": auto_toggle_eDP,
     }
     parser.add_argument(
         "action",

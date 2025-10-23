@@ -87,7 +87,7 @@
             "custom/wlogout",
             "sway/workspaces",
             "hyprland/workspaces",
-            "niri/workspaces",
+            // "niri/workspaces",
             "mpris"
         ],
         "modules-center": [
@@ -124,7 +124,7 @@
             "custom/wlogout",
             "sway/workspaces",
             "hyprland/workspaces",
-            "niri/workspaces",
+            // "niri/workspaces",
             "mpris"
         ],
         "modules-center": [

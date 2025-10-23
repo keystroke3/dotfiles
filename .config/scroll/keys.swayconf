@@ -1,1 +1,347 @@
+set $mod Mod4
+set $left h
+set $down j
+set $up k
+set $right l
+set $term ghostty
+set $menu fuzzel
+set $browser librewolf
+set $files thunar
+floating_modifier $mod normal
 
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+floating_modifier $mod normal
+bindsym $mod+Shift+r reload
+bindsym $mod+Shift+x exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit scroll? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+bindsym $mod+u workspace prev_on_output
+bindsym $mod+m workspace next_on_output
+
+bindsym $mod+Shift+1 move container to workspace number 1, workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2, workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3, workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4, workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5, workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6, workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7, workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8, workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9, workspace number 9
+bindsym $mod+Shift+0 move container to workspace number 10, workspace number 10
+bindsym $mod+Shift+u move container to workspace prev, workspace prev
+bindsym $mod+Shift+m move container to workspace next, workspace next
+bindsym $mod+s floating toggle
+bindsym $mod+t exec bash ~/.bin/totp
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+button1 move
+bindsym XF86AudioRaiseVolume exec bash ~/.bin/volume up
+bindsym XF86AudioLowerVolume exec bash ~/.bin/volume down
+bindsym XF86AudioMute exec bash ~/.bin/volume mute
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Print exec ~/.bin/screensend
+bindsym $mod+Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd "Screenshot"
+bindsym $mod+bracketleft exec copyq menu
+bindsym $mod+Shift+bracketleft exec copyq show
+bindsym $mod+g exec ~/.bin/shuffle
+bindsym $mod+r exec ~/.bin/open_in_mpv
+bindsym Ctrl+Alt+f exec librewolf
+bindsym Alt+Space exec ~/.bin/finder
+bindsym $mod+Space exec $menu
+bindsym XF86PowerOff exec wlogout
+bindsym $mod+Shift+b exec killall waybar && waybar || waybar
+bindsym $mod+p exec hyprpicker -a
+bindsym $mod+Shift+p exec hyprpicker -a --format=rgb
+bindsym $mod+backslash exec ~/.bin/audio_output_switch
+bindsym $mod+e exec $files
+bindsym $mod+Shift+g exec ~/.config/scroll/scripts/monitor_man game
+
+
+bindsym $mod+Ctrl+$left move workspace to output left
+bindsym $mod+Ctrl+$right move workspace to output right
+
+# bindsym $mod+Shift+comma scale_workspace incr -0.05
+# bindsym --whole-window $mod+Shift+button4 scale_workspace incr -0.05
+# bindsym $mod+Shift+period scale_workspace incr 0.05
+# bindsym --whole-window $mod+Shift+button5 scale_workspace incr 0.05
+# bindsym $mod+Shift+Ctrl+period scale_workspace reset
+
+# Jump
+# jump_labels_color #9e1530FF
+# jump_labels_background #15309eFF
+# jump_labels_scale 0.9
+# jump_labels_keys asdf
+bindsym --no-repeat $mod+slash jump workspaces
+
+    # Content
+    bindsym $mod+Shift+comma scale_content incr -0.05
+    bindsym --whole-window $mod+button4 scale_content incr -0.05
+    bindsym $mod+Shift+period scale_content incr 0.05
+    bindsym --whole-window $mod+button5 scale_content incr 0.05
+    bindsym $mod+Ctrl+period scale_content reset
+
+    bindsym $mod+f fullscreen
+    bindsym $mod+Alt+f fullscreen_application toggle
+    bindsym $mod+y focus mode_toggle
+    bindsym $mod+Shift+y layout_transpose
+    bindsym $mod+w sticky toggle
+    # Toggle pin
+    bindsym --no-repeat $mod+a pin beginning
+    bindsym --no-repeat $mod+Shift+a pin end
+
+    # Selection
+    bindsym --no-repeat $mod+Insert selection toggle
+    bindsym --no-repeat $mod+Ctrl+Insert selection reset
+    bindsym --no-repeat $mod+Shift+Insert selection move
+    bindsym --no-repeat $mod+Ctrl+Shift+Insert selection workspace
+    bindsym --no-repeat $mod+Alt+Insert selection to_trail
+
+# Scratchpad:
+#
+    # Scroll has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+z move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+z scratchpad show
+    bindsym --no-repeat $mod+Alt+z scratchpad jump
+
+    bindsym $mod+o workspace back_and_forth
+
+#
+# Mode modifiers
+#
+mode "modifiers" {
+    bindsym $right set_mode after; mode default 
+    bindsym $left set_mode before; mode default 
+    bindsym home set_mode beginning; mode default 
+    bindsym end set_mode end; mode default 
+    bindsym $up set_mode focus; mode default 
+    bindsym $down set_mode nofocus; mode default 
+    bindsym Shift+h set_mode nocenter_horiz; mode default 
+    bindsym Shift+v set_mode nocenter_vert; mode default 
+    bindsym Shift+r set_mode noreorder_auto; mode default 
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+backslash mode "modifiers"
+
+#
+# Resizing containers:
+#
+bindsym $mod+n cycle_size h next
+bindsym $mod+Shift+n cycle_size h prev
+
+mode "setsizeh" {
+    bindsym 1 set_size h 0.125; mode default
+    bindsym 2 set_size h 0.1666666667; mode default
+    bindsym 3 set_size h 0.25; mode default
+    bindsym 4 set_size h 0.333333333; mode default
+    bindsym 5 set_size h 0.375; mode default
+    bindsym 6 set_size h 0.5; mode default
+    bindsym 7 set_size h 0.625; mode default
+    bindsym 8 set_size h 0.6666666667; mode default
+    bindsym 9 set_size h 0.75; mode default
+    bindsym 0 set_size h 0.833333333; mode default
+    bindsym minus set_size h 0.875; mode default
+    bindsym equal set_size h 1.0; mode default
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+b mode "setsizeh"
+
+mode "setsizev" {
+    bindsym 1 set_size v 0.125; mode default
+    bindsym 2 set_size v 0.1666666667; mode default
+    bindsym 3 set_size v 0.25; mode default
+    bindsym 4 set_size v 0.333333333; mode default
+    bindsym 5 set_size v 0.375; mode default
+    bindsym 6 set_size v 0.5; mode default
+    bindsym 7 set_size v 0.625; mode default
+    bindsym 8 set_size v 0.6666666667; mode default
+    bindsym 9 set_size v 0.75; mode default
+    bindsym 0 set_size v 0.833333333; mode default
+    bindsym minus set_size v 0.875; mode default
+    bindsym equal set_size v 1.0; mode default
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+Shift+b mode "setsizev"
+
+mode "resize" {
+    # left will shrink the containers width
+    # right will grow the containers width
+    # up will shrink the containers height
+    # down will grow the containers height
+    bindsym $left resize shrink width 100px
+    bindsym $down resize grow height 100px
+    bindsym $up resize shrink height 100px
+    bindsym $right resize grow width 100px
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+button3 resize
+# bindsym $mod+Shift+r mode "resize"
+
+# Toggle Size (and maximize)
+bindsym $mod+v toggle_size this 0.9 1.0
+bindsym $mod+Shift+v toggle_size active 1.0 0.9
+
+mode "togglesizeh" {
+    bindsym 1 toggle_size all 0.125 1.0; mode default
+    bindsym 2 toggle_size all 0.1666666667 1.0; mode default
+    bindsym 3 toggle_size all 0.25 1.0; mode default
+    bindsym 4 toggle_size all 0.333333333 1.0; mode default
+    bindsym 5 toggle_size all 0.375 1.0; mode default
+    bindsym 6 toggle_size all 0.5 1.0; mode default
+    bindsym 7 toggle_size all 0.625 1.0; mode default
+    bindsym 8 toggle_size all 0.6666666667 1.0; mode default
+    bindsym 9 toggle_size all 0.75 1.0; mode default
+    bindsym 0 toggle_size all 0.833333333 1.0; mode default
+    bindsym minus toggle_size all 0.875 1.0; mode default
+    bindsym equal toggle_size all 1.0 1.0; mode default
+    bindsym r toggle_size reset; mode default
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+Ctrl+t mode "togglesizeh"
+
+mode "togglesizev" {
+    bindsym 1 toggle_size all 1.0 0.125; mode default
+    bindsym 2 toggle_size all 1.0 0.1666666667; mode default
+    bindsym 3 toggle_size all 1.0 0.25; mode default
+    bindsym 4 toggle_size all 1.0 0.333333333; mode default
+    bindsym 5 toggle_size all 1.0 0.375; mode default
+    bindsym 6 toggle_size all 1.0 0.5; mode default
+    bindsym 7 toggle_size all 1.0 0.625; mode default
+    bindsym 8 toggle_size all 1.0 0.6666666667; mode default
+    bindsym 9 toggle_size all 1.0 0.75; mode default
+    bindsym 0 toggle_size all 1.0 0.833333333; mode default
+    bindsym minus toggle_size all 1.0 0.875; mode default
+    bindsym equal toggle_size all 1.0 1.0; mode default
+    bindsym r toggle_size reset; mode default
+
+    # Return to default mode
+    bindsym Escape mode "default"
+}
+# bindsym $mod+Ctrl+Shift+t mode "togglesizev"
+
+mode "align" {
+    bindsym c align center; mode default
+    bindsym m align middle; mode default
+    bindsym r align reset; mode default
+    bindsym $left align left; mode default
+    bindsym $right align right; mode default
+    bindsym $up align up; mode default
+    bindsym $down align down; mode default
+    bindsym Escape mode "default"
+}
+bindsym $mod+c mode "align"
+
+mode "fit_size" {
+    bindsym w fit_size h visible proportional; mode default
+    bindsym Shift+w fit_size v visible proportional; mode default
+    bindsym Ctrl+w fit_size h visible equal; mode default
+    bindsym Ctrl+Shift+w fit_size v visible equal; mode default
+
+    bindsym $right fit_size h toend proportional; mode default
+    bindsym Shift+$right fit_size v toend proportional; mode default
+    bindsym Ctrl+$right fit_size h toend equal; mode default
+    bindsym Ctrl+Shift+$right fit_size v toend equal; mode default
+
+    bindsym $left fit_size h tobeg proportional; mode default
+    bindsym Shift+$left fit_size v tobeg proportional; mode default
+    bindsym Ctrl+$left fit_size h tobeg equal; mode default
+    bindsym Ctrl+Shift+$left fit_size v tobeg equal; mode default
+
+    bindsym $up fit_size h active proportional; mode default
+    bindsym Shift+$up fit_size v active proportional; mode default
+    #bindsym Ctrl+$up fit_size h active equal; mode default
+    #bindsym Ctrl+Shift+$up fit_size v active equal; mode default
+
+    bindsym $down fit_size h all proportional; mode default
+    bindsym Shift+$down fit_size v all proportional; mode default
+    bindsym Ctrl+$down fit_size h all equal; mode default
+    bindsym Ctrl+Shift+$down fit_size v all equal; mode default
+    bindsym Escape mode "default"
+}
+# bindsym $mod+w mode "fit_size"
+#
+mode "spaces" {
+    bindsym 1 space load 1; mode default
+    bindsym 2 space load 2; mode default
+    bindsym 3 space load 3; mode default
+    bindsym 4 space load 4; mode default
+    bindsym 5 space load 5; mode default
+    bindsym 6 space load 6; mode default
+    bindsym 7 space load 7; mode default
+    bindsym 8 space load 8; mode default
+    bindsym 9 space load 9; mode default
+    bindsym 0 space load 0; mode default
+    bindsym Shift+1 space save 1; mode default
+    bindsym Shift+2 space save 2; mode default
+    bindsym Shift+3 space save 3; mode default
+    bindsym Shift+4 space save 4; mode default
+    bindsym Shift+5 space save 5; mode default
+    bindsym Shift+6 space save 6; mode default
+    bindsym Shift+7 space save 7; mode default
+    bindsym Shift+8 space save 8; mode default
+    bindsym Shift+9 space save 9; mode default
+    bindsym Shift+0 space save 0; mode default
+    bindsym Ctrl+1 space restore 1; mode default
+    bindsym Ctrl+2 space restore 2; mode default
+    bindsym Ctrl+3 space restore 3; mode default
+    bindsym Ctrl+4 space restore 4; mode default
+    bindsym Ctrl+5 space restore 5; mode default
+    bindsym Ctrl+6 space restore 6; mode default
+    bindsym Ctrl+7 space restore 7; mode default
+    bindsym Ctrl+8 space restore 8; mode default
+    bindsym Ctrl+9 space restore 9; mode default
+    bindsym Ctrl+0 space restore 0; mode default
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+semicolon mode "spaces"
+
+focus_wrapping no
+
+bindgesture swipe:4:right workspace next
+bindgesture swipe:4:left workspace prev
+
+bindgesture swipe:4:up scale_workspace overview 

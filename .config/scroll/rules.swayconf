@@ -1,20 +1,6 @@
 gaps inner 2
 gaps outer 2
 default_border pixel 4
-# 
-# blur off
-# blur_passes 2
-# blur_radius 10
-# corner_radius 10
-# 
-# shadows disable
-# shadow_blur_radius 10
-# #shadow_inactive_color #00000000
-# 
-# default_dim_inactive 0.2
-# dim_inactive_colors.unfocused #00000000
-# dim_inactive_colors.urgent    #00000088
-# titlebar_separator enable
 
 assign [class="Thunderbird"] workspace number 10
 assign [class="Librewolf"] workspace number 1
@@ -96,8 +82,6 @@ set $text-light     #f2d8e9ff
 set $text-dark      #0b0b0bff
 set $text-inactive  #594850ff
 
-# set color theme
-# class                 border        bground       text            indicator     child_border
 client.focused          $fg           $text-dark    $text-light     $bg           $bg
 client.focused_inactive $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive
 client.unfocused        $bg-inactive  $bg-inactive  $text-inactive  $bg-inactive  $bg-inactive

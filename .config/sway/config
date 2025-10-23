@@ -284,7 +284,5 @@ bar {
     # }
 }
 
-# exec waybar
-
 
 include /etc/sway/config.d/*
