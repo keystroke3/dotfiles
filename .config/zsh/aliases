@@ -5,9 +5,38 @@ if [ -f "${ZDIR}/work_aliases" ];then
     source "${ZDIR}/work_aliases"
 fi
 
+deactivate () {
+        unset -f pydoc > /dev/null 2>&1 || true
+        if ! [ -z "${_OLD_VIRTUAL_PATH:+_}" ]
+        then
+                PATH="$_OLD_VIRTUAL_PATH"
+                export PATH
+                unset _OLD_VIRTUAL_PATH
+        fi
+        if ! [ -z "${_OLD_VIRTUAL_PYTHONHOME+_}" ]
+        then
+                PYTHONHOME="$_OLD_VIRTUAL_PYTHONHOME"
+                export PYTHONHOME
+                unset _OLD_VIRTUAL_PYTHONHOME
+        fi
+        hash -r 2> /dev/null
+        if ! [ -z "${_OLD_VIRTUAL_PS1+_}" ]
+        then
+                PS1="$_OLD_VIRTUAL_PS1"
+                export PS1
+                unset _OLD_VIRTUAL_PS1
+        fi
+        unset VIRTUAL_ENV
+        unset VIRTUAL_ENV_PROMPT
+}
+
+c() { 
+    printf "%s\n" "$@" | bc -l;
+}
+
 h(){
     fuzz=$(cat ~/.config/zsh/zhistory | sort | uniq| fzf)
-    if [ ! -z fuzz ];then
+    if [ ! -z $fuzz ];then
         wl-copy $fuzz
     fi
 }
@@ -253,6 +282,7 @@ alias .....="cd ../../../.."
 alias grep='grep --color=auto'
 alias reload="exec ${SHELL} -l; clear"
 alias al="vim ~/.config/zsh/aliases && clear && reload"
+alias wal="vim ~/.config/zsh/work_aliases && clear && reload"
 alias dd='dd status=progress'
 alias rsync="rsync -ah --progress"
 alias feh="feh -d --edit -. -B black ."
@@ -265,7 +295,7 @@ alias sysenable="sudo systemctl enable"
 alias pyserv="python -m http.server"
 alias crontab="export VISUAL=nvim; crontab"
 alias myip="curl -s 'https://api.myip.com' | jq"
-alias migrate="/usr/bin/env python manage.py migrate"
+# alias migrate="/usr/bin/env python manage.py migrate"
 alias gomigrate="$HOME/go/bin/migrate"
 alias mm="/usr/bin/env python manage.py makemigrations"
 alias rs="export DEBUG=True;/usr/bin/env python manage.py runserver 127.0.0.1:8002"

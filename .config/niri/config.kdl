@@ -13,6 +13,9 @@ environment {
     ELECTRON_ENABLE_WAYLAND "1"
     QT_STYLE_OVERRIDE "kvantum"
     XDG_CURRENT_DESKTOP "LXQt"
+    GTK_IM_MODULE "fcitx"
+    QT_IM_MODULE "fcitx"
+    XMODIFIERS "@im=fcitx"
 }
 
 overview{
@@ -271,11 +274,10 @@ spawn-at-startup "kdeconnectd"
 spawn-at-startup "/usr/bin/kdeconnect-indicator"
 spawn-at-startup "nm-applet"
 spawn-at-startup "~/.bin/startmail"
-spawn-at-startup "auto_media"
 spawn-at-startup "solaar" "-w" "hide"
 spawn-at-startup "swww-daemon"
 spawn-at-startup "xrdb" "-load" "~/.Xresources"
-spawn-at-startup "~/.config/niri/toggle_internal_display"
+// spawn-at-startup "~/.config/niri/toggle_internal_display"
 spawn-at-startup "~/.bin/disable_kbd_on_moonlander"
 
 
@@ -382,7 +384,7 @@ binds {
     // Mod+Shift+Print { spawn "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd 'Screenshot' }
     // window screenshot
 
-    Mod+BracketLeft { spawn "copyq" "menu"; }
+    Mod+BracketLeft { spawn "copyq" "toggle"; }
     Mod+Shift+BracketLeft { spawn "copyq" "show"; }
     Mod+g { spawn "~/.bin/shuffle"; }
     Mod+r { spawn "~/.bin/open_in_mpv"; }

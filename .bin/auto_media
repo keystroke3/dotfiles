@@ -1,22 +1,10 @@
 #!/bin/bash
 
-SERVER_EXPORT='zen:/store/media'
+SERVER_EXPORT='10.0.0.2:/store/media'
 MOUNT_TARGET='/media'
 
 # Nothing to do if user does not have requisite binaries.
 [[ -z $(which ping) ]] && echo 'Install iputils or whatever package provides ping' && exit 0
 [[ -z $(which mountpoint) ]] && echo 'Install util-linux or whatever package provides mountpoint' && exit 0
 
-ping -c 1 zen &>/dev/null
-if [ $? -ne 0 ]; then
-	# server is down so unmount
-	#
-	# if we query the mount point and it was previously mounted, the script freezes
-	# so just unmount forcing while lazy
-	sudo umount -l -f $MOUNT_TARGET &>/dev/null
-else
-	# server is up
-	#
-	# check if mount point is live and try to mount if not
-	mountpoint -q $MOUNT_TARGET || sudo mount -t nfs4 $SERVER_EXPORT $MOUNT_TARGET
-fi
+mountpoint -q $MOUNT_TARGET || sudo mount -t nfs4 $SERVER_EXPORT $MOUNT_TARGET

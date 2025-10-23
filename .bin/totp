@@ -1,7 +1,8 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 secrets_dir="$HOME/.password-store/totp"
 secret=
+fuzz=
 
 get_secret(){
 	account=
@@ -26,6 +27,10 @@ get_secret(){
 }
 
 generate_totp(){
+	if [[ $fuzz == *'invoice'* ]];then
+		wl-copy $(echo $secret)
+		return
+	fi
 	totp=$(oathtool --totp -b $secret)
 	if [ $XDG_SESSION_TYPE == 'wayland' ]; then
 		wl-copy $totp && notify-send 'totp copied' 'totp'

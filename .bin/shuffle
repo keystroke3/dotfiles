@@ -1,6 +1,6 @@
 #!/bin/sh
 mpv_player=$(playerctl -sl | grep --color=no mpv)
-if [ -z $mpv_player ];then
+if [ -n $mpv_player ];then
     mpv --shuffle /media/videos/music --no-resume-playback & disown
 else
     playerctl play-pause -p "$mpv_player"

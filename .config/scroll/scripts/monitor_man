@@ -1,0 +1,212 @@
+#!/bin/python
+
+import argparse
+import json
+import os
+import signal
+import subprocess
+from dataclasses import dataclass
+from time import sleep
+from typing import Callable
+
+PID_FILE = "/tmp/monitor_man"
+
+
+@dataclass
+class Mode:
+    width: int
+    height: int
+    refresh: float
+    preferred: bool = False
+    current: bool = False
+
+
+@dataclass
+class PhysicalSize:
+    width: int
+    height: int
+
+
+@dataclass
+class Position:
+    x: int
+    y: int
+
+
+@dataclass
+class Monitor:
+    name: str
+    description: str
+    make: str
+    model: str
+    serial: str
+    physical_size: PhysicalSize
+    enabled: bool
+    modes: list[Mode]
+    position: Position | None = None
+    transform: str | None = None
+    scale: float | None = None
+    adaptive_sync: bool | None = None
+
+
+def get_monitors() -> dict[str, Monitor]:
+    """Convert JSON data to Monitor dataclass instances"""
+    current_config_str = subprocess.run(
+        ["wlr-randr", "--json"], capture_output=True
+    ).stdout
+    cfg = json.loads(current_config_str)
+    monitors = dict()
+    for item in cfg:
+        physical_size = PhysicalSize(
+            width=item["physical_size"]["width"], height=item["physical_size"]["height"]
+        )
+
+        modes = [
+            Mode(
+                width=mode["width"],
+                height=mode["height"],
+                refresh=mode["refresh"],
+                preferred=mode["preferred"],
+                current=mode["current"],
+            )
+            for mode in item["modes"]
+        ]
+
+        monitor = Monitor(
+            name=item["name"],
+            description=item["description"],
+            make=item["make"],
+            model=item["model"],
+            serial=item["serial"],
+            physical_size=physical_size,
+            enabled=item["enabled"],
+            modes=modes,
+        )
+        if monitor.enabled:
+            monitor.position = Position(
+                x=item["position"]["x"], y=item["position"]["y"]
+            )
+            monitor.transform = item["transform"]
+            monitor.scale = item["scale"]
+            monitor.adaptive_sync = item["adaptive_sync"]
+
+        monitors[monitor.name] = monitor
+
+    return monitors
+
+
+def get_scale_command(mon: Monitor, pos: Position) -> tuple[list[str], Position]:
+    mode = Mode(width=0, height=0, refresh=0)
+    for m in mon.modes:
+        if m.width > mode.width:
+            mode.width = m.width
+        if m.height > mode.height:
+            mode.height = m.height
+        if m.refresh > mode.refresh:
+            mode.refresh = m.refresh
+
+    next_pos = pos
+    cmd = [
+        "sway",
+        "output",
+        mon.name,
+        "pos",
+        str(pos.x),
+        str(pos.y),
+        "scale",
+    ]
+    width_scale_factors = {
+        1920: 1,
+        2560: 1.2,
+        3840: 1.5,
+    }
+    scale = width_scale_factors[mode.width]
+    next_pos.x += int(mode.width / scale)
+    cmd.append(str(scale))
+    return cmd, next_pos
+
+
+def scale(mons: dict[str, Monitor] | None = None):
+    monitor_order = ["DP-1", "DP-2", "HDMI-A-1", "HDMI-A-2", "eDP-1"]
+    next_pos = Position(x=0, y=0)
+    mons_map: dict[str, Monitor] = dict()
+    if not mons:
+        mons_map = get_monitors()
+    else:
+        mons_map = mons
+
+    for monitor in monitor_order:
+        mon = mons_map.get(monitor)
+        if mon is None:
+            continue
+        cmd, pos = get_scale_command(mon, next_pos)
+        print(f"{mon.name}, {cmd=}, {pos=}")
+        next_pos = pos
+        subprocess.run(cmd)
+
+
+def kill_auto_toggle():
+    pid = ""
+    if os.path.exists(PID_FILE):
+        with open(PID_FILE) as p:
+            pid = p.read().strip()
+
+    if pid and os.path.exists(f"/proc/{pid}"):
+        os.kill(int(pid), signal.SIGTERM)
+        os.remove(PID_FILE)
+
+
+def toggle_eDP():
+    monitors = get_monitors()
+    direction = ""
+    cmd = ["swaymsg", "output", "eDP-1"]
+    if len(monitors) == 1:
+        direction = "enable"
+    else:
+        eDP = monitors.get("eDP-1")
+        if eDP and not direction:
+            direction = "disable" if eDP.enabled else "enable"
+    if direction:
+        cmd.append(direction)
+        subprocess.run(cmd)
+    kill_auto_toggle()
+
+
+def auto_toggle_eDP():
+    pid = os.getpid()
+    with open("/tmp/monitor_man", "w") as m:
+        m.write(str(pid))
+    while True:
+        sleep(2)
+        monitors = get_monitors()
+        cmd = ["sway", "output", "eDP-1"]
+        eDP = monitors["eDP-1"]
+        if len(monitors) == 1:
+            if eDP.enabled:
+                continue
+            cmd.append("enable")
+            subprocess.run(cmd)
+            continue
+        if any(["HDMI" in m for m in monitors]) and eDP.enabled:
+            cmd.append("disable")
+            subprocess.run(cmd)
+            continue
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    actions: dict[str, Callable] = {
+        "toggle": toggle_eDP,
+        "auto": auto_toggle_eDP,
+        "quit": kill_auto_toggle,
+        "scale": scale,
+    }
+    parser.add_argument(
+        "action",
+        choices=list(actions.keys()),
+        help="action to perform. 'toggle' automatically turns off 'auto'",
+    )
+
+    args = parser.parse_args()
+    action = actions[args.action]
+    action()
