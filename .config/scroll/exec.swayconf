@@ -12,10 +12,8 @@ exec swayidle -w timeout 1200 'swaymsg "output * power on" && ~/.config/sway/scr
 
 exec easyeffects --gapplication-service
 exec ~/.config/hypr/scripts/resetxdgportal.sh # reset XDPH for screenshare
-# exec swww-daemon || swww img $(cat ~/.cache/last_wall) || swww img `find $wallpaper_path -type f | shuf -n 1` # Set wallpaper
 # exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 exec /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 # authentication dialogue for GUI apps
-# exec ~/.config/waybar/waybar-run # launch the system panel
 exec dunst # start notification demon
 exec copyq
 exec kdeconnectd
@@ -26,7 +24,8 @@ exec xrdb -load ~/.Xresources
 exec auto_media
 exec solaar -w hide
 exec ~/.config/scroll/scripts/monitor_man auto
-# exec-once = ~/.config/hypr/scripts/monitor-setup
+exec waybar
+exec flameshot
 # exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 
 # set window settings
