@@ -20,6 +20,8 @@ bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
+bindsym $mod+delete exec ~/.config/scroll/scripts/monitor_man toggle 
+
 
 bindsym $mod+Shift+$left move left
 bindsym $mod+Shift+$down move down
@@ -66,7 +68,7 @@ bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
-bindsym $mod+Shift+s exec grim -g "$(slurp)" - | wl-copy
+bindsym $mod+Shift+s exec ~/.bin/swayshot
 bindsym $mod+Print exec ~/.bin/screensend
 bindsym $mod+Shift+Print exec grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd "Screenshot"
 bindsym $mod+bracketleft exec copyq menu
@@ -110,7 +112,7 @@ bindsym --no-repeat $mod+slash jump workspaces
 
     bindsym $mod+f fullscreen
     bindsym $mod+Alt+f fullscreen_application toggle
-    bindsym $mod+y focus mode_toggle
+    bindsym $mod+tab focus mode_toggle
     bindsym $mod+Shift+y layout_transpose
     bindsym $mod+w sticky toggle
     # Toggle pin
@@ -219,8 +221,7 @@ mode "resize" {
 # bindsym $mod+Shift+r mode "resize"
 
 # Toggle Size (and maximize)
-bindsym $mod+v toggle_size this 0.9 1.0
-bindsym $mod+Shift+v toggle_size active 1.0 0.9
+bindsym $mod+v toggle_size this 1.0 1.0
 
 mode "togglesizeh" {
     bindsym 1 toggle_size all 0.125 1.0; mode default

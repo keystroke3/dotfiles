@@ -1,6 +1,12 @@
 # Default config for scroll
 
 input type:keyboard xkb_options "compose:ralt"
+input "type:touchpad" {
+    tap enabled
+    natural_scroll enabled
+    middle_emulation enabled
+}
+input type:touchpad xkb_options "compose:ralt"
 include ~/.config/scroll/exec.swayconf
 include ~/.config/scroll/rules.swayconf
 include ~/.config/scroll/keys.swayconf

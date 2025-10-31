@@ -73,10 +73,17 @@ for_window [class="floating"] {
   border enable
 }
 
+#f7d66bff
+#98C379ff
+#120e12ff
+#d92365ff
+#f2d8e9ff
+#0b0b0bff
+#594850ff
 
-set $bg             #a48abfff
+set $bg             #ccaf4fff
 set $fg             #98C379ff
-set $bg-inactive    #120e12ff
+set $bg-inactive    #72925bff
 set $bg-urgent      #d92365ff
 set $text-light     #f2d8e9ff
 set $text-dark      #0b0b0bff

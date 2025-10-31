@@ -30,8 +30,36 @@ deactivate () {
         unset VIRTUAL_ENV_PROMPT
 }
 
+function cd {
+    builtin cd "$@"
+    pwd > ~/.zsh/lastdir
+}
+
+# restore last saved path
+if [ -f ~/.zsh/lastdir ]
+    then cd "$(cat ~/.zsh/lastdir)"
+    else
+        echo "$HOME" > ~/.zsh/lastdir
+        cd $HOME
+fi
+
 c() { 
     printf "%s\n" "$@" | bc -l;
+}
+
+jg(){
+    git_root=$(git rev-parse --show-toplevel)
+    outer_dir=${git_root%/*}
+    if [ "$1" = "/" ];then
+        cd "$git_root"
+        return 0
+    fi
+    fuzz=$(~/.bin/fs -d "$git_root" | sed "s|$outer_dir/||" | fzf)
+    if [ -z $fuzz ];then
+        return 0
+    fi
+    cd $outer_dir/$fuzz
+
 }
 
 h(){
@@ -130,18 +158,6 @@ dlogs(){
 	docker logs $fuzz -f
 }
 
-function cd {
-    builtin cd "$@"
-    pwd > ~/.zsh/lastdir
-}
-
-# restore last saved path
-if [ -f ~/.zsh/lastdir ]
-    then cd "$(cat ~/.zsh/lastdir)"
-    else
-        echo "$HOME" > ~/.zsh/lastdir
-        cd $HOME
-fi
 
 swap(){
     mv "$1" "$1_" &&
