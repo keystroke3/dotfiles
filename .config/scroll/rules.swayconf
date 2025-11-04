@@ -81,9 +81,9 @@ for_window [class="floating"] {
 #0b0b0bff
 #594850ff
 
-set $bg             #ccaf4fff
+set $bg             #81cc4fff
 set $fg             #98C379ff
-set $bg-inactive    #72925bff
+set $bg-inactive    #3d4e31ff
 set $bg-urgent      #d92365ff
 set $text-light     #f2d8e9ff
 set $text-dark      #0b0b0bff
