@@ -3,9 +3,10 @@
 input type:keyboard xkb_options "compose:ralt"
 input "type:touchpad" {
     tap enabled
+    drag enabled
+    drag_lock disabled
     middle_emulation enabled
 }
-input type:touchpad xkb_options "compose:ralt"
 include ~/.config/scroll/exec.swayconf
 include ~/.config/scroll/rules.swayconf
 include ~/.config/scroll/keys.swayconf
