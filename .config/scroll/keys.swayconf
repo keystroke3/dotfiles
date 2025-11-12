@@ -67,6 +67,8 @@ bindsym XF86AudioMute exec bash ~/.bin/volume mute
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
+bindsym XF86MonBrightnessUp exec brightnessctl s +5%
 
 bindsym $mod+Shift+s exec ~/.bin/swayshot
 bindsym $mod+Print exec ~/.bin/screensend

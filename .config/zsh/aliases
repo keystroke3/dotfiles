@@ -223,6 +223,8 @@ remind(){
         *) echo 'unknown flag' && return 1
     esac 
     done
+    echo "delay: $delay"
+    echo "note: $note"
     (sleep $delay && notify-send "$note" &&
         mpv --force-window=no /usr/share/sounds/freedesktop/stereo/service-login.oga) &> /dev/null & disown
 }
@@ -363,3 +365,4 @@ alias stress="s-tui"
 alias qb="qutebrowser"
 alias lg="lazygit"
 alias bw="flatpak run --command=bw com.bitwarden.desktop"
+alias venv="deactivate && source .venv/bin/activate"

@@ -26,7 +26,6 @@ exec solaar -w hide
 exec ~/.config/scroll/scripts/monitor_man auto
 exec ~/.bin/disable_kbd_on_moonlander
 exec waybar
-exec flameshot
 # exec-once = dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP # for XDPH
 
 # set window settings
