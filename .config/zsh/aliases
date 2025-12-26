@@ -47,14 +47,14 @@ c() {
     printf "%s\n" "$@" | bc -l;
 }
 
-jg(){
+jl(){
     git_root=$(git rev-parse --show-toplevel)
     outer_dir=${git_root%/*}
     if [ "$1" = "/" ];then
         cd "$git_root"
         return 0
     fi
-    fuzz=$(~/.bin/fs -d "$git_root" | sed "s|$outer_dir/||" | fzf)
+    fuzz=$(~/.bin/fs -d "$git_root" -i 'node_modules,__pycache__' | sed "s|$outer_dir/||" | fzf)
     if [ -z $fuzz ];then
         return 0
     fi
@@ -171,7 +171,7 @@ o(){
 }
 
 cfg(){
-    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/ -i 'BraveSoftware,Slack'| fzf --reverse --height 40%)
+    fuzz=$(fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/ -i 'BraveSoftware,Slack,discord'| fzf --reverse --height 40%)
     [ -f "$fuzz" ] && ([ -n "$1" ] && $1 "$fuzz" || vim "$fuzz") || return 0
 }
 
@@ -195,7 +195,7 @@ mkpw(){
 }
 
 secret(){
-    echo "$(tr -dc 'A-Za-z0-9!$%&()*./<>_~' </dev/urandom | head -c 50)"
+    openssl rand -base64 32 | tr '/+=' '_'
 }
 
 py(){
@@ -203,7 +203,11 @@ py(){
 }
 
 bp(){
-    "$VIRTUAL_ENV/bin/ipython" "$@"
+    if [ -f "$VIRTUAL_ENV/bin/ipython" ]; then
+        "$VIRTUAL_ENV/bin/ipython" "$@"
+    else
+        /usr/bin/ipython "$@"
+    fi
 }
 
 remind(){
