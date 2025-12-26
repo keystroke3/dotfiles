@@ -97,7 +97,7 @@ output "HDMI-A-1" {
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
     // Set gaps around windows in logical pixels.
-    gaps 12
+    gaps 3
 
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
@@ -160,7 +160,7 @@ layout {
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
         // Color of the ring on the active monitor.
-        active-color "#7fc8ff"
+        active-color "#98C379"
 
         // Color of the ring on inactive monitors.
         //
@@ -175,7 +175,7 @@ layout {
         // You can use any CSS linear-gradient tool on the web to set these up.
         // Changing the color space is also supported, check the wiki for more info.
         //
-        active-gradient from="#E5C07B" to="#a48abf" angle=45
+        // active-gradient from="#E5C07B" to="#a48abf" angle=45
 
         // You can also color the gradient relative to the entire view
         // of the workspace, rather than relative to just the window itself.
@@ -377,7 +377,7 @@ binds {
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
     XF86PowerOff { spawn "wlogout"; }
-    Mod+Delete { spawn "wlogout"; }
+    Mod+Escape { spawn "wlogout"; }
 
 
     // Mod+Shift+Print { spawn "grim -o $(swaymsg -t get_outputs | jq -r '.[] | select(.focused) | .name') && $notifycmd 'Screenshot' }
@@ -608,12 +608,11 @@ binds {
     //
     // The allow-inhibiting=false property can be applied to other binds as well,
     // which ensures niri always processes them, even when an inhibitor is active.
-    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    // Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
     // The quit action will show a confirmation dialog to avoid accidental exits.
     Mod+Shift+X { quit; }
     Ctrl+Alt+Delete { quit; }
-
     // Powers off the monitors. To turn them back on, do any input like
     // moving the mouse or pressing any other key.
 }

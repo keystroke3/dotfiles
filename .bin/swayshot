@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+geometry=$(slurp)
+[ -z "$geometry" ] && exit 0
+
+x=$(echo "$geometry" | cut -d',' -f1)
+y=$(echo "$geometry" | cut -d' ' -f1 | cut -d',' -f2)
+w=$(echo "$geometry" | cut -d' ' -f2 | cut -d'x' -f1)
+h=$(echo "$geometry" | cut -d'x' -f2)
+
+scale_factor=$(swaymsg -t get_outputs | jq -r '.[] | select(.focused == true).scale')
+
+_x=$(bc <<< "$x*$scale_factor / 1")
+_y=$(bc <<< "$y*$scale_factor / 1")
+_w=$(bc <<< "$w*$scale_factor / 1")
+_h=$(bc <<< "$h*$scale_factor / 1")
+
+_g="${_x},${_y} ${_w}x${_h}"
+
+
+grim -g "$_g" - | wl-copy

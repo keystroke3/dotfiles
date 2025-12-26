@@ -27,9 +27,38 @@
             "(.*) - zsh": " [$1]"
         }
     },
-    "niri/workspaces": {
-        "disable-scroll": true
+  "niri/workspaces": {
+    "on-click": "activate",
+    "format": "{icon}",
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": ""
     },
+    "disable-scroll": true
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 14,
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": ["ghostty"],
+    "tooltip-format": "{title} | {app_id}"
+  },
+
+  "niri/window": {
+    "format": "{}",
+    "rewrite": {
+      "(.*) - Brave": "$1",
+      "(.*) - Chromium": "$1",
+      "(.*) - Brave Search": "$1",
+      "(.*) - Outlook": "$1",
+      "(.*) Microsoft Teams": "$1"
+    },
+    "separate-outputs": true
+  },
+
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -88,9 +117,6 @@
             "special": "󰓏",
             "sort-by-number": true
         }
-    },
-    "wlr/taskbar": {
-        "tooltip-format": "{title} | {app_id}"
     },
     "mpris": {
         "format-playing": "{player_icon} {artist} - {title}",
