@@ -166,7 +166,8 @@ layout {
         //
         // The focus ring only draws around the active window, so the only place
         // where you can see its inactive-color is on other monitors.
-        inactive-color "#888"
+        // inactive-color "#888"
+        inactive-color "#98A379"
 
         // You can also use gradients. They take precedence over solid colors.
         // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
@@ -192,7 +193,7 @@ layout {
 
         width 2
         active-color "#ffc87f"
-        inactive-color "#505050"
+        inactive-color "#98A379"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"

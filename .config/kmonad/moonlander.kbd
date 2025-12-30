@@ -1,0 +1,59 @@
+(defcfg
+  ;; For Linux
+  input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+  output (uinput-sink "homerow"
+    "sleep 1 && setxkbmap -option compose:ralt")
+  cmp-seq ralt    ;; Set the compose key to `RightAlt'
+  cmp-seq-delay 5 ;; 5ms delay between each compose-key sequence press
+  key-seq-delay 5 ;; 5ms delay between each outputted key event
+
+  fallthrough true
+  allow-cmd true
+  implicit-around around
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                           prnt del home  pgup  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                     nlck kp/ kp* kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                        kp7  kp8  kp9  kp+
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret                           kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                   up          kp1  kp2  kp3  kprt
+  lctl lmet lalt           spc            ralt rmet   rctl                left down rght    kp0  kp. 
+)
+
+(defalias
+  ;; Tap CapsLock for Esc, hold for 200ms to toggle CapsLock
+  cap (tap-hold 200 esc caps)
+
+  ;; Tap Space for Space, hold for the 'symbols' layer
+  spc-sym (tap-hold 250 spc (layer-toggle symbols))
+  hm-a (tap-hold-next-release 250 a lalt)
+  hm-s (tap-hold-next-release 250 s lsft)
+  hm-d (tap-hold-next-release 250 d lmet)
+  hm-f (tap-hold-next-release 250 f lctl)
+
+  hm-j (tap-hold-next-release 250 j rctl)
+  hm-k (tap-hold-next-release 250 k rmet)
+  hm-l (tap-hold-next-release 250 l rsft)
+  hm-sc (tap-hold-next-release 250 ; lalt)
+)
+
+(deflayer home
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                           prnt del  home  pgup  pgdn
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc                     nlck kp/  kp* kp-
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                        kp7  kp8  kp9  kp+
+  @cap @hm-a @hm-s @hm-d @hm-f g    h    @hm-j @hm-k @hm-l @hm-sc '    ret                  kp4  kp5  kp6
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft                   up          kp1  kp2  kp3  kprt
+  lctl lmet lalt           @spc-sym            ralt rmet   rctl           left down rght    kp0  kp.
+)
+
+(deflayer symbols
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                                       prnt del  home  pgup  pgdn
+  grv    f1   f2   f3   f4   f5   f6   f7   f8  f9   f10  f11  f12   bspc                               nlck kp/  kp*   kp-
+  tab  !    @    {    }    &    y    u    volu    brup    prev    [    ]    \                           kp7  kp8  kp9   kp+
+  caps #    $    \(    \)    ~    left    down    up    right    pp    '    ret                         kp4  kp5  kp6
+  lsft %    ^    [    ]    |    next    mute    vold    brdn    /    rsft                   up          kp1  kp2  kp3   kprt
+  lctl lmet lalt           spc                 ralt rmet   rctl                       left down rght    kp0  kp.
+)
+
+
