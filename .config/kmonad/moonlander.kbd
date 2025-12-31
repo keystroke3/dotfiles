@@ -23,7 +23,7 @@
 
 (defalias
   ;; Tap CapsLock for Esc, hold for 200ms to toggle CapsLock
-  cap (tap-hold 200 esc caps)
+  cap (tap-hold 500 esc caps)
 
   ;; Tap Space for Space, hold for the 'symbols' layer
   spc-sym (tap-hold 250 spc (layer-toggle symbols))
@@ -35,7 +35,7 @@
   hm-j (tap-hold-next-release 250 j rctl)
   hm-k (tap-hold-next-release 250 k rmet)
   hm-l (tap-hold-next-release 250 l rsft)
-  hm-sc (tap-hold-next-release 250 ; lalt)
+  hm-sc (tap-hold-next-release 350 ; lalt)
 )
 
 (deflayer home
