@@ -3,6 +3,7 @@
 !.bash_prompt
 !.bashrc
 !.bin/*
+.config/*
 !.config/scroll/
 !.config/MangoHud
 !.config/alacritty
@@ -19,7 +20,6 @@
 !.config/niri
 !.config/paru
 !.config/qtile
-!.config/qutebrowser
 !.config/ranger
 !.config/rofi
 !.config/screenshots
@@ -34,6 +34,7 @@
 !.config/wlogout
 !.config/yay
 !.config/zathura
+!.config/helix
 !.fzf.zsh
 !.gitignore
 !.venv
@@ -51,11 +52,5 @@
 *history
 *test*
 *videofinder.log
-.config/*
-.config/mpv/watch_later
-.config/qtile/.xprofile
-.config/qtile/__pycache__/
-.config/qtile/groups.py
-.config/qtile/keys.py
-.config/vim/plugged
 *.env
+.config/zsh/.zcompdump

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+while true;do
+	if niri msg outputs | grep -qi 'HDMI';then
+		niri msg output "eDP-1" off
+		sleep 2
+	else
+		niri msg output "eDP-1" on
+		sleep 2
+	fi
+done
