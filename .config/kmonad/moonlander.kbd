@@ -51,7 +51,7 @@
   esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12                                       prnt del  home  pgup  pgdn
   grv    f1   f2   f3   f4   f5   f6   f7   f8  f9   f10  f11  f12   bspc                               nlck kp/  kp*   kp-
   tab  !    @    {    }    &    y    u    volu    brup    prev    [    ]    \                           kp7  kp8  kp9   kp+
-  caps #    $    \(    \)    ~    left    down    up    right    pp    '    ret                         kp4  kp5  kp6
+  caps #    $    \(    \)    =    left    down    up    right    pp    '    ret                         kp4  kp5  kp6
   lsft %    ^    [    ]    |    next    mute    vold    brdn    /    rsft                   up          kp1  kp2  kp3   kprt
   lctl lmet lalt           spc                 ralt rmet   rctl                       left down rght    kp0  kp.
 )

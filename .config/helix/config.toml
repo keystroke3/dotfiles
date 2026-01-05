@@ -1,0 +1,15 @@
+theme = "gruvbox_dark_hard"
+
+[editor]
+color-modes = true
+auto-pairs = true
+middle-click-paste = false
+line-number = "relative"
+
+[editor.statusline]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.cursor-shape]
+insert = "bar"
