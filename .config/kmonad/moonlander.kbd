@@ -18,7 +18,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                        kp7  kp8  kp9  kp+
   caps a    s    d    f    g    h    j    k    l    ;    '    ret                           kp4  kp5  kp6
   lsft z    x    c    v    b    n    m    ,    .    /    rsft                   up          kp1  kp2  kp3  kprt
-  lctl lmet lalt           spc            ralt rmet   rctl                left down rght    kp0  kp. 
+  lctl lmet lalt           spc            ralt   rctl                left down rght    kp0  kp. 
 )
 
 (defalias
@@ -36,6 +36,8 @@
   hm-k (tap-hold-next-release 250 k rmet)
   hm-l (tap-hold-next-release 250 l rsft)
   hm-sc (tap-hold-next-release 350 ; lalt)
+  ctrl-b (around lctl b)
+
 )
 
 (deflayer home
@@ -44,7 +46,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \                        kp7  kp8  kp9  kp+
   @cap @hm-a @hm-s @hm-d @hm-f g    h    @hm-j @hm-k @hm-l @hm-sc '    ret                  kp4  kp5  kp6
   lsft z    x    c    v    b    n    m    ,    .    /    rsft                   up          kp1  kp2  kp3  kprt
-  lctl lmet lalt           @spc-sym            ralt rmet   rctl           left down rght    kp0  kp.
+  lctl lmet @ctrl-b           @spc-sym            ralt  rctl           left down rght    kp0  kp.
 )
 
 (deflayer symbols
@@ -53,7 +55,7 @@
   tab  !    @    {    }    &    y    u    volu    brup    prev    [    ]    \                           kp7  kp8  kp9   kp+
   caps #    $    \(    \)    =    left    down    up    right    pp    '    ret                         kp4  kp5  kp6
   lsft %    ^    [    ]    |    next    mute    vold    brdn    /    rsft                   up          kp1  kp2  kp3   kprt
-  lctl lmet lalt           spc                 ralt rmet   rctl                       left down rght    kp0  kp.
+  lctl lmet lalt           spc                 ralt   rctl                       left down rght    kp0  kp.
 )
 
 

@@ -364,7 +364,7 @@ alias wrandr='wlr-randr'
 alias reflect="sudo reflector --latest 20 --sort rate --save /etc/pacman.d/mirrorlist"
 alias suspend="sudo systemctl suspend"
 alias nvc="nvim --cmd \"cd ~/.config/nvim\" ~/.config/nvim"
-alias jbat="wl-paste | jq | bat --language=json"
+alias jbat="wl-paste | jq | bat --language=json --decorations=never"
 alias stress="s-tui"
 alias qb="qutebrowser"
 alias lg="lazygit"
