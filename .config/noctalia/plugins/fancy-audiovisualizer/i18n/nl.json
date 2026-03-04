@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Balkbreedte",
+    "bloomIntensity": "Bloei Intensiteit",
+    "customPrimaryColor": "Primaire kleur",
+    "customSecondaryColor": "Secundaire kleur",
+    "description": "Configureer de weergave van de audio visualisatie.",
+    "fadeWhenIdle": "Vervagen bij inactiviteit",
+    "fadeWhenIdle-description": "Visualiseerder laten vervagen wanneer er geen audio wordt afgespeeld.",
+    "innerDiameter": "Binnendiameter",
+    "mode": {
+      "all": "Alles",
+      "bars": "Bars",
+      "barsRings": "Rekstok + Ringen",
+      "rings": "Ringen",
+      "wave": "Golf",
+      "waveRings": "Golf + Ringen"
+    },
+    "ringOpacity": "Ringondoorzichtigheid",
+    "rotationSpeed": "Rotatiesnelheid",
+    "sensitivity": "Gevoeligheid",
+    "title": "Visualisatie-instellingen",
+    "useCustomColors": "Aangepaste kleuren gebruiken",
+    "useCustomColors-description": "Themakleuren overschrijven met aangepaste kleuren",
+    "visualizationMode": "Visualisatiemodus",
+    "visualizationMode-description": "Kies visualisatiestijl",
+    "waveThickness": "Golflaagdikte"
+  }
+}

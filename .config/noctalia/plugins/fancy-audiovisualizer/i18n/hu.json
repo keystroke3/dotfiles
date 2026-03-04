@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Sávszélesség",
+    "bloomIntensity": "Virágzás intenzitása",
+    "customPrimaryColor": "Elsődleges szín",
+    "customSecondaryColor": "Másodlagos szín",
+    "description": "Az audio vizualizáló megjelenésének beállítása",
+    "fadeWhenIdle": "Halványítás tétlenség esetén",
+    "fadeWhenIdle-description": "A vizualizáció elhalványítása, ha nincs hang lejátszva",
+    "innerDiameter": "Belső átmérő",
+    "mode": {
+      "all": "Összes",
+      "bars": "Sávok",
+      "barsRings": "Sávok + Gyűrűk",
+      "rings": "Gyűrűk",
+      "wave": "Hullám",
+      "waveRings": "Hullám + Gyűrűk"
+    },
+    "ringOpacity": "Gyűrű átlátszósága",
+    "rotationSpeed": "Forgási sebesség",
+    "sensitivity": "Érzékenység",
+    "title": "Vizualizációs beállítások",
+    "useCustomColors": "Egyéni színek használata",
+    "useCustomColors-description": "A téma színeinek felülírása egyéni színekkel",
+    "visualizationMode": "Megjelenítési mód",
+    "visualizationMode-description": "Válassz megjelenítési stílust",
+    "waveThickness": "Hullámvastagság"
+  }
+}

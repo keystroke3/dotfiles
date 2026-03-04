@@ -1,0 +1,42 @@
+{
+  "menu": {
+    "settings": "Widget settings"
+  },
+  "panel": {
+    "test": "This string is translated via the plugin API",
+    "open-settings": "Open Plugin Settings"
+  },
+  "settings": {
+    "appearance": {
+      "title": "Appearance"
+    },
+    "iconColor": {
+      "desc": "Color for the icon when IP is successfully fetched",
+      "label": "Icon Color"
+    },
+    "stateIcons": {
+      "title": "State Icons"
+    },
+    "successIcon": {
+      "desc": "Icon to show when IP is successfully fetched",
+      "label": "Success Icon"
+    },
+    "errorIcon": {
+      "desc": "Icon to show when IP fetch fails",
+      "label": "Error Icon"
+    },
+    "loadingIcon": {
+      "desc": "Icon to show while fetching IP",
+      "label": "Loading Icon"
+    },
+    "browseIcons": "Browse Icons",
+    "behavior": {
+      "title": "Behavior"
+    },
+    "refreshInterval": {
+      "desc": "How often to automatically refresh IP info. Set to 0 to disable auto-refresh.",
+      "label": "Auto-refresh Interval (seconds)",
+      "placeholder": "300"
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "menu": {
+    "settings": "Ustawienia widżetu"
+  },
+  "panel": {
+    "test": "Ten ciąg jest tłumaczony przez API wtyczki",
+    "open-settings": "Otwórz ustawienia wtyczki"
+  },
+  "settings": {
+    "appearance": {
+      "title": "Wygląd"
+    },
+    "iconColor": {
+      "desc": "Kolor ikony po pomyślnym pobraniu IP",
+      "label": "Kolor ikony"
+    },
+    "stateIcons": {
+      "title": "Ikony stanu"
+    },
+    "successIcon": {
+      "desc": "Ikona wyświetlana po pomyślnym pobraniu IP",
+      "label": "Ikona sukcesu"
+    },
+    "errorIcon": {
+      "desc": "Ikona wyświetlana w przypadku błędu pobierania IP",
+      "label": "Ikona błędu"
+    },
+    "loadingIcon": {
+      "desc": "Ikona wyświetlana podczas pobierania IP",
+      "label": "Ikona ładowania"
+    },
+    "browseIcons": "Przeglądaj ikony",
+    "behavior": {
+      "title": "Zachowanie"
+    },
+    "refreshInterval": {
+      "desc": "Jak często automatycznie odświeżać informacje o IP. Ustaw na 0, aby wyłączyć automatyczne odświeżanie.",
+      "label": "Interwał automatycznego odświeżania (sekundy)",
+      "placeholder": "300"
+    }
+  }
+}

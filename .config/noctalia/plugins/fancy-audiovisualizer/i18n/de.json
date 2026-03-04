@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Balkenbreite",
+    "bloomIntensity": "Blütenintensität",
+    "customPrimaryColor": "Primärfarbe",
+    "customSecondaryColor": "Sekundärfarbe",
+    "description": "Audiovisualisierungsdarstellung konfigurieren",
+    "fadeWhenIdle": "Ausblenden bei Inaktivität",
+    "fadeWhenIdle-description": "Visualisierer ausblenden, wenn keine Audioausgabe erfolgt",
+    "innerDiameter": "Innendurchmesser",
+    "mode": {
+      "all": "Alle",
+      "bars": "Bars",
+      "barsRings": "Barren + Ringe",
+      "rings": "Ringe",
+      "wave": "Welle",
+      "waveRings": "Welle + Ringe"
+    },
+    "ringOpacity": "Ring-Opazität",
+    "rotationSpeed": "Drehzahl",
+    "sensitivity": "Empfindlichkeit",
+    "title": "Visualisierungseinstellungen",
+    "useCustomColors": "Benutzerdefinierte Farben verwenden",
+    "useCustomColors-description": "Themenfarben mit benutzerdefinierten Farben überschreiben",
+    "visualizationMode": "Visualisierungsmodus",
+    "visualizationMode-description": "Visualisierungsstil wählen",
+    "waveThickness": "Wellendicke"
+  }
+}

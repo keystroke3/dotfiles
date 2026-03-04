@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Ширина полосы",
+    "bloomIntensity": "Интенсивность свечения",
+    "customPrimaryColor": "Основной цвет",
+    "customSecondaryColor": "Вторичный цвет",
+    "description": "Настроить внешний вид визуализатора звука",
+    "fadeWhenIdle": "Затухать в режиме ожидания",
+    "fadeWhenIdle-description": "Затухать визуализатору при отсутствии воспроизведения аудио.",
+    "innerDiameter": "Внутренний диаметр",
+    "mode": {
+      "all": "Всё",
+      "bars": "Бары",
+      "barsRings": "Турники + Кольца",
+      "rings": "Кольца",
+      "wave": "Волна",
+      "waveRings": "Волна + Кольца"
+    },
+    "ringOpacity": "Прозрачность кольца",
+    "rotationSpeed": "Скорость вращения",
+    "sensitivity": "Чувствительность",
+    "title": "Настройки визуализатора",
+    "useCustomColors": "Использовать пользовательские цвета",
+    "useCustomColors-description": "Переопределить цвета темы пользовательскими цветами",
+    "visualizationMode": "Режим визуализации",
+    "visualizationMode-description": "Выберите стиль визуализации",
+    "waveThickness": "Толщина волны"
+  }
+}

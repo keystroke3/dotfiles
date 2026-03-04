@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Ancho de barra",
+    "bloomIntensity": "Intensidad de floración",
+    "customPrimaryColor": "Color primario",
+    "customSecondaryColor": "Color secundario",
+    "description": "Configurar la apariencia del visualizador de audio",
+    "fadeWhenIdle": "Desvanecer al estar inactivo",
+    "fadeWhenIdle-description": "Atenuar el visualizador cuando no se reproduce audio.",
+    "innerDiameter": "Diámetro interior",
+    "mode": {
+      "all": "Todo",
+      "bars": "Barras",
+      "barsRings": "Barras + Anillas",
+      "rings": "Anillos",
+      "wave": "Ola",
+      "waveRings": "Onda + Anillos"
+    },
+    "ringOpacity": "Opacidad del anillo",
+    "rotationSpeed": "Velocidad de rotación",
+    "sensitivity": "Sensibilidad",
+    "title": "Ajustes del Visualizador",
+    "useCustomColors": "Usar colores personalizados",
+    "useCustomColors-description": "Anular los colores del tema con colores personalizados",
+    "visualizationMode": "Modo de visualización",
+    "visualizationMode-description": "Elegir estilo de visualización",
+    "waveThickness": "Espesor de la onda"
+  }
+}

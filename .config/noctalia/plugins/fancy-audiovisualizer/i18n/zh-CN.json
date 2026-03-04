@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "条宽",
+    "bloomIntensity": "光晕强度",
+    "customPrimaryColor": "原色",
+    "customSecondaryColor": "间色",
+    "description": "配置音频可视化效果外观",
+    "fadeWhenIdle": "空闲时淡出",
+    "fadeWhenIdle-description": "当没有音频播放时淡出可视化工具",
+    "innerDiameter": "内径",
+    "mode": {
+      "all": "全部",
+      "bars": "酒吧",
+      "barsRings": "单杠 + 吊环",
+      "rings": "戒指",
+      "wave": "波浪",
+      "waveRings": "波浪 + 环"
+    },
+    "ringOpacity": "环透明度",
+    "rotationSpeed": "转速",
+    "sensitivity": "敏感性",
+    "title": "可视化设置",
+    "useCustomColors": "使用自定义颜色",
+    "useCustomColors-description": "使用自定义颜色覆盖主题颜色",
+    "visualizationMode": "可视化模式",
+    "visualizationMode-description": "选择可视化风格",
+    "waveThickness": "波浪厚度"
+  }
+}

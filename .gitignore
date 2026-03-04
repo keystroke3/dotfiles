@@ -35,6 +35,7 @@
 !.config/yay
 !.config/zathura
 !.config/helix
+!.config/noctalia
 !.fzf.zsh
 !.gitignore
 !.venv

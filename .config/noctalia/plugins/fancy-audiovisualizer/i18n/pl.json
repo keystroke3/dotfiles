@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Szerokość paska",
+    "bloomIntensity": "Intensywność Rozkwitu",
+    "customPrimaryColor": "Kolor podstawowy",
+    "customSecondaryColor": "Kolor dodatkowy",
+    "description": "Skonfiguruj wygląd wizualizatora dźwięku",
+    "fadeWhenIdle": "Przyciemnij przy bezczynności",
+    "fadeWhenIdle-description": "Wycisz wizualizator, gdy nie jest odtwarzany dźwięk",
+    "innerDiameter": "Średnica wewnętrzna",
+    "mode": {
+      "all": "Wszystkie",
+      "bars": "Paski",
+      "barsRings": "Paski + Pierścienie",
+      "rings": "Pierścienie",
+      "wave": "Fala",
+      "waveRings": "Fala + Pierścienie"
+    },
+    "ringOpacity": "Krycie pierścienia",
+    "rotationSpeed": "Prędkość obrotu",
+    "sensitivity": "Czułość",
+    "title": "Ustawienia wizualizatora",
+    "useCustomColors": "Użyj własnych kolorów",
+    "useCustomColors-description": "Zastąp kolory motywu własnymi kolorami",
+    "visualizationMode": "Tryb wizualizacji",
+    "visualizationMode-description": "Wybierz styl wizualizacji",
+    "waveThickness": "Grubość fali"
+  }
+}
