@@ -1,0 +1,29 @@
+[[language]]
+name = "python"
+language-id = "python"
+roots = ["pyproject.toml", "poetry.lock", ".git", ".venv/"]
+language-servers = ["ruff"]
+formatter = { command = "sh", args = ["-c", "uvx ruff check --fix - | uvx ruff format -"] }
+file-types = ["py", "ipynb"]
+comment-token = "#"
+shebangs = ["python"]
+auto-format = true
+
+[language-server.ruff]
+command = "uvx"
+args = ["ruff", "server"]
+
+[language-server.ruff.config.settings]
+lineLength = 100
+logLevel = "debug"
+fix = true
+
+ignore = [
+  "E501",  # line too long
+  "E731",  # do not assign lambda
+]
+
+[language-server.ruff.config.settings.format]
+quote-style = "double"
+docstring-code-format = true
+indent-style = "space"   
