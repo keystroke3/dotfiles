@@ -8,8 +8,8 @@ environment {
     GTK_IM_MODULE "fcitx"
     QT_IM_MODULE "fcitx"
     XMODIFIERS "@im=fcitx"
-}
 
+}
 
 overview{
     zoom 0.5
@@ -108,7 +108,6 @@ layout {
     }
 }
 
-spawn-at-startup "waybar"
 spawn-at-startup "xwayland-satellite"
 spawn-at-startup "nm-applet" "--indicator"
 spawn-at-startup "blueman-applet"
@@ -149,15 +148,15 @@ window-rule {
 
 binds {
     Mod+Return hotkey-overlay-title="Open a Terminal" { spawn "ghostty"; }
-    Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    XF86AudioRaiseVolume { spawn "pamixer" "-i" "1"; }
-    XF86AudioLowerVolume { spawn "pamixer" "-d" "1"; }
-    XF86MonBrightnessDown { spawn "brightnessctl" "s" "5%-"; }
-    XF86MonBrightnessUp { spawn "brightnessctl" "s" "+5%"; }
-    XF86AudioMute { spawn "~/.bin/volume" "mute"; }
+    // Mod+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
     XF86AudioPlay { spawn "playerctl" "play-pause"; }
     XF86AudioNext { spawn "playerctl" "next"; }
     XF86AudioPrev { spawn "playerctl" "previous"; }
+    XF86AudioRaiseVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "increase"; }
+    XF86AudioLowerVolume { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "decrease"; }
+    XF86AudioMute { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "volume" "muteOutput"; }
+    XF86MonBrightnessUp { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "increase"; }
+    XF86MonBrightnessDown { spawn "qs" "-c" "noctalia-shell" "ipc" "call" "brightness" "decrease"; }
     XF86PowerOff { spawn "wlogout"; }
     Mod+Escape { spawn "wlogout"; }
     Mod+BracketLeft { spawn "copyq" "toggle"; }
@@ -172,7 +171,10 @@ binds {
     Mod+backslash { spawn "~/.bin/audio_output_switch"; }
     Mod+e { spawn "thunar"; }
     Mod+t { spawn "~/.bin/totp"; }
-    Mod+O repeat=false { toggle-overview; }
+    // Mod+O repeat=false { toggle-overview; }
+    Mod+Space { spawn-sh "qs -c noctalia-shell ipc call launcher toggle"; }
+    Mod+C { spawn-sh "qs -c noctalia-shell ipc call controlCenter toggle"; }
+    Mod+Y { spawn-sh "qs -c noctalia-shell ipc call settings toggle"; }
     Mod+Shift+Q repeat=false { close-window; }
     Mod+H     hotkey-overlay-title="focus-column-left" { focus-column-left; }
     Mod+J     hotkey-overlay-title="focus-window-down" { focus-window-down; }
@@ -229,15 +231,6 @@ binds {
     Mod+7 { focus-workspace 7; }
     Mod+8 { focus-workspace 8; }
     Mod+9 { focus-workspace 9; }
-    Mod+Ctrl+1 { move-column-to-workspace 1; }
-    Mod+Ctrl+2 { move-column-to-workspace 2; }
-    Mod+Ctrl+3 { move-column-to-workspace 3; }
-    Mod+Ctrl+4 { move-column-to-workspace 4; }
-    Mod+Ctrl+5 { move-column-to-workspace 5; }
-    Mod+Ctrl+6 { move-column-to-workspace 6; }
-    Mod+Ctrl+7 { move-column-to-workspace 7; }
-    Mod+Ctrl+8 { move-column-to-workspace 8; }
-    Mod+Ctrl+9 { move-column-to-workspace 9; }
     Mod+Comma  { consume-or-expel-window-left; }
     Mod+Period { consume-or-expel-window-right; }
     Mod+Shift+Comma  { consume-window-into-column; }
@@ -245,7 +238,6 @@ binds {
     Mod+V { maximize-column; }
     Mod+F { fullscreen-window; }
     Mod+Shift+G { spawn "~/.config/niri/switch_monitor_scale"; }
-    Mod+C { center-column; }
     Mod+Ctrl+C { center-visible-columns; }
     Mod+Minus { set-column-width "-10%"; }
     Mod+Equal { set-column-width "+10%"; }
@@ -262,4 +254,7 @@ binds {
     Mod+Shift+X { quit; }
     Ctrl+Alt+Delete { quit; }
 }
+
+
+include "./noctalia.kdl"
 
