@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Çubuk Genişliği",
+    "bloomIntensity": "Çiçeklenme Yoğunluğu",
+    "customPrimaryColor": "Ana Renk",
+    "customSecondaryColor": "İkincil Renk",
+    "description": "Ses görselleştirici görünümünü yapılandır",
+    "fadeWhenIdle": "Boşta Kalınca Karart",
+    "fadeWhenIdle-description": "Ses çalmadığında görselleştiriciyi soldur.",
+    "innerDiameter": "İç Çap",
+    "mode": {
+      "all": "Tüm",
+      "bars": "Barlar",
+      "barsRings": "Barfiks Demiri + Halkalar",
+      "rings": "Yüzükler",
+      "wave": "Dalga",
+      "waveRings": "Dalga + Halkalar"
+    },
+    "ringOpacity": "Halka Opaklığı",
+    "rotationSpeed": "Dönme Hızı",
+    "sensitivity": "Hassasiyet",
+    "title": "Görselleştirici Ayarları",
+    "useCustomColors": "Özel Renkleri Kullan",
+    "useCustomColors-description": "Tema renklerini özel renklerle geçersiz kıl",
+    "visualizationMode": "Görselleştirme Modu",
+    "visualizationMode-description": "Görselleştirme stilini seçin",
+    "waveThickness": "Dalga Kalınlığı"
+  }
+}

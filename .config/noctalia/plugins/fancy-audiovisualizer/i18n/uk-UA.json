@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Ширина бруска",
+    "bloomIntensity": "Інтенсивність світіння",
+    "customPrimaryColor": "Основний колір",
+    "customSecondaryColor": "Вторинний колір",
+    "description": "Налаштуйте вигляд аудіовізуалізатора",
+    "fadeWhenIdle": "Згасати в режимі очікування",
+    "fadeWhenIdle-description": "Затемнювати візуалізатор, коли не відтворюється звук.",
+    "innerDiameter": "Внутрішній діаметр",
+    "mode": {
+      "all": "Все",
+      "bars": "Бари",
+      "barsRings": "Бруси + Кільця",
+      "rings": "Кільця",
+      "wave": "Хвиля",
+      "waveRings": "Хвиля + Кільця"
+    },
+    "ringOpacity": "Прозорість кільця",
+    "rotationSpeed": "Швидкість обертання",
+    "sensitivity": "Чутливість",
+    "title": "Налаштування візуалізатора",
+    "useCustomColors": "Використовувати власні кольори",
+    "useCustomColors-description": "Перевизначити кольори теми власними кольорами",
+    "visualizationMode": "Режим візуалізації",
+    "visualizationMode-description": "Виберіть стиль візуалізації",
+    "waveThickness": "Товщина хвилі"
+  }
+}

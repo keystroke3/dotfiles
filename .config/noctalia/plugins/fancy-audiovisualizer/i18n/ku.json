@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Firehiya Barê",
+    "bloomIntensity": "Zehfîya Gurtî",
+    "customPrimaryColor": "Rengê Seretayî",
+    "customSecondaryColor": "Rengê Duyemîn",
+    "description": "Xuyakirina dîmenê bihîstwerî yê dengî",
+    "fadeWhenIdle": "Dema de bêdengiyê vemirîne",
+    "fadeWhenIdle-description": "Dîmenkerê dema ku tu deng lê nabe, hêdî hêdî winda bike",
+    "innerDiameter": "Dirêjbûna Hundir",
+    "mode": {
+      "all": "Hemû",
+      "bars": "Bars",
+      "barsRings": "Bars + Rings",
+      "rings": "Xelqet",
+      "wave": "Pêl",
+      "waveRings": "Pêl + Xelek"
+    },
+    "ringOpacity": "Ronahiya Zengil",
+    "rotationSpeed": "Leza Şewitandinê",
+    "sensitivity": "Hesasiyet",
+    "title": "Mîhengên Dîmenderê",
+    "useCustomColors": "Rengên Xweser Bikar Bîne",
+    "useCustomColors-description": "Rengên mijarê bi rengên xwerû biguherîne",
+    "visualizationMode": "Şêwaza Dîmenkirinê",
+    "visualizationMode-description": "Şêwaza dîtinê hilbijêre",
+    "waveThickness": "Qalinîya Pêlê"
+  }
+}

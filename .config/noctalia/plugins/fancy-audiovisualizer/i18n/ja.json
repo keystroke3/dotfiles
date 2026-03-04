@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "バーの幅",
+    "bloomIntensity": "開花強度",
+    "customPrimaryColor": "原色",
+    "customSecondaryColor": "二次色",
+    "description": "オーディオビジュアライザーの外観を設定します。",
+    "fadeWhenIdle": "アイドル時にフェード",
+    "fadeWhenIdle-description": "音声が再生されていないときは、ビジュアライザーをフェードアウトする",
+    "innerDiameter": "内径",
+    "mode": {
+      "all": "すべて",
+      "bars": "バー",
+      "barsRings": "鉄棒と輪",
+      "rings": "リング",
+      "wave": "波",
+      "waveRings": "波紋 + リング"
+    },
+    "ringOpacity": "リングの不透明度",
+    "rotationSpeed": "回転速度",
+    "sensitivity": "感度",
+    "title": "ビジュアライザー設定",
+    "useCustomColors": "カスタムカラーを使用する",
+    "useCustomColors-description": "カスタムカラーでテーマの色をオーバーライドする",
+    "visualizationMode": "可視化モード",
+    "visualizationMode-description": "視覚化のスタイルを選択",
+    "waveThickness": "波厚"
+  }
+}

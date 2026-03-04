@@ -1,0 +1,44 @@
+{
+  "panel": {
+    "title": "Appareils connectés",
+    "signal": {
+      "very-weak": "Très faible",
+      "weak": "Faible",
+      "fair": "Moyen",
+      "good": "Bon",
+      "excellent": "Excellent",
+      "unknown": "Inconnu"
+    },
+    "card": {
+      "battery": "Batterie",
+      "network": "Réseau",
+      "signal-strength": "Force du signal",
+      "notifications": "Notifications"
+    },
+    "other-devices": "Autres appareils",
+    "send-file-picker": "Choisir un fichier à envoyer à l'appareil",
+    "send-file": "Envoyer un fichier",
+    "find-device": "Trouver mon appareil",
+    "pair": "Coupler avec l'appareil",
+    "unpair": "Découpler l'appareil",
+    "kdeconnect-error": {
+      "no-devices": "Aucun appareil exécutant KDE Connect trouvé",
+      "unavailable-title": "kdeconnectd ne semble pas être en cours d'exécution !",
+      "unavailable-desc": "Assurez-vous d'avoir installé l'application KDE Connect sur votre système et qu'elle a démarré le démon kdeconnectd",
+      "device-unavailable": "L'appareil est actuellement indisponible"
+    }
+  },
+  "bar": {
+    "tooltip": "Appareils connectés"
+  },
+  "control_center": {
+    "state-label": "État",
+    "state": {
+      "connected": "Connecté",
+      "disconnected": "Déconnecté",
+      "unavailable": "Indisponible",
+      "no-device": "Aucun appareil",
+      "not-paired": "Non couplé"
+    }
+  }
+}

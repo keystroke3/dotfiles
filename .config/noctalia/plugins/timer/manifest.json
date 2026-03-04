@@ -1,0 +1,33 @@
+{
+  "id": "timer",
+  "name": "Timer",
+  "version": "1.1.0",
+  "minNoctaliaVersion": "4.4.4",
+  "author": "Noctalia Team",
+  "official": true,
+  "license": "MIT",
+  "repository": "https://github.com/noctalia-dev/noctalia-plugins",
+  "description": "A timer and stopwatch plugin for the bar & control center.",
+  "tags": [
+    "Bar",
+    "Utility"
+  ],
+  "entryPoints": {
+    "main": "Main.qml",
+    "barWidget": "BarWidget.qml",
+    "panel": "Panel.qml",
+    "controlCenterWidget": "ControlCenterWidget.qml",
+    "settings": "Settings.qml"
+  },
+  "dependencies": {
+    "plugins": []
+  },
+  "metadata": {
+    "defaultSettings": {
+      "defaultDuration": 0,
+      "compactMode": false,
+      "iconColor": "none",
+      "textColor": "none"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "settings": {
+    "barWidth": "Breite der Leiste",
+    "bloomIntensity": "Intensità Bloom",
+    "customPrimaryColor": "Ngjyra parësore",
+    "customSecondaryColor": "Ngjyra dytësore",
+    "description": "Konfigurieren Sie das Aussehen des Audio-Visualisierers.",
+    "fadeWhenIdle": "Verblassen im Leerlauf",
+    "fadeWhenIdle-description": "Vizualizátor eltüntetése, ha nincs hang lejátszva.",
+    "innerDiameter": "Innendurchmesser",
+    "mode": {
+      "all": "Kaikki",
+      "bars": "Pritličja",
+      "barsRings": "Stangen + Ringe",
+      "rings": "Hringar",
+      "wave": "Val",
+      "waveRings": "Welle + Ringe"
+    },
+    "ringOpacity": "Neprůhlednost prstence",
+    "rotationSpeed": "Schnelllaufdrehzahl",
+    "sensitivity": "Ndjeshmëri",
+    "title": "Mga Setting ng Visualizer",
+    "useCustomColors": "Përdorni Ngjyra të Personalizuara",
+    "useCustomColors-description": "Ngjyrat e personalizuara mbivendosin ngjyrat e temës",
+    "visualizationMode": "Módszer megjelenítése",
+    "visualizationMode-description": "Zgjidhni stilin e vizualizimit",
+    "waveThickness": "Onda-lodiera"
+  }
+}
