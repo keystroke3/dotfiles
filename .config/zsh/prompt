@@ -128,4 +128,3 @@ ZVM_VISUAL_LINE_MODE_CURSOR=$ZVM_CURSOR_BLOCK
 # The prompt cursor in operator pending mode
 ZVM_OPPEND_MODE_CURSOR=$ZVM_CURSOR_BLINKING_UNDERLINE
 
-source /usr/share/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh

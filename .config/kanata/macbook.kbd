@@ -1,0 +1,63 @@
+(defcfg
+  process-unmapped-keys yes
+  concurrent-tap-hold yes
+)
+
+(defsrc
+  esc  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  fn   lctl lalt lmet spc            rmet ralt left down up   rght
+)
+
+(defalias
+  ;; CapsLock: tap=Esc, hold=Left Option/Alt
+  cap   (tap-hold-release 200 200 esc lalt)
+
+  ;; Left Option: Ctrl+B (tmux prefix)
+  ctrlb (multi lctl b)
+
+  ;; Home row mods — left hand (A=Alt S=Shift D=Super F=Ctrl)
+  hma  (tap-hold-release 250 250 a lalt)
+  hms  (tap-hold-release 250 250 s lsft)
+  hmd  (tap-hold-release 250 250 d lmet)
+  hmf  (tap-hold-release 250 250 f lctl)
+
+  ;; Home row mods — right hand (J=Ctrl K=Super L=Shift ;=Alt)
+  hmj  (tap-hold-release 250 250 j rctl)
+  hmk  (tap-hold-release 250 250 k rmet)
+  hml  (tap-hold-release 250 250 l rsft)
+  hmsc (tap-hold-release 350 350 ; lalt)
+
+  ;; Space: tap=Space, hold=symbols layer
+  spc  (tap-hold 200 200 spc (layer-while-held symbols))
+)
+
+(deflayer base
+  caps f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @cap @hma @hms @hmd @hmf g    h    @hmj @hmk @hml @hmsc '   ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  fn   lctl @ctrlb lmet @spc       rmet ralt left down up   rght
+)
+
+;; Symbols layer — activated by holding Space
+;;
+;; Number row : F1-F12
+;; q w e r t  : ! @ { } &
+;; i o p      : volume-up brightness-up prev-track
+;; a s d f g  : # $ ( ) =
+;; h j k l ;  : left down up right play-pause
+;; z x c v b  : % ^ [ ] |
+;; n m , .    : next-track mute volume-down brightness-down
+(deflayer symbols
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
+  _    S-1  S-2  S-[  S-]  S-7  _    _    volu brup prev  _    _    _
+  caps S-3  S-4  S-9  S-0  =    left down up   rght pp    _    ret
+  _    S-5  S-6  [    ]    S-\  next mute vold brdn  _    _
+  _    _    _    _    _              _    _    _    _    _    _
+)

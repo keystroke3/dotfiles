@@ -1,3 +1,4 @@
+ZDIR=$HOME/.config/zsh/
 export PATH="$HOME/bin:$PATH"
 #export PATH="$HOME.nvm/\*/bin:$PATH"
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
