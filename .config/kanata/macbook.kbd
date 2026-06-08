@@ -22,12 +22,12 @@
   ;; Home row mods — left hand (A=Alt S=Shift D=Super F=Ctrl)
   hma  (tap-hold-release 250 250 a lalt)
   hms  (tap-hold-release 250 250 s lsft)
-  hmd  (tap-hold-release 250 250 d lmet)
+  hmd  (tap-hold-release 250 250 d (multi lalt lmet))
   hmf  (tap-hold-release 250 250 f lctl)
 
   ;; Home row mods — right hand (J=Ctrl K=Super L=Shift ;=Alt)
   hmj  (tap-hold-release 250 250 j rctl)
-  hmk  (tap-hold-release 250 250 k rmet)
+  hmk  (tap-hold-release 250 250 k (multi lalt rmet))
   hml  (tap-hold-release 250 250 l rsft)
   hmsc (tap-hold-release 350 350 ; lalt)
 
