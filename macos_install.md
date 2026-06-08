@@ -11,6 +11,10 @@
     - zsh-vi-mode
     - bat
     - middleclick
+    - gnupg
+    - keepassxc
+    - mpv
+    - copyq
  - git clone dotfiles
  - symlink dotfiles/.config to ~/.config
  - git clone nvim config to ~/.config/nvim

@@ -30,13 +30,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-
 export NODE_PATH="/usr/local/lib/node_modules"
 export LOCAL_PH_TOKEN='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzAzNjczMjM4LCJpYXQiOjE3MDEwODEyMzgsImp0aSI6ImZjZGQ0M2E5MjhlZjQyMGU5ZDBmNzZmMGZmNjQ2YzFmIiwidXNlcl9pZCI6IjkyOTA4ZTRhIn0.3oaVWquOsRrt1_VOCUSK4tgzfhzyz7Ll0ypPiZnHis4'
-export HELLO="hi"
-# bindkey "^R" history-incremental-search-backward
 zstyle ':autocomplete:*' default-context history-incremental-search-backward
 export XDG_DATA_DIRS="$XDG_DATA_DIRS:/var/lib/flatpak/exports/share:/home/ted/.local/share/flatpak/exports/share"
 . "$HOME/.cargo/env"
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+export PATH="/Users/ted/.lmstudio/bin:$PATH"
 
+if [[ $OSTYPE == 'darwin'* ]]; then
+	export PATH="/opt/homebrew/opt/mysql-client/bin:$PATH"
+	export PATH="/opt/homebrew/opt/python@3.11/bin:$PATH"
+	export PKG_CONFIG_PATH="/opt/homebrew/opt/mysql-client/lib/pkgconfig"
+fi

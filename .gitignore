@@ -19,7 +19,9 @@
 !.config/logid.cfg
 !.config/mpv
 !.config/niri
+!.config/omniwm
 !.config/paru
+!.config/paneru
 !.config/qtile
 !.config/ranger
 !.config/rofi
