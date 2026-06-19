@@ -1,6 +1,7 @@
 (defcfg
   process-unmapped-keys yes
   concurrent-tap-hold yes
+  macos-dev-names-include ("Apple Internal Keyboard / Trackpad")
 )
 
 (defsrc
@@ -16,18 +17,24 @@
   ;; CapsLock: tap=Esc, hold=Left Option/Alt
   cap   (tap-hold-release 200 200 esc lalt)
 
-  ;; Left Option: Ctrl+B (tmux prefix)
-  ctrlb (multi lctl b)
+  ;; Escape: tap=Esc, hold=CapsLock
+  esccap (tap-hold-release 200 200 esc caps)
 
-  ;; Home row mods — left hand (A=Alt S=Shift D=Super F=Ctrl)
+  ;; Left Option: tap=Ctrl+X, hold=Option
+   lopt  (tap-hold-release 200 200 (multi lctl x) lalt)
+
+  ;; Left Command: tap=Ctrl+B, hold=Cmd
+   lcmd  (tap-hold-release 200 200 (multi lctl b) lmet)
+
+  ;; Home row mods — left hand (A=Alt S=Shift D=Amethyst F=Ctrl)
   hma  (tap-hold-release 250 250 a lalt)
   hms  (tap-hold-release 250 250 s lsft)
-  hmd  (tap-hold-release 250 250 d (multi lalt lmet))
+  hmd  (tap-hold-release 250 250 d (multi lalt lsft))
   hmf  (tap-hold-release 250 250 f lctl)
 
-  ;; Home row mods — right hand (J=Ctrl K=Super L=Shift ;=Alt)
+  ;; Home row mods — right hand (J=Ctrl K=Amethyst L=Shift ;=Alt)
   hmj  (tap-hold-release 250 250 j rctl)
-  hmk  (tap-hold-release 250 250 k (multi lalt rmet))
+  hmk  (tap-hold-release 250 250 k (multi lalt lsft))
   hml  (tap-hold-release 250 250 l rsft)
   hmsc (tap-hold-release 350 350 ; lalt)
 
@@ -36,28 +43,40 @@
 )
 
 (deflayer base
-  caps f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
+  @esccap f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @cap @hma @hms @hmd @hmf g    h    @hmj @hmk @hml @hmsc '   ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  fn   lctl @ctrlb lmet @spc       rmet ralt left down up   rght
+   fn   lctl @lopt  @lcmd @spc       rmet ralt left down up   rght
 )
 
 ;; Symbols layer — activated by holding Space
 ;;
 ;; Number row : F1-F12
 ;; q w e r t  : ! @ { } &
-;; i o p      : volume-up brightness-up prev-track
+;; u i o p    : prev-space volume-up brightness-up prev-track
 ;; a s d f g  : # $ ( ) =
-;; h j k l ;  : left down up right play-pause
+;; h j k l ;' : left down up right play-pause mute
 ;; z x c v b  : % ^ [ ] |
-;; n m , .    : next-track mute volume-down brightness-down
+;; n m , .    : next-track next-space volume-down brightness-down
+;; Amethyst layer — activated by holding D or K
+;; u/m → ctrl+left/right (focus prev/next macOS Space)
+;; all other keys → option+shift+key (Amethyst modifier)
+(deflayer amethyst
+  _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    (multi lalt lsft q) (multi lalt lsft w) (multi lalt lsft e) (multi lalt lsft r) (multi lalt lsft t) (multi lalt lsft y) C-left (multi lalt lsft i) (multi lalt lsft o) (multi lalt lsft p) (multi lalt lsft [) _ _
+  _    (multi lalt lsft a) (multi lalt lsft s) _    (multi lalt lsft f) (multi lalt lsft g) (multi lalt lsft h) (multi lalt lsft j) _    (multi lalt lsft l) _    _    (multi lalt lsft ret)
+  _    (multi lalt lsft z) _    _    _    _    (multi lalt lsft n) C-rght (multi lalt lsft ,) (multi lalt lsft .) _    _
+  _    _    _    _    (multi lalt lsft spc)    _    _    _    _    _    _
+)
+
 (deflayer symbols
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-  _    S-1  S-2  S-[  S-]  S-7  _    _    volu brup prev  _    _    _
-  caps S-3  S-4  S-9  S-0  =    left down up   rght pp    _    ret
-  _    S-5  S-6  [    ]    S-\  next mute vold brdn  _    _
+  _    S-1  S-2  S-[  S-]  S-7  _    C-left volu brup prev  _    _    _
+  caps S-3  S-4  S-9  S-0  =    left down up   rght pp    mute ret
+  _    S-5  S-6  [    ]    S-\  next C-rght vold brdn  _    _
   _    _    _    _    _              _    _    _    _    _    _
 )

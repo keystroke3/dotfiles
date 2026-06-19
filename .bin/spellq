@@ -4,12 +4,20 @@ HIST_FILE=~/.cache/spellqhist
 [ -f $HIST_FILE ] && HIST="$(cat $HIST_FILE)" || touch $HIST_FILE
 
 # Get query from user. If already in history add to clipboard else check spelling
-QUERY=$(echo "$HIST" | dmenu  -i -p Word: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    QUERY=$(echo "$HIST" | choose)
+else
+    QUERY=$(echo "$HIST" | dmenu  -i -p Word: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+fi
 [ -z $QUERY ] && exit 0
 if (echo "$HIST" | fgrep -q "$QUERY"); then
 	CHOICE="$QUERY"
 else
-	CHOICE=$(dym -c -n 10 "$QUERY" | dmenu -i -p Options: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        CHOICE=$(dym -c -n 10 "$QUERY" | choose)
+    else
+        CHOICE=$(dym -c -n 10 "$QUERY" | dmenu -i -p Options: -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')
+    fi
 [ -z $CHOICE ] && exit 0 || echo $CHOICE | tr -d "\n" | xclip -sel c
 
 # Add to history or move to top

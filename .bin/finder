@@ -2,7 +2,12 @@
 #
 # This script looks for media stored in a custom NAS. The actual media paths are /media
 rg="$($HOME/.bin/fs /media/music /media/videos/music/ -i services,/media/downloads --host '10.0.0.10:6450')"
-if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    fuzz="$(print $rg | choose)"
+    if [ -z $fuzz ]; then;exit 0;fi
+    fuzz="/Volumes${fuzz}"
+else if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
     fuzz="$(print $rg | fuzzel --dmenu \
         -b '1e1e2eff' -t 'cdd6f4ff' -s 'f9e2afff' -S '313244ff'\
         -f 'Fira Mono Nerd Font:size=9'\
@@ -14,16 +19,18 @@ if [[ "$XDG_SESSION_TYPE" == "wayland" ]];then
         )"
 else
     fuzz="$(echo $hist $rg | dmenu -i -l 10  -p file: -nb '#1e1c31' -nf '#ccc' -sb '#e5c07b' -sf '#1e1c31')"
+    fi
 fi
-echo "$fuzz"
 
-# _fuzz=$(echo $fuzz|sed 's*/store/*/*')
-# echo $_fuzz
+echo $fuzz
 
-if [ ! -z $fuzz ] && [ -f $fuzz ]
-then 
-  echo "$hist" | grep -vF $fuzz | sed "1i$fuzz" > $hist_file
-  xdg-open $fuzz & disown
+if [ ! -z "$fuzz" ] && [ -f "$fuzz" ]
+then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    iina --resume-playback=no "$fuzz"
+  else
+    xdg-open "$fuzz" & disown
+  fi
 else
     echo "Not a file"
 fi

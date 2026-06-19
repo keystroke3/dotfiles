@@ -1,4 +1,8 @@
 #!/bin/bash
-fuzz=$(fd  . $HOME/ --ignore-file $HOME/dotfiles/.gitignore -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    fuzz=$(fd . $HOME/ --ignore-file $HOME/dotfiles/.gitignore -pt d | choose)
+else
+    fuzz=$(fd  . $HOME/ --ignore-file $HOME/dotfiles/.gitignore -pt d | dmenu -i -l 10  -p File: -nb '#1E1C31' -nf '#ccc' -sb '#98C379' -sf '#1E1C31')
+fi
 [ -z $fuzz ] && : || code "$fuzz"  
 
