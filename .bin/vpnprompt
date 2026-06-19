@@ -1,14 +1,18 @@
 #!/bin/python3
 
 import subprocess
+import sys
 
 process_name = "protonvpn"
-PROMPT = [
-    "fuzzel", "--dmenu", "-b", "1e1e2eff", "-t", "cdd6f4ff", "-s",
-    "a6e3a1ff", "-S", "313244ff", "-f", "Fira", "Mono", "Nerd", "Font",
-    "-p", "Country:", "", "-w", "50", "-r", "0", "-C", "f9e2afff", "-B",
-    "2", "-i", "-format", "f", "--no-exit-on-keyboard-focus-loss",
-]
+if sys.platform == "darwin":
+    PROMPT = ["choose"]
+else:
+    PROMPT = [
+        "fuzzel", "--dmenu", "-b", "1e1e2eff", "-t", "cdd6f4ff", "-s",
+        "a6e3a1ff", "-S", "313244ff", "-f", "Fira", "Mono", "Nerd", "Font",
+        "-p", "Country:", "", "-w", "50", "-r", "0", "-C", "f9e2afff", "-B",
+        "2", "-i", "-format", "f", "--no-exit-on-keyboard-focus-loss",
+    ]
 
 
 CONFIGS_LOCATION = "/home/ted/.local/share/ovpn"

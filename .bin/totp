@@ -7,9 +7,12 @@ fuzz=
 get_secret(){
 	account=
 	if [ -z $1 ];then
-		fuzz=$(~/.bin/fs $secrets_dir | grep -oP "totp.*" | tr '_' ':' | sed 's/totp\///' | sed 's/\.gpg//' | 
-			fuzzel --dmenu --config ~/.bin/prompt-theme.ini
-		)
+		if [[ "$OSTYPE" == "darwin"* ]]; then
+			fuzz=$(~/.bin/fs $secrets_dir | grep -oP "totp.*" | tr '_' ':' | sed 's/totp\///' | sed 's/\.gpg//' | choose)
+		else
+			fuzz=$(~/.bin/fs $secrets_dir | grep -oP "totp.*" | tr '_' ':' | sed 's/totp\///' | sed 's/\.gpg//' | \
+				fuzzel --dmenu --config ~/.bin/prompt-theme.ini)
+		fi
 		if [ -z $fuzz ]; then 
 			echo "no account selected"
 			exit 0
@@ -28,11 +31,17 @@ get_secret(){
 
 generate_totp(){
 	if [[ $fuzz == *'invoice'* ]];then
-		wl-copy $(echo $secret)
+		if [[ "$OSTYPE" == "darwin"* ]]; then
+			echo $secret | pbcopy
+		else
+			wl-copy $(echo $secret)
+		fi
 		return
 	fi
 	totp=$(oathtool --totp -b $secret)
-	if [ $XDG_SESSION_TYPE == 'wayland' ]; then
+	if [[ "$OSTYPE" == "darwin"* ]]; then
+		echo $totp | pbcopy && osascript -e 'display notification "totp copied" with title "totp"'
+	elif [ $XDG_SESSION_TYPE == 'wayland' ]; then
 		wl-copy $totp && notify-send 'totp copied' 'totp'
 	else
 		echo $totp | xclip -selection clipboard && notify-send 'totp copied' 'totp'

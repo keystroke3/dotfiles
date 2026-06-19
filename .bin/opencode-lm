@@ -1,0 +1,73 @@
+#!/usr/bin/env bash
+# Start opencode with the largest currently-loaded LM Studio model.
+# Auto-detects project dir from git root; falls back to known-projects list;
+# prompts when no project can be determined.
+#
+# Known projects (fallback when not in a git repo):
+KNOWN_PROJECTS=(
+    "$HOME/work/core"
+    "$HOME/dotfiles"
+)
+
+CONFIG="$HOME/.config/opencode/opencode.jsonc"
+
+# --- model selection ---
+current=$(grep -m1 '^  "model": "lmstudio/' "$CONFIG" | sed 's|.*"lmstudio/\([^"]*\)".*|\1|')
+loaded=$(lms ps 2>/dev/null | awk '$1!="" && $1!="IDENTIFIER" {print $4, $1}')
+
+if [ -z "$loaded" ]; then
+    echo "opencode-lm: LM Studio unreachable or no models loaded — using config default" >&2
+elif echo "$loaded" | awk '{print $2}' | grep -qxF "$current"; then
+    echo "opencode-lm: lmstudio/$current still loaded — skipping update" >&2
+else
+    largest=$(echo "$loaded" | sort -rn | head -1 | awk '{print $2}')
+    echo "opencode-lm: model → lmstudio/$largest" >&2
+    sed -i '' "s|^  \"model\": \"lmstudio/[^\"]*\"|  \"model\": \"lmstudio/$largest\"|" "$CONFIG"
+fi
+
+# --- project detection ---
+# Skip detection if user already supplied --dir or a positional path arg.
+has_dir=false
+for arg in "$@"; do
+    [[ "$arg" == "--dir" || "$arg" == "--dir="* ]] && has_dir=true && break
+    # positional: non-flag arg that looks like a path
+    [[ "$arg" != -* && -d "$arg" ]] && has_dir=true && break
+done
+
+if ! $has_dir; then
+    cwd=$(pwd)
+
+    # 1. git root
+    project_dir=$(git rev-parse --show-toplevel 2>/dev/null)
+
+    # 2. known-projects prefix match
+    if [ -z "$project_dir" ]; then
+        for p in "${KNOWN_PROJECTS[@]}"; do
+            if [[ "$cwd" == "$p" || "$cwd" == "$p/"* ]]; then
+                project_dir="$p"
+                break
+            fi
+        done
+    fi
+
+    # 3. prompt
+    if [ -z "$project_dir" ]; then
+        echo "opencode-lm: no project found for $cwd" >&2
+        printf "Project dir (enter to use cwd, ctrl-c to abort): " >&2
+        read -r project_dir </dev/tty
+        project_dir="${project_dir:-$cwd}"
+    fi
+
+    echo "opencode-lm: project → $project_dir" >&2
+
+    # Inject dir: --dir for attach, positional for everything else
+    # Also inject --port 0 (OS-assigned random port) so nvim can auto-discover
+    # this instance via CWD matching without a hardcoded server_url.
+    if [[ "${1:-}" == "attach" ]]; then
+        exec opencode attach "${@:2}" --dir "$project_dir"
+    else
+        exec opencode --port 0 "$project_dir" "$@"
+    fi
+fi
+
+exec opencode --port 0 "$@"

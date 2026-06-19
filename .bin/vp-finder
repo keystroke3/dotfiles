@@ -2,7 +2,9 @@
 video_path=/media/
 folders=$($HOME/.bin/fs -d -p /media -i services --host='10.0.0.2:10002')
 [[ "$1" == "resume" ]] && color='#a6e3a1ff' || color='#e06c75ff'
-if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    fuzz="$(print $folders | choose)"
+elif [[ $XDG_SESSION_TYPE == "wayland" ]]; then
     fuzz="$(print $folders | fuzzel --dmenu \
         -b '1e1e2eff' -t 'cdd6f4ff' -s $color -S '313244ff'\
         -f 'Fira Mono Nerd Font'\
@@ -12,10 +14,8 @@ if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
         -i \
         --no-exit-on-keyboard-focus-loss \
         )"
-
 else
     fuzz=$(echo $folders | dmenu -i -l 10  -p file: -nb '#1e1c31' -nf '#ccc' -sb $color -sf '#1e1c31')
-    # fuzz=$(echo $folders | wofi --show dmenu)
 fi
 
 [[ "$1" == "resume" ]] &&  mpv "$fuzz" --resume-playback || mpv "$fuzz" --no-resume-playback
