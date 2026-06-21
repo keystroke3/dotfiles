@@ -40,6 +40,15 @@
 
   ;; Space: tap=Space, hold=symbols layer
   spc  (tap-hold 200 200 spc (layer-while-held symbols))
+
+  ;; Screenshot area to clipboard (Cmd+Ctrl+Shift+4)
+  scr  (multi lmet lctl lsft 4)
+
+  ;; Screenshot UI with annotations (Cmd+Shift+5)
+  scrui (multi lmet lsft 5)
+
+  ;; Maccy clipboard history (Cmd+Shift+C)
+  spot (multi lmet lsft c)
 )
 
 (deflayer base
@@ -75,8 +84,8 @@
 (deflayer symbols
   _    _    _    _    _    _    _    _    _    _    _    _    _
   _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12  _
-  _    S-1  S-2  S-[  S-]  S-7  _    C-left volu brup prev  _    _    _
+  _    S-1  S-2  S-[  S-]  S-7  _    C-left volu brup prev  @scr @scrui _
   caps S-3  S-4  S-9  S-0  =    left down up   rght pp    mute ret
-  _    S-5  S-6  [    ]    S-\  next C-rght vold brdn  _    _
+  _    S-5  S-6  [    ]    S-\  next C-rght vold brdn  @spot _
   _    _    _    _    _              _    _    _    _    _    _
 )
