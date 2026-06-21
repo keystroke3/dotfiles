@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+#
+# Search and open obsidian memos from ~/notes
+# Uses fzf for selection, opens in nvim with memo zen mode
+
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    FUZZ="$(fs -p ~/notes -g '.md' -t /Users/ted/notes 2>/dev/null | fzf --prompt 'Memo: ' -i)"
+    if [ -z "$FUZZ" ]; then exit 0; fi
+    nvim -c "lua require('memo').open_file('~/notes/$FUZZ')" ~/notes/"$FUZZ"
+else
+    if [[ "$XDG_SESSION_TYPE" == "wayland" ]]; then
+        FUZZ="$(fs -p ~/notes -g '.md' -t /Users/ted/notes 2>/dev/null | fzf --dmenu \
+            -b '1e1c31ff' -t 'cdd6f4ff' -s 'e5c07bff' -S '1e1c31ff'\
+            -f 'Fira Mono Nerd Font:size=9'\
+            -p 'Memo: '\
+            -w 150 \
+            -r 0 -C 'f9e2afff' -B 2 \
+            -i \
+            --no-exit-on-keyboard-focus-loss \
+            )"
+        if [ -z "$FUZZ" ]; then exit 0; fi
+        kitty -e nvim -c "lua require('memo').open_file('~/notes/$FUZZ')" ~/notes/"$FUZZ"
+    else
+        FUZZ="$(fs -p ~/notes -g '.md' -t /Users/ted/notes 2>/dev/null | dmenu -i -l 10 -p 'Memo:' -nb '#1E1C31' -nf '#ccc' -sb '#E5C07B' -sf '#1E1C31')"
+        if [ -z "$FUZZ" ]; then exit 0; fi
+        nvim -c "lua require('memo').open_file('~/notes/$FUZZ')" ~/notes/"$FUZZ"
+    fi
+fi
