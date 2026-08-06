@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Start opencode with the largest currently-loaded LM Studio model.
+# Start opencode with the largest currently-loaded omlx model.
 # Auto-detects project dir from git root; falls back to known-projects list;
 # prompts when no project can be determined.
 #
@@ -10,19 +10,26 @@ KNOWN_PROJECTS=(
 )
 
 CONFIG="$HOME/.config/opencode/opencode.jsonc"
+OMLX_BASE="http://localhost:7100/v1"
+OMLX_KEY="omlx-f0dl0v4d6ed1fq76"
 
 # --- model selection ---
-current=$(grep -m1 '^  "model": "lmstudio/' "$CONFIG" | sed 's|.*"lmstudio/\([^"]*\)".*|\1|')
-loaded=$(lms ps 2>/dev/null | awk '$1!="" && $1!="IDENTIFIER" {print $4, $1}')
+current=$(grep -m1 '^  "model": "omlx/' "$CONFIG" | sed 's|.*"omlx/\([^"]*\)".*|\1|')
+loaded=$(curl -sf -H "Authorization: Bearer $OMLX_KEY" "$OMLX_BASE/models" \
+    | sed 's/[[:space:]]//g' | grep -o '"id":"[^"]*"' | sed 's/"id":"//;s/"$//')
 
 if [ -z "$loaded" ]; then
-    echo "opencode-lm: LM Studio unreachable or no models loaded — using config default" >&2
-elif echo "$loaded" | awk '{print $2}' | grep -qxF "$current"; then
-    echo "opencode-lm: lmstudio/$current still loaded — skipping update" >&2
+    echo "opencode-lm: omlx unreachable or no models loaded — using config default" >&2
+elif echo "$loaded" | grep -qxF "$current"; then
+    echo "opencode-lm: omlx/$current still loaded — skipping update" >&2
 else
-    largest=$(echo "$loaded" | sort -rn | head -1 | awk '{print $2}')
-    echo "opencode-lm: model → lmstudio/$largest" >&2
-    sed -i '' "s|^  \"model\": \"lmstudio/[^\"]*\"|  \"model\": \"lmstudio/$largest\"|" "$CONFIG"
+    # Pick largest by extracting parameter count from model name (e.g. 35B > 27B > 9B)
+    largest=$(echo "$loaded" | while IFS= read -r name; do
+        size=$(echo "$name" | grep -oiE '[0-9]+(\.[0-9]+)?[Bb]' | head -1 | tr -d 'Bb')
+        printf '%s %s\n' "${size:-0}" "$name"
+    done | sort -rn | head -1 | cut -d' ' -f2-)
+    echo "opencode-lm: model → omlx/$largest" >&2
+    sed -i '' "s|^  \"model\": \"omlx/[^\"]*\"|  \"model\": \"omlx/$largest\"|" "$CONFIG"
 fi
 
 # --- project detection ---

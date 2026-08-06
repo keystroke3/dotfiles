@@ -36,9 +36,11 @@
 !.config/waybar
 !.config/wlogout
 !.config/yay
+!.config/yazi
 !.config/zathura
 !.config/helix
 !.config/noctalia
+!.config/opencode
 !.fzf.zsh
 !.gitignore
 !.venv

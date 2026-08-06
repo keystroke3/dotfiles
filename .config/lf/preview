@@ -1,12 +1,7 @@
 #!/bin/sh
 
 image() {
-	if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
-		printf '{"action": "add", "identifier": "PREVIEW", "x": "%s", "y": "%s", "width": "%s", "height": "%s", "scaler": "contain", "path": "%s"}\n' "$4" "$5" "$(($2-1))" "$(($3-1))" "$1" > "$FIFO_UEBERZUG"
-		exit 1
-	else
-		chafa "$1" -s "$4x"
-	fi
+	chafa --format sixel --size "${2}x${3}" "$1"
 }
 
 batorcat() {
@@ -20,7 +15,8 @@ batorcat() {
 	fi
 }
 
-CACHE="$HOME/.cache/lf/thumbnail.$(stat --printf '%n\0%i\0%F\0%s\0%W\0%Y' -- "$(readlink -f "$1")" | sha256sum | awk '{print $1}'))"
+mkdir -p "$HOME/.cache/lf"
+CACHE="$HOME/.cache/lf/thumbnail.$(printf '%s' "$(realpath "$1")$(stat -f '%m' "$1")" | shasum -a 256 | awk '{print $1}')"
 
 case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.tgz|*.tar.gz) tar tzf "$1" ;;

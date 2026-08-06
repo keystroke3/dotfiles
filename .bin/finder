@@ -1,7 +1,7 @@
 #!/bin/zsh
 #
 # This script looks for media stored in a custom NAS. The actual media paths are /media
-rg="$($HOME/.bin/fs /media/music /media/videos/music/ -i services,/media/downloads --host '10.0.0.10:6450')"
+rg="$($HOME/.bin/fs -p /media/music -p /media/videos/music/ --host '10.0.0.10:6450')"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     fuzz="$(print $rg | choose)"

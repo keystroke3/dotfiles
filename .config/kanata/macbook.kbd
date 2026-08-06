@@ -49,6 +49,9 @@
 
   ;; Maccy clipboard history (Cmd+Shift+C)
   spot (multi lmet lsft c)
+
+  ;; Right Command: tap=Cmd, hold=Hyper (Ctrl+Shift+Alt+Cmd)
+  rcmd (tap-hold-release 200 200 rmet (multi lctl lsft lalt lmet))
 )
 
 (deflayer base
@@ -57,7 +60,7 @@
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
   @cap @hma @hms @hmd @hmf g    h    @hmj @hmk @hml @hmsc '   ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
-   fn   lctl @lopt  @lcmd @spc       rmet ralt left down up   rght
+   fn   lctl @lopt  @lcmd @spc       @rcmd ralt left down up   rght
 )
 
 ;; Symbols layer — activated by holding Space

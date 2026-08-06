@@ -1,5 +1,6 @@
 set ratios 1:2:3
 set previewer ~/.config/lf/preview
+set sixel true
 # Luke's lf settings
 
 
