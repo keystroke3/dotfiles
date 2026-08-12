@@ -1,0 +1,3 @@
+.config/fish/conf.d/work_aliases.fish filter=git-crypt diff=git-crypt
+.config/fish/conf.d/work_functions.fish filter=git-crypt diff=git-crypt
+.config/zsh/work_aliases filter=git-crypt diff=git-crypt
