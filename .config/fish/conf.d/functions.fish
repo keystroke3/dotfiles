@@ -11,8 +11,9 @@ function __save_lastdir --on-event fish_prompt
 end
 
 function bp
-    if test -f "$VIRTUAL_ENV/bin/ipython"
-        "$VIRTUAL_ENV/bin/ipython" $argv
+    set -l ipython_path "$VIRTUAL_ENV/bin/ipython"
+    if test -f "$ipython_path"
+        $ipython_path $argv
     else
         /usr/bin/ipython $argv
     end
@@ -23,7 +24,7 @@ function c
 end
 
 function cfg
-    set -l fuzz (fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/ -i 'node_modules,BraveSoftware,Slack,discord' | fzf --reverse --height 40%)
+    set -l fuzz (~/.bin/fs -p ~/dotfiles/ -p ~/dotfiles/.config/ -p ~/.bin/ -i 'node_modules,BraveSoftware,Slack,discord' | fzf --reverse --height 40%)
     if test -f "$fuzz"
         if test -n "$argv[1]"
             $argv[1] "$fuzz"
@@ -110,7 +111,7 @@ end
 function h
     set -l fuzz (history | sort | uniq | fzf)
     if test -n "$fuzz"
-        wl-copy $fuzz
+        pbcopy $fuzz
     end
 end
 
@@ -124,12 +125,46 @@ function ignore
 end
 
 function j
-    set -l fuzz (fs --dir -p $HOME/.config/ -p $HOME -i 'node_modules, __pycahce__,Library,go,.git,venv,.venv' | fzf --reverse --height 40%)
+    set -l fuzz (~/.bin/fs --dir -p $HOME/.config/ -p $HOME -i 'node_modules, __pycahce__,Library,go,.git,venv,.venv,media' | fzf --reverse --height 40%)
     if test -z "$fuzz"
         return 0
     else if test -d "$fuzz"
         cd "$fuzz"
     end
+end
+
+function ips
+    set -l configs ~/.ssh/config ~/.ssh/kupiku-config
+    set -l list
+    for f in $configs
+        test -f $f; or continue
+        set -a list (awk '
+            function flush() {
+                if (host != "" && host != "*") {
+                    dest = (ip == "" ? firstword : ip)
+                    printf "%-28s %s\n", host, dest
+                }
+            }
+            /^Host[ \t]+/ {
+                flush()
+                host = $0
+                sub(/^Host[ \t]+/, "", host)
+                n = split(host, arr, " ")
+                firstword = arr[1]
+                ip = ""
+                next
+            }
+            tolower($1) == "hostname" { ip = $2 }
+            END { flush() }
+        ' $f)
+    end
+    set -l fuzz (printf '%s\n' $list | fzf --reverse --height 40% --header 'server -> ip')
+    if test -z "$fuzz"
+        return 0
+    end
+    set -l ip (echo $fuzz | awk '{print $NF}')
+    echo -n $ip | pbcopy
+    echo "Copied: $ip  ($fuzz)"
 end
 
 function jl
@@ -233,7 +268,7 @@ function secret
 end
 
 function sqlf
-    set -l fuzz (fs -g '.sql$' | fzf --reverse --height 40%)
+    set -l fuzz (~/.bin/fs -g '.sql$' | fzf --reverse --height 40%)
     test -f "$fuzz"; or return 0
     sqlformat -ask upper $fuzz -o $fuzz
     sed -i 's/;--/;\n--/g' $fuzz

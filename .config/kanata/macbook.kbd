@@ -14,8 +14,8 @@
 )
 
 (defalias
-  ;; CapsLock: tap=Esc, hold=Left Option/Alt
-  cap   (tap-hold-release 200 200 esc lalt)
+  ;; CapsLock: tap=Esc, hold=Hyper (Ctrl+Shift+Alt+Cmd)
+  cap   (tap-hold-release 200 200 esc (multi lctl lsft lalt lmet))
 
   ;; Escape: tap=Esc, hold=CapsLock
   esccap (tap-hold-release 200 200 esc caps)

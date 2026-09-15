@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+PLISTS=(
+    /Library/LaunchDaemons/com.example.karabiner-vhidmanager.plist
+    /Library/LaunchDaemons/com.example.karabiner-vhiddaemon.plist
+    /Library/LaunchDaemons/com.example.kanata.plist
+)
+
+sudo mkdir -p /Library/Logs/Kanata
+
+for p in "${PLISTS[@]}"; do
+    if [[ ! -f "$p" ]]; then
+        echo "missing: $p" >&2
+        exit 1
+    fi
+    sudo xattr -c "$p"
+done
+
+for p in "${PLISTS[@]}"; do
+    label=$(basename "$p" .plist)
+    sudo launchctl bootout "system/$label" 2>/dev/null || true
+    sudo launchctl bootstrap system "$p"
+done
+
+echo "--- status ---"
+ps aux | grep -E "kanata|VirtualHIDDevice" | grep -v grep
+echo "--- recent kanata errors ---"
+tail -20 /Library/Logs/Kanata/kanata.err.log 2>/dev/null || echo "(no log yet)"

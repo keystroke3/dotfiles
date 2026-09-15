@@ -12,8 +12,12 @@ fish_add_path -g /Users/ted/.lmstudio/bin
 
 if test (uname) = Darwin
     fish_add_path -g /opt/homebrew/opt/mysql-client/bin
-    fish_add_path -g /opt/homebrew/opt/python@3.11/bin
     set -gx PKG_CONFIG_PATH "/opt/homebrew/opt/mysql-client/lib/pkgconfig"
+    fish_add_path -g /opt/homebrew/sbin
+    fish_add_path -g /opt/homebrew/bin
+    function python
+        python3 $argv
+    end
 end
 
 set -gx FZF_DEFAULT_OPTS "--layout=reverse --height 40%"
