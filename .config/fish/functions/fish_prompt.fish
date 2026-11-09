@@ -65,7 +65,7 @@ function fish_prompt
     set -l prompt_color $green
     test $last_status -eq 0; or set prompt_color $red
 
-    echo -n "$screen_info$ssh_info$bold$teal$cwd$git_info$venv_info $time_info"
+    echo -n "$ssh_info$bold$teal$cwd$git_info $time_info"
     echo
     echo -n "$prompt_color🐟 $normal"
 end

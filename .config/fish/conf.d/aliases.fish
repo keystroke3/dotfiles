@@ -31,6 +31,7 @@ alias dd 'dd status=progress'
 alias rsync 'rsync -ah --progress'
 alias feh 'feh -d --edit -. -B black .'
 alias gst 'git status'
+alias grs 'git restore --staged .'
 alias gconflict 'git diff --name-only --diff-filter=U'
 alias start 'sudo systemctl start'
 alias stop 'sudo systemctl stop'
@@ -97,6 +98,7 @@ alias hx helix
 alias olm '~/.bin/opencode-lm'
 alias hr 'herdr --remote'
 alias hs 'herdr --session'
+alias devdb 'psql "postgres://core@127.0.0.1:54329/core_dev?sslmode=disable"'
 
 # restore last saved path (own file, see functions.fish __save_lastdir)
 if test -f ~/.cache/fish/lastdir
