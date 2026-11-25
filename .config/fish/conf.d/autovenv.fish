@@ -12,16 +12,26 @@ function __autovenv_find
     end
 end
 
+function __autovenv_deactivate
+    if functions -q deactivate
+        deactivate
+        return
+    end
+    set -l index (contains -i -- "$VIRTUAL_ENV/bin" $PATH)
+    and set -e PATH[$index]
+    set -e VIRTUAL_ENV
+end
+
 function __autovenv_check --on-variable PWD
     set -l venv_path (__autovenv_find)
     if test -n "$venv_path"
-        if test "$VIRTUAL_ENV" = "$venv_path"
+        if test "$VIRTUAL_ENV" = "$venv_path"; and functions -q deactivate
             return
         end
-        set -q VIRTUAL_ENV; and deactivate
+        set -q VIRTUAL_ENV; and __autovenv_deactivate
         source "$venv_path/bin/activate.fish"
     else
-        set -q VIRTUAL_ENV; and deactivate
+        set -q VIRTUAL_ENV; and __autovenv_deactivate
     end
 end
 
